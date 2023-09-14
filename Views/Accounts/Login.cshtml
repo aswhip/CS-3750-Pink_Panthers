@@ -1,0 +1,54 @@
+﻿@model Pink_Panthers_Project.Models.Account
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<h3> Login </h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Accounts" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewData.ModelState.ContainsKey("InvalidEmail"))
+            {
+                <em>Invalid Email. @Html.ActionLink("Create Account?", "Create", "Accounts")</em>
+                <br />
+                <br />
+            }
+            @if (ViewData.ModelState.ContainsKey("IncorrectPass"))
+            {
+                <em>Incorrect Password.</em>
+                <br />
+                <br />
+            }
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<input type="button" value="Create Account" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Accounts")'" />
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
