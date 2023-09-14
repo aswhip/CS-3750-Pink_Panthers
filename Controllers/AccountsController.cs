@@ -25,32 +25,32 @@ namespace Pink_Panthers_Project.Controllers
         public IActionResult Login([Bind("Email,Password")] Account account)
         {
             Account? loginAccount = null;
-            if (!String.IsNullOrEmpty(account.Email) && !String.IsNullOrEmpty(account.Password))
+            if (!String.IsNullOrEmpty(account.Email) && !String.IsNullOrEmpty(account.Password)) //Email and Password must be entered
             {
-                loginAccount = _context.Account.FirstOrDefault(m => m.Email == account.Email);
+                loginAccount = _context.Account.FirstOrDefault(m => m.Email == account.Email); //Tries to find an account with the passed in email
             }
-            if (loginAccount == null && !String.IsNullOrEmpty(account.Email))
+            if (loginAccount == null && !String.IsNullOrEmpty(account.Email)) //Comparing against the account.email so we don't get the error message on load
             {
                 ModelState.AddModelError("InvalidEmail", "");
                 return View();
             }
             else if (loginAccount != null)
             {
-                if (!validatePassword(ref account, ref loginAccount))
+                if (!validatePassword(ref account, ref loginAccount)) //Checks the entered password
                 {
                     ModelState.AddModelError("IncorrectPass", "");
                     return View();
                 }
                 else
                 {
-                    return RedirectToAction(nameof(ProfileController.Index), "Profile", loginAccount);
+                    return RedirectToAction(nameof(ProfileController.Index), "Profile", loginAccount); //If email and password match, take us to the logged in page
                 }
             }
             return View();
         }
 
         // GET: Accounts/Create
-        public IActionResult Create()
+        public IActionResult Create() //Initial Load of the page
         {
             return View();
         }
@@ -62,58 +62,54 @@ namespace Pink_Panthers_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Email,Password,ConfirmPassword,BirthDate,accountType")] Account account)
         {
-            //bool accountType = Boolean.Parse(account.accountType);
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //If all binded properties have a value, the state is valid
             {
-                if (isOldEnough(ref account))
+                if (isOldEnough(ref account)) //Compares the age. Must be 18+years old
                 {
-                    if (!emailExists(account.Email!))
+                    if (!emailExists(account.Email!))//If an account with the email doesn't exist, we can create it
                     {
                         if (account.Password.Equals(account.ConfirmPassword))
                         {
-                            byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
-                            account.Salt = Convert.ToBase64String(salt);
+                            byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); //Generates a new hashing algorithm salt per account, so no two accounts share the same one
+                            account.Salt = Convert.ToBase64String(salt); //Convert it to a string to store in the database
                             hashPassword(ref account);
-                            _context.Add(account);
+                            _context.Add(account); //Adds the account to the database
                             await _context.SaveChangesAsync();
-                            return RedirectToAction(nameof(ProfileController.Index), "Profile", account);
+                            return RedirectToAction(nameof(ProfileController.Index), "Profile", account); //Redirect to the Logged-in page. Name can be changed if need be
                         }
                         else
                         {
-                            ModelState.AddModelError("PasswordsDontMatch", "");
+                            ModelState.AddModelError("PasswordsDontMatch", ""); //Error for when passwords don't match
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("AccountExists", "");
+                        ModelState.AddModelError("AccountExists", ""); //Error for when an account with the email exists already
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("NotOldEnough", "");
+                    ModelState.AddModelError("NotOldEnough", ""); //Error for when the user isn't old enough
                 }
             }
             return View(account);
         }
 
-        private bool AccountExists(int id)
-        {
-            return (_context.Account?.Any(e => e.ID == id)).GetValueOrDefault();
-        }
-
-        private bool emailExists(string email)
+        private bool emailExists(string email) //If an account with the passed in email exists, return true, else return false
         {
             return (_context.Account?.Any(a => a.Email == email)).GetValueOrDefault();
         }
 
+        //Not the most secure approach, but for what we need having this be its own function works great
         private void hashPassword(ref Account account)
         {
             string hashedPassword = getHashedPassword(account.Password!, Encoding.ASCII.GetBytes(account.Salt!));
-            account.Password = hashedPassword;
+            account.Password = hashedPassword; //Makes the account password the hashed password for storing in the database
             account.ConfirmPassword = hashedPassword;
         }
 
-        private bool validatePassword(ref Account account, ref Account loginAccount)
+		//Validates the password by hashing this password and comparing the hashed passwords
+		private bool validatePassword(ref Account account, ref Account loginAccount) 
         {
             string hashedPassword = getHashedPassword(account.Password!, Encoding.ASCII.GetBytes(loginAccount.Salt!));
 
@@ -124,14 +120,15 @@ namespace Pink_Panthers_Project.Controllers
             return false;
         }
 
+        //Has to be its own function or the hashing can return different values even using the same hashing algorithm salt
         private string getHashedPassword(string password, byte[] salt)
         {
             string hashedPassword = "";
-            hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password!,
+            hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2( //Microsoft's hashing algorithm
+                password: password!, //Password can't be null here
                 salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 300000,
+                prf: KeyDerivationPrf.HMACSHA256, //SHA256 algorithm
+                iterationCount: 300000, //300,000 iterations is the recommended amount right now
                 numBytesRequested: 256 / 8));
 
             return hashedPassword;
@@ -139,8 +136,8 @@ namespace Pink_Panthers_Project.Controllers
 
         private bool isOldEnough(ref Account account)
         {
-            //int age = DateTime.Now.Year - date.Year;
-            return (account.BirthDate.AddYears(18) <= DateTime.Now);
+			//Adds 18 years to the user's entered birthdate. If the date is still before or equal to today's date, they are 18 years old.
+			return (account.BirthDate.AddYears(18) <= DateTime.Now);  
         }
     }
 }

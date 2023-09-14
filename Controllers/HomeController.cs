@@ -16,7 +16,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return RedirectToAction("Login", "Accounts");
+            return RedirectToAction("Login", "Accounts");//Redirects to the login page on load
         }
 
         public IActionResult Privacy()

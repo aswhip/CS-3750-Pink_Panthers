@@ -13,12 +13,12 @@ namespace Pink_Panthers_Project.Controllers
         }
         public async Task<IActionResult> Index(int? id)
         {
-            if (id == null || _context.Account == null)
+            if (id == null || _context.Account == null) //So they can't manually type in the url and get an account's info
             {
                 return NotFound();
             }
             var account = await _context.Account
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.ID == id); //Gets the account with the passed in id, if it exists
             if (account == null)
             {
                 return NotFound();
