@@ -16,3 +16,37 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.custom-card {
+    width: 300px; 
+    height: 300px; 
+    background-color: lightgray;
+}
+
+.card-header-class {
+    background-color: #54b4c4; 
+    color: white;
+    height: 50px;
+    font-size: x-large;
+}
+
+.card-header-course {
+    background-color: #2f0ba3; 
+    color: white;
+    height: 50px;
+    font-size: x-large;
+}
+
+.card-header-place {
+    background-color: #b0339b; 
+    color: white;
+    height: 50px;
+    font-size: x-large;
+}
+
+.card-header-time {
+    background-color: #27b34f; 
+    color: white;
+    height: 50px;
+    font-size: x-large;
+}
