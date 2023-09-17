@@ -13,15 +13,33 @@ namespace Pink_Panthers_Project.Controllers
             _logger = logger;
         }
 
+        private Account? account = null;
+
         [HttpGet]
         public IActionResult Index()
         {
-            return RedirectToAction("Login", "Accounts");//Redirects to the login page on load
+            account = ProfileController.getAccount();
+            if(account != null)
+            {
+                return RedirectToAction(nameof(ProfileController.Index), "Profile", account);
+            }
+            return RedirectToAction("Login", "Accounts", account);//Redirects to the login page on load
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            account = ProfileController.getAccount();
+            if (account != null)
+            {
+                ProfileController.logoutAccount();
+                return View();
+            }
+            return NotFound();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

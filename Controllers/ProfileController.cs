@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pink_Panthers_Project.Data;
+using Pink_Panthers_Project.Models;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -11,20 +12,50 @@ namespace Pink_Panthers_Project.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int? id)
+        private static Account? _account;
+        public IActionResult Index(Account? account = null)
         {
-            if (id == null || _context.Account == null) //So they can't manually type in the url and get an account's info
+            if (account != null)
             {
-                return NotFound();
+                if (isValidState(ref account))
+                {
+                    _account = account;
+                    return View(account);
+                }
             }
-            var account = await _context.Account
-                .FirstOrDefaultAsync(m => m.ID == id); //Gets the account with the passed in id, if it exists
-            if (account == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
 
-            return View(account);
+        }
+
+        public IActionResult Privacy()
+        {
+            if(_account != null)
+                return View();
+            return NotFound();
+        }
+
+        public static Account? getAccount()
+        {
+            if (_account != null)
+            {
+                return _account;
+            }
+            return null;
+        }
+
+        public static void logoutAccount()
+        {
+            _account = null;
+        }
+        private bool isValidState(ref Account account)
+        {
+            if(account.ID != null && account.Email != null && account.Password != null 
+                && account.ConfirmPassword != null && account.FirstName != null 
+                && account.LastName != null && account.Salt != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
