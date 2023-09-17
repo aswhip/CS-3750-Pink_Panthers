@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
+using System.Text;
+using System.Web;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -13,19 +15,20 @@ namespace Pink_Panthers_Project.Controllers
             _context = context;
         }
         private static Account? _account;
-        public IActionResult Index(Account? account = null)
+        public IActionResult Index(Account? account)
         {
             if (account != null)
             {
-                if (isValidState(ref account))
+				if (_context.Account.SingleOrDefault(m => m.Email == account.Email && m.Password == account.Password) != null)
                 {
-                    _account = account;
+					_account = account;
                     return View(account);
                 }
             }
             return NotFound();
-
         }
+
+        
 
         public IActionResult Privacy()
         {
@@ -46,16 +49,6 @@ namespace Pink_Panthers_Project.Controllers
         public static void logoutAccount()
         {
             _account = null;
-        }
-        private bool isValidState(ref Account account)
-        {
-            if(account.ID != null && account.Email != null && account.Password != null 
-                && account.ConfirmPassword != null && account.FirstName != null 
-                && account.LastName != null && account.Salt != null)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }
