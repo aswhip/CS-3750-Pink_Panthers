@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
 using System.Text;
@@ -15,20 +16,15 @@ namespace Pink_Panthers_Project.Controllers
             _context = context;
         }
         private static Account? _account;
-        public IActionResult Index(Account? account)
+
+        public IActionResult Index()
         {
-            if (account != null)
+            if(_account != null) //An account must be active to view this page
             {
-				if (_context.Account.SingleOrDefault(m => m.Email == account.Email && m.Password == account.Password) != null)
-                {
-					_account = account;
-                    return View(account);
-                }
+                return View(_account);
             }
             return NotFound();
         }
-
-        
 
         public IActionResult Privacy()
         {
@@ -37,7 +33,7 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
-        public static Account? getAccount()
+        public static Account? getAccount() //Returns the account if it's not null
         {
             if (_account != null)
             {
@@ -46,7 +42,12 @@ namespace Pink_Panthers_Project.Controllers
             return null;
         }
 
-        public static void logoutAccount()
+        public static void setAccount(ref Account account) //Used to set the current account
+        {
+            _account = account;
+        }
+
+        public static void logoutAccount() //Sets the current account to null
         {
             _account = null;
         }

@@ -13,17 +13,14 @@ namespace Pink_Panthers_Project.Controllers
             _logger = logger;
         }
 
-        private Account? account = null;
-
         [HttpGet]
         public IActionResult Index()
         {
-            account = ProfileController.getAccount();
-            if(account != null)
+            if(ProfileController.getAccount() != null) //Only take us to the profile page if the profile account is active
             {
-                return RedirectToAction(nameof(ProfileController.Index), "Profile", account);
+                return RedirectToAction(nameof(ProfileController.Index), "Profile");
             }
-            return RedirectToAction("Login", "Accounts", account);//Redirects to the login page on load
+            return RedirectToAction("Login", "Accounts");//Redirects to the login page on load
         }
 
         public IActionResult Privacy()
@@ -33,8 +30,7 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Logout()
         {
-            account = ProfileController.getAccount();
-            if (account != null)
+            if (ProfileController.getAccount() != null) //Can only log out if user is currently logged in
             {
                 ProfileController.logoutAccount();
                 return View();

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
@@ -22,6 +23,14 @@ namespace Pink_Panthers_Project.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login([Bind("Email,Password")] Account account)
         {
             Account? loginAccount = null;
@@ -43,11 +52,14 @@ namespace Pink_Panthers_Project.Controllers
                 }
                 else
                 {
-                    return RedirectToAction(nameof(ProfileController.Index), "Profile", loginAccount); //If email and password match, take us to the logged in page
+                    ProfileController.setAccount(ref loginAccount);
+                    return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
                 }
             }
             return View();
+
         }
+
 
         // GET: Accounts/Create
         public IActionResult Create() //Initial Load of the page
@@ -64,32 +76,29 @@ namespace Pink_Panthers_Project.Controllers
         {
             if (ModelState.IsValid) //If all binded properties have a value, the state is valid
             {
-                if (isOldEnough(ref account)) //Compares the age. Must be 18+years old
+                if (isOldEnough(ref account) && !emailExists(account.Email!)) //Checks the age and email for validity.
                 {
-                    if (!emailExists(account.Email!))//If an account with the email doesn't exist, we can create it
+                    if (account.Password!.Equals(account.ConfirmPassword!)) //account.Password and account.ConfirmPassword cannot be null here
                     {
-                        if (account.Password.Equals(account.ConfirmPassword))
-                        {
-                            byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); //Generates a new hashing algorithm salt per account, so no two accounts share the same one
-                            account.Salt = Convert.ToBase64String(salt); //Convert it to a string to store in the database
-                            hashPassword(ref account);
-                            _context.Add(account); //Adds the account to the database
-                            await _context.SaveChangesAsync();
-                            return RedirectToAction(nameof(ProfileController.Index), "Profile", account); //Redirect to the Logged-in page. Name can be changed if need be
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("PasswordsDontMatch", ""); //Error for when passwords don't match
-                        }
+                        byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); //Generates a new hashing algorithm salt per account, so no two accounts share the same one
+                        account.Salt = Convert.ToBase64String(salt); //Convert it to a string to store in the database
+                        hashPassword(ref account); //Reference so we aren't creating a new temporary account
+                        _context.Add(account); //Adds the account to the database
+                        await _context.SaveChangesAsync();
+                        ProfileController.setAccount(ref account);
+                        return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
                     }
                     else
                     {
-                        ModelState.AddModelError("AccountExists", ""); //Error for when an account with the email exists already
+                        ModelState.AddModelError("PasswordsDontMatch", ""); //Error for when passwords don't match
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("NotOldEnough", ""); //Error for when the user isn't old enough
+                    if(!isOldEnough(ref account))
+                        ModelState.AddModelError("NotOldEnough", ""); //Error for when the user isn't old enough
+                    if(emailExists(account.Email!))
+                        ModelState.AddModelError("AccountExists", ""); //Error for when an account with the email exists already
                 }
             }
             return View(account);
