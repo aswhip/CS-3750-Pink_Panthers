@@ -39,14 +39,13 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
+                <input type="button" value="Create Account" class="btn btn-primary btn-signup" onclick="location.href='@Url.Action("Create", "Accounts")'" />
+                <input type="submit" value="Login" class="btn btn-primary btn-login" />
             </div>
         </form>
     </div>
 </div>
 
-<br />
-<input type="button" value="Create Account" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Accounts")'" />
 
 @section Scripts {
     @{
