@@ -125,6 +125,10 @@ namespace Pink_Panthers_Project.Controllers
             }
             return BadRequest("Image not Found");
         }
+        public IActionResult Calendar()
+        {
+            return View();
+        }
 
         public static Account? getAccount() //Returns the account if it's not null
         {
