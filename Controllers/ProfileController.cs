@@ -94,7 +94,33 @@ namespace Pink_Panthers_Project.Controllers
 
 
             return RedirectToAction("Details");
-        }   
+        }
+        [HttpGet]
+        public IActionResult FileUpload() {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult FileUpload(IFormFile file) {
+            if(file == null)
+            {
+                return NotFound();
+            }
+            string fileName = "image";
+            string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/Images",fileName);
+            byte[] Array = Encoding.UTF8.GetBytes(path);
+            MemoryStream stream = new MemoryStream(Array);
+
+            if (!Directory.Exists("wwwroot/Images"))
+            {
+                Directory.CreateDirectory("wwwroot/Images");
+            }
+            if(stream != null)
+            {
+                file.CopyTo(stream);
+            }
+            return View();
+             
+        }
 
         public static Account? getAccount() //Returns the account if it's not null
         {
