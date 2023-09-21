@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{41A89149-B819-4F7C-A546-BB8E18CB2CA4}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="wwwroot/css/site.css">
+    <Files>
+      <File FileName="Program.cs" Line="6" Column="82" />
+      <File FileName="wwwroot/css/site.css" Line="20" Column="1" />
+      <File FileName="Views/Profile/Index.cshtml" Line="26" Column="23" />
+      <File FileName="appsettings.json" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Pink_Panthers_Project">
+            <Node name="Pink_Panthers_Project">
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+                <Node name="Images" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Pink__Panthers__Project PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
