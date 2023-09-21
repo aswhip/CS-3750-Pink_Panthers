@@ -30,6 +30,23 @@ namespace Pink_Panthers_Project.Models
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
+        [StringLength(50)]
+        public string? AddressLine1 { get; set; }
+
+        [StringLength(50)]
+        public string? AddressLine2 { get; set; }
+
+        [StringLength(50)]
+        public string? City { get; set; }
+
+        [StringLength(30)]
+        public string? State { get; set; }
+
+        [StringLength(10)]
+        public string? ZipCode { get; set; }
+
+
+
         public string? Salt { get; set; } //Used for hashing and validating passwords. Unique per account
 
         public bool accountType { get; set; } //True for Teacher Account, false for Student Account
