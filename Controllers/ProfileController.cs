@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Update;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
+using System.IO;
 using System.Text;
 using System.Web;
+using System;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -96,30 +98,23 @@ namespace Pink_Panthers_Project.Controllers
             return RedirectToAction("Details");
         }
         [HttpGet]
-        public IActionResult FileUpload() {
+        public IActionResult FileUpload(){
             return View();
+
         }
         [HttpPost]
-        public IActionResult FileUpload(IFormFile file) {
-            if(file == null)
-            {
-                return NotFound();
-            }
+        public IActionResult FileUpload(IFormFile postedFile) {
             string fileName = "image";
-            string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/Images",fileName);
-            byte[] Array = Encoding.UTF8.GetBytes(path);
-            MemoryStream stream = new MemoryStream(Array);
-
-            if (!Directory.Exists("wwwroot/Images"))
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName + ".jpg");
+            if(HttpContext.Request.Form.Files[0] != null)
             {
-                Directory.CreateDirectory("wwwroot/Images");
+                using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+                {
+                    postedFile.CopyTo(fs);
+                }
+                return View();
             }
-            if(stream != null)
-            {
-                file.CopyTo(stream);
-            }
-            return View();
-             
+            return BadRequest("Image not Found");
         }
 
         public static Account? getAccount() //Returns the account if it's not null
