@@ -1,0 +1,87 @@
+﻿@model Pink_Panthers_Project.Models.Account
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h1>Edit</h1>
+
+
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" value="@Model.FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" value="@Model.LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" value="@Model.Email" class="form-control" readonly data-editable="false" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" value="@Model.BirthDate.ToString("yyyy-MM-dd")" readonly data-editable="false" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+				<label asp-for="AddressLine1" class="control-label"></label>
+				<input asp-for="AddressLine1" class="form-control" value="@Model.AddressLine1" />
+				<span asp-validation-for="AddressLine1" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AddressLine2" class="control-label"></label>
+                <input asp-for="AddressLine2" class="form-control" value="@Model.AddressLine2" />
+                <span asp-validation-for="AddressLine2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+				<label asp-for="City" class="control-label"></label>
+				<input asp-for="City" class="form-control" value="@Model.City" />
+				<span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" value="@Model.State" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+				<label asp-for="ZipCode" class="control-label"></label>
+				<input asp-for="ZipCode" class="form-control" value="@Model.ZipCode" />
+				<span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+
+
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <a asp-action="Details" class="btn btn-danger">Cancel</a>
+
+
+    </div>
+
+</body>
+</html>

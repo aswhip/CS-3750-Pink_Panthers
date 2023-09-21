@@ -33,6 +33,69 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// GET
+        /// Returns page with details of the logged in account
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Details()
+        {
+            if(_account != null)
+                return View(_account);
+            return NotFound();
+        }
+
+        /// <summary>
+        /// GET
+        /// Returns page with now editable fields
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Edit()
+        {
+            if(_account != null)
+                return View(_account);
+            return NotFound();
+        }
+
+        /// <summary>
+        /// POST
+        /// Updates account details
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Edit(Account account)
+        {
+            var Account = _account; //Get account
+
+            if(!ModelState.IsValid) //Check if fields are vaild
+            {
+                return View(account);
+            }
+
+            if (Account != null) //Update account information
+            {
+                Account.FirstName = account.FirstName;
+                Account.LastName = account.LastName;
+                Account.AddressLine1 = account.AddressLine1;
+                Account.AddressLine2 = account.AddressLine2;
+                Account.City = account.City;
+                Account.State = account.State;
+                Account.ZipCode = account.ZipCode;
+
+                //Save to database
+                _context.Entry(Account).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+
+            return RedirectToAction("Details");
+        }   
+
         public static Account? getAccount() //Returns the account if it's not null
         {
             if (_account != null)
@@ -46,6 +109,8 @@ namespace Pink_Panthers_Project.Controllers
         {
             _account = account;
         }
+
+
 
         public static void logoutAccount() //Sets the current account to null
         {
