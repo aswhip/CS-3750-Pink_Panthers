@@ -108,8 +108,8 @@ namespace Pink_Panthers_Project.Controllers
             {
                 return NotFound();
             }
-            string fileName = "image";
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName + ".jpg");
+            string fileName = _account.ID.ToString() + "_" + _account.LastName + "pfp.jpg";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName);
             if(postedFile == null)
             {
                 ModelState.AddModelError("NoImage", String.Empty);

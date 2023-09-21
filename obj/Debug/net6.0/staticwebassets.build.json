@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sdEqkIcOdLKRv8BvLmXO0xT3nLrRCrm6xg6ENjzwFcY=",
+  "Hash": "JYSYjEUEKCV9gf/hOjvlKiDiPj8Kwi7myFZ/VzjW0Fw=",
   "Source": "Pink_Panthers_Project",
   "BasePath": "_content/Pink_Panthers_Project",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\3_Studentpfp.jpg",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+      "BasePath": "_content/Pink_Panthers_Project",
+      "RelativePath": "Images/3_Studentpfp.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\3_Studentpfp.jpg"
     },
     {
       "Identity": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\image.jpg",
