@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Pink_Panthers_Project.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Pink_Panthers_ProjectContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Pink_Panthers_ProjectContext") ?? throw new InvalidOperationException("Connection string 'Pink_Panthers_ProjectContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Titan_Server") ?? throw new InvalidOperationException("Connection string 'Pink_Panthers_ProjectContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
