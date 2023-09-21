@@ -3,17 +3,23 @@
 }
 <h2>File Upload</h2>
 <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="FileUpload">
-
+    @if (ViewData.ModelState.ContainsKey("NoImage"))
+    {
+        <em>Upload an image first!</em>
+        <br />
+        <br />
+    }
     <span>Select File:</span>
 
     <input type="file" name="postedFile" />
-
+    <br />
     <input type="submit" value="Upload" />
 
     <br />
-
+    <br />
+    <br />
     <span>@Html.Raw(ViewBag.Message)</span>
 
-    <img src="~/Images/image.jpg" alt="Profile Picture"></img>
+    <img src="~/Images/image.jpg" alt="Profile Picture">
 
 </form> 

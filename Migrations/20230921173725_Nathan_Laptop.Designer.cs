@@ -12,7 +12,7 @@ using Pink_Panthers_Project.Data;
 namespace Pink_Panthers_Project.Migrations
 {
     [DbContext(typeof(Pink_Panthers_ProjectContext))]
-    [Migration("20230917020056_Nathan_Laptop")]
+    [Migration("20230921173725_Nathan_Laptop")]
     partial class Nathan_Laptop
     {
         /// <inheritdoc />
@@ -33,8 +33,20 @@ namespace Pink_Panthers_Project.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("AddressLine1")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ConfirmPassword")
                         .HasMaxLength(100)
@@ -60,6 +72,14 @@ namespace Pink_Panthers_Project.Migrations
 
                     b.Property<string>("Salt")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<bool>("accountType")
                         .HasColumnType("bit");

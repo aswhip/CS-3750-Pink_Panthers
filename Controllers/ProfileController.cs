@@ -104,9 +104,18 @@ namespace Pink_Panthers_Project.Controllers
         }
         [HttpPost]
         public IActionResult FileUpload(IFormFile postedFile) {
+            if(_account == null)
+            {
+                return NotFound();
+            }
             string fileName = "image";
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName + ".jpg");
-            if(HttpContext.Request.Form.Files[0] != null)
+            if(postedFile == null)
+            {
+                ModelState.AddModelError("NoImage", String.Empty);
+                return View();
+            }
+            if(postedFile != null)
             {
                 using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
