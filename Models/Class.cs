@@ -12,11 +12,22 @@ namespace Pink_Panthers_Project.Models
         public string? CourseNumber { get; set; }
         public string? CourseName { get; set; }
 
-        public string? Days { get; set; }
+        public int Days { get; set; }
 
         [DataType(DataType.Time)]
         public DateTime StartTime {  get; set; }
         [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
+
+        [NotMapped]
+        public bool monday { get; set; }
+        [NotMapped]
+        public bool tuesday { get; set; }
+        [NotMapped]
+        public bool wednesday { get; set; }
+        [NotMapped]
+        public bool thursday { get; set; }
+        [NotMapped]
+        public bool friday { get; set; }
     }
 }

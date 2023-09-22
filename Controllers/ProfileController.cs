@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System;
 using System.Configuration;
+using System.Runtime.CompilerServices;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -24,6 +25,9 @@ namespace Pink_Panthers_Project.Controllers
         {
             if(_account != null) //An account must be active to view this page
             {
+                getDays(1);
+                getDays(2);
+                getDays(3);
                 return View(_account);
             }
             return NotFound();
@@ -34,6 +38,87 @@ namespace Pink_Panthers_Project.Controllers
             if(_account != null)
                 return View();
             return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult addClass()
+        {
+            if (_account!.isTeacher)
+                return View();
+            return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,StartTime,EndTime")]Class newClass, [Bind("monday,tuesday,wednesday,thursday,friday")]Class getDays)
+        {
+            if (_account!.isTeacher && ModelState.IsValid)
+            {
+                int days = setDays(ref getDays);
+                if(days == 0)
+                {
+                    ModelState.AddModelError("NoDaysSelected", "");
+                    return View(newClass);
+                }
+                newClass.Days = days;
+                newClass.accountID = _account.ID;
+                _context.Add(newClass);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return NotFound();
+        }
+
+        private int setDays(ref Class getDays)
+        {
+            int days = 0;
+            if (getDays.monday)
+                days += 1;
+            if (getDays.tuesday)
+                days += 2;
+            if(getDays.wednesday)
+                days += 4;
+            if (getDays.thursday)
+                days += 8;
+            if (getDays.friday)
+                days += 16;
+            return days;
+        }
+
+        /* Use this class as a template for when you are getting the days from the database
+         * This uses bit magic using Bit Shifting and Bit AND to check each day
+         * If you need help understanding it let Nathan know
+         */
+        private void getDays(int id) //Just using this for test cases with bit magic
+        {
+            Class? @class = _context.Class.FirstOrDefault(m => m.ID == id); //ID 1 only has Thursday, ID 2 has Monday,Wednesday,Friday, ID 3 has all
+            int days = @class!.Days;
+            int curDay = 0;
+            int temp = 1;
+            for(int i = 0; i < 5; ++i)
+            {
+                curDay = temp & (days >> i); //Funny bit magic hehe
+                if (curDay == 1)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            Console.WriteLine("Monday");
+                            break;
+                        case 1:
+                            Console.WriteLine("Tuesday");
+                            break;
+                        case 2: 
+                            Console.WriteLine("Wednesday");
+                            break;
+                        case 3:
+                            Console.WriteLine("Thursday");
+                            break;
+                        case 4:
+                            Console.WriteLine("Friday");
+                            break;
+
+                    }
+                }
+            }
         }
 
 

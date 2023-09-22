@@ -1,0 +1,65 @@
+﻿@model Pink_Panthers_Project.Models.Class
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Add Class";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="addClass">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (ViewData.ModelState.ContainsKey("NoDaysSelected"))
+            {
+                <em>Select at least one day</em>
+                <br />
+                <br />
+            }
+            <div class="form-group">
+                <label asp-for="Room" class="control-label"></label>
+                <input asp-for="Room" class="form-control" />
+                <span asp-validation-for="Room" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentCode" class="control-label"></label>
+                <input asp-for="DepartmentCode" class="form-control" />
+                <span asp-validation-for="DepartmentCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseNumber" class="control-label"></label>
+                <input asp-for="CourseNumber" class="form-control" />
+                <span asp-validation-for="CourseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Monday</label>
+                @Html.CheckBoxFor(m => m.monday)
+                <label class="control-label">Tuesday</label>
+                @Html.CheckBoxFor(m => m.tuesday)
+                <label class="control-label">Wednesday</label>
+                @Html.CheckBoxFor(m => m.wednesday)
+                <label class="control-label">Thursday</label>
+                @Html.CheckBoxFor(m => m.thursday)
+                <label class="control-label">Friday</label>
+                @Html.CheckBoxFor(m => m.friday)
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add Class" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
