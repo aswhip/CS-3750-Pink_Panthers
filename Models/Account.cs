@@ -49,6 +49,6 @@ namespace Pink_Panthers_Project.Models
 
         public string? Salt { get; set; } //Used for hashing and validating passwords. Unique per account
 
-        public bool accountType { get; set; } //True for Teacher Account, false for Student Account
+        public bool isTeacher { get; set; } //True for Teacher Account, false for Student Account
     }
 }

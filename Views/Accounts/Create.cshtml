@@ -63,8 +63,8 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Teacher Account?</label>
-                @Html.CheckBoxFor(m => m.accountType)
-                <span asp-validation-for="accountType" class="text-danger"></span>
+                @Html.CheckBoxFor(m => m.isTeacher)
+                <span asp-validation-for="isTeacher" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

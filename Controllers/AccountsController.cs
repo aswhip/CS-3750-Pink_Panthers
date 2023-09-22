@@ -72,7 +72,7 @@ namespace Pink_Panthers_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Email,Password,ConfirmPassword,BirthDate,accountType")] Account account)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Email,Password,ConfirmPassword,BirthDate,isTeacher")] Account account)
         {
             if (ModelState.IsValid) //If all binded properties have a value, the state is valid
             {

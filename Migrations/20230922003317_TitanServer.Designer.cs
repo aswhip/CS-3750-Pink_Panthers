@@ -12,7 +12,7 @@ using Pink_Panthers_Project.Data;
 namespace Pink_Panthers_Project.Migrations
 {
     [DbContext(typeof(Pink_Panthers_ProjectContext))]
-    [Migration("20230921180125_TitanServer")]
+    [Migration("20230922003317_TitanServer")]
     partial class TitanServer
     {
         /// <inheritdoc />
@@ -81,12 +81,68 @@ namespace Pink_Panthers_Project.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<bool>("accountType")
+                    b.Property<bool>("isTeacher")
                         .HasColumnType("bit");
 
                     b.HasKey("ID");
 
                     b.ToTable("Account");
+                });
+
+            modelBuilder.Entity("Pink_Panthers_Project.Models.Class", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("CourseName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Days")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Room")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("accountID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Class");
+                });
+
+            modelBuilder.Entity("Pink_Panthers_Project.Models.RegisteredClass", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("accountID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("classID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("registeredClasses");
                 });
 #pragma warning restore 612, 618
         }
