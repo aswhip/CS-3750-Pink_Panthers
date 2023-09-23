@@ -28,7 +28,49 @@ namespace Pink_Panthers_Project.Controllers
                 getDays(1);
                 getDays(2);
                 getDays(3);
-                return View(_account);
+
+                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
+                var registeredCourses = new List<Class>();//list of classes a student is taking
+
+                if (_account.isTeacher)//check if the user is a teacher
+                {
+                    teachingCourses = _context.Class //populate the fields
+                        .Where(c => c.accountID == _account.ID)
+                        .Select(c => new Class
+                        {
+                            CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                            CourseName = c.CourseName,
+                            Room = c.Room,
+                            StartTime = c.StartTime,
+                            EndTime = c.EndTime,
+                            Days = c.Days
+                        })
+                        .ToList();
+                }
+                else
+                {
+                    registeredCourses = _context.registeredClasses
+                .Where(rc => rc.accountID == _account.ID)
+                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+                {
+                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                    CourseName = c.CourseName,
+                    Room = c.Room,
+                    StartTime = c.StartTime,
+                    EndTime = c.EndTime,
+                    Days = c.Days
+                })
+                .ToList();
+                }
+
+                var viewModel = new CourseView
+                {
+                    TeachingCourses = teachingCourses,
+                    RegisteredCourses = registeredCourses,
+                    Account = _account
+                };
+
+                return View(viewModel);
             }
             return NotFound();
         }
