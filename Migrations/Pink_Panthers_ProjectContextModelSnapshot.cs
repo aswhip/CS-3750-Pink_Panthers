@@ -100,8 +100,8 @@ namespace Pink_Panthers_Project.Migrations
                     b.Property<string>("CourseNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Days")
-                        .HasColumnType("int");
+                    b.Property<string>("Days")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentCode")
                         .HasColumnType("nvarchar(max)");
@@ -117,21 +117,6 @@ namespace Pink_Panthers_Project.Migrations
 
                     b.Property<int>("accountID")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("friday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("monday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("thursday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("tuesday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("wednesday")
-                        .HasColumnType("bit");
 
                     b.HasKey("ID");
 

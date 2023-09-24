@@ -11109,19 +11109,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Michael\\.nuget\\packages\\": {}
+    "C:\\Users\\davis\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\CS 3750\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
+      "projectUniqueName": "C:\\Users\\davis\\Desktop\\College\\CS3750\\CS3750-Project\\Pink_Panthers_Project.csproj",
       "projectName": "Pink_Panthers_Project",
-      "projectPath": "E:\\CS 3750\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
-      "packagesPath": "C:\\Users\\Michael\\.nuget\\packages\\",
-      "outputPath": "E:\\CS 3750\\CS-3750-Pink_Panthers\\obj\\",
+      "projectPath": "C:\\Users\\davis\\Desktop\\College\\CS3750\\CS3750-Project\\Pink_Panthers_Project.csproj",
+      "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\davis\\Desktop\\College\\CS3750\\CS3750-Project\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Michael\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\davis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11187,7 +11192,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -12,7 +12,7 @@ namespace Pink_Panthers_Project.Models
         public string? CourseNumber { get; set; }
         public string? CourseName { get; set; }
 
-        public int Days { get; set; }
+        public string? Days { get; set; }
 
         [DataType(DataType.Time)]
         public DateTime StartTime {  get; set; }

@@ -12,7 +12,7 @@ using Pink_Panthers_Project.Data;
 namespace Pink_Panthers_Project.Migrations
 {
     [DbContext(typeof(Pink_Panthers_ProjectContext))]
-    [Migration("20230922185801_TitanServer")]
+    [Migration("20230924003542_TitanServer")]
     partial class TitanServer
     {
         /// <inheritdoc />
@@ -103,8 +103,8 @@ namespace Pink_Panthers_Project.Migrations
                     b.Property<string>("CourseNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Days")
-                        .HasColumnType("int");
+                    b.Property<string>("Days")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentCode")
                         .HasColumnType("nvarchar(max)");
@@ -120,21 +120,6 @@ namespace Pink_Panthers_Project.Migrations
 
                     b.Property<int>("accountID")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("friday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("monday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("thursday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("tuesday")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("wednesday")
-                        .HasColumnType("bit");
 
                     b.HasKey("ID");
 
