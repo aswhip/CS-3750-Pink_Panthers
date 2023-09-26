@@ -5,5 +5,7 @@
         public int ID { get; set; }
         public int accountID { get; set; }
         public int classID { get; set; }
+
+        public Account Account { get; set; }
     }
 }

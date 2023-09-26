@@ -119,6 +119,61 @@ namespace Pink_Panthers_Project.Controllers
                 getDays.Days += "F ";
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            ViewBag.account = _account.ID;
+
+            if (!_account!.isTeacher && ModelState.IsValid)
+            {
+                var viewModel = new RegisterView
+                {
+                    Classes = _context.Class.Include(c => c.Account).ToList(),
+                    RegisteredClasses = _context.registeredClasses.ToList()
+                };
+            return View(viewModel);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(int classId)
+        {
+            int accountId = _account.ID;
+
+            var existingRegistration = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+            if (existingRegistration == null)
+            {
+                    
+
+                // Add the class to the student's registered classes
+                var registeredClass = new RegisteredClass
+                {
+                    accountID = _account.ID,
+                    classID = classId
+                };
+
+                // Add the registeredClass to your registered classes collection
+                _context.registeredClasses.Add(registeredClass);
+            }
+            else
+            {
+
+                // Remove the class from the student's registered classes
+                var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+                _context.registeredClasses.Remove(registeredClassToRemove);
+                
+            }
+            _context.SaveChanges();
+            
+
+            // Redirect back to the class list page
+            return RedirectToAction("Index");
+        }
+
         /// <summary>
         /// GET
         /// Returns page with details of the logged in account

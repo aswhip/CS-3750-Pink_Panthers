@@ -1,0 +1,64 @@
+﻿@model Pink_Panthers_Project.Models.RegisterView
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Register for Class";
+}
+
+<h1>Class List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Instructor</th>
+            <th>Room</th>
+            <th>Department Code</th>
+            <th>Course Number</th>
+            <th>Course Name</th>
+            <th>Days</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Classes)
+        {
+            <tr>
+                <td>@item.Account.FirstName @item.Account.LastName</td>
+                <td>@item.Room</td>
+                <td>@item.DepartmentCode</td>
+                <td>@item.CourseNumber</td>
+                <td>@item.CourseName</td>
+                <td>@item.Days</td>
+                <td>@item.StartTime.ToString("hh:mm tt")</td>
+                <td>@item.EndTime.ToString("hh:mm tt")</td>
+                <td>
+                    @if (IsStudentRegistered(item.ID))
+                    {
+                        <form method="post" action="@Url.Action("Register", "Profile")">
+                            <input type="hidden" name="classId" value="@item.ID" />
+                            <button type="submit" class="btn btn-danger">Drop</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" action="@Url.Action("Register", "Profile")">
+                            <input type="hidden" name="classId" value="@item.ID" />
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@functions{
+    bool IsStudentRegistered(int classID)
+    {
+        var studentAccountID = ViewBag.account;
+        var isRegistered = Model.RegisteredClasses.Any(rc => rc.classID == classID && rc.accountID == studentAccountID);
+
+        return isRegistered;
+    }
+}

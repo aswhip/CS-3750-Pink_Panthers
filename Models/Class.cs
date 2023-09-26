@@ -29,5 +29,7 @@ namespace Pink_Panthers_Project.Models
         public bool thursday { get; set; }
         [NotMapped]
         public bool friday { get; set; }
+
+        public Account Account { get; set; }
     }
 }
