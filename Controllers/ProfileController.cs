@@ -128,7 +128,7 @@ namespace Pink_Panthers_Project.Controllers
             {
                 var viewModel = new RegisterView
                 {
-                    Classes = _context.Class.Include(c => c.Account).ToList(),
+                    Classes = _context.Class.ToList(),
                     RegisteredClasses = _context.registeredClasses.ToList()
                 };
             return View(viewModel);
