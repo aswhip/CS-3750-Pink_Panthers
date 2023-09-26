@@ -1,19 +1,15 @@
 ﻿<Properties StartupConfiguration="{41A89149-B819-4F7C-A546-BB8E18CB2CA4}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Pink__Panthers__Project PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Views/Accounts/Login.cshtml">
     <Files>
       <File FileName="Program.cs" />
-      <File FileName="wwwroot/css/site.css" Line="93" Column="6" />
+      <File FileName="wwwroot/css/site.css" />
       <File FileName="Views/Profile/Index.cshtml" />
       <File FileName="appsettings.json" />
-      <File FileName="Views/Accounts/Create.cshtml" Line="1" Column="1" />
-      <File FileName="Views/Accounts/Login.cshtml" Line="54" Column="1" />
+      <File FileName="Views/Accounts/Create.cshtml" />
+      <File FileName="Views/Accounts/Login.cshtml" Line="32" Column="39" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -31,4 +27,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Pink__Panthers__Project PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>
