@@ -16,14 +16,16 @@
         <div class="row mt-5">
             @if (Model != null && Model.TeachingCourses != null)
             {
-                
+
                 <!-- Display courses for teachers -->
-                
+
                 @foreach (var course in Model.TeachingCourses)
                 {
+                    string headerColor = RandomHexColor(); // Generate a random hex color
+
                     <div class="col-md-3">
                         <div class="card mb-4 custom-card">
-                            <div class="card-header">@course.CourseNumber</div>
+                            <div class="card-header" style="background-color: @headerColor;">@course.CourseNumber</div>
                             <div class="card-body">
                                 @course.CourseName<br />
                                 @course.Room<br />
@@ -56,3 +58,12 @@
     </div>
 </body>
 </html>
+
+@functions {
+    Random random = new Random();
+
+    string RandomHexColor()
+    {
+        return $"#{random.Next(0x1000000):X6}";
+    }
+}
