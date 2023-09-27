@@ -73,6 +73,27 @@
             <input type="text" id="ZipCode" name="ZipCode" class="form-control" value="@Model.ZipCode" readonly data-editable="false" />
         </div>
 
+        @if (!string.IsNullOrEmpty(Model.ProfileLink1))
+        {
+            <div class="form-group">
+                <a href="@Model.ProfileLink1">@Model.ProfileLink1</a>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.ProfileLink2))
+        {
+            <div class="form-group">
+                <a href="@Model.ProfileLink2">@Model.ProfileLink2</a>
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.ProfileLink3))
+        {
+            <div class="form-group">
+                <a href="@Model.ProfileLink3">@Model.ProfileLink3</a>
+            </div>
+        }
+
         <a asp-action="Edit" class="btn btn-warning" class="btn btn-primary">Edit</a>
     </div>
 

@@ -45,6 +45,12 @@ namespace Pink_Panthers_Project.Models
         [StringLength(10)]
         public string? ZipCode { get; set; }
 
+        public string? ProfileLink1 { get; set; }
+
+        public string? ProfileLink2 { get; set; }
+
+        public string? ProfileLink3 { get; set; }
+
 
 
         public string? Salt { get; set; } //Used for hashing and validating passwords. Unique per account
