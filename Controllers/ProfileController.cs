@@ -236,6 +236,9 @@ namespace Pink_Panthers_Project.Controllers
                 Account.City = account.City;
                 Account.State = account.State;
                 Account.ZipCode = account.ZipCode;
+                Account.ProfileLink1 = account.ProfileLink1;
+                Account.ProfileLink2 = account.ProfileLink2;
+                Account.ProfileLink3 = account.ProfileLink3;
 
                 //Save to database
                 _context.Entry(Account).State = EntityState.Modified;
