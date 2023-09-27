@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pink_Panthers_Project.Data;
 
@@ -11,9 +12,11 @@ using Pink_Panthers_Project.Data;
 namespace Pink_Panthers_Project.Migrations
 {
     [DbContext(typeof(Pink_Panthers_ProjectContext))]
-    partial class Pink_Panthers_ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20230927223239_ProfileLinks")]
+    partial class ProfileLinks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
