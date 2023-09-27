@@ -1,14 +1,6 @@
 ﻿@model Pink_Panthers_Project.Models.CourseView
 
 @{
-    if (Model.Account!.isTeacher)
-    {
-        Layout = "TeacherLayout";
-    }
-    else
-    {
-        Layout = "StudentLayout";
-    }
     ViewData["Title"] = "Dashboard";
 }
 

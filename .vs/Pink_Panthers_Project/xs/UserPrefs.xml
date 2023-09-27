@@ -4,41 +4,28 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Profile/Index.cshtml">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Shared/_Layout.cshtml">
     <Files>
       <File FileName="Program.cs" />
       <File FileName="wwwroot/css/site.css" />
-      <File FileName="Views/Profile/Index.cshtml" Line="57" Column="15" />
+      <File FileName="Views/Profile/Index.cshtml" />
       <File FileName="appsettings.json" />
       <File FileName="Views/Accounts/Create.cshtml" />
       <File FileName="Views/Accounts/Login.cshtml" />
       <File FileName="Models/Account.cs" />
-      <File FileName="Models/RegisteredClass.cs" />
-      <File FileName="Views/Profile/addClass.cshtml" />
-      <File FileName="Views/Profile/Register.cshtml" />
-      <File FileName="Controllers/ProfileController.cs" />
-      <File FileName="Models/Class.cs" />
-      <File FileName="Models/CourseView.cs" />
+      <File FileName="Controllers/ProfileController.cs" Line="80" Column="1" />
       <File FileName="Controllers/HomeController.cs" />
       <File FileName="Data/Pink_Panthers_ProjectContext.cs" />
-      <File FileName="Models/RegisterView.cs" />
+      <File FileName="Views/Shared/_Layout.cshtml" Line="39" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Pink_Panthers_Project">
-            <Node name="Pink_Panthers_Project">
-              <Node name="Views" expanded="True">
-                <Node name="Profile" expanded="True">
-                  <Node name="Index.cshtml" selected="True" />
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Pink_Panthers_Project" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
