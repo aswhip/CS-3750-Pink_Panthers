@@ -40,7 +40,8 @@ namespace Pink_Panthers_Project.Controllers
                             Room = c.Room,
                             StartTime = c.StartTime,
                             EndTime = c.EndTime,
-                            Days = c.Days
+                            Days = c.Days,
+                            color = c.color
                         })
                         .ToList();
                 }
@@ -56,7 +57,8 @@ namespace Pink_Panthers_Project.Controllers
                     StartTime = c.StartTime,
                     EndTime = c.EndTime,
                     Days = c.Days,
-                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault()
+                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+                    color = c.color
                 })
                 .ToList();
                 }
@@ -99,6 +101,8 @@ namespace Pink_Panthers_Project.Controllers
                     return View(newClass);
                 }
                 newClass.accountID = _account.ID;
+                string color = RandomHexColor();
+                newClass.color = color;
                 _context.Add(newClass);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -302,6 +306,34 @@ namespace Pink_Panthers_Project.Controllers
         public static void logoutAccount() //Sets the current account to null
         {
             _account = null;
+        }
+
+        string RandomHexColor()
+        {
+            Random random = new Random();
+            string hexColor;
+
+            double brightness;
+
+            // Generate a random color
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+
+            // Calculate brightness
+            brightness = 0.299 * red + 0.587 * green + 0.114 * blue;
+
+            // Convert RGB to hex
+            hexColor = $"#{red:X2}{green:X2}{blue:X2}";
+
+            if (brightness > 128)
+            {
+                hexColor += ";color:#000";
+            }
+            // Check if brightness is above the threshold (e.g., 128)
+
+
+            return hexColor;
         }
     }
 }

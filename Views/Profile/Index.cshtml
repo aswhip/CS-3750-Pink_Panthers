@@ -21,11 +21,9 @@
 
                 @foreach (var course in Model.TeachingCourses!)
                 {
-                    string headerColor = RandomHexColor(); // Generate a random hex color
-
                     <div class="col-md-3">
                         <div class="card mb-4 custom-card">
-                            <div class="card-header" style="background-color: @headerColor;">@course.CourseNumber</div>
+                            <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
                             <div class="card-body">
                                 @course.CourseName<br />
                                 @course.Room<br />
@@ -41,10 +39,9 @@
                 <!-- Display courses for students -->
                 @foreach (var course in Model.RegisteredCourses!)
                 {
-                    string headerColor = RandomHexColor(); // Generate a random hex color
                     <div class="col-md-3">
                         <div class="card mb-4 custom-card">
-                            <div class="card-header" style="background-color: @headerColor;">@course.CourseNumber</div>
+                            <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
                             <div class="card-body">
                                 @course.CourseName<br />
                                 @course.tName<br />
@@ -60,37 +57,3 @@
     </div>
 </body>
 </html>
-
-@functions {
-    Random random = new Random();
-
-    double brightness;
-
-    string RandomHexColor()
-    {
-        Random random = new Random();
-        string hexColor;
-
-        double brightness;
-       
-        // Generate a random color
-        int red = random.Next(256);
-        int green = random.Next(256);
-        int blue = random.Next(256);
-
-        // Calculate brightness
-        brightness = 0.299 * red + 0.587 * green + 0.114 * blue;
-
-        // Convert RGB to hex
-        hexColor = $"#{red:X2}{green:X2}{blue:X2}";
-
-        if(brightness > 128)
-        {
-            hexColor += ";color:#000";
-        }
-        // Check if brightness is above the threshold (e.g., 128)
-        
-
-        return hexColor;
-    }
-}
