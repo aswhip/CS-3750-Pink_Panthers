@@ -1,10 +1,18 @@
 ﻿@model Pink_Panthers_Project.Models.CourseView
 
 @{
-    ViewData["Title"] = "Index";
+    if (Model.Account!.isTeacher)
+    {
+        Layout = "TeacherLayout";
+    }
+    else
+    {
+        Layout = "StudentLayout";
+    }
+    ViewData["Title"] = "Dashboard";
 }
 
-<h1>Hello, @Html.DisplayFor(Model => Model.Account.FirstName) @Html.DisplayFor(Model => Model.Account.LastName)</h1>
+<h1>Hello, @Html.DisplayFor(Model => Model.Account!.FirstName) @Html.DisplayFor(Model => Model.Account!.LastName)</h1>
 
 <!DOCTYPE html>
 <html>
@@ -14,12 +22,12 @@
 <body>
     <div class="container">
         <div class="row mt-5">
-            @if (Model != null && Model.Account.isTeacher)
+            @if (Model != null && Model.Account!.isTeacher)
             {
 
                 <!-- Display courses for teachers -->
 
-                @foreach (var course in Model.TeachingCourses)
+                @foreach (var course in Model.TeachingCourses!)
                 {
                     string headerColor = RandomHexColor(); // Generate a random hex color
 
@@ -36,10 +44,10 @@
                     </div>
                 }
             }
-            else if (Model != null && !Model.Account.isTeacher)
+            else if (Model != null && !Model.Account!.isTeacher)
             {
                 <!-- Display courses for students -->
-                @foreach (var course in Model.RegisteredCourses)
+                @foreach (var course in Model.RegisteredCourses!)
                 {
                     string headerColor = RandomHexColor(); // Generate a random hex color
                     <div class="col-md-3">
@@ -47,8 +55,9 @@
                             <div class="card-header" style="background-color: @headerColor;">@course.CourseNumber</div>
                             <div class="card-body">
                                 @course.CourseName<br />
+                                @course.tName<br />
                                 @course.Room<br />
-                                @course.StartTime<br />
+                                @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
                                 @course.Days
                             </div>
                         </div>

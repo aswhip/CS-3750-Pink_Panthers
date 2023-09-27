@@ -1,6 +1,14 @@
 ﻿@model Pink_Panthers_Project.Models.Account
 
 @{
+    if (Model.isTeacher)
+    {
+        Layout = "TeacherLayout";
+    }
+    else
+    {
+        Layout = "StudentLayout";
+    }
     ViewData["Title"] = "Details";
 }
 
@@ -13,9 +21,18 @@
     <div class="col-md-4">
 
         <h1>Details</h1>
-
-        <img src="~/Images/@Html.ValueFor(Model => Model.ID)_@Html.ValueFor(Model => Model.LastName)pfp.jpg" alt="Profile Picture" width="100px" height="100px">
-
+        
+        @{
+            string path = Directory.GetCurrentDirectory() + @"\wwwroot\Images\" + Model.ID!.ToString() + "_" + Model.LastName! + "pfp.jpg";
+            if (File.Exists(path))
+            {
+                <img src="~/Images/@Html.ValueFor(Model => Model.ID)_@Html.ValueFor(Model => Model.LastName)pfp.jpg" alt="Profile Picture" width="150px" height="150px">
+            }
+            else
+            {
+                <img src="~/Images/default_pfp.jpg" width="150px" height="150px" alt="No Profile Picture Shown">
+            }
+        }
         <div class="form-group">
             <label for="FirstName">First Name</label>
             <input type="text" id="FirstName" name="Firstname" class="form-control" value="@Model.FirstName" readonly data-editable="false" />

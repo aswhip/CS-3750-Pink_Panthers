@@ -7,7 +7,7 @@ namespace Pink_Panthers_Project.Models
     {
         public int ID { get; set; }
         public int accountID { get; set; }
-        public string? Room {  get; set; }
+        public string? Room { get; set; }
         public string? DepartmentCode { get; set; }
         public string? CourseNumber { get; set; }
         public string? CourseName { get; set; }
@@ -15,7 +15,7 @@ namespace Pink_Panthers_Project.Models
         public string? Days { get; set; }
 
         [DataType(DataType.Time)]
-        public DateTime StartTime {  get; set; }
+        public DateTime StartTime { get; set; }
         [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
 
@@ -29,6 +29,8 @@ namespace Pink_Panthers_Project.Models
         public bool thursday { get; set; }
         [NotMapped]
         public bool friday { get; set; }
+        [NotMapped]
+        public string? tName { get; set; }
 
     }
 }

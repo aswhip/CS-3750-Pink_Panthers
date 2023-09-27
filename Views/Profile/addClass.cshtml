@@ -1,7 +1,7 @@
 ﻿@model Pink_Panthers_Project.Models.Class
 
 @{
-    Layout = "_Layout";
+    Layout = "TeacherLayout";
     ViewData["Title"] = "Add Class";
 }
 
@@ -36,16 +36,16 @@
                 <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Monday</label>
-                @Html.CheckBoxFor(m => m.monday)
-                <label class="control-label">Tuesday</label>
-                @Html.CheckBoxFor(m => m.tuesday)
-                <label class="control-label">Wednesday</label>
-                @Html.CheckBoxFor(m => m.wednesday)
-                <label class="control-label">Thursday</label>
-                @Html.CheckBoxFor(m => m.thursday)
+                <label class="control-label" >Monday&emsp;</label>
+                <label class="control-label">Tuesday&emsp;</label>
+                <label class="control-label">Wednesday&emsp;</label>
+                <label class="control-label">Thursday&emsp;</label>
                 <label class="control-label">Friday</label>
-                @Html.CheckBoxFor(m => m.friday)
+                <br />
+                <div>
+                    <pre>
+   @Html.CheckBoxFor(m => m.monday)         @Html.CheckBoxFor(m => m.tuesday)          @Html.CheckBoxFor(m => m.wednesday)          @Html.CheckBoxFor(m => m.thursday)        @Html.CheckBoxFor(m => m.friday)</pre>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>

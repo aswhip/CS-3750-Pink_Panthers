@@ -1,6 +1,14 @@
-﻿@{
-    
-    Layout = "_Layout";
+﻿@model Pink_Panthers_Project.Models.Account
+
+@{
+    if (Model.isTeacher)
+    {
+        Layout = "TeacherLayout";
+    }
+    else
+    {
+        Layout = "StudentLayout";
+    }
     ViewData["Title"] = "Privacy Policy";
 } 
 <h1>@ViewData["Title"]</h1>

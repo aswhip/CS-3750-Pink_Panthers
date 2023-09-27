@@ -54,7 +54,8 @@ namespace Pink_Panthers_Project.Controllers
                     Room = c.Room,
                     StartTime = c.StartTime,
                     EndTime = c.EndTime,
-                    Days = c.Days
+                    Days = c.Days,
+                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault()
                 })
                 .ToList();
                 }
@@ -65,7 +66,6 @@ namespace Pink_Panthers_Project.Controllers
                     RegisteredCourses = registeredCourses,
                     Account = _account
                 };
-
                 return View(viewModel);
             }
             return NotFound();
@@ -74,7 +74,7 @@ namespace Pink_Panthers_Project.Controllers
         public IActionResult Privacy()
         {
             if(_account != null)
-                return View();
+                return View(_account);
             return NotFound();
         }
 
@@ -122,15 +122,19 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.account = _account.ID;
+            ViewBag.account = _account!.ID;
 
             if (!_account!.isTeacher && ModelState.IsValid)
             {
                 var viewModel = new RegisterView
                 {
                     Classes = _context.Class.ToList(),
-                    RegisteredClasses = _context.registeredClasses.ToList()
+                    RegisteredClasses = _context.registeredClasses.ToList(),
                 };
+                foreach(var item in viewModel.Classes)
+                {
+                    item.tName = _context.Account.Where(t => t.ID == item.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault();
+                }
             return View(viewModel);
             }
 
@@ -140,7 +144,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(int classId)
         {
-            int accountId = _account.ID;
+            int accountId = _account!.ID;
 
             var existingRegistration = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
 
@@ -156,7 +160,7 @@ namespace Pink_Panthers_Project.Controllers
                 };
 
                 // Add the registeredClass to your registered classes collection
-                _context.registeredClasses.Add(registeredClass);
+                await _context.registeredClasses.AddAsync(registeredClass);
             }
             else
             {
@@ -164,7 +168,7 @@ namespace Pink_Panthers_Project.Controllers
                 // Remove the class from the student's registered classes
                 var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
 
-                _context.registeredClasses.Remove(registeredClassToRemove);
+                _context.registeredClasses.Remove(registeredClassToRemove!);
                 
             }
             _context.SaveChanges();
@@ -238,7 +242,7 @@ namespace Pink_Panthers_Project.Controllers
         }
         [HttpGet]
         public IActionResult FileUpload(){
-            return View();
+            return View(_account);
 
         }
         [HttpPost]
@@ -260,13 +264,13 @@ namespace Pink_Panthers_Project.Controllers
                 {
                     postedFile.CopyTo(fs);
                 }
-                return View();
+                return RedirectToAction("Details");
             }
             return BadRequest("Image not Found");
         }
         public IActionResult Calendar()
         {
-            return View();
+            return View(_account);
         }
 
         public static Account? getAccount() //Returns the account if it's not null

@@ -1,7 +1,7 @@
 ﻿@model Pink_Panthers_Project.Models.RegisterView
 
 @{
-    Layout = "_Layout";
+    Layout = "StudentLayout";
     ViewData["Title"] = "Register for Class";
 }
 
@@ -21,34 +21,36 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Classes)
-        {
-            <tr>
-                <td>@item.accountID</td>
-                <td>@item.Room</td>
-                <td>@item.DepartmentCode</td>
-                <td>@item.CourseNumber</td>
-                <td>@item.CourseName</td>
-                <td>@item.Days</td>
-                <td>@item.StartTime.ToString("hh:mm tt")</td>
-                <td>@item.EndTime.ToString("hh:mm tt")</td>
-                <td>
-                    @if (IsStudentRegistered(item.ID))
-                    {
-                        <form method="post" action="@Url.Action("Register", "Profile")">
-                            <input type="hidden" name="classId" value="@item.ID" />
-                            <button type="submit" class="btn btn-danger">Drop</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <form method="post" action="@Url.Action("Register", "Profile")">
-                            <input type="hidden" name="classId" value="@item.ID" />
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </form>
-                    }
-                </td>
-            </tr>
+        @{
+            @foreach (var item in Model.Classes!)
+            {
+                <tr>
+                    <td>@item.tName</td>
+                    <td>@item.Room</td>
+                    <td>@item.DepartmentCode</td>
+                    <td>@item.CourseNumber</td>
+                    <td>@item.CourseName</td>
+                    <td>@item.Days</td>
+                    <td>@item.StartTime.ToString("hh:mm tt")</td>
+                    <td>@item.EndTime.ToString("hh:mm tt")</td>
+                    <td>
+                        @if (IsStudentRegistered(item.ID))
+                        {
+                            <form method="post" action="@Url.Action("Register", "Profile")">
+                                <input type="hidden" name="classId" value="@item.ID" />
+                                <button type="submit" class="btn btn-danger">Drop</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" action="@Url.Action("Register", "Profile")">
+                                <input type="hidden" name="classId" value="@item.ID" />
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
@@ -57,7 +59,7 @@
     bool IsStudentRegistered(int classID)
     {
         var studentAccountID = ViewBag.account;
-        var isRegistered = Model.RegisteredClasses.Any(rc => rc.classID == classID && rc.accountID == studentAccountID);
+        var isRegistered = Model.RegisteredClasses!.Any(rc => rc.classID == classID && rc.accountID == studentAccountID);
 
         return isRegistered;
     }
