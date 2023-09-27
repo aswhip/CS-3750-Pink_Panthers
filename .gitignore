@@ -16,9 +16,9 @@
 # Mono auto generated files
 mono_crash.*
 
-.vs
-bin/Debug/net6.0
-obj/
+.vs/Pink_Panthers_Project/.vs
+Pink_Panthers_Project/vs
+Pink_Panthers_Project/obj
 
 # Build results
 [Dd]ebug/
