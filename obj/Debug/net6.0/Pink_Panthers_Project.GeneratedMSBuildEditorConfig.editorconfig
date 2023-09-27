@@ -9,81 +9,81 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Pink_Panthers_Project
 build_property.RootNamespace = Pink_Panthers_Project
-build_property.ProjectDir = /Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/
+build_property.ProjectDir = E:\CS 3750\CS-3750-Pink_Panthers\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers
+build_property.MSBuildProjectDirectory = E:\CS 3750\CS-3750-Pink_Panthers
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Accounts/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudHMvQ3JlYXRlLmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Accounts/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Accounts/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudHMvTG9naW4uY3NodG1s
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Accounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Home/Logout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Mb2dvdXQuY3NodG1s
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Home/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/addClass.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9hZGRDbGFzcy5jc2h0bWw=
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/addClass.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxhZGRDbGFzcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Calendar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9DYWxlbmRhci5jc2h0bWw=
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Calendar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxDYWxlbmRhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9EZXRhaWxzLmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9FZGl0LmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/FileUpload.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9GaWxlVXBsb2FkLmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/FileUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxGaWxlVXBsb2FkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9JbmRleC5jc2h0bWw=
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9Qcml2YWN5LmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZmlsZS9SZWdpc3Rlci5jc2h0bWw=
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Profile/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Shared/MinimalNav.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL01pbmltYWxOYXYuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-5gs1bao6n7
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Shared/MinimalNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE1pbmltYWxOYXYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-sb71b1x6ev
 
-[/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-c45s6i77zb
+[E:/CS 3750/CS-3750-Pink_Panthers/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-35vuog3b38
