@@ -1,5 +1,6 @@
 ﻿<Properties StartupConfiguration="{41A89149-B819-4F7C-A546-BB8E18CB2CA4}|Default">
   <MultiItemStartupConfigurations />
+<<<<<<< Updated upstream
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Views/Accounts/Login.cshtml">
@@ -7,6 +8,15 @@
       <File FileName="Program.cs" />
       <File FileName="wwwroot/css/site.css" />
       <File FileName="Views/Profile/Index.cshtml" />
+=======
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Profile/Index.cshtml">
+    <Files>
+      <File FileName="Program.cs" />
+      <File FileName="wwwroot/css/site.css" />
+      <File FileName="Views/Profile/Index.cshtml" Line="77" Column="38" />
+>>>>>>> Stashed changes
       <File FileName="appsettings.json" />
       <File FileName="Views/Accounts/Create.cshtml" />
       <File FileName="Views/Accounts/Login.cshtml" Line="32" Column="39" />
@@ -15,11 +25,17 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Pink_Panthers_Project">
+<<<<<<< Updated upstream
             <Node name="Pink_Panthers_Project">
               <Node name="Views">
                 <Node name="Accounts">
                   <Node name="Login.cshtml" selected="True" />
                 </Node>
+=======
+            <Node name="Pink_Panthers_Project" expanded="True">
+              <Node name="Views" expanded="True">
+                <Node name="Profile" expanded="True" />
+>>>>>>> Stashed changes
               </Node>
             </Node>
           </Node>
@@ -27,8 +43,15 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+<<<<<<< Updated upstream
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Pink__Panthers__Project PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+=======
+  <MonoDevelop.Ide.ItemProperties.Pink__Panthers__Project PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+>>>>>>> Stashed changes
 </Properties>

@@ -21,7 +21,9 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Index()
         {
-            if(_account != null) //An account must be active to view this page
+            ViewBag.isTeacher = _account.isTeacher;
+
+            if (_account != null) //An account must be active to view this page
             {
                 return View(_account);
             }
@@ -30,11 +32,113 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Privacy()
         {
-            if(_account != null)
+            ViewBag.isTeacher = _account.isTeacher;
+            if (_account != null)
                 return View();
             return NotFound();
         }
 
+<<<<<<< Updated upstream
+=======
+        [HttpGet]
+        public IActionResult addClass()
+        {
+            ViewBag.isTeacher = _account.isTeacher;
+            if (_account!.isTeacher)
+                return View();
+            return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,monday,tuesday,wednesday,thursday,friday,StartTime,EndTime")]Class newClass)
+        {
+            if (_account!.isTeacher && ModelState.IsValid)
+            {
+                setDays(ref newClass);
+                if (String.IsNullOrEmpty(newClass.Days))
+                {
+                    ModelState.AddModelError("NoDaysSelected", "");
+                    return View(newClass);
+                }
+                newClass.accountID = _account.ID;
+                _context.Add(newClass);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return NotFound();
+        }
+
+        private void setDays(ref Class getDays)
+        {
+            getDays.Days = "";
+            if (getDays.monday)
+                getDays.Days += "M ";
+            if (getDays.tuesday)
+                getDays.Days += "T ";
+            if (getDays.wednesday)
+                getDays.Days += "W ";
+            if (getDays.thursday)
+                getDays.Days += "Th ";
+            if (getDays.friday)
+                getDays.Days += "F ";
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            ViewBag.account = _account.ID;
+            ViewBag.isTeacher = _account.isTeacher;
+
+            if (!_account!.isTeacher && ModelState.IsValid)
+            {
+                var viewModel = new RegisterView
+                {
+                    Classes = _context.Class.ToList(),
+                    RegisteredClasses = _context.registeredClasses.ToList()
+                };
+            return View(viewModel);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(int classId)
+        {
+            int accountId = _account.ID;
+
+            var existingRegistration = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+            if (existingRegistration == null)
+            {
+                    
+
+                // Add the class to the student's registered classes
+                var registeredClass = new RegisteredClass
+                {
+                    accountID = _account.ID,
+                    classID = classId
+                };
+
+                // Add the registeredClass to your registered classes collection
+                _context.registeredClasses.Add(registeredClass);
+            }
+            else
+            {
+
+                // Remove the class from the student's registered classes
+                var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+                _context.registeredClasses.Remove(registeredClassToRemove);
+                
+            }
+            _context.SaveChanges();
+            
+
+            // Redirect back to the class list page
+            return RedirectToAction("Register");
+        }
+
+>>>>>>> Stashed changes
         /// <summary>
         /// GET
         /// Returns page with details of the logged in account
@@ -42,7 +146,8 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Details()
         {
-            if(_account != null)
+            ViewBag.isTeacher = _account.isTeacher;
+            if (_account != null)
                 return View(_account);
             return NotFound();
         }
@@ -54,7 +159,8 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Edit()
         {
-            if(_account != null)
+            ViewBag.isTeacher = _account.isTeacher;
+            if (_account != null)
                 return View(_account);
             return NotFound();
         }
@@ -99,6 +205,7 @@ namespace Pink_Panthers_Project.Controllers
         }
         [HttpGet]
         public IActionResult FileUpload(){
+            ViewBag.isTeacher = _account.isTeacher;
             return View();
 
         }
@@ -125,6 +232,14 @@ namespace Pink_Panthers_Project.Controllers
             }
             return BadRequest("Image not Found");
         }
+<<<<<<< Updated upstream
+=======
+        public IActionResult Calendar()
+        {
+            ViewBag.isTeacher = _account.isTeacher;
+            return View();
+        }
+>>>>>>> Stashed changes
 
         public static Account? getAccount() //Returns the account if it's not null
         {

@@ -34,6 +34,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
                         </li>
+<<<<<<< Updated upstream
+=======
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Calendar">Calendar</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (!ViewBag.isTeacher)
+                            {
+                                <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Register">Register</a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (ViewBag.isTeacher)
+                            {
+                                <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="addClass">Add Class</a>
+                            }
+                        </li>
+>>>>>>> Stashed changes
                     </ul>
                 </div>
             </div>
