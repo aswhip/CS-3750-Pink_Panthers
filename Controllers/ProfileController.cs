@@ -240,7 +240,6 @@ namespace Pink_Panthers_Project.Controllers
                 Account.ProfileLink2 = account.ProfileLink2;
                 Account.ProfileLink3 = account.ProfileLink3;
 
-
                 //Save to database
                 _context.Entry(Account).State = EntityState.Modified;
                 _context.SaveChanges();
