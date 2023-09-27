@@ -58,11 +58,7 @@ namespace Pink_Panthers_Project.Models
         public bool isTeacher { get; set; } //True for Teacher Account, false for Student Account
 
 
-        public string? ProfileLink1 { get; set; }
-
-        public string? ProfileLink2 { get; set; }
-
-        public string? ProfileLink3 { get; set; }
+        
 
 
 
