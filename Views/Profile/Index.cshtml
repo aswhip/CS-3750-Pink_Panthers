@@ -25,7 +25,7 @@
 
                     <div class="col-md-3">
                         <div class="card mb-4 custom-card">
-                            <div class="card-header" style="background-color: @headerColor;">@course.CourseNumber</div>
+                            <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
                             <div class="card-body">
                                 @course.CourseName<br />
                                 @course.Room<br />
@@ -44,7 +44,7 @@
                     string headerColor = RandomHexColor(); // Generate a random hex color
                     <div class="col-md-3">
                         <div class="card mb-4 custom-card">
-                            <div class="card-header" style="background-color: @headerColor;">@course.CourseNumber</div>
+                            <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
                             <div class="card-body">
                                 @course.CourseName<br />
                                 @course.tName<br />
@@ -62,9 +62,6 @@
 </html>
 
 @functions {
-    Random random = new Random();
-
-    double brightness;
 
     string RandomHexColor()
     {
