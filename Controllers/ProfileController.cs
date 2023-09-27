@@ -25,7 +25,6 @@ namespace Pink_Panthers_Project.Controllers
         {
             if(_account != null) //An account must be active to view this page
             {
-                Console.WriteLine("Just testing something right now");
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
                 var registeredCourses = new List<Class>();//list of classes a student is taking
 
