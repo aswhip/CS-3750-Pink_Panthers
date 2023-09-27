@@ -16,6 +16,10 @@
 # Mono auto generated files
 mono_crash.*
 
+.vs
+bin/Debug/net6.0
+obj/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
