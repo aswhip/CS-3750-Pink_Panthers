@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Pink_Panthers_Project.props" />
-</Project>
