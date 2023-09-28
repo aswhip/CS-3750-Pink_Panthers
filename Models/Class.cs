@@ -11,6 +11,7 @@ namespace Pink_Panthers_Project.Models
         public string? DepartmentCode { get; set; }
         public string? CourseNumber { get; set; }
         public string? CourseName { get; set; }
+        public string? color { get; set; }
 
         public string? Days { get; set; }
 
@@ -32,7 +33,6 @@ namespace Pink_Panthers_Project.Models
         [NotMapped]
         public string? tName { get; set; }
 
-        [NotMapped]
-        public string? color { get; set; }
+        
     }
 }
