@@ -14,61 +14,73 @@
 <body>
     <div class="container">
         <div class="row mt-5">
-            @if (Model != null && Model.Account!.isTeacher)
-            {
-
-                <!-- Display courses for teachers -->
-
-                @foreach (var course in Model.TeachingCourses!)
-                {
-                    <div class="col-md-3">
-                        <div class="card mb-4 custom-card">
-                            <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
-                            <div class="card-body">
-                                @course.CourseName<br />
-                                @course.Room<br />
-                                @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
-                                @course.Days
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-            else if (Model != null && !Model.Account!.isTeacher)
-            {
-                <!-- Display courses for students -->
-                @foreach (var course in Model.RegisteredCourses!)
-                {
-                    <div class="col-md-3">
-                        <div class="card mb-4 custom-card">
-                            <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
-                            <div class="card-body">
-                                @course.CourseName<br />
-                                @course.tName<br />
-                                @course.Room<br />
-                                @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
-                                @course.Days
-                            </div>
-                        </div>
-                    </div>
-                }
-                <style>
-                    .clickable{
-                        cursor: pointer;
-                    }
-                </style>
-                <div class="to-do-list">
-                        <div class="to-do-header">To-Do List</div>
-                    @foreach (var assignment in Model.Assignments!)
+            <div class="col-md-8">
+                <div class="row">
+                    @if (Model != null && Model.Account!.isTeacher)
                     {
-                        <div class="clickable">
-                            <div class="card-body to-do-card">
-                                <b>@assignment.className</b><br />
-                                Assignment: @assignment.AssignmentName<br />
-                                Due: @assignment.DueDate
+
+                        <!-- Display courses for teachers -->
+
+                        @foreach (var course in Model.TeachingCourses!)
+                        {
+
+                            <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
+                                <div class="card custom-card">
+                                    <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
+                                    <div class="card-body">
+                                        @course.CourseName<br />
+                                        @course.Room<br />
+                                        @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
+                                        @course.Days
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
+                    else if (Model != null && !Model.Account!.isTeacher)
+                    {
+                        <!-- Display courses for students -->
+                        @foreach (var course in Model.RegisteredCourses!)
+                        {
+                            <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
+                                <div class="card custom-card">
+                                    <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
+                                    <div class="card-body">
+                                        @course.CourseName<br />
+                                        @course.tName<br />
+                                        @course.Room<br />
+                                        @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
+                                        @course.Days
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    }
+                </div>
+            </div>
+            @if (Model != null && !Model.Account!.isTeacher)
+            {
+                <div class="col-md-4">
+                    <style>
+                        .clickable {
+                            cursor: pointer;
+                        }
+                    </style>
+                    <div class="to-do-list">
+                        <div class="to-do-header">To-Do List</div>
+                        @foreach (var assignment in Model.Assignments!)
+                        {
+                            <div class="clickable">
+                                <div class="">
+                                    <b>@assignment.className</b><br />
+                                    Assignment: @assignment.AssignmentName<br />
+                                    Due: @assignment.DueDate
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
             }
         </div>
