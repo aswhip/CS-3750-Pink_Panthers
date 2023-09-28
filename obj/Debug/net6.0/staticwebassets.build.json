@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "ArL0sUEv7mKdp6DUJyuJDv0W9+b2xg9m9yRlaXRz3xA=",
+=======
+  "Hash": "NWmWQkVtU3HLAanx4pyj4uW+EXp/hvAKK4sxTmYXQ5k=",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
   "Source": "Pink_Panthers_Project",
   "BasePath": "_content/Pink_Panthers_Project",
   "Mode": "Default",
@@ -10,17 +14,28 @@
     {
       "Name": "Pink_Panthers_Project\\wwwroot",
       "Source": "Pink_Panthers_Project",
+<<<<<<< HEAD
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Pink_Panthers_Project.styles.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Pink_Panthers_Project.styles.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\obj\\Debug\\net6.0\\scopedcss\\bundle\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Pink_Panthers_Project.styles.css",
       "AssetKind": "All",
@@ -31,6 +46,7 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
       "OriginalItemSpec": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Pink_Panthers_Project.styles.css"
     },
     {
@@ -38,6 +54,15 @@
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+=======
+      "OriginalItemSpec": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Pink_Panthers_Project.styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Pink_Panthers_Project.bundle.scp.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Pink_Panthers_Project.bundle.scp.css",
       "AssetKind": "All",
@@ -48,6 +73,7 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
       "OriginalItemSpec": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Pink_Panthers_Project.bundle.scp.css"
     },
     {
@@ -55,6 +81,15 @@
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "OriginalItemSpec": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Pink_Panthers_Project.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\.DS_Store",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": ".DS_Store",
       "AssetKind": "All",
@@ -68,10 +103,17 @@
       "OriginalItemSpec": "wwwroot\\.DS_Store"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\css\\site.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\css\\site.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -85,10 +127,17 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\favicon.ico",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\favicon.ico",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -102,10 +151,17 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\1_Studentpfp.jpg",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\Images\\1_Studentpfp.jpg",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Images/1_Studentpfp.jpg",
       "AssetKind": "All",
@@ -119,10 +175,17 @@
       "OriginalItemSpec": "wwwroot\\Images\\1_Studentpfp.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\2_Teacherpfp.jpg",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\Images\\2_Teacherpfp.jpg",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Images/2_Teacherpfp.jpg",
       "AssetKind": "All",
@@ -136,10 +199,17 @@
       "OriginalItemSpec": "wwwroot\\Images\\2_Teacherpfp.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\3_Davispfp.jpg",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\Images\\3_Davispfp.jpg",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Images/3_Davispfp.jpg",
       "AssetKind": "All",
@@ -153,6 +223,7 @@
       "OriginalItemSpec": "wwwroot\\Images\\3_Davispfp.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\3_Studentpfp.jpg",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
@@ -174,6 +245,12 @@
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\Images\\5_Teacherpfp.jpg",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Images/5_Teacherpfp.jpg",
       "AssetKind": "All",
@@ -187,6 +264,7 @@
       "OriginalItemSpec": "wwwroot\\Images\\5_Teacherpfp.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\Images\\8_Teacherpfp.jpg",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
@@ -208,6 +286,12 @@
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\Images\\default_pfp.jpg",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "Images/default_pfp.jpg",
       "AssetKind": "All",
@@ -221,10 +305,17 @@
       "OriginalItemSpec": "wwwroot\\Images\\default_pfp.jpg"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\js\\site.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\js\\site.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -238,10 +329,17 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -255,10 +353,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -272,10 +377,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -289,10 +401,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -306,10 +425,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -323,10 +449,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -340,10 +473,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -357,10 +497,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -374,10 +521,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -391,10 +545,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -408,10 +569,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -425,10 +593,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -442,10 +617,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -459,10 +641,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -476,10 +665,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -493,10 +689,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -510,10 +713,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -527,10 +737,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -544,10 +761,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -561,10 +785,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -578,10 +809,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -595,10 +833,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -612,10 +857,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -629,10 +881,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -646,10 +905,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -663,10 +929,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -680,10 +953,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -697,10 +977,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -714,10 +1001,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -731,10 +1025,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -748,10 +1049,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -765,10 +1073,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -782,10 +1097,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -799,10 +1121,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -816,10 +1145,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -833,10 +1169,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -850,10 +1193,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -867,10 +1217,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -884,10 +1241,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -901,10 +1265,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -918,10 +1289,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -935,10 +1313,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -952,10 +1337,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -969,10 +1361,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -986,10 +1385,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -1003,10 +1409,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -1020,10 +1433,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -1037,10 +1457,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -1054,10 +1481,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",
@@ -1071,10 +1505,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -1088,10 +1529,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -1105,10 +1553,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -1122,10 +1577,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -1139,10 +1601,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -1156,10 +1625,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -1173,10 +1649,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -1190,10 +1673,17 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
+<<<<<<< HEAD
       "Identity": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "Pink_Panthers_Project",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\wwwroot\\",
+=======
+      "Identity": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "SourceId": "Pink_Panthers_Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\wwwroot\\",
+>>>>>>> a4429ecac66749ab2244b5056617dd8960879ad0
       "BasePath": "_content/Pink_Panthers_Project",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",

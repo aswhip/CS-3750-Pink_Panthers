@@ -82,13 +82,6 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
-        public IActionResult Privacy()
-        {
-            if(_account != null)
-                return View(_account);
-            return NotFound();
-        }
-
         [HttpGet]
         public IActionResult addClass()
         {
@@ -274,9 +267,10 @@ namespace Pink_Panthers_Project.Controllers
             }
             string fileName = _account.ID.ToString() + "_" + _account.LastName + "pfp.jpg";
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName);
-            if(postedFile == null)
+            if (postedFile == null)
             {
                 ModelState.AddModelError("NoImage", String.Empty);
+                ViewBag.isTeacher = _account.isTeacher;
                 return View();
             }
             if(postedFile != null)

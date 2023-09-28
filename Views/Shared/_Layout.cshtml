@@ -29,9 +29,6 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="FileUpload">Change Profile Picture</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
                             @if (!ViewBag.isTeacher)
                             {
                                 <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Register">Register</a>
