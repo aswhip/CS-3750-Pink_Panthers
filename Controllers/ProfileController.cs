@@ -28,6 +28,7 @@ namespace Pink_Panthers_Project.Controllers
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
                 var registeredCourses = new List<Class>();//list of classes a student is taking
+                var assignments = new List<Assignment>();
 
                 if (_account.isTeacher)//check if the user is a teacher
                 {
@@ -61,12 +62,19 @@ namespace Pink_Panthers_Project.Controllers
                     color = c.color
                 })
                 .ToList();
+
+                    assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
+                    foreach(var assignment in assignments)
+                    {
+                        assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.CourseName).SingleOrDefault();
+                    }
                 }
 
                 var viewModel = new CourseView
                 {
                     TeachingCourses = teachingCourses,
                     RegisteredCourses = registeredCourses,
+                    Assignments = assignments,
                     Account = _account
                 };
                 return View(viewModel);

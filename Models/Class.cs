@@ -32,7 +32,7 @@ namespace Pink_Panthers_Project.Models
         [NotMapped]
         public string? tName { get; set; }
 
-
+        [NotMapped]
         public string? color { get; set; }
     }
 }
