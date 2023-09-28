@@ -67,6 +67,15 @@ namespace Pink_Panthers_Project.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("ProfileLink1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileLink2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileLink3")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Salt")
                         .HasColumnType("nvarchar(max)");
 
@@ -84,6 +93,28 @@ namespace Pink_Panthers_Project.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Account");
+                });
+
+            modelBuilder.Entity("Pink_Panthers_Project.Models.Assignment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AssignmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Assignments");
                 });
 
             modelBuilder.Entity("Pink_Panthers_Project.Models.Class", b =>
@@ -117,9 +148,6 @@ namespace Pink_Panthers_Project.Migrations
 
                     b.Property<int>("accountID")
                         .HasColumnType("int");
-
-                    b.Property<string>("color")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

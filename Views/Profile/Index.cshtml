@@ -52,6 +52,24 @@
                         </div>
                     </div>
                 }
+                <style>
+                    .clickable{
+                        cursor: pointer;
+                    }
+                </style>
+                <div class="to-do-list">
+                        <div class="to-do-header">To-Do List</div>
+                    @foreach (var assignment in Model.Assignments!)
+                    {
+                        <div class="clickable">
+                            <div class="card-body to-do-card">
+                                <b>@assignment.className</b><br />
+                                Assignment: @assignment.AssignmentName<br />
+                                Due: @assignment.DueDate
+                            </div>
+                        </div>
+                    }
+                </div>
             }
         </div>
     </div>
