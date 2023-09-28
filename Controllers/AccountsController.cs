@@ -34,6 +34,11 @@ namespace Pink_Panthers_Project.Controllers
         public IActionResult Login([Bind("Email,Password")] Account account)
         {
             Account? loginAccount = null;
+            if(String.IsNullOrEmpty(account.Email) || String.IsNullOrEmpty(account.Password))
+            {
+                ModelState.AddModelError("MissingInfo", "");
+                return View();
+            }
             if (!String.IsNullOrEmpty(account.Email) && !String.IsNullOrEmpty(account.Password)) //Email and Password must be entered
             {
                 loginAccount = _context.Account.FirstOrDefault(m => m.Email == account.Email); //Tries to find an account with the passed in email

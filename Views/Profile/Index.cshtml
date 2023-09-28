@@ -63,16 +63,11 @@
             @if (Model != null && !Model.Account!.isTeacher)
             {
                 <div class="col-md-4">
-                    <style>
-                        .clickable {
-                            cursor: pointer;
-                        }
-                    </style>
                     <div class="to-do-list">
                         <div class="to-do-header">To-Do List</div>
                         @foreach (var assignment in Model.Assignments!)
                         {
-                            <div class="clickable">
+                            <div class="clickable to-do-card">
                                 <div class="">
                                     <b>@assignment.className</b><br />
                                     Assignment: @assignment.AssignmentName<br />
