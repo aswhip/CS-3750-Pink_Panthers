@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PX1HoLGUdUSozX1lPoL4kNW2IgY/8qCWmG24I8EpnwTlhq63j13OjwbrUnf6XVN5WISY0Lh8RhZ4uCm0KtJgOA==",
+  "dgSpecHash": "pGtkr5nb8C3Ubw5M/r22glkOF17/2inhnFC/qDSB/MmdtoNBD6z26kF8xTUSGwDPCsof/L/kgn5/wV+tQcPpsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\davis\\OneDrive\\Desktop\\CS3750\\Project\\Pink_Panthers_Project.csproj",
+  "projectFilePath": "C:\\Users\\davis\\source\\repos\\Project_Root\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\davis\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\davis\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
