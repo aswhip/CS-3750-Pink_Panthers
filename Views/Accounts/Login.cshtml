@@ -28,6 +28,12 @@
                 <br />
                 <br />
             }
+            @if (ViewData.ModelState.ContainsKey("MissingInfo"))
+            {
+                <em>Enter Email and Password First.</em>
+                <br />
+                <br />
+            }
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />

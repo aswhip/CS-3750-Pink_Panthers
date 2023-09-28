@@ -23,11 +23,6 @@ namespace Pink_Panthers_Project.Controllers
             return RedirectToAction("Login", "Accounts");//Redirects to the login page on load
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Logout()
         {
             if (ProfileController.getAccount() != null) //Can only log out if user is currently logged in

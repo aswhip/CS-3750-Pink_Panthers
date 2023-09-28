@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pink_Panthers_Project", "Pink_Panthers_Project.csproj", "{41A89149-B819-4F7C-A546-BB8E18CB2CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pink_Panthers_Test", "..\Pink_Panthers_Test\Pink_Panthers_Test.csproj", "{866AE8CF-0339-4796-8A35-491FDD711547}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{41A89149-B819-4F7C-A546-BB8E18CB2CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41A89149-B819-4F7C-A546-BB8E18CB2CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41A89149-B819-4F7C-A546-BB8E18CB2CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{866AE8CF-0339-4796-8A35-491FDD711547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{866AE8CF-0339-4796-8A35-491FDD711547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{866AE8CF-0339-4796-8A35-491FDD711547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{866AE8CF-0339-4796-8A35-491FDD711547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
