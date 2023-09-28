@@ -66,7 +66,7 @@ namespace Pink_Panthers_Project.Controllers
                     assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
                     foreach(var assignment in assignments)
                     {
-                        assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.CourseName).SingleOrDefault();
+                        assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
                     }
                 }
 
