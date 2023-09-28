@@ -400,3 +400,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/.vs/Pink_Panthers_Project/v17/.suo
+/obj/Debug/net6.0/Pink_Panthers_Project.assets.cache
+/obj/Debug/net6.0/Pink_Panthers_Project.GeneratedMSBuildEditorConfig.editorconfig
