@@ -11109,26 +11109,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/aswhip/.nuget/packages/": {}
+    "C:\\Users\\swimj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Pink_Panthers_Project.csproj",
+      "projectUniqueName": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
       "projectName": "Pink_Panthers_Project",
-      "projectPath": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Pink_Panthers_Project.csproj",
-      "packagesPath": "/Users/aswhip/.nuget/packages/",
-      "outputPath": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/obj/",
+      "projectPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
+      "packagesPath": "C:\\Users\\swimj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/aswhip/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\swimj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
-        "/usr/local/share/dotnet/sdk/7.0.308/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11187,7 +11187,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.308/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
