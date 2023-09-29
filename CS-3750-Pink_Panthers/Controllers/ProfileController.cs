@@ -23,7 +23,7 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             if(_account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
@@ -85,7 +85,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult addClass()
         {
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             if (_account!.isTeacher)
                 return View();
             return NotFound();
@@ -129,7 +129,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             ViewBag.account = _account!.ID;
 
             if (!_account!.isTeacher && ModelState.IsValid)
@@ -193,7 +193,7 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Details()
         {
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null)
                 return View(_account);
             return NotFound();
@@ -206,7 +206,7 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Edit()
         {
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null)
                 return View(_account);
             return NotFound();
@@ -255,7 +255,7 @@ namespace Pink_Panthers_Project.Controllers
         }
         [HttpGet]
         public IActionResult FileUpload(){
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             return View(_account);
 
         }
@@ -285,7 +285,7 @@ namespace Pink_Panthers_Project.Controllers
         }
         public IActionResult Calendar()
         {
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = _account!.isTeacher;
             return View(_account);
         }
 

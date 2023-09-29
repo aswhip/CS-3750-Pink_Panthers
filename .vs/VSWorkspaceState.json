@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Pink_Panthers_Test"
   ],
-  "SelectedNode": "\\Pink_Panthers_Project.sln",
+  "SelectedNode": "\\Pink_Panthers_Test\\UnitTest1.cs",
   "PreviewInSolutionExplorer": false
 }
