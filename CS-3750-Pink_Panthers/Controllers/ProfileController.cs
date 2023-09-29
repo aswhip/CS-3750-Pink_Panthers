@@ -104,7 +104,7 @@ namespace Pink_Panthers_Project.Controllers
                 newClass.accountID = _account.ID;
                 string color = RandomHexColor();
                 newClass.color = color;
-                _context.Add(newClass);
+                await _context.AddAsync(newClass);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -179,7 +179,7 @@ namespace Pink_Panthers_Project.Controllers
                 _context.registeredClasses.Remove(registeredClassToRemove!);
                 
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             
 
             // Redirect back to the class list page

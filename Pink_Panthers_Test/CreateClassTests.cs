@@ -46,6 +46,8 @@ namespace Pink_Panthers_Test
 
             _context.Class.Remove(newClass);
             await _context.SaveChangesAsync();
+
+            ProfileController.logoutAccount();
         }
 
         [TestMethod]
@@ -79,6 +81,7 @@ namespace Pink_Panthers_Test
 
             await _context.SaveChangesAsync();
 
+            ProfileController.logoutAccount();
         }
     }
 }

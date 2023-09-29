@@ -88,7 +88,7 @@ namespace Pink_Panthers_Project.Controllers
                         byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); //Generates a new hashing algorithm salt per account, so no two accounts share the same one
                         account.Salt = Convert.ToBase64String(salt); //Convert it to a string to store in the database
                         hashPassword(ref account); //Reference so we aren't creating a new temporary account
-                        _context.Add(account); //Adds the account to the database
+                        await _context.AddAsync(account); //Adds the account to the database
                         await _context.SaveChangesAsync();
                         ProfileController.setAccount(ref account);
                         return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
