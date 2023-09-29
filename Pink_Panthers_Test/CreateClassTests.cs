@@ -6,10 +6,10 @@ using Pink_Panthers_Project.Models;
 namespace Pink_Panthers_Test
 {
     [TestClass]
-    public class UnitTest1
+    public class CreateClassTests
     {
         private readonly Pink_Panthers_ProjectContext _context;
-        public UnitTest1()
+        public CreateClassTests()
         {
             DbContextOptions<Pink_Panthers_ProjectContext> options = new DbContextOptions<Pink_Panthers_ProjectContext>();
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder(options);
