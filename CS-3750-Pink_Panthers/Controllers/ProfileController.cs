@@ -152,36 +152,37 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(int classId)
         {
-            int accountId = _account!.ID;
-
-            var existingRegistration = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
-
-            if (existingRegistration == null)
+            if (!_account!.isTeacher)
             {
-                    
+                int accountId = _account!.ID;
 
-                // Add the class to the student's registered classes
-                var registeredClass = new RegisteredClass
+                var existingRegistration = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+                if (existingRegistration == null)
                 {
-                    accountID = _account.ID,
-                    classID = classId
-                };
 
-                // Add the registeredClass to your registered classes collection
-                await _context.registeredClasses.AddAsync(registeredClass);
+
+                    // Add the class to the student's registered classes
+                    var registeredClass = new RegisteredClass
+                    {
+                        accountID = _account.ID,
+                        classID = classId
+                    };
+
+                    // Add the registeredClass to your registered classes collection
+                    await _context.registeredClasses.AddAsync(registeredClass);
+                }
+                else
+                {
+
+                    // Remove the class from the student's registered classes
+                    var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+                    _context.registeredClasses.Remove(registeredClassToRemove!);
+
+                }
+                await _context.SaveChangesAsync();
             }
-            else
-            {
-
-                // Remove the class from the student's registered classes
-                var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
-
-                _context.registeredClasses.Remove(registeredClassToRemove!);
-                
-            }
-            await _context.SaveChangesAsync();
-            
-
             // Redirect back to the class list page
             return RedirectToAction("Index");
         }

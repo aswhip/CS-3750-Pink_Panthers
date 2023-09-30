@@ -11,17 +11,8 @@ using System.Threading.Tasks;
 namespace Pink_Panthers_Test
 {
     [TestClass]
-    public class LoginTests
+    public class LoginTests : Tests //Derived from Tests, can access protected member _context
     {
-        private readonly Pink_Panthers_ProjectContext _context;
-        public LoginTests()
-        {
-            DbContextOptions<Pink_Panthers_ProjectContext> options = new DbContextOptions<Pink_Panthers_ProjectContext>();
-            DbContextOptionsBuilder builder = new DbContextOptionsBuilder(options);
-            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Data Source=titan.cs.weber.edu,10433;Initial Catalog=3750_PinkPanthers;User ID=3750_PinkPanthers;Password=P1nkpanthers!;TrustServerCertificate=True");
-            _context = new Pink_Panthers_ProjectContext((DbContextOptions<Pink_Panthers_ProjectContext>)builder.Options);
-        }
-
         [TestMethod]
         public void CanLoginToExistingAccount()
         {
