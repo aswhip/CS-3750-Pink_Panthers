@@ -286,8 +286,64 @@ namespace Pink_Panthers_Project.Controllers
         }
         public IActionResult Calendar()
         {
+
             ViewBag.isTeacher = _account!.isTeacher;
-            return View(_account);
+            if (_account != null) //An account must be active to view this page
+            {
+                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
+                var registeredCourses = new List<Class>();//list of classes a student is taking
+                var assignments = new List<Assignment>();
+
+                if (_account.isTeacher)//check if the user is a teacher
+                {
+                    teachingCourses = _context.Class //populate the fields
+                        .Where(c => c.accountID == _account.ID)
+                        .Select(c => new Class
+                        {
+                            CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                            CourseName = c.CourseName,
+                            Room = c.Room,
+                            StartTime = c.StartTime,
+                            EndTime = c.EndTime,
+                            Days = c.Days,
+                            color = c.color
+                        })
+                        .ToList();
+                }
+                else
+                {
+                    registeredCourses = _context.registeredClasses
+                .Where(rc => rc.accountID == _account.ID)
+                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+                {
+                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                    CourseName = c.CourseName,
+                    Room = c.Room,
+                    StartTime = c.StartTime,
+                    EndTime = c.EndTime,
+                    Days = c.Days,
+                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+                    color = c.color
+                })
+                .ToList();
+
+                    assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
+                    foreach (var assignment in assignments)
+                    {
+                        assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+                    }
+                }
+
+                var viewModel = new CourseView
+                {
+                    TeachingCourses = teachingCourses,
+                    RegisteredCourses = registeredCourses,
+                    Assignments = assignments,
+                    Account = _account
+                };
+                return View(viewModel);
+            }
+            return NotFound();
         }
 
         public static Account? getAccount() //Returns the account if it's not null
