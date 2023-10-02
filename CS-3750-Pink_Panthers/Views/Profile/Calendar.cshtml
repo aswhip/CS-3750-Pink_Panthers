@@ -1,4 +1,4 @@
-﻿@model Pink_Panthers_Project.Models.Account
+﻿@model Pink_Panthers_Project.Models.CourseView
 
 @{
     ViewData["Title"] = "Calendar";
@@ -10,15 +10,162 @@
     <meta charset='utf-8' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
+                initialView: 'dayGridMonth',
+                events: [
+        @if (Model.Account.isTeacher)
+        {
+            @foreach (var course in Model.TeachingCourses)
+            {
+                var startDate = new DateTime(2023, 8, 15);
+                var endDate = new DateTime(2023, 12, 15);
+                string days = @course.Days;
+                while (days.Length != 0)
+                {
+                    if (days.StartsWith("M"))
+                    {
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 21);
+                        
+                    }
+                    else if (days.StartsWith("Th"))
+                    {
+                        if (days.Length == 2)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(3);
+                        startDate = new DateTime(2023, 8, 17);
+                    }
+                    else if (days.StartsWith("W"))
+                    {
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 16);
+                    }
+                    else if (days.StartsWith("T "))
+                    {
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 15);
+                    }
+                    else if (days.StartsWith("F"))
+                    {
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 18);
+                    }
+                    while (startDate <= endDate)
+                    {
+                        <text>
+                                    {
+                                        title: '@course.CourseName',
+                                        start: '@startDate.ToString("yyyy-MM-dd")',
+                                        end: '@startDate.ToString("yyyy-MM-dd")'
+                                    },
+                        </text>
+                        startDate = startDate.AddDays(7);
+                    }
+                }
+            }
+        }
+        else
+        {
+            @foreach (var course in Model.RegisteredCourses) {
+            var startDate = new DateTime(2023, 8, 15);
+            var endDate = new DateTime(2023, 12, 15);
+            string days = @course.Days;
+            while (days.Length != 0)
+            {
+                if (days.StartsWith("M"))
+                {
+                    if (days.Length == 1)
+                    {
+                        days = "";
+                    }
+                    else
+                        days = days.Substring(2);
+                    startDate = new DateTime(2023, 8, 21);
+
+                }
+                else if (days.StartsWith("Th"))
+                {
+                    if (days.Length == 2)
+                    {
+                        days = "";
+                    }
+                    else
+                        days = days.Substring(3);
+                    startDate = new DateTime(2023, 8, 17);
+                }
+                else if (days.StartsWith("W"))
+                {
+                    if (days.Length == 1)
+                    {
+                        days = "";
+                    }
+                    else
+                        days = days.Substring(2);
+                    startDate = new DateTime(2023, 8, 16);
+                }
+                else if (days.StartsWith("T "))
+                {
+                    if (days.Length == 1)
+                    {
+                        days = "";
+                    }
+                    else
+                        days = days.Substring(2);
+                    startDate = new DateTime(2023, 8, 15);
+                }
+                else if (days.StartsWith("F"))
+                {
+                    if (days.Length == 1)
+                    {
+                        days = "";
+                    }
+                    else
+                        days = days.Substring(2);
+                    startDate = new DateTime(2023, 8, 18);
+                }
+                while (startDate <= endDate)
+                {
+                    <text>
+                                {
+                                    title: '@course.CourseName',
+                                    start: '@startDate.ToString("yyyy-MM-dd")',
+                                    end: '@startDate.ToString("yyyy-MM-dd")'
+                                },
+                    </text>
+                    startDate = startDate.AddDays(7);
+                }
+            }
+        }
+        }
+                        ]
             });
             calendar.render();
         });
-
     </script>
 </head>
 <body>
