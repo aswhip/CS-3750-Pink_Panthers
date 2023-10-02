@@ -12298,11 +12298,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< Updated upstream
     "C:\\Users\\Michael\\.nuget\\packages\\": {}
+=======
+    "/Users/aswhip/.nuget/packages/": {}
+>>>>>>> Stashed changes
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< Updated upstream
       "projectUniqueName": "E:\\CS 3750\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
       "projectName": "Pink_Panthers_Test",
       "projectPath": "E:\\CS 3750\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
@@ -12312,20 +12317,35 @@
       "configFilePaths": [
         "C:\\Users\\Michael\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+      "projectUniqueName": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Pink_Panthers_Test/Pink_Panthers_Test.csproj",
+      "projectName": "Pink_Panthers_Test",
+      "projectPath": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Pink_Panthers_Test/Pink_Panthers_Test.csproj",
+      "packagesPath": "/Users/aswhip/.nuget/packages/",
+      "outputPath": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/Pink_Panthers_Test/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/aswhip/.nuget/NuGet/NuGet.Config"
+>>>>>>> Stashed changes
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+<<<<<<< Updated upstream
             "E:\\CS 3750\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
               "projectPath": "E:\\CS 3750\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
+=======
+            "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/CS-3750-Pink_Panthers/Pink_Panthers_Project.csproj": {
+              "projectPath": "/Users/aswhip/Desktop/CS 3750/CS-3750-Pink_Panthers/CS-3750-Pink_Panthers/Pink_Panthers_Project.csproj"
+>>>>>>> Stashed changes
             }
           }
         }
@@ -12373,7 +12393,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< Updated upstream
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.308/RuntimeIdentifierGraph.json"
+>>>>>>> Stashed changes
       }
     }
   }

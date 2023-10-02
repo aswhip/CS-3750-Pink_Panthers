@@ -33,7 +33,7 @@
                         else
                             days = days.Substring(2);
                         startDate = new DateTime(2023, 8, 21);
-                        
+
                     }
                     else if (days.StartsWith("Th"))
                     {
@@ -80,8 +80,10 @@
                         <text>
                                     {
                                         title: '@course.CourseName',
+                                        backgroundColor: '@course.color',
                                         start: '@startDate.ToString("yyyy-MM-dd")',
                                         end: '@startDate.ToString("yyyy-MM-dd")'
+
                                     },
                         </text>
                         startDate = startDate.AddDays(7);
@@ -153,8 +155,10 @@
                     <text>
                                 {
                                     title: '@course.CourseName',
+                                    backgroundColor: '@course.color',
                                     start: '@startDate.ToString("yyyy-MM-dd")',
                                     end: '@startDate.ToString("yyyy-MM-dd")'
+
                                 },
                     </text>
                     startDate = startDate.AddDays(7);

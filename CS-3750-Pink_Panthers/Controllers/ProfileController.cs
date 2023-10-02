@@ -42,7 +42,8 @@ namespace Pink_Panthers_Project.Controllers
                             StartTime = c.StartTime,
                             EndTime = c.EndTime,
                             Days = c.Days,
-                            color = c.color
+                            color = c.color,
+                            hours = c.hours
                         })
                         .ToList();
                 }
@@ -59,7 +60,8 @@ namespace Pink_Panthers_Project.Controllers
                     EndTime = c.EndTime,
                     Days = c.Days,
                     tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                    color = c.color
+                    color = c.color,
+                    hours = c.hours
                 })
                 .ToList();
 
@@ -124,6 +126,57 @@ namespace Pink_Panthers_Project.Controllers
                 getDays.Days += "Th ";
             if (getDays.friday)
                 getDays.Days += "F ";
+        }
+
+        public IActionResult Chart()
+        {
+            ViewBag.isTeacher = _account!.isTeacher;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Account()
+        {
+            ViewBag.isTeacher = _account!.isTeacher;
+            if (_account != null) //An account must be active to view this page
+            {
+                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
+                var registeredCourses = new List<Class>();//list of classes a student is taking
+                var assignments = new List<Assignment>();
+
+                registeredCourses = _context.registeredClasses
+                .Where(rc => rc.accountID == _account.ID)
+                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+                {
+                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                    CourseName = c.CourseName,
+                    Room = c.Room,
+                    StartTime = c.StartTime,
+                    EndTime = c.EndTime,
+                    Days = c.Days,
+                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+                    color = c.color,
+                    hours = c.hours
+                })
+                .ToList();
+
+                assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
+                foreach (var assignment in assignments)
+                {
+                    assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+                }
+                var viewModel = new CourseView
+                {
+                    TeachingCourses = teachingCourses,
+                    RegisteredCourses = registeredCourses,
+                    Assignments = assignments,
+                    Account = _account
+                };
+                return View(viewModel);
+            }
+
+
+            return NotFound();
         }
 
         [HttpGet]

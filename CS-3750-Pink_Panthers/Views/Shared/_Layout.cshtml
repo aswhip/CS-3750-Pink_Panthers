@@ -35,10 +35,19 @@
                             }
                         </li>
                         <li class="nav-item">
+                            @if (!ViewBag.isTeacher)
+                            {
+                                <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Account">Account</a>
+                            }
+                        </li>
+                        <li class="nav-item">
                             @if (ViewBag.isTeacher)
                             {
                                 <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="addClass">Add Class</a>
                             }
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Chart">Chart</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Profile" asp-action="Calendar">Calendar</a>
@@ -56,12 +65,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Pink_Panthers_Project - <a asp-area="" asp-controller="Profile" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -12,6 +12,7 @@ namespace Pink_Panthers_Project.Models
         public string? CourseNumber { get; set; }
         public string? CourseName { get; set; }
         public string? color { get; set; }
+        public int hours { get; set; }
 
         public string? Days { get; set; }
 
