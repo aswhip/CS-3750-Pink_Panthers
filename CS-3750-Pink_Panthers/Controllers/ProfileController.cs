@@ -9,6 +9,7 @@ using System.Web;
 using System;
 using System.Configuration;
 using System.Runtime.CompilerServices;
+using Pink_Panthers_Project.Migrations;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -93,7 +94,7 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,monday,tuesday,wednesday,thursday,friday,StartTime,EndTime")]Class newClass)
+        public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,monday,tuesday,wednesday,thursday,friday,StartTime,EndTime,hours")]Class newClass)
         {
             if (_account!.isTeacher && ModelState.IsValid)
             {
