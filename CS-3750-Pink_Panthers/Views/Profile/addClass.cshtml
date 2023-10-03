@@ -20,17 +20,25 @@
                 <span asp-validation-for="Room" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DepartmentCode" class="control-label"></label>
-                <input asp-for="DepartmentCode" class="form-control" />
+                <label asp-for="DepartmentCode" class="control-label">Department Code</label>
+                <select asp-for="DepartmentCode" class="form-control">
+                    <option value="0">CS</option>
+                    <option value="1">BTNY</option>
+                    <option value="2">CHEM</option>
+                    <option value="3">ECE</option>
+                    <option value="4">ATHL</option>
+                    <option value="5">MUSC</option>
+                    <option value="6">COMM</option>
+                </select>
                 <span asp-validation-for="DepartmentCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CourseNumber" class="control-label"></label>
+                <label asp-for="CourseNumber" class="control-label">Course Number</label>
                 <input asp-for="CourseNumber" class="form-control" />
                 <span asp-validation-for="CourseNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CourseName" class="control-label"></label>
+                <label asp-for="CourseName" class="control-label">Course Name</label>
                 <input asp-for="CourseName" class="form-control" />
                 <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>
@@ -47,14 +55,26 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
+                <label asp-for="StartTime" class="control-label">Start Time</label>
                 <input asp-for="StartTime" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
+                <label asp-for="EndTime" class="control-label">End Time</label>
                 <input asp-for="EndTime" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hours" class="control-label">Credit Hours</label>
+                <select asp-for="hours" class="form-control">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add Class" class="btn btn-primary" />

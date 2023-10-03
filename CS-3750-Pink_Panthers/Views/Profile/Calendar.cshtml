@@ -20,6 +20,8 @@
             @foreach (var course in Model.TeachingCourses)
             {
                 var startDate = new DateTime(2023, 8, 15);
+                startDate.AddHours(course.StartTime.Hour);
+                startDate.AddMinutes(course.StartTime.Minute);
                 var endDate = new DateTime(2023, 12, 15);
                 string days = @course.Days;
                 while (days.Length != 0)
@@ -55,7 +57,7 @@
                             days = days.Substring(2);
                         startDate = new DateTime(2023, 8, 16);
                     }
-                    else if (days.StartsWith("T "))
+                    else if (days.StartsWith("T"))
                     {
                         if (days.Length == 1)
                         {
@@ -79,7 +81,7 @@
                     {
                         <text>
                                     {
-                                        title: '@course.CourseName',
+                                        title: '@course.StartTime.ToString("hh:mm tt") @course.DepartmentCode @course.CourseNumber',
                                         backgroundColor: '@course.color',
                                         start: '@startDate.ToString("yyyy-MM-dd")',
                                         end: '@startDate.ToString("yyyy-MM-dd")'
