@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
+using Pink_Panthers_Project.Util;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -14,12 +15,12 @@ namespace Pink_Panthers_Project.Controllers
             _context = context;
         }
 
-        private static Account? _account;
 
 
         public IActionResult Index(int id)
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+            var account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
+            ViewBag.isTeacher = account!.isTeacher;
 
 
             var assignments = _context.Assignments.Where(a => a.ClassID == id);
@@ -27,7 +28,8 @@ namespace Pink_Panthers_Project.Controllers
             var viewModel = new ClassViewModel
             {
                 Class = currentClass,
-                Assignments = assignments.ToList()
+                Assignments = assignments.ToList(),
+                Account = account
             };
             return View(viewModel);
         }

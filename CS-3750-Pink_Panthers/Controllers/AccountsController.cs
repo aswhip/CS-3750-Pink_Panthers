@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
+using Pink_Panthers_Project.Util;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -57,6 +59,7 @@ namespace Pink_Panthers_Project.Controllers
                 }
                 else
                 {
+                    HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount); //Store account in session
                     ProfileController.setAccount(ref loginAccount);
                     return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
                 }
@@ -153,5 +156,8 @@ namespace Pink_Panthers_Project.Controllers
 			//Adds 18 years to the user's entered birthdate. If the date is still before or equal to today's date, they are 18 years old.
 			return (account.BirthDate.AddYears(18) <= DateTime.Now);  
         }
+
+        
+
     }
 }
