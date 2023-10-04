@@ -1,0 +1,21 @@
+﻿@model Pink_Panthers_Project.Models.ClassViewModel
+
+@{
+    ViewData["Title"] = "Course";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+
+            <h1>Class @(Model?.Class?.CourseName ?? "Not Available")</h1>
+        </div>
+    </div>
+</body>
+</html>
