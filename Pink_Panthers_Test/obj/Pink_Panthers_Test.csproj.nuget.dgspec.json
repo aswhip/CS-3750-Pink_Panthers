@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {}
+    "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
+    "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
+        "projectUniqueName": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
         "projectName": "Pink_Panthers_Project",
-        "projectPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
+        "projectPath": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
         "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\obj\\",
+        "outputPath": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -88,14 +88,14 @@
         }
       }
     },
-    "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {
+    "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
+        "projectUniqueName": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
         "projectName": "Pink_Panthers_Test",
-        "projectPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
+        "projectPath": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
         "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\obj\\",
+        "outputPath": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -116,8 +116,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
-                "projectPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
+              "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
+                "projectPath": "C:\\Users\\davis\\source\\repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
               }
             }
           }
