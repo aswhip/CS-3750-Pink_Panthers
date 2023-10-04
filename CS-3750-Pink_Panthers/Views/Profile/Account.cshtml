@@ -28,8 +28,8 @@
                         </div>
                         <div class="card-body">
                             <p>Total Credit Hours: @creditHours</p>
-                            <p>Total Cost: $@(creditHours * 100)</p>
-                            <form onsubmit="return validatePaymentAmount()">
+                            <p>Total Cost: $@String.Format("{0:0.00}", Model.Account!.AmountToBePaid)</p>
+                            <form onsubmit="return validatePaymentAmount()" method="post">
                                 <div class="form-group">
                                     <label for="cardName">Name on Card<span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" id="cardName" name="cardName" required>
@@ -109,7 +109,7 @@
 <script>
     function validatePaymentAmount()
     {
-        const totalCost = @creditHours * 100; // Calculate the total cost
+        const totalCost = @Html.ValueFor(ac => ac.Account!.AmountToBePaid); // Calculate the total cost
         const paymentAmount = parseFloat(document.getElementById('amountToPay').value);
 
         if (paymentAmount > totalCost) {

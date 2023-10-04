@@ -1,4 +1,6 @@
-﻿namespace Pink_Panthers_Project.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Pink_Panthers_Project.Models
 {
     public class RegisteredClass
     {
@@ -6,6 +8,7 @@
         public int accountID { get; set; }
         public int classID { get; set; }
 
+        [NotMapped]
         public Account Account { get; set; }
     }
 }

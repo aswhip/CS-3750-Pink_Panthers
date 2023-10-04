@@ -38,6 +38,9 @@ namespace Pink_Panthers_Project.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<double>("AmountToBePaid")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
@@ -152,7 +155,7 @@ namespace Pink_Panthers_Project.Migrations
                     b.Property<string>("color")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("hours")
+                    b.Property<int>("hours")
                         .HasColumnType("int");
 
                     b.HasKey("ID");

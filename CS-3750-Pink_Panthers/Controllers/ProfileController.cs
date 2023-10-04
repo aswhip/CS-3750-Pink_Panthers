@@ -180,6 +180,54 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Account(double amountToPay) //Updates the amount needing to be paid
+        {
+            ViewBag.isTeacher = _account!.isTeacher;
+            if (_account != null) //An account must be active to view this page
+            {
+                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
+                var registeredCourses = new List<Class>();//list of classes a student is taking
+                var assignments = new List<Assignment>();
+
+                registeredCourses = _context.registeredClasses
+                .Where(rc => rc.accountID == _account.ID)
+                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+                {
+                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                    CourseName = c.CourseName,
+                    Room = c.Room,
+                    StartTime = c.StartTime,
+                    EndTime = c.EndTime,
+                    Days = c.Days,
+                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+                    color = c.color,
+                    hours = c.hours
+                })
+                .ToList();
+
+                assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
+                foreach (var assignment in assignments)
+                {
+                    assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+                }
+                var viewModel = new CourseView
+                {
+                    TeachingCourses = teachingCourses,
+                    RegisteredCourses = registeredCourses,
+                    Assignments = assignments,
+                    Account = _account
+                };
+
+                _account!.AmountToBePaid -= amountToPay;
+                _account!.AmountToBePaid = Math.Round(_account!.AmountToBePaid, 2);
+                _context.Account.Update(_account);
+                await _context.SaveChangesAsync();
+                return View(viewModel);
+            }
+            return NotFound();
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
@@ -223,6 +271,10 @@ namespace Pink_Panthers_Project.Controllers
                         classID = classId
                     };
 
+                    int hours = _context.Class.Where(c => c.ID == registeredClass.classID).Select(c => c.hours).SingleOrDefault();
+                    _account.AmountToBePaid += (100 * hours);
+                    _account!.AmountToBePaid = Math.Round(_account!.AmountToBePaid, 2);
+
                     // Add the registeredClass to your registered classes collection
                     await _context.registeredClasses.AddAsync(registeredClass);
                 }
@@ -231,6 +283,10 @@ namespace Pink_Panthers_Project.Controllers
 
                     // Remove the class from the student's registered classes
                     var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
+
+                    int hours = _context.Class.Where(c => c.ID == registeredClassToRemove!.classID).Select(c => c.hours).SingleOrDefault();
+                    _account.AmountToBePaid -= (100 * hours);
+                    _account!.AmountToBePaid = Math.Round(_account!.AmountToBePaid, 2);
 
                     _context.registeredClasses.Remove(registeredClassToRemove!);
 
