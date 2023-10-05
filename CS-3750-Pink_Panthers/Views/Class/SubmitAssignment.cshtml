@@ -1,0 +1,27 @@
+﻿@model Pink_Panthers_Project.Models.StudentSubmission
+
+@{
+	ViewData["Title"] = "Course";
+}
+
+<div class="container">
+	<div class="row mt-5">
+		<form asp-action="SubmitAssignment" method="post">
+		<h2>Assignment: @Model.currentAssignment!.AssignmentName</h2>
+		<h5>@Model.currentAssignment!.Description</h5>
+		<br /><br />
+		@Html.HiddenFor(m => m.AssignmentID)
+		@if(Model!.currentAssignment!.SubmissionType == "text")
+		{
+			<textarea asp-for="Submission" style="width:100%; height:80%;"></textarea>
+			<br />
+		}
+		else
+		{
+			<input type="file">
+		}
+		<br />
+		<input type="submit" value="Submit"/>
+		</form>
+	</div>
+</div>

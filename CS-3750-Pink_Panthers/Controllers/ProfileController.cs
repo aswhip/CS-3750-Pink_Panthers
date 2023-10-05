@@ -10,6 +10,7 @@ using System;
 using System.Configuration;
 using System.Runtime.CompilerServices;
 using Pink_Panthers_Project.Migrations;
+using System.Collections.Immutable;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -24,6 +25,7 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Index()
         {
+            ClassController.resetClass();
             ViewBag.isTeacher = _account!.isTeacher;
             if(_account != null) //An account must be active to view this page
             {
@@ -67,12 +69,22 @@ namespace Pink_Panthers_Project.Controllers
                     hours = c.hours
                 })
                 .ToList();
-
-                    assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
-                    foreach(var assignment in assignments)
+                    assignments = _context.registeredClasses.Where(rc => rc.accountID == _account.ID)
+                    .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
                     {
-                        assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-                    }
+                        Id = c.Id,
+                        ClassID = c.ClassID,
+                        AssignmentName = c.AssignmentName,
+                        DueDate = c.DueDate,
+                        PossiblePoints = c.PossiblePoints,
+                        Description = c.Description,
+                        SubmissionType = c.SubmissionType
+                    }).ToList();
+				}
+
+                foreach(var a in assignments)
+                {
+                    a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
                 }
 
                 var viewModel = new CourseView
@@ -90,7 +102,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult addClass()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             if (_account!.isTeacher)
                 return View();
             return NotFound();
@@ -98,7 +110,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,monday,tuesday,wednesday,thursday,friday,StartTime,EndTime,hours")]Class newClass)
         {
-            if (_account!.isTeacher && ModelState.IsValid)
+			if (_account!.isTeacher && ModelState.IsValid)
             {
                 setDays(ref newClass);
                 if (String.IsNullOrEmpty(newClass.Days))
@@ -133,14 +145,14 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Chart()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             return View();
         }
 
         [HttpGet]
         public IActionResult Account()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
@@ -185,7 +197,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Account(double amountToPay) //Updates the amount needing to be paid
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
@@ -233,7 +245,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             ViewBag.account = _account!.ID;
 
             if (!_account!.isTeacher && ModelState.IsValid)
@@ -256,7 +268,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(int classId)
         {
-            if (!_account!.isTeacher)
+			if (!_account!.isTeacher)
             {
                 int accountId = _account!.ID;
 
@@ -306,7 +318,7 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Details()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null)
                 return View(_account);
             return NotFound();
@@ -319,7 +331,7 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Edit()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null)
                 return View(_account);
             return NotFound();
@@ -334,7 +346,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public IActionResult Edit(Account account)
         {
-            var Account = _account; //Get account
+			var Account = _account; //Get account
 
             if(!ModelState.IsValid) //Check if fields are vaild
             {
@@ -368,13 +380,13 @@ namespace Pink_Panthers_Project.Controllers
         }
         [HttpGet]
         public IActionResult FileUpload(){
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             return View(_account);
 
         }
         [HttpPost]
         public IActionResult FileUpload(IFormFile postedFile) {
-            if(_account == null)
+			if (_account == null)
             {
                 return NotFound();
             }
@@ -398,8 +410,7 @@ namespace Pink_Panthers_Project.Controllers
         }
         public IActionResult Calendar()
         {
-
-            ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = _account!.isTeacher;
             if (_account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching

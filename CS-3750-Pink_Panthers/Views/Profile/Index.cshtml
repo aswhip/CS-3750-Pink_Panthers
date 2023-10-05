@@ -69,13 +69,15 @@
                         <div class="to-do-header">To-Do List</div>
                         @foreach (var assignment in Model.Assignments!)
                         {
-                            <div class="clickable to-do-card">
-                                <div class="">
-                                    <b>@assignment.className</b><br />
-                                    Assignment: @assignment.AssignmentName<br />
-                                    Due: @assignment.DueDate
+                            <a class="no-decoration" asp-controller="Class" asp-action="ToDoListClick" asp-route-assignmentID="@assignment.Id">
+                                <div class="clickable to-do-card">
+                                    <div class="">
+                                        <b>@assignment.className</b><br />
+                                        Assignment: @assignment.AssignmentName<br />
+                                        Due: @assignment.DueDate
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         }
                     </div>
                 </div>
