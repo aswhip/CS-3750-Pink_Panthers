@@ -21,17 +21,64 @@ namespace Pink_Panthers_Project.Controllers
         {
             var account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
             ViewBag.isTeacher = account!.isTeacher;
-
-
-            var assignments = _context.Assignments.Where(a => a.ClassID == id);
             var currentClass = _context.Class.Find(id);
-            var viewModel = new ClassViewModel
+
+            if (currentClass == null)
             {
-                Class = currentClass,
-                Assignments = assignments.ToList(),
-                Account = account
-            };
-            return View(viewModel);
+                return NotFound();
+            }
+            else
+            {
+                var assignments = _context.Assignments.Where(a => a.ClassID == id);
+
+                var viewModel = new ClassViewModel
+                {
+                    Class = currentClass,
+                    Assignments = assignments.ToList(),
+                    Account = account
+                };
+                return View(viewModel);
+            }
         }
+
+        public IActionResult Create(int id)
+        {
+            var account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
+            ViewBag.isTeacher = account!.isTeacher;
+            ViewBag.ClassID = id;
+            var currentClass = _context.Class.Find(id);
+
+            if (currentClass == null)
+            {
+                return NotFound();
+            } 
+            else
+            {
+                ViewBag.ClassName = currentClass.CourseName;
+                return View();
+            }
+           
+			
+		}
+
+        [HttpPost]
+        public IActionResult Create([Bind("ClassID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignement)
+        {
+            var account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
+			ViewBag.isTeacher = account!.isTeacher;
+			if (ModelState.IsValid)
+            {
+				_context.Add(assignement);
+				_context.SaveChanges();
+				return RedirectToAction("Index", new { id = assignement.ClassID});
+			}
+            else
+            {
+				ViewBag.ClassID = assignement.ClassID;
+				var currentClass = _context.Class.Find(assignement.ClassID);
+				ViewBag.ClassName = currentClass?.CourseName;
+                return View("Create", assignement);
+			}
+		}
     }
 }

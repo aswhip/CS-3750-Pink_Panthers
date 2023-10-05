@@ -13,8 +13,37 @@
 <body>
     <div class="container">
         <div class="row mt-5">
-            <h1>Welcome @Model.Account.FirstName @Model.Account.LastName</h1>
-            <h1>Class @(Model?.Class?.CourseName ?? "Not Available")</h1>
+            <h1>@Model?.Class?.CourseName</h1>
+            
+            <h2>Assignements:</h2>
+
+            <table>
+				<tr>
+					<th>Name</th>
+					<th>Points</th>
+					<th>Due Date</th>
+					<th>Submissions</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				@foreach (var assignement in Model?.Assignments!)
+				{
+					<tr>
+						<td>@assignement.AssignmentName</td>
+						<td>@assignement.PossiblePoints</td>
+						<td>@assignement.DueDate.ToString()</td>
+						<td><a class="btn btn-primary">Submissions</a></td>
+						<td><a class="btn btn-light">Edit</a></td>
+						<td><a class="btn btn-warning">Delete</a></td>
+					</tr>
+				}
+            </table>
+
+			<div class="col-md-4">
+				<a asp-action="Create" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+			</div>
+
+
         </div>
     </div>
 </body>

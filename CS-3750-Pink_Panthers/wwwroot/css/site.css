@@ -123,3 +123,13 @@ body {
         color: black;
         width: 200px;
     }
+
+a.no-decoration {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.no-decoration:hover {
+    text-decoration: none;
+    color: inherit;
+}
