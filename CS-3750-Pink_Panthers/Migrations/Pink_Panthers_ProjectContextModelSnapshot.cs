@@ -107,13 +107,25 @@ namespace Pink_Panthers_Project.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AssignmentName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("ClassID")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PossiblePoints")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubmissionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -179,20 +191,29 @@ namespace Pink_Panthers_Project.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("accountID");
-
                     b.ToTable("registeredClasses");
                 });
 
-            modelBuilder.Entity("Pink_Panthers_Project.Models.RegisteredClass", b =>
+            modelBuilder.Entity("Pink_Panthers_Project.Models.StudentSubmission", b =>
                 {
-                    b.HasOne("Pink_Panthers_Project.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("accountID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Account");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("AccountID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AssignmentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Submission")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("StudentSubmissions");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,38 @@
+﻿@model Pink_Panthers_Project.Models.SubmissionsViewModel
+
+@{
+	ViewData["Title"] = "Course";
+	Layout = "TeacherClassLayout";
+}
+
+<div class="container">
+	<div class="row mt-5">
+		<h2>@Model.AssignmentName</h2>
+		@if (Model!.StudentSubmissions!.Count == 0)
+		{
+			<p>No Submissions yet for this assignment</p>
+		}
+		<table>
+			<tr>
+				<th>Student</th>
+				<th>Submission</th>
+				<th>Grade</th>
+			</tr>
+		@foreach(var submission in Model.StudentSubmissions!)
+		{
+			<tr>
+				<td>@Html.Raw(submission.studentAccount!.FirstName + " " + submission.studentAccount!.LastName)</td>
+					@if (submission.currentAssignment!.SubmissionType == "text")
+					{
+						<td>@submission.Submission</td>
+					}
+					else
+					{
+						<td>File Upload not supported just yet, coming soon!</td>
+					}
+					<td>200/@submission.currentAssignment!.PossiblePoints</td>
+			</tr>
+		}
+		</table>
+	</div>
+</div>
