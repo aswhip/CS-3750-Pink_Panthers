@@ -23,7 +23,7 @@ namespace Pink_Panthers_Test
             double currAmount = Math.Round(account!.AmountToBePaid, 2);
 
             Random rand = new Random();
-            double payment = Math.Round(rand.NextDouble(), 2) + rand.Next(300); //Some random number between 0-300, rounded to 2 decimal places
+            double payment = Math.Round(rand.NextDouble(), 2) + rand.Next(50); //Some random number between 0-300, rounded to 2 decimal places
             await profileController.Account(payment);
 
             double newAmount = account!.AmountToBePaid;
