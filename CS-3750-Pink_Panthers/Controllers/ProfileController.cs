@@ -37,6 +37,7 @@ namespace Pink_Panthers_Project.Controllers
                         .Where(c => c.accountID == _account.ID)
                         .Select(c => new Class
                         {
+                            ID = c.ID,
                             CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
                             CourseName = c.CourseName,
                             Room = c.Room,
@@ -54,6 +55,7 @@ namespace Pink_Panthers_Project.Controllers
                 .Where(rc => rc.accountID == _account.ID)
                 .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                 {
+                    ID = c.ID,
                     CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
                     CourseName = c.CourseName,
                     Room = c.Room,

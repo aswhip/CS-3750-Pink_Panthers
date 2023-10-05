@@ -25,15 +25,17 @@
                         {
 
                             <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
-                                <div class="card custom-card">
-                                    <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
-                                    <div class="card-body">
-                                        @course.CourseName<br />
-                                        @course.Room<br />
-                                        @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
-                                        @course.Days
+                                <a class="no-decoration" asp-controller="Class" asp-action="Index" asp-route-id="@course.ID">
+                                    <div class="card custom-card">
+                                        <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
+                                        <div class="card-body">
+                                            @course.CourseName<br />
+                                            @course.Room<br />
+                                            @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
+                                            @course.Days
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         }
                     }
@@ -43,20 +45,20 @@
                         @foreach (var course in Model.RegisteredCourses!)
                         {
                             <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
-                                <div class="card custom-card">
-                                    <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
-                                    <div class="card-body">
-                                        @course.CourseName<br />
-                                        @course.tName<br />
-                                        @course.Room<br />
-                                        @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
-                                        @course.Days
+                                <a class="no-decoration" asp-controller="Class" asp-action="Index" asp-route-id="@course.ID">
+                                    <div class="card custom-card">
+                                        <div class="card-header" style="background-color: @course.color;">@course.CourseNumber</div>
+                                        <div class="card-body">
+                                            @course.CourseName<br />
+                                            @course.tName<br />
+                                            @course.Room<br />
+                                            @course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")<br />
+                                            @course.Days
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         }
-
-
                     }
                 </div>
             </div>
