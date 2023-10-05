@@ -28,7 +28,8 @@ namespace Pink_Panthers_Project.Controllers
             if (ProfileController.getAccount() != null) //Can only log out if user is currently logged in
             {
                 ProfileController.logoutAccount();
-                HttpContext.Session.Remove("LoggedInAccount"); //Remove account from session
+                HttpContext.Session.Remove("LoggedInAccount");//Remove account from session
+				HttpContext.Session.Clear();
                 return View();
             }
             return NotFound();
