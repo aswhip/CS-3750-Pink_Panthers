@@ -66,8 +66,15 @@ namespace Pink_Panthers_Project.Controllers
         {
             var account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
 			ViewBag.isTeacher = account!.isTeacher;
+
+            if (assignement.DueDate < DateTime.Now)
+            {
+				ModelState.AddModelError("DueDate", "Due date must be in the future");
+			}
+
 			if (ModelState.IsValid)
             {
+                assignement.DueDate = assignement.DueDate.AddHours(23).AddMinutes(59).AddSeconds(59);
 				_context.Add(assignement);
 				_context.SaveChanges();
 				return RedirectToAction("Index", new { id = assignement.ClassID});

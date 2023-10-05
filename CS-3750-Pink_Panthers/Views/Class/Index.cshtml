@@ -16,32 +16,71 @@
             <h1>@Model?.Class?.CourseName</h1>
             
             <h2>Assignements:</h2>
-
-            <table>
-				<tr>
-					<th>Name</th>
-					<th>Points</th>
-					<th>Due Date</th>
-					<th>Submissions</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-				@foreach (var assignement in Model?.Assignments!)
+			@if (Model.Assignments.Count == 0)
+			{
+				<p>No Assignments yet for this course</p>
+			}
+			else
+			{
+				@if (Model.Account.isTeacher)
 				{
-					<tr>
-						<td>@assignement.AssignmentName</td>
-						<td>@assignement.PossiblePoints</td>
-						<td>@assignement.DueDate.ToString()</td>
-						<td><a class="btn btn-primary">Submissions</a></td>
-						<td><a class="btn btn-light">Edit</a></td>
-						<td><a class="btn btn-warning">Delete</a></td>
-					</tr>
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Points</th>
+							<th>Due Date</th>
+							<th>Submissions</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+						@foreach (var assignement in Model?.Assignments!)
+						{
+							<tr>
+								<td>@assignement.AssignmentName</td>
+								<td>@assignement.PossiblePoints</td>
+								<td>@assignement.DueDate.ToString()</td>
+								<td><a class="btn btn-primary">Submissions</a></td>
+								<td><a class="btn btn-light">Edit</a></td>
+								<td><a class="btn btn-warning">Delete</a></td>
+							</tr>
+						}
+					</table>
 				}
-            </table>
 
-			<div class="col-md-4">
-				<a asp-action="Create" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
-			</div>
+				@if (!Model.Account.isTeacher)
+				{
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Points</th>
+							<th>Due Date</th>
+							<th>Submissions</th>
+						</tr>
+						@foreach (var assignement in Model?.Assignments!)
+						{
+							<tr>
+								<td>@assignement.AssignmentName</td>
+								<td>@assignement.PossiblePoints</td>
+								<td>@assignement.DueDate.ToString()</td>
+								<td><a class="btn btn-primary">Submissions</a></td>
+							</tr>
+						}
+					</table>
+				}
+
+
+
+
+				@if (Model.Account.isTeacher)
+				{
+					<div class="col-md-4">
+						<a asp-action="Create" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+					</div>
+				}
+			}
+
+			
+			
 
 
         </div>
