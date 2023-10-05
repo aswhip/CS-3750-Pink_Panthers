@@ -12703,19 +12703,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\wanne\\.nuget\\packages\\": {}
+    "C:\\Users\\swimj\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\wanne\\Documents\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
+      "projectUniqueName": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
       "projectName": "Pink_Panthers_Test",
-      "projectPath": "C:\\Users\\wanne\\Documents\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
-      "packagesPath": "C:\\Users\\wanne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\wanne\\Documents\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\obj\\",
+      "projectPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
+      "packagesPath": "C:\\Users\\swimj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\wanne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\swimj\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12729,8 +12729,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\wanne\\Documents\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
-              "projectPath": "C:\\Users\\wanne\\Documents\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
+            "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
+              "projectPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
             }
           }
         }
@@ -12778,7 +12778,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
