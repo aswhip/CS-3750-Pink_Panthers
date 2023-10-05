@@ -235,6 +235,8 @@ namespace Pink_Panthers_Project.Controllers
 
                 _account!.AmountToBePaid -= amountToPay;
                 _account!.AmountToBePaid = Math.Round(_account!.AmountToBePaid, 2);
+                if (_account!.AmountToBePaid < 0)
+                    _account!.AmountToBePaid = 0;
                 _context.Account.Update(_account);
                 await _context.SaveChangesAsync();
                 return View(viewModel);

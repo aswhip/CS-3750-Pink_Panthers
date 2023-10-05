@@ -59,7 +59,6 @@ namespace Pink_Panthers_Project.Controllers
                 }
                 else
                 {
-                    HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount); //Store account in session
                     ProfileController.setAccount(ref loginAccount);
                     return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
                 }
