@@ -1,4 +1,58 @@
 ﻿<Properties StartupConfiguration="{5FD8B871-8044-407C-AA3F-B7AE2E661AC5}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CS-3750-Pink_Panthers/Views/Profile/Calendar.cshtml">
+    <Files>
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Calendar.cshtml" Line="23" Column="46" />
+      <File FileName="CS-3750-Pink_Panthers/Models/Class.cs" Line="17" Column="42" />
+      <File FileName="CS-3750-Pink_Panthers/Models/RegisteredClass.cs" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Models/RegisterView.cs" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Models/Account.cs" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Models/Assignment.cs" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Models/CourseView.cs" Line="6" Column="9" />
+      <File FileName="CS-3750-Pink_Panthers/Models/ErrorViewModel.cs" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Migrations/20231002174112_creditHours.cs" Line="23" Column="10" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Chart.cshtml" Line="25" Column="39" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Details.cshtml" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Index.cshtml" Line="26" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/FileUpload.cshtml" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Controllers/ProfileController.cs" Line="176" Column="38" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Shared/_Layout.cshtml" Line="67" Column="11" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Shared/StudentLayout.cshtml" Line="52" Column="11" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Shared/TeacherLayout.cshtml" Line="24" Column="30" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Account.cshtml" Line="46" Column="135" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Register.cshtml" Line="35" Column="36" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/Edit.cshtml" Line="1" Column="1" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Profile/addClass.cshtml" Line="30" Column="55" />
+      <File FileName="CS-3750-Pink_Panthers/Views/Shared/MinimalNav.cshtml" Line="34" Column="11" />
+      <File FileName="CS-3750-Pink_Panthers/wwwroot/css/site.css" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Pink_Panthers_Project">
+            <Node name="Pink_Panthers_Project">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Views">
+                <Node name="Profile">
+                  <Node name="Calendar.cshtml" selected="True" />
+                </Node>
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Pink__Panthers__Project PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
 </Properties>
