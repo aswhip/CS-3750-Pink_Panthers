@@ -35,3 +35,8 @@ Pink_Panthers_Test/bin
 /Pink_Panthers_Test/bin
 /.vs/slnx.sqlite
 /.vs/Pink_Panthers_Project/v17/.wsuo
+
+*.wsuo
+*.user
+*.suo
+
