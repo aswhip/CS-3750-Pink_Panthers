@@ -16,7 +16,7 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task CanCreateStudentAccount()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController accountsController = new AccountsController(_context, true);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -37,14 +37,12 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-
-            ProfileController.logoutAccount();
         }
 
         [TestMethod]
         public async Task CanCreateTeacherAccount()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController accountsController = new AccountsController(_context, true);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -65,14 +63,12 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-
-            ProfileController.logoutAccount();
         }
 
         [TestMethod]
         public async Task AccountAgeMustBeAtLeast18Years()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController accountsController = new AccountsController(_context, true);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -93,14 +89,12 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-
-            ProfileController.logoutAccount();
         }
 
         [TestMethod]
         public async Task CannotShareEmail()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController accountsController = new AccountsController(_context, true);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -121,8 +115,6 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-
-            ProfileController.logoutAccount();
         }
     }
 }

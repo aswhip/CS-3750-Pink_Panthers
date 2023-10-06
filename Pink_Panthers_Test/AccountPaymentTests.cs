@@ -19,7 +19,8 @@ namespace Pink_Panthers_Test
             ProfileController profileController = new ProfileController(_context);
             Account? account = _context.Account.Where(ac => ac.ID == 1).SingleOrDefault(); //ID 1 is test student
             if (account != null)
-                ProfileController.setAccount(ref account!);
+                profileController.setAccount(account!, true);
+
             double currAmount = Math.Round(account!.AmountToBePaid, 2);
 
             Random rand = new Random();
@@ -33,7 +34,7 @@ namespace Pink_Panthers_Test
             _context.Account.Update(account);
             await _context.SaveChangesAsync();
 
-            ProfileController.logoutAccount();
+            profileController.logoutAccount();
         }
     }
 

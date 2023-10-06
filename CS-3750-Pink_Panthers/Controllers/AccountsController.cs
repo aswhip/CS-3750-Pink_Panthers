@@ -19,10 +19,13 @@ namespace Pink_Panthers_Project.Controllers
     public class AccountsController : Controller
     {
         private readonly Pink_Panthers_ProjectContext _context;
+        private readonly bool isUnitTest = false;
+        private Account _account = null;
 
-        public AccountsController(Pink_Panthers_ProjectContext context)
+        public AccountsController(Pink_Panthers_ProjectContext context, bool isUnitTest = false)
         {
             _context = context;
+            this.isUnitTest = isUnitTest;
         }
 
         [HttpGet]
@@ -59,7 +62,12 @@ namespace Pink_Panthers_Project.Controllers
                 }
                 else
                 {
-                    ProfileController.setAccount(ref loginAccount);
+                    if (isUnitTest)
+                        _account = loginAccount;
+                    else
+                    {
+                        HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
+                    }
                     return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
                 }
             }
@@ -92,8 +100,15 @@ namespace Pink_Panthers_Project.Controllers
                         hashPassword(ref account); //Reference so we aren't creating a new temporary account
                         await _context.AddAsync(account); //Adds the account to the database
                         await _context.SaveChangesAsync();
-                        ProfileController.setAccount(ref account);
-                        return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
+
+                        if (isUnitTest)
+                            _account = account;
+                        else
+                        {
+                            HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+                        }
+
+						return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
                     }
                     else
                     {
@@ -157,6 +172,10 @@ namespace Pink_Panthers_Project.Controllers
         }
 
         
+        public Account? getAccount()
+        {
+            return _account;
+        }
 
     }
 }

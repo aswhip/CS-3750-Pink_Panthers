@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pink_Panthers_Project.Models;
+using Pink_Panthers_Project.Util;
 using System.Diagnostics;
 
 namespace Pink_Panthers_Project.Controllers
@@ -16,7 +17,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            if(ProfileController.getAccount() != null) //Only take us to the profile page if the profile account is active
+            if(HttpContext.Session.GetSessionValue<Account>("LoggedInAccount") != null) //Only take us to the profile page if the profile account is active
             {
                 return RedirectToAction(nameof(ProfileController.Index), "Profile");
             }
@@ -25,9 +26,8 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Logout()
         {
-            if (ProfileController.getAccount() != null) //Can only log out if user is currently logged in
+            if (HttpContext.Session.GetSessionValue<Account>("LoggedInAccount") != null) //Can only log out if user is currently logged in
             {
-                ProfileController.logoutAccount();
                 HttpContext.Session.Remove("LoggedInAccount");//Remove account from session
 				HttpContext.Session.Clear();
                 return View();

@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Runtime.CompilerServices;
 using Pink_Panthers_Project.Migrations;
 using System.Collections.Immutable;
+using Pink_Panthers_Project.Util;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -25,6 +26,7 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Index()
         {
+            setAccount();
             ClassController.resetClass();
             ViewBag.isTeacher = _account!.isTeacher;
             if(_account != null) //An account must be active to view this page
@@ -110,6 +112,11 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,monday,tuesday,wednesday,thursday,friday,StartTime,EndTime,hours")]Class newClass)
         {
+            if(_account == null)
+            {
+                return NotFound();
+            }
+            //else
 			if (_account!.isTeacher && ModelState.IsValid)
             {
                 setDays(ref newClass);
@@ -471,23 +478,16 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
-        public static Account? getAccount() //Returns the account if it's not null
+        public void setAccount(Account? account = null, bool isUnitTest = false) //Used to set the current account
         {
-            if (_account != null)
+            if(isUnitTest)
+                _account = account;
+            else
             {
-                return _account;
+                _account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
             }
-            return null;
-        }
-
-        public static void setAccount(ref Account account) //Used to set the current account
-        {
-            _account = account;
-        }
-
-
-
-        public static void logoutAccount() //Sets the current account to null
+		}
+        public void logoutAccount() //Sets the current account to null
         {
             _account = null;
         }
