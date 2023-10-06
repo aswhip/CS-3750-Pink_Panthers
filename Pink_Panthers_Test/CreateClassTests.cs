@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Pink_Panthers_Project.Controllers;
 using Pink_Panthers_Project.Data;
@@ -28,7 +29,8 @@ namespace Pink_Panthers_Test
                 EndTime = DateTime.Parse("11:00 AM")
             };
             Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //Teacher Account
-            ProfileController.setAccount(ref account!);
+
+            profileController.setAccount(account, true);
 
             int count = _context.Class.Where(c => c.accountID == account.ID).Count();
             await profileController.addClass(newClass);
@@ -39,7 +41,7 @@ namespace Pink_Panthers_Test
             _context.Class.Remove(newClass);
             await _context.SaveChangesAsync();
 
-            ProfileController.logoutAccount();
+            profileController.logoutAccount();
         }
 
         [TestMethod]
@@ -61,7 +63,8 @@ namespace Pink_Panthers_Test
                 EndTime = DateTime.Parse("11:00 AM")
             };
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //Student Account
-            ProfileController.setAccount(ref account!);
+
+            profileController.setAccount(account, true);
 
             int count = _context.Class.Where(c => c.accountID == account.ID).Count();
             Assert.AreEqual(count, 0, "Count should be 0");
@@ -73,7 +76,7 @@ namespace Pink_Panthers_Test
 
             await _context.SaveChangesAsync();
 
-            ProfileController.logoutAccount();
+            profileController.logoutAccount();
         }
     }
 }

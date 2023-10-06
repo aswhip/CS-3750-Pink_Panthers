@@ -20,19 +20,19 @@ namespace Pink_Panthers_Test
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
 
             if(account != null)
-                ProfileController.setAccount(ref account!);
+                profileController.setAccount(account!, true);
 
-            await profileController.Register(7); //Class ID 7 is the Test Course
-            var didRegister = _context.registeredClasses.Where(c => c.classID == 7 && c.accountID == account!.ID).FirstOrDefault();
+            await profileController.Register(46); //Class ID 46 is the Test Course
+            var didRegister = _context.registeredClasses.Where(c => c.classID == 46 && c.accountID == account!.ID).FirstOrDefault();
             Assert.IsNotNull(didRegister);
             if(didRegister != null)
             {
-                _context.Remove(didRegister);
-            }
+				await profileController.Register(46); //Class ID 46 is the Test Course
+			}
 
             await _context.SaveChangesAsync();
 
-            ProfileController.logoutAccount(); //Logout since we are done using it now
+            profileController.logoutAccount(); //Logout since we are done using it now
         }
 
         [TestMethod]
@@ -43,14 +43,14 @@ namespace Pink_Panthers_Test
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
 
             if (account != null)
-                ProfileController.setAccount(ref account!);
+                profileController.setAccount(account!, true);
 
-            await profileController.Register(7); //Class ID 7 is the Test Course
+            await profileController.Register(46); //Class ID 46 is the Test Course
 
             //Now we need to drop the class, which uses the same method but drops the class if they are already registered
-            await profileController.Register(7); //Drops the class 
+            await profileController.Register(46); //Drops the class 
 
-            var didDrop = _context.registeredClasses.Where(c => c.classID == 7 && c.accountID == account!.ID).FirstOrDefault();
+            var didDrop = _context.registeredClasses.Where(c => c.classID == 46 && c.accountID == account!.ID).FirstOrDefault();
 
             Assert.IsNull(didDrop, "Class Drop Failed");
 
@@ -61,7 +61,7 @@ namespace Pink_Panthers_Test
 
             await _context.SaveChangesAsync();
 
-            ProfileController.logoutAccount(); //Logout since we are done using it now
+            profileController.logoutAccount(); //Logout since we are done using it now
         }
 
         [TestMethod]
@@ -71,9 +71,9 @@ namespace Pink_Panthers_Test
             Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //ID 5 is test teacher
 
             if (account != null)
-                ProfileController.setAccount(ref account!);
+                profileController.setAccount(account!, true);
 
-            await profileController.Register(7); //Class ID 7 is the Test Course
+            await profileController.Register(46); //Class ID 46 is the Test Course
 
             var didRegister = _context.registeredClasses.Where(c => c.classID == 7 && c.accountID == account!.ID).FirstOrDefault();
 
@@ -86,7 +86,7 @@ namespace Pink_Panthers_Test
 
             await _context.SaveChangesAsync();
 
-            ProfileController.logoutAccount(); //Logout since we are done using it now
+            profileController.logoutAccount(); //Logout since we are done using it now
         }
     }
 }

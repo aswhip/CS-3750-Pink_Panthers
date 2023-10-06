@@ -1,0 +1,93 @@
+﻿@model Pink_Panthers_Project.Models.ClassViewModel
+
+@{
+	ViewData["Title"] = "Course";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <h1>@Model!.Class!.CourseName</h1>
+            
+            <h2>Assignments:</h2>
+			@if (Model!.Assignments!.Count == 0)
+			{
+				<p>No Assignments yet for this course</p>
+			}
+			else
+			{
+				@if (Model.Account!.isTeacher)
+				{
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Points</th>
+							<th>Due Date</th>
+							<th>Submission Type</th>
+							<th>Submissions</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+						@foreach (var assignment in Model?.Assignments!)
+						{
+							<tr>
+								<td>@assignment.AssignmentName</td>
+								<td>@assignment.PossiblePoints</td>
+								<td>@assignment.DueDate.ToString()</td>
+								<td>@assignment.SubmissionType</td>
+								<td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Submissions</a></td>
+								<td><a class="btn btn-light">Edit</a></td>
+								<td><a class="btn btn-warning">Delete</a></td>
+							</tr>
+						}
+					</table>
+				}
+
+				@if (!Model.Account.isTeacher)
+				{
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Points</th>
+							<th>Due Date</th>
+							<th>Submission Type</th>
+							<th>Submissions</th>
+						</tr>
+						@foreach (var assignment in Model?.Assignments!)
+						{
+							<tr>
+								<td>@assignment.AssignmentName</td>
+								<td>@assignment.PossiblePoints</td>
+								<td>@assignment.DueDate.ToString()</td>
+								<td>@assignment.SubmissionType</td>
+								<td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Submit Assignment</a></td>
+							</tr>
+						}
+					</table>
+				}
+
+
+
+
+				@if (Model.Account.isTeacher)
+				{
+					<div class="col-md-4">
+						<a asp-action="Create" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+					</div>
+				}
+			}
+
+			
+			
+
+
+        </div>
+    </div>
+</body>
+</html>

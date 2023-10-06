@@ -1,6 +1,19 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
+        "projectName": "Pink_Panthers_Project",
+        "projectPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
+        "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\obj\\",
+=======
     "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {}
   },
   "projects": {
@@ -12,6 +25,7 @@
         "projectPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj",
         "packagesPath": "C:\\Users\\swimj\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\obj\\",
+>>>>>>> main
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\swimj\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,6 +102,16 @@
         }
       }
     },
+<<<<<<< HEAD
+    "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
+        "projectName": "Pink_Panthers_Test",
+        "projectPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
+        "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\obj\\",
+=======
     "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -96,6 +120,7 @@
         "projectPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\Pink_Panthers_Test.csproj",
         "packagesPath": "C:\\Users\\swimj\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\Pink_Panthers_Test\\obj\\",
+>>>>>>> main
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\swimj\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -112,8 +137,13 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+<<<<<<< HEAD
+              "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
+                "projectPath": "C:\\Users\\davis\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
+=======
               "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj": {
                 "projectPath": "C:\\Users\\swimj\\Source\\Repos\\CS-3750-Pink_Panthers\\CS-3750-Pink_Panthers\\Pink_Panthers_Project.csproj"
+>>>>>>> main
               }
             }
           }
@@ -128,6 +158,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "HttpContextMoq": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            },
             "MSTest.TestAdapter": {
               "target": "Package",
               "version": "[2.2.8, )"

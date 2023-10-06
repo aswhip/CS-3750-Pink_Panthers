@@ -1,4 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using HttpContextMoq;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 using Pink_Panthers_Project.Controllers;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
@@ -7,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Pink_Panthers_Test
 {
@@ -16,43 +24,41 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public void CanLoginToExistingAccount()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController controller = new AccountsController(_context, true);
             Account loginAccount = new Account
             {
                 Email = "teststudent@gmail.com",
                 Password = "test1"
             };
-            accountsController.Login(loginAccount);
-            Assert.IsNotNull(ProfileController.getAccount());
-            ProfileController.logoutAccount(); //Logout once we are done
+
+            controller.Login(loginAccount);
+            Assert.IsNotNull(controller.getAccount());
         }
 
         [TestMethod]
         public void CantLoginToFakeAccount()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController controller = new AccountsController(_context, true);
             Account loginAccount = new Account
             {
                 Email = "thisemaildoesntexists@gmail.com",
                 Password = "test1"
             };
-            accountsController.Login(loginAccount);
-            Assert.IsNull(ProfileController.getAccount());
-            ProfileController.logoutAccount();
-        }
+            controller.Login(loginAccount);
+            Assert.IsNull(controller.getAccount());
+		}
 
         [TestMethod]
         public void CantLoginWithInvalidPassword()
         {
-            AccountsController accountsController = new AccountsController(_context);
+            AccountsController controller = new AccountsController(_context, true);
             Account loginAccount = new Account
             {
                 Email = "teststudent@gmail.com",
                 Password = "wrongpassword"
             };
-            accountsController.Login(loginAccount);
-            Assert.IsNull(ProfileController.getAccount());
-            ProfileController.logoutAccount();
-        }
+            controller.Login(loginAccount);
+            Assert.IsNull(controller.getAccount());
+		}
     }
 }

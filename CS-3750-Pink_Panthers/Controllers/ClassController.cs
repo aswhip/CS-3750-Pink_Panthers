@@ -20,24 +20,76 @@ namespace Pink_Panthers_Project.Controllers
         private static Class? _class;
         private static Account? _account; 
 
-        public IActionResult Index(int? id)
+        public IActionResult Index()
         {
-            if(_account == null)
-                _account = ProfileController.getAccount();
-            ViewBag.isTeacher = _account!.isTeacher;
-            if(_class == null)
-                _class = _context.Class.Find(id);
+            List<Class> tCourses = new List<Class>();
+            List<Class> sCourses = new List<Class>();
 
-            var assignments = _context.Assignments.Where(a => a.ClassID == _class!.ID);
-
-            var viewModel = new ClassViewModel
+			_account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
+			if (_account == null)
             {
-                Class = _class,
-                Assignments = assignments.ToList(),
+                return NotFound();
+            }
+            ViewBag.isTeacher = _account!.isTeacher;
+
+            if (_account.isTeacher)
+            {
+                tCourses = _context.Class.Where(c => c.accountID == _account.ID).ToList();
+            }
+            else if (!_account.isTeacher)
+            {
+                sCourses = _context.registeredClasses.Where(rc => rc.accountID == _account.ID)
+                    .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+                    {
+                        ID = c.ID,
+                        DepartmentCode = c.DepartmentCode,
+                        CourseNumber = c.CourseNumber,
+                        CourseName = c.CourseName,
+                        Room = c.Room,
+                        StartTime = c.StartTime,
+                        EndTime = c.EndTime,
+                        Days = c.Days,
+                        tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+                        color = c.color,
+                        hours = c.hours
+                    }).ToList();
+            }
+            
+
+            var viewModel = new CourseView
+            {
+                TeachingCourses = tCourses,
+                RegisteredCourses = sCourses,
                 Account = _account
             };
             return View(viewModel);
         }
+
+        public IActionResult Assignments(int? id)
+        {
+			_account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
+			if (_account == null)
+            {
+                return NotFound();
+            }
+			setClass(id);
+            if(_class == null)
+            {
+                return NotFound();
+            }
+
+			ViewBag.isTeacher = _account!.isTeacher;
+
+			var assignments = _context.Assignments.Where(a => a.ClassID == _class!.ID);
+
+			var viewModel = new ClassViewModel
+			{
+				Class = _class,
+				Assignments = assignments.ToList(),
+				Account = _account
+			};
+			return View(viewModel);
+		}
 
         [HttpGet]
         public IActionResult Create()
@@ -87,7 +139,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult ToDoListClick(int assignmentID)
         {
-            _account = ProfileController.getAccount();
+            _account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
             int classID = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.ClassID).SingleOrDefault();
             _class = _context.Class.Where(c => c.ID == classID).SingleOrDefault();
 
@@ -159,5 +211,11 @@ namespace Pink_Panthers_Project.Controllers
         {
             _class = null;
         }
+
+        private void setClass(int? id)
+        {
+			_class = _context.Class.Find(id);
+            HttpContext.Session.SetSessionValue("CurrentClass", _class);
+		}
 	}
 }
