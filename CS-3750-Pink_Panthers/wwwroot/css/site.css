@@ -134,37 +134,3 @@ a.no-decoration:hover {
     color: inherit;
 }
 
-.notifications {
-    width: 300px;
-    text-align: center;
-    position: absolute;
-    right: 30px;
-    top: 55px;
-    border-radius: 10px !important;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    display: none;
-}
-
-.notification {
-    border-bottom: solid;
-    border-radius: 5px;
-}
-
-    .notification p {
-        margin: 20px 5px;
-        padding: 0px;
-    }
-
-.notification_header {
-    font-size: x-large;
-    font-display: bolder;
-    border-radius: 10px 10px 0px 0px !important;
-    background-color: aquamarine;
-    height: 40px;
-}
-
-.exit_button {
-    float: right;
-    padding-right: 10px;
-}

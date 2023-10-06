@@ -83,56 +83,7 @@
                     </div>
                 </div>
             }
-            @if (Model != null)
-            {
-                <div class="col-md-3">
-                    <div class="notifications">
-                        <div class="notification_header">
-                            <b>Notifications</b>
-                            <div class="exit_button clickable">x</div>
-                        </div>
-                        <div class="notification">
-                            <b>CS 3550</b><br />
-                            <b>Assignment 1</b><br />
-                            <b>Graded</b><br />
-                            <b>10/4/2023 10:45 AM</b>
-                        </div>
-                        <div class="notification">
-                            <b>CS 1400</b><br />
-                            <b>Assignment 2</b><br />
-                            <b>Created</b><br />
-                            <b>10/3/2023 9:45 AM</b>
-                        </div>
-                        <div class="notification">
-                            <b>CS 1400</b><br />
-                            <b>Quiz 1</b><br />
-                            <b>Graded</b><br />
-                            <b>9/30/2023 3:00 PM</b>
-                        </div>
-                        <div class="notification">
-                            <b>CS 1400</b><br />
-                            <b>Quiz 1</b><br />
-                            <b>Created</b><br />
-                            <b>9/27/2023 12:00 AM</b>
-                        </div>
-                        <div class="notification">
-                            <b>CS 3550</b><br />
-                            <b>Assignment 1</b><br />
-                            <b>Created</b><br />
-                            <b>9/25/2023 10:00 AM</b>
-                        </div>
 
-                    </div>
-                </div>
-                <script>
-                    var down = document.getElementById("notifications");
-                    var x = document.querySelector('.exit_button');
-                    x.addEventListener('click', function () {
-                        var x1 = document.querySelector('.notifications');
-                        x1.style.display = "none";
-                    });
-                </script>
-            }
         </div>
     </div>
 </body>
