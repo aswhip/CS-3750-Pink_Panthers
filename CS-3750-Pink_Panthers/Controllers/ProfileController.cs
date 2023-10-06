@@ -16,35 +16,30 @@ using Pink_Panthers_Project.Util;
 
 namespace Pink_Panthers_Project.Controllers
 {
-	public class ProfileController : Controller
+    public class ProfileController : Controller
     {
 		private readonly Pink_Panthers_ProjectContext _context;
-        private static string session = "";
-        private static Dictionary<string, Account?> _account = new Dictionary<string, Account?>();
-        private static bool isUnitTesting = false;
         public ProfileController(Pink_Panthers_ProjectContext context, bool unitTest = false)
         {
             _context = context;
-            if (unitTest)
-                isUnitTesting = true;
+            UnitTestingData.isUnitTesting = unitTest;
         }
 
         public IActionResult Index()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id; //Much cleaner than if(isUnitTesting) { } else { }
+			var account = getAccount();
 
-			setAccount();
-            ViewBag.isTeacher = _account![session]!.isTeacher;
-            if(_account![session] != null) //An account must be active to view this page
+			ViewBag.isTeacher = account!.isTeacher;
+            if(account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
                 var registeredCourses = new List<Class>();//list of classes a student is taking
                 var assignments = new List<Assignment>();
 
-                if (_account[session]!.isTeacher)//check if the user is a teacher
+                if (account!.isTeacher)//check if the user is a teacher
                 {
                     teachingCourses = _context.Class //populate the fields
-                        .Where(c => c.accountID == _account[session]!.ID)
+                        .Where(c => c.accountID == account!.ID)
                         .Select(c => new Class
                         {
                             ID = c.ID,
@@ -62,7 +57,7 @@ namespace Pink_Panthers_Project.Controllers
                 else
                 {
                     registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == _account[session]!.ID)
+                .Where(rc => rc.accountID == account!.ID)
                 .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                 {
                     ID = c.ID,
@@ -77,7 +72,7 @@ namespace Pink_Panthers_Project.Controllers
                     hours = c.hours
                 })
                 .ToList();
-                    assignments = _context.registeredClasses.Where(rc => rc.accountID == _account[session]!.ID)
+                    assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
                     .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
                     {
                         Id = c.Id,
@@ -100,7 +95,7 @@ namespace Pink_Panthers_Project.Controllers
                     TeachingCourses = teachingCourses,
                     RegisteredCourses = registeredCourses,
                     Assignments = assignments,
-                    Account = _account![session]
+                    Account = account
                 };
                 return View(viewModel);
             }
@@ -110,24 +105,24 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult addClass()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            if (_account![session]!.isTeacher)
+			ViewBag.isTeacher = account!.isTeacher;
+            if (account!.isTeacher)
                 return View();
             return NotFound();
         }
         [HttpPost]
         public async Task<IActionResult> addClass([Bind("Room,DepartmentCode,CourseNumber,CourseName,monday,tuesday,wednesday,thursday,friday,StartTime,EndTime,hours")]Class newClass)
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			if (_account![session] == null)
+			if (account == null)
             {
                 return NotFound();
             }
             //else
-			if (_account![session]!.isTeacher && ModelState.IsValid)
+			if (account!.isTeacher && ModelState.IsValid)
             {
                 setDays(ref newClass);
                 if (String.IsNullOrEmpty(newClass.Days))
@@ -135,7 +130,7 @@ namespace Pink_Panthers_Project.Controllers
                     ModelState.AddModelError("NoDaysSelected", "");
                     return View(newClass);
                 }
-                newClass.accountID = _account[session]!.ID;
+                newClass.accountID = account!.ID;
                 string color = RandomHexColor();
                 newClass.color = color;
                 await _context.AddAsync(newClass);
@@ -162,26 +157,26 @@ namespace Pink_Panthers_Project.Controllers
 
         public IActionResult Chart()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+            var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
+			ViewBag.isTeacher = account!.isTeacher;
             return View();
         }
 
         [HttpGet]
         public IActionResult Account()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            if (_account![session] != null) //An account must be active to view this page
+			ViewBag.isTeacher = account!.isTeacher;
+            if (account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
                 var registeredCourses = new List<Class>();//list of classes a student is taking
                 var assignments = new List<Assignment>();
 
                 registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == _account[session]!.ID)
+                .Where(rc => rc.accountID == account!.ID)
                 .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                 {
                     CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
@@ -206,7 +201,7 @@ namespace Pink_Panthers_Project.Controllers
                     TeachingCourses = teachingCourses,
                     RegisteredCourses = registeredCourses,
                     Assignments = assignments,
-                    Account = _account![session]
+                    Account = account
                 };
                 return View(viewModel);
             }
@@ -218,17 +213,17 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Account(double amountToPay) //Updates the amount needing to be paid
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            if (_account![session] != null) //An account must be active to view this page
+			ViewBag.isTeacher = account!.isTeacher;
+            if (account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
                 var registeredCourses = new List<Class>();//list of classes a student is taking
                 var assignments = new List<Assignment>();
 
                 registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == _account[session]!.ID)
+                .Where(rc => rc.accountID == account!.ID)
                 .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                 {
                     CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
@@ -253,14 +248,14 @@ namespace Pink_Panthers_Project.Controllers
                     TeachingCourses = teachingCourses,
                     RegisteredCourses = registeredCourses,
                     Assignments = assignments,
-                    Account = _account![session]
+                    Account = account
                 };
 
-                _account![session]!.AmountToBePaid -= amountToPay;
-                _account![session]!.AmountToBePaid = Math.Round(_account![session]!.AmountToBePaid, 2);
-                if (_account![session]!.AmountToBePaid < 0)
-                    _account![session]!.AmountToBePaid = 0;
-                _context.Account.Update(_account[session]!);
+                account!.AmountToBePaid -= amountToPay;
+                account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
+                if (account!.AmountToBePaid < 0)
+                    account!.AmountToBePaid = 0;
+                _context.Account.Update(account!);
                 await _context.SaveChangesAsync();
                 return View(viewModel);
             }
@@ -270,12 +265,12 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            ViewBag.account = _account![session]!.ID;
+			ViewBag.isTeacher = account!.isTeacher;
+            ViewBag.account = account!.ID;
 
-            if (!_account![session]!.isTeacher && ModelState.IsValid)
+            if (!account!.isTeacher && ModelState.IsValid)
             {
                 var viewModel = new RegisterView
                 {
@@ -295,11 +290,11 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(int classId)
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			if (!_account![session]!.isTeacher)
+			if (!account!.isTeacher)
             {
-                int accountId = _account![session]!.ID;
+                int accountId = account!.ID;
 
                 var existingRegistration = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
 
@@ -310,13 +305,13 @@ namespace Pink_Panthers_Project.Controllers
                     // Add the class to the student's registered classes
                     var registeredClass = new RegisteredClass
                     {
-                        accountID = _account[session]!.ID,
+                        accountID = account!.ID,
                         classID = classId
                     };
 
                     int hours = _context.Class.Where(c => c.ID == registeredClass.classID).Select(c => c.hours).SingleOrDefault();
-                    _account[session]!.AmountToBePaid += (100 * hours);
-                    _account![session]!.AmountToBePaid = Math.Round(_account![session]!.AmountToBePaid, 2);
+                    account!.AmountToBePaid += (100 * hours);
+                    account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
 
                     // Add the registeredClass to your registered classes collection
                     await _context.registeredClasses.AddAsync(registeredClass);
@@ -328,8 +323,8 @@ namespace Pink_Panthers_Project.Controllers
                     var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
 
                     int hours = _context.Class.Where(c => c.ID == registeredClassToRemove!.classID).Select(c => c.hours).SingleOrDefault();
-                    _account[session]!.AmountToBePaid -= (100 * hours);
-                    _account![session]!.AmountToBePaid = Math.Round(_account![session]!.AmountToBePaid, 2);
+                    account!.AmountToBePaid -= (100 * hours);
+                    account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
 
                     _context.registeredClasses.Remove(registeredClassToRemove!);
 
@@ -347,11 +342,11 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Details()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            if (_account![session] != null)
-                return View(_account![session]);
+			ViewBag.isTeacher = account!.isTeacher;
+            if (account != null)
+                return View(account);
             return NotFound();
         }
 
@@ -362,11 +357,11 @@ namespace Pink_Panthers_Project.Controllers
         /// <returns></returns>
         public IActionResult Edit()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            if (_account![session] != null)
-                return View(_account![session]);
+			ViewBag.isTeacher = account!.isTeacher;
+            if (account != null)
+                return View(account);
             return NotFound();
         }
 
@@ -379,9 +374,7 @@ namespace Pink_Panthers_Project.Controllers
         [HttpPost]
         public IActionResult Edit(Account account)
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
-
-			var Account = _account![session]; //Get account
+			var Account = account; //Get account
 
             if(!ModelState.IsValid) //Check if fields are vaild
             {
@@ -416,27 +409,27 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult FileUpload()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            return View(_account![session]);
+			ViewBag.isTeacher = account!.isTeacher;
+            return View(account);
 
         }
         [HttpPost]
         public IActionResult FileUpload(IFormFile postedFile) 
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+			var account = getAccount();
 
-			if (_account![session] == null)
+			if (account == null)
             {
                 return NotFound();
             }
-            string fileName = _account[session]!.ID.ToString() + "_" + _account[session]!.LastName + "pfp.jpg";
+            string fileName = account!.ID.ToString() + "_" + account!.LastName + "pfp.jpg";
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", fileName);
             if (postedFile == null)
             {
                 ModelState.AddModelError("NoImage", String.Empty);
-                ViewBag.isTeacher = _account[session]!.isTeacher;
+                ViewBag.isTeacher = account!.isTeacher;
                 return View();
             }
             if(postedFile != null)
@@ -451,19 +444,19 @@ namespace Pink_Panthers_Project.Controllers
         }
         public IActionResult Calendar()
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
+            var account = getAccount();
 
-			ViewBag.isTeacher = _account![session]!.isTeacher;
-            if (_account![session] != null) //An account must be active to view this page
+			ViewBag.isTeacher = account!.isTeacher;
+            if (account != null) //An account must be active to view this page
             {
                 var teachingCourses = new List<Class>();//list of classes an instructor is teaching
                 var registeredCourses = new List<Class>();//list of classes a student is taking
                 var assignments = new List<Assignment>();
 
-                if (_account[session]!.isTeacher)//check if the user is a teacher
+                if (account!.isTeacher)//check if the user is a teacher
                 {
                     teachingCourses = _context.Class //populate the fields
-                        .Where(c => c.accountID == _account[session]!.ID)
+                        .Where(c => c.accountID == account!.ID)
                         .Select(c => new Class
                         {
                             CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
@@ -479,7 +472,7 @@ namespace Pink_Panthers_Project.Controllers
                 else
                 {
                     registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == _account[session]!.ID)
+                .Where(rc => rc.accountID == account!.ID)
                 .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                 {
                     CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
@@ -505,31 +498,34 @@ namespace Pink_Panthers_Project.Controllers
                     TeachingCourses = teachingCourses,
                     RegisteredCourses = registeredCourses,
                     Assignments = assignments,
-                    Account = _account![session]
+                    Account = account
                 };
                 return View(viewModel);
             }
             return NotFound();
         }
 
-        public void setAccount(Account? account = null) //Used to set the current account
+        public Account getAccount() //Used to set the current account
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
-
-            _account![session] = isUnitTesting ? account! : HttpContext.Session.GetSessionValue<Account>("LoggedInAccount")!;
+			if (UnitTestingData.isUnitTesting)
+			{
+                return UnitTestingData._account!;
+			}
+			return HttpContext.Session.GetSessionValue<Account>("LoggedInAccount")!;
 			
 		}
         public void logoutAccount() //Sets the current account to null
         {
-			session = isUnitTesting ? "test" : HttpContext.Session.Id;
-
-			if (_account!.ContainsKey(session))
-            {
-                _account[session] = null;
-                _account.Remove(session);
-                isUnitTesting = false;
-            }
-        }   
+			if (UnitTestingData.isUnitTesting)
+			{
+				UnitTestingData._account = null;
+			}
+			else
+			{
+				HttpContext.Session.Remove("LoggedInAccount");
+                HttpContext.Session.Clear();
+			}
+		}   
 
         string RandomHexColor()
         {

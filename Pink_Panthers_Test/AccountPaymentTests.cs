@@ -19,7 +19,7 @@ namespace Pink_Panthers_Test
             ProfileController profileController = new ProfileController(_context, true);
             Account? account = _context.Account.Where(ac => ac.ID == 1).SingleOrDefault(); //ID 1 is test student
             if (account != null)
-                profileController.setAccount(account!);
+                UnitTestingData._account = account;
 
             double currAmount = Math.Round(account!.AmountToBePaid, 2);
 

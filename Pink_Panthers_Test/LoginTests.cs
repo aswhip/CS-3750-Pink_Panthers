@@ -29,7 +29,9 @@ namespace Pink_Panthers_Test
                 Password = "test1"
             };
             controller.Login(loginAccount);
-            Assert.IsNotNull(controller.getAccount());
+            Assert.IsNotNull(UnitTestingData._account);
+            UnitTestingData._account = null;
+            UnitTestingData.isUnitTesting = false;
         }
 
         [TestMethod]
@@ -42,7 +44,8 @@ namespace Pink_Panthers_Test
                 Password = "test1"
             };
             controller.Login(loginAccount);
-            Assert.IsNull(controller.getAccount());
+            Assert.IsNull(UnitTestingData._account);
+			UnitTestingData.isUnitTesting = false;
 		}
 
         [TestMethod]
@@ -55,7 +58,8 @@ namespace Pink_Panthers_Test
                 Password = "wrongpassword"
             };
             controller.Login(loginAccount);
-            Assert.IsNull(controller.getAccount());
+			Assert.IsNull(UnitTestingData._account);
+			UnitTestingData.isUnitTesting = false;
 		}
     }
 }

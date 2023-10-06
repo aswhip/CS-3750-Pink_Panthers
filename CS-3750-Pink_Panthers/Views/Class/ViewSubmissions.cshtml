@@ -27,7 +27,7 @@
 					}
 					else
 					{
-						<td>File Upload not supported just yet, coming soon!</td>
+						<td><a href="~/Submissions/@Html.Raw(submission.Submission)" download></a></td>
 					}
 				<td>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</td>
 				<td><a class="btn btn-primary" asp-action="GradeAssignment" asp-route-id="@submission.ID">Grade</a></td>
