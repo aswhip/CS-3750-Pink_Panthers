@@ -25,20 +25,9 @@ namespace Pink_Panthers_Project.Controllers
             UnitTestingData.isUnitTesting = unitTest;
         }
 
-        public IActionResult Index()
+        private void UpdateTeachingCourses(Account account)
         {
-			var account = getAccount();
-
-			ViewBag.isTeacher = account!.isTeacher;
-            if(account != null) //An account must be active to view this page
-            {
-                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
-                var registeredCourses = new List<Class>();//list of classes a student is taking
-                var assignments = new List<Assignment>();
-
-                if (account!.isTeacher)//check if the user is a teacher
-                {
-                    teachingCourses = _context.Class //populate the fields
+            var teachingCourses = _context.Class
                         .Where(c => c.accountID == account!.ID)
                         .Select(c => new Class
                         {
@@ -53,10 +42,12 @@ namespace Pink_Panthers_Project.Controllers
                             hours = c.hours
                         })
                         .ToList();
-                }
-                else
-                {
-                    registeredCourses = _context.registeredClasses
+            HttpContext.Session.SetSessionValue("TeachingCourses", teachingCourses);
+        }
+
+        private void UpdateRegisteredCoursesAndAssignments(Account account)
+        {
+            var registeredCourses = _context.registeredClasses
                 .Where(rc => rc.accountID == account!.ID)
                 .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                 {
@@ -72,35 +63,47 @@ namespace Pink_Panthers_Project.Controllers
                     hours = c.hours
                 })
                 .ToList();
-                    assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
-                    .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
-                    {
-                        Id = c.Id,
-                        ClassID = c.ClassID,
-                        AssignmentName = c.AssignmentName,
-                        DueDate = c.DueDate,
-                        PossiblePoints = c.PossiblePoints,
-                        Description = c.Description,
-                        SubmissionType = c.SubmissionType
-                    }).ToList();
-				}
+            var assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
+            .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
+            {
+                Id = c.Id,
+                ClassID = c.ClassID,
+                AssignmentName = c.AssignmentName,
+                DueDate = c.DueDate,
+                PossiblePoints = c.PossiblePoints,
+                Description = c.Description,
+                SubmissionType = c.SubmissionType
+            }).ToList();
 
-                foreach(var a in assignments)
-                {
-                    a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-                }
 
-                var viewModel = new CourseView
-                {
-                    TeachingCourses = teachingCourses,
-                    RegisteredCourses = registeredCourses,
-                    Assignments = assignments,
-                    Account = account
-                };
-                return View(viewModel);
+            foreach (var a in assignments)
+            {
+                a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
             }
-            return NotFound();
+            HttpContext.Session.SetSessionValue("RegisteredCourses", registeredCourses);
+            HttpContext.Session.SetSessionValue("Assignments", assignments);
         }
+
+        public IActionResult Index()
+        {
+            var account = getAccount();
+
+            ViewBag.isTeacher = account!.isTeacher;
+            if (account != null) //An account must be active to view this page
+            {
+
+                    var viewModel = new CourseView
+                    {
+                        TeachingCourses = HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses"),
+                        RegisteredCourses = HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses"),
+                        Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
+                        Account = account
+                    };
+                    return View(viewModel);
+                }
+                return NotFound();
+            } 
+        
 
         [HttpGet]
         public IActionResult addClass()
@@ -135,6 +138,7 @@ namespace Pink_Panthers_Project.Controllers
                 newClass.color = color;
                 await _context.AddAsync(newClass);
                 await _context.SaveChangesAsync();
+                UpdateTeachingCourses(account);
                 return RedirectToAction("Index");
             }
             return NotFound();
@@ -171,36 +175,11 @@ namespace Pink_Panthers_Project.Controllers
 			ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
             {
-                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
-                var registeredCourses = new List<Class>();//list of classes a student is taking
-                var assignments = new List<Assignment>();
-
-                registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == account!.ID)
-                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
-                {
-                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-                    CourseName = c.CourseName,
-                    Room = c.Room,
-                    StartTime = c.StartTime,
-                    EndTime = c.EndTime,
-                    Days = c.Days,
-                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                    color = c.color,
-                    hours = c.hours
-                })
-                .ToList();
-
-                assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
-                foreach (var assignment in assignments)
-                {
-                    assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-                }
                 var viewModel = new CourseView
                 {
-                    TeachingCourses = teachingCourses,
-                    RegisteredCourses = registeredCourses,
-                    Assignments = assignments,
+                    TeachingCourses = HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses"),
+                    RegisteredCourses = HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses"),
+                    Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
                     Account = account
                 };
                 return View(viewModel);
@@ -218,36 +197,12 @@ namespace Pink_Panthers_Project.Controllers
 			ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
             {
-                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
-                var registeredCourses = new List<Class>();//list of classes a student is taking
-                var assignments = new List<Assignment>();
-
-                registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == account!.ID)
-                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
-                {
-                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-                    CourseName = c.CourseName,
-                    Room = c.Room,
-                    StartTime = c.StartTime,
-                    EndTime = c.EndTime,
-                    Days = c.Days,
-                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                    color = c.color,
-                    hours = c.hours
-                })
-                .ToList();
-
-                assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
-                foreach (var assignment in assignments)
-                {
-                    assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-                }
+                
                 var viewModel = new CourseView
                 {
-                    TeachingCourses = teachingCourses,
-                    RegisteredCourses = registeredCourses,
-                    Assignments = assignments,
+                    TeachingCourses = HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses"),
+                    RegisteredCourses = HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses"),
+                    Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
                     Account = account
                 };
 
@@ -331,6 +286,7 @@ namespace Pink_Panthers_Project.Controllers
                 }
                 await _context.SaveChangesAsync();
             }
+            UpdateRegisteredCoursesAndAssignments(account);
             // Redirect back to the class list page
             return RedirectToAction("Index");
         }
@@ -448,56 +404,12 @@ namespace Pink_Panthers_Project.Controllers
 
 			ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
-            {
-                var teachingCourses = new List<Class>();//list of classes an instructor is teaching
-                var registeredCourses = new List<Class>();//list of classes a student is taking
-                var assignments = new List<Assignment>();
-
-                if (account!.isTeacher)//check if the user is a teacher
-                {
-                    teachingCourses = _context.Class //populate the fields
-                        .Where(c => c.accountID == account!.ID)
-                        .Select(c => new Class
-                        {
-                            CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-                            CourseName = c.CourseName,
-                            Room = c.Room,
-                            StartTime = c.StartTime,
-                            EndTime = c.EndTime,
-                            Days = c.Days,
-                            color = c.color
-                        })
-                        .ToList();
-                }
-                else
-                {
-                    registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == account!.ID)
-                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
-                {
-                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-                    CourseName = c.CourseName,
-                    Room = c.Room,
-                    StartTime = c.StartTime,
-                    EndTime = c.EndTime,
-                    Days = c.Days,
-                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                    color = c.color
-                })
-                .ToList();
-
-                    assignments = _context.Assignments.OrderBy(c => c.Id).ToList();
-                    foreach (var assignment in assignments)
-                    {
-                        assignment.className = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-                    }
-                }
-
+            {                
                 var viewModel = new CourseView
                 {
-                    TeachingCourses = teachingCourses,
-                    RegisteredCourses = registeredCourses,
-                    Assignments = assignments,
+                    TeachingCourses = HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses"),
+                    RegisteredCourses = HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses"),
+                    Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
                     Account = account
                 };
                 return View(viewModel);

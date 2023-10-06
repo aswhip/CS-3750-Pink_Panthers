@@ -20,6 +20,65 @@ namespace Pink_Panthers_Project.Controllers
     {
         private readonly Pink_Panthers_ProjectContext _context;
 
+        private void UpdateTeachingCourses(Account account)
+        {
+            var teachingCourses = _context.Class
+                        .Where(c => c.accountID == account!.ID)
+                        .Select(c => new Class
+                        {
+                            ID = c.ID,
+                            CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                            CourseName = c.CourseName,
+                            Room = c.Room,
+                            StartTime = c.StartTime,
+                            EndTime = c.EndTime,
+                            Days = c.Days,
+                            color = c.color,
+                            hours = c.hours
+                        })
+                        .ToList();
+            HttpContext.Session.SetSessionValue("TeachingCourses", teachingCourses);
+        }
+
+        private void UpdateRegisteredCoursesAndAssignments(Account account)
+        {
+            var registeredCourses = _context.registeredClasses
+                .Where(rc => rc.accountID == account!.ID)
+                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+                {
+                    ID = c.ID,
+                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+                    CourseName = c.CourseName,
+                    Room = c.Room,
+                    StartTime = c.StartTime,
+                    EndTime = c.EndTime,
+                    Days = c.Days,
+                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+                    color = c.color,
+                    hours = c.hours
+                })
+                .ToList();
+            var assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
+            .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
+            {
+                Id = c.Id,
+                ClassID = c.ClassID,
+                AssignmentName = c.AssignmentName,
+                DueDate = c.DueDate,
+                PossiblePoints = c.PossiblePoints,
+                Description = c.Description,
+                SubmissionType = c.SubmissionType
+            }).ToList();
+        
+
+                foreach(var a in assignments)
+                {
+                    a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+    }
+            HttpContext.Session.SetSessionValue("RegisteredCourses", registeredCourses);
+            HttpContext.Session.SetSessionValue("Assignments", assignments);
+}
+
         public AccountsController(Pink_Panthers_ProjectContext context, bool isUnitTest = false)
         {
             _context = context;
@@ -66,6 +125,11 @@ namespace Pink_Panthers_Project.Controllers
 					}
 					else
 					{
+                        if (loginAccount.isTeacher)
+                        {
+                            UpdateTeachingCourses(loginAccount);
+                        }
+                        else UpdateRegisteredCoursesAndAssignments(loginAccount);
 						HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
 					}
 					return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
