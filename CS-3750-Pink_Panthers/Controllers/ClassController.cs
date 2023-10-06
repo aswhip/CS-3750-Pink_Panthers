@@ -2,43 +2,41 @@
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
 using Pink_Panthers_Project.Util;
-using Pink_Panthers_Project.Controllers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Pink_Panthers_Project.Controllers
 {
-    public class ClassController : Controller
+    public class classController : Controller
     {
         private readonly Pink_Panthers_ProjectContext _context;
 
-
-        public ClassController(Pink_Panthers_ProjectContext context)
+		public classController(Pink_Panthers_ProjectContext context, bool unitTest = false)
         {
             _context = context;
+            UnitTestingData.isUnitTesting = unitTest;
         }
 
-        private static Class? _class;
-        private static Account? _account; 
 
         public IActionResult Index()
         {
-            List<Class> tCourses = new List<Class>();
+            var account = getAccount();
+
+			List<Class> tCourses = new List<Class>();
             List<Class> sCourses = new List<Class>();
 
-			_account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
-			if (_account == null)
+			if (account == null)
             {
                 return NotFound();
             }
-            ViewBag.isTeacher = _account!.isTeacher;
+            ViewBag.isTeacher = account!.isTeacher;
 
-            if (_account.isTeacher)
+            if (account!.isTeacher)
             {
-                tCourses = _context.Class.Where(c => c.accountID == _account.ID).ToList();
+                tCourses = _context.Class.Where(c => c.accountID == account!.ID).ToList();
             }
-            else if (!_account.isTeacher)
+            else if (!account!.isTeacher)
             {
-                sCourses = _context.registeredClasses.Where(rc => rc.accountID == _account.ID)
+                sCourses = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
                     .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
                     {
                         ID = c.ID,
@@ -60,33 +58,34 @@ namespace Pink_Panthers_Project.Controllers
             {
                 TeachingCourses = tCourses,
                 RegisteredCourses = sCourses,
-                Account = _account
+                Account = account!
             };
             return View(viewModel);
         }
 
         public IActionResult Assignments(int? id)
         {
-			_account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
-			if (_account == null)
+            var account = getAccount();
+			var cls = getClass(id);
+
+			if(account! == null)
             {
                 return NotFound();
             }
-			setClass(id);
-            if(_class == null)
+            if(cls! == null)
             {
                 return NotFound();
             }
 
-			ViewBag.isTeacher = _account!.isTeacher;
+			ViewBag.isTeacher = account!.isTeacher;
 
-			var assignments = _context.Assignments.Where(a => a.ClassID == _class!.ID);
+			var assignments = _context.Assignments.Where(a => a.ClassID == cls!.ID);
 
 			var viewModel = new ClassViewModel
 			{
-				Class = _class,
+				Class = cls!,
 				Assignments = assignments.ToList(),
-				Account = _account
+				Account = account!
 			};
 			return View(viewModel);
 		}
@@ -94,12 +93,14 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult GradeAssignment(int? id)
         {
-            if (_account == null)
+            var account = getAccount();
+
+			if (account! == null)
                 return NotFound();
 
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = account!.isTeacher;
             //else
-            if (!_account.isTeacher)
+            if (!account!.isTeacher)
             {
                 return NotFound();
             }
@@ -115,7 +116,9 @@ namespace Pink_Panthers_Project.Controllers
 		[HttpPost]
 		public async Task<IActionResult> GradeAssignment([Bind("ID,Grade")]StudentSubmission newGrade)
 		{
-			if (_account == null)
+            var account = getAccount();
+
+			if (account! == null)
 				return NotFound();
 
 			//else
@@ -134,28 +137,30 @@ namespace Pink_Panthers_Project.Controllers
 		}
 
 		[HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateAssignment()
         {
-            ViewBag.isTeacher = _account!.isTeacher;
-            ViewBag.ClassID = _class!.ID;
+            var account = getAccount();
+            var cls = getClass();
 
-            if (_class == null)
+			ViewBag.isTeacher = account!.isTeacher;
+            ViewBag.ClassID = cls!.ID;
+
+            if (cls! == null)
             {
                 return NotFound();
             } 
             else
             {
-                ViewBag.ClassName = _class.CourseName;
+                ViewBag.ClassName = cls!.CourseName;
                 return View();
             }
-           
-			
 		}
-
         [HttpPost]
-        public IActionResult Create([Bind("ClassID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignment)
+        public IActionResult CreateAssignment([Bind("clsID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignment)
         {
-			ViewBag.isTeacher = _account!.isTeacher;
+            var account = getAccount();
+
+			ViewBag.isTeacher = account!.isTeacher;
 
             if (assignment.DueDate < DateTime.Now)
             {
@@ -172,8 +177,8 @@ namespace Pink_Panthers_Project.Controllers
             else
             {
 				ViewBag.ClassID = assignment.ClassID;
-				var currentClass = _context.Class.Find(assignment.ClassID);
-				ViewBag.ClassName = currentClass?.CourseName;
+				var currentcls = _context.Class.Find(assignment.ClassID);
+				ViewBag.ClassName = currentcls?.CourseName;
                 return View("Create", assignment);
 			}
 		}
@@ -181,9 +186,10 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult ToDoListClick(int assignmentID)
         {
-            _account = HttpContext.Session.GetSessionValue<Account>("LoggedInAccount");
-            int classID = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.ClassID).SingleOrDefault();
-            _class = _context.Class.Where(c => c.ID == classID).SingleOrDefault();
+            var account = getAccount();
+
+            int clsID = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.ClassID).SingleOrDefault();
+            var cls = getClass(clsID); //Sets the current class
 
             return RedirectToAction("SubmitAssignment", new { assignmentID = assignmentID });
         }
@@ -191,9 +197,12 @@ namespace Pink_Panthers_Project.Controllers
         [HttpGet]
         public IActionResult SubmitAssignment(int assignmentID)
         {
-			ViewBag.isTeacher = _account!.isTeacher;
+            var account = getAccount();
+            var cls = getClass();
 
-			if (_class == null)
+			ViewBag.isTeacher = account!.isTeacher;
+
+			if (cls! == null)
 			{
 				return NotFound();
 			}
@@ -208,35 +217,85 @@ namespace Pink_Panthers_Project.Controllers
 			}
 		}
 		[HttpPost]
-		public async Task<IActionResult> SubmitAssignment(StudentSubmission? newSubmission)
+		public async Task<IActionResult> SubmitAssignment(StudentSubmission? newSubmission, IFormFile? file)
 		{
-            if (ModelState.IsValid)
+            var account = getAccount();
+            var cls = getClass();
+
+            ViewBag.isTeacher = account!.isTeacher;
+
+			if (account == null)
             {
-                newSubmission!.AccountID = _account!.ID;
-                if (await _context.StudentSubmissions.Where(c => c.AccountID == newSubmission.AccountID && c.AssignmentID == newSubmission.AssignmentID).SingleOrDefaultAsync() == null)
+                return NotFound();
+            }
+
+			StudentSubmission sub;
+			if (ModelState.IsValid && newSubmission!.Submission != null)
+            {
+                newSubmission!.AccountID = account!.ID;
+                if (await _context.StudentSubmissions.Where(c => c.AccountID == account!.ID && c.AssignmentID == newSubmission.AssignmentID).SingleOrDefaultAsync() == null)
                 {
                     await _context.StudentSubmissions.AddAsync(newSubmission!);
                     await _context.SaveChangesAsync();
                 }
                 else
                 {
-                    StudentSubmission sub = await _context.StudentSubmissions.Where(c => c.AccountID == _account!.ID && c.AssignmentID == newSubmission.AssignmentID).SingleAsync();
-                    sub.Submission = newSubmission.Submission;
+                    sub = await _context.StudentSubmissions.Where(c => c.AccountID == account!.ID && c.AssignmentID == newSubmission!.AssignmentID).SingleAsync();
+					sub!.Submission = newSubmission.Submission;
                     _context.StudentSubmissions.Update(sub);
                     await _context.SaveChangesAsync();
                 }
             }
-            return RedirectToAction("Index");
+            else if (ModelState.IsValid && file == null)
+            {
+                var submissionView = new StudentSubmission
+                {
+                    AssignmentID = newSubmission!.AssignmentID,
+                    currentAssignment = _context.Assignments.Find(newSubmission.AssignmentID)
+                };
+                ModelState.AddModelError("NoFile", String.Empty);
+                return View(submissionView);
+            }
+            else if (ModelState.IsValid && file != null)
+            {
+				sub = newSubmission!;
+				sub.AccountID = account!.ID;
+				string fileName = account!.ID + "_" + file.FileName;
+				string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Submissions", fileName);
+                using(FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
+                {
+                    if (await _context.StudentSubmissions.Where(c => c.AccountID == account!.ID && c.AssignmentID == newSubmission!.AssignmentID).SingleOrDefaultAsync() == null)
+                    {
+                        await file.CopyToAsync(fs);
+                        sub.Submission = fileName;
+                        _context.StudentSubmissions.Add(sub);
+                    }
+                    else
+                    {
+                        sub = await _context.StudentSubmissions.Where(c => c.AccountID == account!.ID && c.AssignmentID == newSubmission!.AssignmentID).SingleAsync();
+						await file.CopyToAsync(fs);
+						sub.Submission = fileName;
+						_context.StudentSubmissions.Update(sub);
+					}
+					await _context.SaveChangesAsync();
+
+					return RedirectToAction("Index");
+				}
+			}
+			return BadRequest("File not Found");
 		}
 
         [HttpGet]
         public IActionResult ViewSubmissions(int assignmentID)
         {
-            if(_account == null || _class == null || !_account.isTeacher)
+            var account = getAccount();
+            var cls = getClass();
+
+			if (account! == null || cls! == null || !account!.isTeacher)
             {
                 return NotFound();
             }
-            ViewBag.isTeacher = _account.isTeacher;
+            ViewBag.isTeacher = account!.isTeacher;
             var viewSubmissions = new SubmissionsViewModel
             {
                 StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),
@@ -250,15 +309,34 @@ namespace Pink_Panthers_Project.Controllers
             return View(viewSubmissions);
         }
 
-        public static void resetClass()
+        private Class getClass(int? id = null)
         {
-            _class = null;
-        }
+            if (UnitTestingData.isUnitTesting)
+            {
+                if(id != null)
+                {
+                    UnitTestingData.cls = _context.Class.Find(id);
+                }
+                return UnitTestingData.cls!;
+            }
+            //else
+            if(id != null)
+            {
+                Class cCls = _context.Class.Find(id)!;
+                HttpContext.Session.SetSessionValue("CurrentClass", cCls);
+            }
+            return HttpContext.Session.GetSessionValue<Class>("CurrentClass")!;
 
-        private void setClass(int? id)
-        {
-			_class = _context.Class.Find(id);
-            HttpContext.Session.SetSessionValue("CurrentClass", _class);
+		}
+
+		private Account getAccount() //Used to set the current account
+		{
+			if (UnitTestingData.isUnitTesting)
+			{
+				return UnitTestingData._account!;
+			}
+			return HttpContext.Session.GetSessionValue<Account>("LoggedInAccount")!;
+
 		}
 	}
 }

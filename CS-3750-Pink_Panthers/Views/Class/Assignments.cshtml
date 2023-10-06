@@ -78,7 +78,7 @@
 				@if (Model.Account.isTeacher)
 				{
 					<div class="col-md-4">
-						<a asp-action="Create" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+						<a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
 					</div>
 				}
 			}

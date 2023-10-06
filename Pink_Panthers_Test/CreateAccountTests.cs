@@ -37,7 +37,10 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-        }
+
+			UnitTestingData._account = null;
+			UnitTestingData.isUnitTesting = false;
+		}
 
         [TestMethod]
         public async Task CanCreateTeacherAccount()
@@ -63,7 +66,10 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-        }
+
+			UnitTestingData._account = null;
+			UnitTestingData.isUnitTesting = false;
+		}
 
         [TestMethod]
         public async Task AccountAgeMustBeAtLeast18Years()
@@ -89,7 +95,10 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-        }
+
+			UnitTestingData._account = null;
+			UnitTestingData.isUnitTesting = false;
+		}
 
         [TestMethod]
         public async Task CannotShareEmail()
@@ -115,6 +124,9 @@ namespace Pink_Panthers_Test
                 _context.Remove(addedAccount);
             }
             await _context.SaveChangesAsync();
-        }
+
+            UnitTestingData._account = null;
+			UnitTestingData.isUnitTesting = false;
+		}
     }
 }

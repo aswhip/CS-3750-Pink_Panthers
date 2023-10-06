@@ -19,13 +19,11 @@ namespace Pink_Panthers_Project.Controllers
     public class AccountsController : Controller
     {
         private readonly Pink_Panthers_ProjectContext _context;
-        private readonly bool isUnitTest = false;
-        private Account _account = null;
 
         public AccountsController(Pink_Panthers_ProjectContext context, bool isUnitTest = false)
         {
             _context = context;
-            this.isUnitTest = isUnitTest;
+            UnitTestingData.isUnitTesting = isUnitTest;
         }
 
         [HttpGet]
@@ -62,13 +60,15 @@ namespace Pink_Panthers_Project.Controllers
                 }
                 else
                 {
-                    if (isUnitTest)
-                        _account = loginAccount;
-                    else
-                    {
-                        HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
-                    }
-                    return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
+					if (UnitTestingData.isUnitTesting)
+					{
+						UnitTestingData._account = loginAccount;
+					}
+					else
+					{
+						HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
+					}
+					return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
                 }
             }
             return View();
@@ -101,13 +101,14 @@ namespace Pink_Panthers_Project.Controllers
                         await _context.AddAsync(account); //Adds the account to the database
                         await _context.SaveChangesAsync();
 
-                        if (isUnitTest)
-                            _account = account;
-                        else
-                        {
-                            HttpContext.Session.SetSessionValue("LoggedInAccount", account);
-                        }
-
+						if (UnitTestingData.isUnitTesting)
+						{
+							UnitTestingData._account = account;
+						}
+						else
+						{
+							HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+						}
 						return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
                     }
                     else
@@ -170,12 +171,5 @@ namespace Pink_Panthers_Project.Controllers
 			//Adds 18 years to the user's entered birthdate. If the date is still before or equal to today's date, they are 18 years old.
 			return (account.BirthDate.AddYears(18) <= DateTime.Now);  
         }
-
-        
-        public Account? getAccount()
-        {
-            return _account;
-        }
-
     }
 }

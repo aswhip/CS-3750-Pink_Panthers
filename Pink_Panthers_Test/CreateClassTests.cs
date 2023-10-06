@@ -13,7 +13,7 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task TeacherCanCreateClassAsync()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Class newClass = new Class
             {
                 Room = "NB318",
@@ -30,11 +30,11 @@ namespace Pink_Panthers_Test
             };
             Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //Teacher Account
 
-            profileController.setAccount(account, true);
+            UnitTestingData._account = account;
 
-            int count = _context.Class.Where(c => c.accountID == account.ID).Count();
+            int count = _context.Class.Where(c => c.accountID == account!.ID).Count();
             await profileController.addClass(newClass);
-            int newCount = _context.Class.Where(c => c.accountID == account.ID).Count();
+            int newCount = _context.Class.Where(c => c.accountID == account!.ID).Count();
 
             Assert.AreEqual(newCount, count + 1, "Add class failed");
 
@@ -47,7 +47,7 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task StudentCannotCreateClass()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Class newClass = new Class
             {
                 Room = "NB318",
@@ -64,13 +64,13 @@ namespace Pink_Panthers_Test
             };
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //Student Account
 
-            profileController.setAccount(account, true);
+            UnitTestingData._account = account;
 
-            int count = _context.Class.Where(c => c.accountID == account.ID).Count();
+            int count = _context.Class.Where(c => c.accountID == account!.ID).Count();
             Assert.AreEqual(count, 0, "Count should be 0");
 
             await profileController.addClass(newClass);
-            int newCount = _context.Class.Where(c => c.accountID == account.ID).Count();
+            int newCount = _context.Class.Where(c => c.accountID == account!.ID).Count();
 
             Assert.AreEqual(newCount, count, "Student added class"); //Student should not be able to add class, so new count and count should be equal
 
