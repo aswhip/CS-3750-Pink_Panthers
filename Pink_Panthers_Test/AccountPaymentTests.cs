@@ -16,10 +16,10 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task CanMakePaymentToAccount()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Account? account = _context.Account.Where(ac => ac.ID == 1).SingleOrDefault(); //ID 1 is test student
             if (account != null)
-                profileController.setAccount(account!, true);
+                profileController.setAccount(account!);
 
             double currAmount = Math.Round(account!.AmountToBePaid, 2);
 

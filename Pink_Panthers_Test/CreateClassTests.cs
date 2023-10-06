@@ -13,7 +13,7 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task TeacherCanCreateClassAsync()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Class newClass = new Class
             {
                 Room = "NB318",
@@ -30,7 +30,7 @@ namespace Pink_Panthers_Test
             };
             Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //Teacher Account
 
-            profileController.setAccount(account, true);
+            profileController.setAccount(account);
 
             int count = _context.Class.Where(c => c.accountID == account.ID).Count();
             await profileController.addClass(newClass);
@@ -47,7 +47,7 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task StudentCannotCreateClass()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Class newClass = new Class
             {
                 Room = "NB318",
@@ -64,7 +64,7 @@ namespace Pink_Panthers_Test
             };
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //Student Account
 
-            profileController.setAccount(account, true);
+            profileController.setAccount(account);
 
             int count = _context.Class.Where(c => c.accountID == account.ID).Count();
             Assert.AreEqual(count, 0, "Count should be 0");

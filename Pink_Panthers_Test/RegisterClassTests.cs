@@ -16,11 +16,11 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task StudentCanRegisterForClass()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
 
             if(account != null)
-                profileController.setAccount(account!, true);
+                profileController.setAccount(account!);
 
             await profileController.Register(46); //Class ID 46 is the Test Course
             var didRegister = _context.registeredClasses.Where(c => c.classID == 46 && c.accountID == account!.ID).FirstOrDefault();
@@ -39,11 +39,11 @@ namespace Pink_Panthers_Test
         public async Task StudentCanDropRegisteredClass()
         {
             //Need to temporarily register for a class
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
 
             if (account != null)
-                profileController.setAccount(account!, true);
+                profileController.setAccount(account!);
 
             await profileController.Register(46); //Class ID 46 is the Test Course
 
@@ -67,11 +67,11 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task TeacherCannotRegisterForClass()
         {
-            ProfileController profileController = new ProfileController(_context);
+            ProfileController profileController = new ProfileController(_context, true);
             Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //ID 5 is test teacher
 
             if (account != null)
-                profileController.setAccount(account!, true);
+                profileController.setAccount(account!);
 
             await profileController.Register(46); //Class ID 46 is the Test Course
 
