@@ -22,7 +22,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public void CanLoginToExistingAccount()
         {
-            AccountsController controller = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController controller = new AccountsController(_context);
             Account loginAccount = new Account
             {
                 Email = "teststudent@gmail.com",
@@ -37,7 +39,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public void CantLoginToFakeAccount()
         {
-            AccountsController controller = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController controller = new AccountsController(_context);
             Account loginAccount = new Account
             {
                 Email = "thisemaildoesntexists@gmail.com",
@@ -51,7 +55,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public void CantLoginWithInvalidPassword()
         {
-            AccountsController controller = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController controller = new AccountsController(_context);
             Account loginAccount = new Account
             {
                 Email = "teststudent@gmail.com",

@@ -19,70 +19,9 @@ namespace Pink_Panthers_Project.Controllers
     public class AccountsController : Controller
     {
         private readonly Pink_Panthers_ProjectContext _context;
-
-        private void UpdateTeachingCourses(Account account)
-        {
-            var teachingCourses = _context.Class
-                        .Where(c => c.accountID == account!.ID)
-                        .Select(c => new Class
-                        {
-                            ID = c.ID,
-                            CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-                            CourseName = c.CourseName,
-                            Room = c.Room,
-                            StartTime = c.StartTime,
-                            EndTime = c.EndTime,
-                            Days = c.Days,
-                            color = c.color,
-                            hours = c.hours
-                        })
-                        .ToList();
-            HttpContext.Session.SetSessionValue("TeachingCourses", teachingCourses);
-        }
-
-        private void UpdateRegisteredCoursesAndAssignments(Account account)
-        {
-            var registeredCourses = _context.registeredClasses
-                .Where(rc => rc.accountID == account!.ID)
-                .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
-                {
-                    ID = c.ID,
-                    CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-                    CourseName = c.CourseName,
-                    Room = c.Room,
-                    StartTime = c.StartTime,
-                    EndTime = c.EndTime,
-                    Days = c.Days,
-                    tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                    color = c.color,
-                    hours = c.hours
-                })
-                .ToList();
-            var assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
-            .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
-            {
-                Id = c.Id,
-                ClassID = c.ClassID,
-                AssignmentName = c.AssignmentName,
-                DueDate = c.DueDate,
-                PossiblePoints = c.PossiblePoints,
-                Description = c.Description,
-                SubmissionType = c.SubmissionType
-            }).ToList();
-        
-
-                foreach(var a in assignments)
-                {
-                    a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-    }
-            HttpContext.Session.SetSessionValue("RegisteredCourses", registeredCourses);
-            HttpContext.Session.SetSessionValue("Assignments", assignments);
-}
-
-        public AccountsController(Pink_Panthers_ProjectContext context, bool isUnitTest = false)
+        public AccountsController(Pink_Panthers_ProjectContext context)
         {
             _context = context;
-            UnitTestingData.isUnitTesting = isUnitTest;
         }
 
         [HttpGet]
@@ -191,6 +130,11 @@ namespace Pink_Panthers_Project.Controllers
             return View(account);
         }
 
+        /// <summary>
+        /// Private functions for setting and testing parameters
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         private bool emailExists(string email) //If an account with the passed in email exists, return true, else return false
         {
             return (_context.Account?.Any(a => a.Email == email)).GetValueOrDefault();
@@ -235,5 +179,70 @@ namespace Pink_Panthers_Project.Controllers
 			//Adds 18 years to the user's entered birthdate. If the date is still before or equal to today's date, they are 18 years old.
 			return (account.BirthDate.AddYears(18) <= DateTime.Now);  
         }
-    }
+
+		private void UpdateTeachingCourses(Account account)
+		{
+			if (!UnitTestingData.isUnitTesting)
+			{
+				var teachingCourses = _context.Class
+							.Where(c => c.accountID == account!.ID)
+							.Select(c => new Class
+							{
+								ID = c.ID,
+								CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+								CourseName = c.CourseName,
+								Room = c.Room,
+								StartTime = c.StartTime,
+								EndTime = c.EndTime,
+								Days = c.Days,
+								color = c.color,
+								hours = c.hours
+							})
+							.ToList();
+				HttpContext.Session.SetSessionValue("TeachingCourses", teachingCourses);
+			}
+		}
+
+		private void UpdateRegisteredCoursesAndAssignments(Account account)
+		{
+			if (!UnitTestingData.isUnitTesting)
+			{
+				var registeredCourses = _context.registeredClasses
+					.Where(rc => rc.accountID == account!.ID)
+					.Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+					{
+						ID = c.ID,
+						CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+						CourseName = c.CourseName,
+						Room = c.Room,
+						StartTime = c.StartTime,
+						EndTime = c.EndTime,
+						Days = c.Days,
+						tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+						color = c.color,
+						hours = c.hours
+					})
+					.ToList();
+				var assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
+				.Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
+				{
+					Id = c.Id,
+					ClassID = c.ClassID,
+					AssignmentName = c.AssignmentName,
+					DueDate = c.DueDate,
+					PossiblePoints = c.PossiblePoints,
+					Description = c.Description,
+					SubmissionType = c.SubmissionType
+				}).ToList();
+
+
+				foreach (var a in assignments)
+				{
+					a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+				}
+				HttpContext.Session.SetSessionValue("RegisteredCourses", registeredCourses);
+				HttpContext.Session.SetSessionValue("Assignments", assignments);
+			}
+		}
+	}
 }

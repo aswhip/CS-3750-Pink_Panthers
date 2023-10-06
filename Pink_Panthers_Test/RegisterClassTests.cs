@@ -16,7 +16,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task StudentCanRegisterForClass()
         {
-            ProfileController profileController = new ProfileController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			ProfileController profileController = new ProfileController(_context);
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
 
             if(account != null)
@@ -38,8 +40,10 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task StudentCanDropRegisteredClass()
         {
-            //Need to temporarily register for a class
-            ProfileController profileController = new ProfileController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			//Need to temporarily register for a class
+			ProfileController profileController = new ProfileController(_context);
             Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
 
             if (account != null)
@@ -67,7 +71,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task TeacherCannotRegisterForClass()
         {
-            ProfileController profileController = new ProfileController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			ProfileController profileController = new ProfileController(_context);
             Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //ID 5 is test teacher
 
             if (account != null)

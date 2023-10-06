@@ -16,7 +16,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task CanCreateStudentAccount()
         {
-            AccountsController accountsController = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController accountsController = new AccountsController(_context);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -45,7 +47,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task CanCreateTeacherAccount()
         {
-            AccountsController accountsController = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController accountsController = new AccountsController(_context);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -74,7 +78,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task AccountAgeMustBeAtLeast18Years()
         {
-            AccountsController accountsController = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController accountsController = new AccountsController(_context);
             Account newAccount = new Account
             {
                 FirstName = "Unit",
@@ -103,7 +109,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task CannotShareEmail()
         {
-            AccountsController accountsController = new AccountsController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			AccountsController accountsController = new AccountsController(_context);
             Account newAccount = new Account
             {
                 FirstName = "Unit",

@@ -13,13 +13,15 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task TeacherCanCreateClassAsync()
         {
-            ProfileController profileController = new ProfileController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			ProfileController profileController = new ProfileController(_context);
             Class newClass = new Class
             {
                 Room = "NB318",
-                DepartmentCode = "CS",
-                CourseNumber = "1410",
-                CourseName = "Object Oriented Programming",
+                DepartmentCode = "TS",
+                CourseNumber = "9999",
+                CourseName = "UNIT TEST COURSE",
                 monday = true,
                 tuesday = false,
                 wednesday = true,
@@ -47,13 +49,15 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task StudentCannotCreateClass()
         {
-            ProfileController profileController = new ProfileController(_context, true);
+			UnitTestingData.isUnitTesting = true;
+
+			ProfileController profileController = new ProfileController(_context);
             Class newClass = new Class
             {
                 Room = "NB318",
-                DepartmentCode = "CS",
-                CourseNumber = "1410",
-                CourseName = "Object Oriented Programming",
+                DepartmentCode = "TS",
+                CourseNumber = "9999",
+                CourseName = "UNIT TEST COURSE",
                 monday = true,
                 tuesday = false,
                 wednesday = true,

@@ -10,10 +10,9 @@ namespace Pink_Panthers_Project.Controllers
     {
         private readonly Pink_Panthers_ProjectContext _context;
 
-		public classController(Pink_Panthers_ProjectContext context, bool unitTest = false)
+		public classController(Pink_Panthers_ProjectContext context)
         {
             _context = context;
-            UnitTestingData.isUnitTesting = unitTest;
         }
 
 

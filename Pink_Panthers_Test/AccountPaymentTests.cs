@@ -16,7 +16,9 @@ namespace Pink_Panthers_Test
         [TestMethod]
         public async Task CanMakePaymentToAccount()
         {
-            ProfileController profileController = new ProfileController(_context, true);
+            UnitTestingData.isUnitTesting = true;
+
+            ProfileController profileController = new ProfileController(_context);
             Account? account = _context.Account.Where(ac => ac.ID == 1).SingleOrDefault(); //ID 1 is test student
             if (account != null)
                 UnitTestingData._account = account;
