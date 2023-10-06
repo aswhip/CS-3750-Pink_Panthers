@@ -1,11 +1,9 @@
 ﻿using Azure;
-using HttpContextMoq;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Pink_Panthers_Project.Controllers;
 using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
@@ -30,7 +28,6 @@ namespace Pink_Panthers_Test
                 Email = "teststudent@gmail.com",
                 Password = "test1"
             };
-
             controller.Login(loginAccount);
             Assert.IsNotNull(controller.getAccount());
         }
