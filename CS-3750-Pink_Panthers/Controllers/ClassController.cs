@@ -92,6 +92,48 @@ namespace Pink_Panthers_Project.Controllers
 		}
 
         [HttpGet]
+        public IActionResult GradeAssignment(int? id)
+        {
+            if (_account == null)
+                return NotFound();
+
+            ViewBag.isTeacher = _account.isTeacher;
+            //else
+            if (!_account.isTeacher)
+            {
+                return NotFound();
+            }
+
+            StudentSubmission sSub;
+            sSub = _context.StudentSubmissions.Find(id)!;
+            sSub.studentAccount = _context.Account.Find(sSub.AccountID);
+            sSub.currentAssignment = _context.Assignments.Find(sSub.AssignmentID);
+
+            return View(sSub);
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> GradeAssignment([Bind("ID,Grade")]StudentSubmission newGrade)
+		{
+			if (_account == null)
+				return NotFound();
+
+			//else
+			StudentSubmission sSub;
+			sSub = _context.StudentSubmissions.Find(newGrade.ID)!;
+			if(newGrade.Grade != null)
+            {
+                sSub.Grade = newGrade.Grade;
+                _context.StudentSubmissions.Update(sSub);
+                await _context.SaveChangesAsync();
+			    return RedirectToAction("ViewSubmissions", new { assignmentID = sSub.AssignmentID } );
+            }
+
+            ModelState.AddModelError("GradeMustBeEntered", "");
+            return View(sSub);
+		}
+
+		[HttpGet]
         public IActionResult Create()
         {
             ViewBag.isTeacher = _account!.isTeacher;
@@ -194,6 +236,7 @@ namespace Pink_Panthers_Project.Controllers
             {
                 return NotFound();
             }
+            ViewBag.isTeacher = _account.isTeacher;
             var viewSubmissions = new SubmissionsViewModel
             {
                 StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),

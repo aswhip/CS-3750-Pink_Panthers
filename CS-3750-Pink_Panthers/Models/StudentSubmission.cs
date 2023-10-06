@@ -13,6 +13,8 @@ namespace Pink_Panthers_Project.Models
 
 		public string? Submission { get; set; }
 
+		public int? Grade { get; set; }
+
 		[NotMapped]
 		public Assignment? currentAssignment { get; set; }
 		[NotMapped]

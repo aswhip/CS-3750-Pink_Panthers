@@ -208,6 +208,9 @@ namespace Pink_Panthers_Project.Migrations
                     b.Property<int>("AssignmentID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Grade")
+                        .HasColumnType("int");
+
                     b.Property<string>("Submission")
                         .HasColumnType("nvarchar(max)");
 

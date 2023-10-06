@@ -1,0 +1,46 @@
+﻿@model Pink_Panthers_Project.Models.StudentSubmission
+
+@{
+	ViewData["Title"] = "Course";
+}
+
+<div class="container">
+	<div class="row mt-5">
+		<h2>@Model.currentAssignment!.AssignmentName</h2>
+		<br />
+		<h4>@Model.currentAssignment.Description</h4>
+		<br />
+		@{
+			if (ViewData.ModelState.ContainsKey("GradeMustBeEntered"))
+			{
+				<em>Enter a grade before submitting</em>
+				<br />
+				<br />
+			}
+		}
+		<form asp-action="GradeAssignment" method="post">
+			<table>
+				<tr>
+					<th width="200px">Student</th>
+					<th width="200px">Max Points</th>
+					<th>Grade</th>
+				</tr>>
+
+				<tr>
+					@Html.HiddenFor(c => c.ID)
+					<td>@Html.Raw(Model.studentAccount!.FirstName + " " + Model.studentAccount.LastName)</td>
+					<td>@Model.currentAssignment.PossiblePoints</td>
+					<td><input asp-for="Grade" width="30px"/>/@Model.currentAssignment.PossiblePoints</td>
+				</tr>
+			</table>
+
+			<br />
+			<h5>Submission: </h5>
+			<br />
+			<p width="80%" style="border: 2px;">
+				@Model.Submission
+			</p>
+			<input type="submit" class="btn btn-primary" value="Submit Grade" />
+		</form>
+	</div>
+</div>
