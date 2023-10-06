@@ -336,7 +336,7 @@ namespace Pink_Panthers_Project.Controllers
         /// Getters and Setters for the viewModels and account, based on session
         /// </summary>
         /// <returns></returns>
-        public Account getAccount() //Used to set the current account
+        private Account getAccount() //Used to set the current account
         {
 			if (UnitTestingData.isUnitTesting)
 			{
@@ -358,7 +358,7 @@ namespace Pink_Panthers_Project.Controllers
 			}
 		}
 
-        public CourseView getCourseView()
+        private CourseView getCourseView()
         {
             var account = getAccount();
             CourseView viewModel;
