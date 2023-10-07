@@ -57,6 +57,7 @@
 							<th>Points</th>
 							<th>Due Date</th>
 							<th>Submission Type</th>
+							<th>Grade</th>
 							<th>Submissions</th>
 						</tr>
 						@foreach (var assignment in Model?.Assignments!)
@@ -66,7 +67,16 @@
 								<td>@assignment.PossiblePoints</td>
 								<td>@assignment.DueDate.ToString()</td>
 								<td>@assignment.SubmissionType</td>
-								<td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Submit Assignment</a></td>
+								<td>@Model.StudentSubmissions!.Where(c => c.AssignmentID == assignment.Id).Select(c => c.Grade).SingleOrDefault() / @assignment.PossiblePoints</td>
+								@if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
+								{
+									<td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Re-Submit Assignment</a></td>
+								}
+								else
+								{
+									<td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Submit Assignment</a></td>
+
+								}
 							</tr>
 						}
 					</table>

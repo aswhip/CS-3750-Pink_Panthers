@@ -2,16 +2,13 @@
 
 @{
     ViewData["Title"] = "Account";
+    Layout = "_Layout";
     int creditHours = 0;
 }
 
-<!DOCTYPE html>
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
     <div class="container mt-5">
         <div class="row justify-content-center">
 
@@ -89,8 +86,6 @@
             }
         </div>
     </div>
-</body>
-</html>
 
 <script>
     function autoFormatCardNumber(input)

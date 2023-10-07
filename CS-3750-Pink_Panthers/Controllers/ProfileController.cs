@@ -376,7 +376,7 @@ namespace Pink_Panthers_Project.Controllers
                     TeachingCourses = HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses"),
                     RegisteredCourses = HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses"),
                     Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
-                    StudentSubmissions = HttpContext.Session.GetSessionValue<List<int>>("StudentSubmissions"),
+                    StudentSubmissions = HttpContext.Session.GetSessionValue<List<StudentSubmission>>("StudentSubmissions"),
                     Account = account
                 };
             }

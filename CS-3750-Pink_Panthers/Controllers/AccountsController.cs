@@ -72,7 +72,7 @@ namespace Pink_Panthers_Project.Controllers
                         {
                             UpdateRegisteredCourses(loginAccount);
                             UpdateAssignments(loginAccount);
-                            UpdateSubmittedAssignments(loginAccount);
+                            UpdateStudentSubmissions(loginAccount);
                         }
 						HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
 					}
@@ -253,9 +253,9 @@ namespace Pink_Panthers_Project.Controllers
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
             }
         }
-        private void UpdateSubmittedAssignments(Account account)
+        private void UpdateStudentSubmissions(Account account)
         {
-            var studentSubmissions = _context.StudentSubmissions.Where(ss => ss.AccountID == account.ID).Select(ss => ss.AssignmentID).ToList();
+            var studentSubmissions = _context.StudentSubmissions.Where(ss => ss.AccountID == account.ID).ToList();
 
             if (!UnitTestingData.isUnitTesting)
                 HttpContext.Session.SetSessionValue("StudentSubmissions", studentSubmissions);

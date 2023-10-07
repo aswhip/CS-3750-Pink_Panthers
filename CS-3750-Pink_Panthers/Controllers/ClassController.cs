@@ -50,9 +50,10 @@ namespace Pink_Panthers_Project.Controllers
         public IActionResult Assignments(int? id)
         {
             var account = getAccount();
-			var cls = getClass(id);
+			var cls = id != null ? getClass(id) : getClass(); //Gets the class based on id if id != null, otherwise just gets the current active class
+            ViewBag.Class = cls;
 
-			if(account! == null)
+            if (account! == null)
             {
                 return NotFound();
             }
@@ -66,11 +67,14 @@ namespace Pink_Panthers_Project.Controllers
             UpdateAssignments();
             var assignments = getAssignments();
 
-			var viewModel = new ClassViewModel
-			{
-				Class = cls!,
-				Assignments = assignments!,
-				Account = account!
+            var submissions = getStudentSubmissions();
+
+            var viewModel = new ClassViewModel
+            {
+                Class = cls!,
+                Assignments = assignments!,
+                Account = account!,
+                StudentSubmissions = submissions
 			};
 			return View(viewModel);
 		}
@@ -226,8 +230,8 @@ namespace Pink_Panthers_Project.Controllers
                 {
                     await _context.StudentSubmissions.AddAsync(newSubmission!);
                     await _context.SaveChangesAsync();
-                    UpdateSubmittedAssignments();
-                    return RedirectToAction("Index");
+                    UpdateStudentSubmissions();
+                    return RedirectToAction("Assignments");
                 }
                 else
                 {
@@ -235,8 +239,8 @@ namespace Pink_Panthers_Project.Controllers
 					sub!.Submission = newSubmission.Submission;
                     _context.StudentSubmissions.Update(sub);
                     await _context.SaveChangesAsync();
-                    UpdateSubmittedAssignments();
-                    return RedirectToAction("Index");
+                    UpdateStudentSubmissions();
+                    return RedirectToAction("Assignments");
                 }
             }
             else if (ModelState.IsValid && file == null)
@@ -253,7 +257,7 @@ namespace Pink_Panthers_Project.Controllers
             {
 				sub = newSubmission!;
 				sub.AccountID = account!.ID;
-				string fileName = account!.ID + "_" + file.FileName;
+				string fileName = account!.ID + "_" + newSubmission!.AssignmentID + "_" + file.FileName ;
 				string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Submissions", fileName);
                 using(FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
@@ -263,8 +267,8 @@ namespace Pink_Panthers_Project.Controllers
                         sub.Submission = fileName;
                         _context.StudentSubmissions.Add(sub);
                         await _context.SaveChangesAsync();
-                        UpdateSubmittedAssignments();
-                        return RedirectToAction("Index");
+                        UpdateStudentSubmissions();
+                        return RedirectToAction("Assignments");
                     }
                     else
                     {
@@ -273,8 +277,8 @@ namespace Pink_Panthers_Project.Controllers
 						sub.Submission = fileName;
 						_context.StudentSubmissions.Update(sub);
                         await _context.SaveChangesAsync();
-                        UpdateSubmittedAssignments();
-                        return RedirectToAction("Index");
+                        UpdateStudentSubmissions();
+                        return RedirectToAction("Assignments");
                     }
                 }
             }
@@ -286,8 +290,9 @@ namespace Pink_Panthers_Project.Controllers
         {
             var account = getAccount();
             var cls = getClass();
+            ViewBag.Class = cls;
 
-			if (account! == null || cls! == null || !account!.isTeacher)
+            if (account! == null || cls! == null || !account!.isTeacher)
             {
                 return NotFound();
             }
@@ -352,6 +357,12 @@ namespace Pink_Panthers_Project.Controllers
                 return HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments");
             return null;
         }
+        private List<StudentSubmission>? getStudentSubmissions()
+        {
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<StudentSubmission>>("StudentSubmissions")!;
+            return null;
+        }
 
         private void UpdateTeachingCourses()
         {
@@ -389,18 +400,25 @@ namespace Pink_Panthers_Project.Controllers
         {
             var account = getAccount();
             var cls = getClass();
-
-            var assignments = _context.registeredClasses.Where(rc => rc.classID == cls!.ID && rc.accountID == account.ID)
-                .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
-                {
-                    Id = c.Id,
-                    ClassID = c.ClassID,
-                    AssignmentName = c.AssignmentName,
-                    DueDate = c.DueDate,
-                    PossiblePoints = c.PossiblePoints,
-                    Description = c.Description,
-                    SubmissionType = c.SubmissionType
-                }).ToList();
+            List<Assignment> assignments = new List<Assignment>();
+            if (!account.isTeacher)
+            {
+                assignments = _context.registeredClasses.Where(rc => rc.classID == cls!.ID && rc.accountID == account.ID)
+                    .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
+                    {
+                        Id = c.Id,
+                        ClassID = c.ClassID,
+                        AssignmentName = c.AssignmentName,
+                        DueDate = c.DueDate,
+                        PossiblePoints = c.PossiblePoints,
+                        Description = c.Description,
+                        SubmissionType = c.SubmissionType
+                    }).ToList();
+            }
+            else
+            {
+                assignments = _context.Assignments.Where(c => c.ClassID == cls.ID).ToList();
+            }
 
             foreach (var a in assignments)
             {
@@ -411,11 +429,10 @@ namespace Pink_Panthers_Project.Controllers
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
             }
         }
-        private void UpdateSubmittedAssignments()
+        private void UpdateStudentSubmissions()
         {
             var account = getAccount();
-
-            var studentSubmissions = _context.StudentSubmissions.Where(ss => ss.AccountID == account.ID).Select(ss => ss.AssignmentID).ToList();
+            var studentSubmissions = _context.StudentSubmissions.Where(ss => ss.AccountID == account.ID).ToList();
 
             if (!UnitTestingData.isUnitTesting)
                 HttpContext.Session.SetSessionValue("StudentSubmissions", studentSubmissions);
