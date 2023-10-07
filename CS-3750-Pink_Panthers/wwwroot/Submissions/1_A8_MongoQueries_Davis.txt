@@ -1,0 +1,588 @@
+1. List all the orders in the Northwind database. 
+    query: db.orders.find({})
+    results: First and Last only, as the results page is very large
+    {
+        _id: ObjectId("5dc24d63421316888620ca9e"),
+        customer: { CustomerID: 'VINET', CompanyName: 'Vins et alcools Chevalier' },
+        Employee: {
+        EmployeeID: 5,
+        LastName: 'Buchanan',
+        Firstname: 'Steven',
+        Title: 'Sales manager'
+        },
+        OrderDate: ISODate("1996-07-04T00:00:00.000Z"),
+        RequiredDate: ISODate("1996-08-01T00:00:00.000Z"),
+        ShippedDate: ISODate("1996-07-16T00:00:00.000Z"),
+        Freight: 32.38,
+        Shipper: {
+        ShipperID: 3,
+        CompanyName: 'Federal Shipping',
+        Phone: '(503) 555-9931'
+        },
+        ShipName: 'Vins et alcools Chevalier',
+        ShipAddress: "59 rue de l'Abbaye",
+        ShipCity: 'Reims',
+        ShipRegion: '',
+        ShipPostalCode: '51100',
+        ShipCountry: 'France',
+        products: [
+        {
+            ProductID: 11,
+            ProductName: 'Queso Cabrales',
+            UnitPrice: 14,
+            Quantity: 12,
+            Discount: 0
+        },
+        {
+            ProductID: 42,
+            ProductName: 'Singaporean Hokkien Fried Mee',
+            UnitPrice: 9.8,
+            Quantity: 10,
+            Discount: 0
+        },
+        {
+            ProductID: 72,
+            ProductName: 'Queso Cabrales',
+            UnitPrice: 34.8,
+            Quantity: 5,
+            Discount: 0
+        }
+        ]
+  },
+  {
+    _id: ObjectId("5dc381c4acedb56dc700240e"),
+    customer: { CustomerID: 'ERNSH', CompanyName: 'Ernst Handel' },
+    Employee: {
+      EmployeeID: 1,
+      LastName: 'Davolio',
+      FirstName: 'Nancy',
+      Title: 'Senior Sales Representative'
+    },
+    OrderDate: ISODate("1996-07-17T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-14T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-23T00:00:00.000Z"),
+    Freight: 140.51,
+    Shipper: {
+      ShipperID: 1,
+      CompanyName: 'Speedy Express',
+      Phone: '(503) 555-9831'
+    },
+    ShipName: 'Ernst Handel',
+    ShipAddress: 'Kirchgasse 6',
+    ShipCity: 'Graz',
+    ShipRegion: 'NULL',
+    ShipPostalCode: '8010',
+    ShipCountry: 'Austria',
+    products: [
+      {
+        ProductID: 2,
+        ProductName: 'Chang',
+        UnitPrice: 19,
+        Quantity: 50,
+        Discount: 0.2
+      },
+      {
+        ProductID: 5,
+        ProductName: "Chef Anton's Gumbo Mix",
+        UnitPrice: 21.35,
+        Quantity: 65,
+        Discount: 0.2
+      },
+      {
+        ProductID: 32,
+        ProductName: 'Mascarpone Fabioli',
+        UnitPrice: 32,
+        Quantity: 6,
+        Discount: 0.2
+      }
+    ]
+  }
+
+2. List all the orders placed by the customer with customer id: "VICTE"
+    query: db.orders.find({"customer.CustomerID" : "VICTE"})
+    
+    results:
+        {
+    _id: ObjectId("5dc38196002dcba7dc0f5fd1"),
+    customer: { CustomerID: 'VICTE', CompanyName: 'Victuailles en stock' },
+    Employee: {
+      EmployeeID: 3,
+      LastName: 'Leverling',
+      FirstName: 'Janet',
+      Title: 'Senior Sales Representative'
+    },
+    OrderDate: ISODate("1996-07-08T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-05T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-15T00:00:00.000Z"),
+    Freight: 41.34,
+    Shipper: {
+      ShipperID: 1,
+      CompanyName: 'Speedy Express',
+      Phone: '(503) 555-9831'
+    },
+    ShipName: 'Victuailles en stock',
+    ShipAddress: '2, rue du Commerce',
+    ShipCity: 'Lyon',
+    ShipRegion: 'NULL',
+    ShipPostalCode: '69004',
+    ShipCountry: 'France',
+    products: [
+      {
+        ProductID: 22,
+        ProductName: "Gustaf's Knäckebröd",
+        UnitPrice: 21,
+        Quantity: 6,
+        Discount: 0.05
+      },
+      {
+        ProductID: 57,
+        ProductName: 'Ravioli Angelo',
+        UnitPrice: 19.5,
+        Quantity: 15,
+        Discount: 0.05
+      },
+      {
+        ProductID: 65,
+        ProductName: 'Louisiana Fiery Hot Pepper Sauce',
+        UnitPrice: 21.05,
+        Quantity: 20,
+        Discount: 0
+      }
+    ]
+  }
+
+3. List all the orders served by the employee with the last name "Buchanan". 
+    query: db.orders.find({"Employee.LastName" : "Buchanan"})
+    results:
+    {
+    _id: ObjectId("5dc24d63421316888620ca9e"),
+    customer: { CustomerID: 'VINET', CompanyName: 'Vins et alcools Chevalier' },
+    Employee: {
+      EmployeeID: 5,
+      LastName: 'Buchanan',
+      Firstname: 'Steven',
+      Title: 'Sales manager'
+    },
+    OrderDate: ISODate("1996-07-04T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-01T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-16T00:00:00.000Z"),
+    Freight: 32.38,
+    Shipper: {
+      ShipperID: 3,
+      CompanyName: 'Federal Shipping',
+      Phone: '(503) 555-9931'
+    },
+    ShipName: 'Vins et alcools Chevalier',
+    ShipAddress: "59 rue de l'Abbaye",
+    ShipCity: 'Reims',
+    ShipRegion: '',
+    ShipPostalCode: '51100',
+    ShipCountry: 'France',
+    products: [
+      {
+        ProductID: 11,
+        ProductName: 'Queso Cabrales',
+        UnitPrice: 14,
+        Quantity: 12,
+        Discount: 0
+      },
+      {
+        ProductID: 42,
+        ProductName: 'Singaporean Hokkien Fried Mee',
+        UnitPrice: 9.8,
+        Quantity: 10,
+        Discount: 0
+      },
+      {
+        ProductID: 72,
+        ProductName: 'Queso Cabrales',
+        UnitPrice: 34.8,
+        Quantity: 5,
+        Discount: 0
+      }
+    ]
+  },
+  {
+    _id: ObjectId("5dc381a9ed31e98bb6a04b74"),
+    customer: { CustomerID: 'CHOPS', CompanyName: 'Chop-suey Chinese' },
+    Employee: {
+      EmployeeID: 5,
+      LastName: 'Buchanan',
+      FirstName: 'Steven',
+      Title: 'Sales Manager'
+    },
+    OrderDate: ISODate("1996-07-11T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-08T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-23T00:00:00.000Z"),
+    Freight: 22.98,
+    Shipper: {
+      ShipperID: 2,
+      CompanyName: 'United Package',
+      Phone: '(503) 555-3199'
+    },
+    ShipName: 'Chop-suey Chinese',
+    ShipAddress: 'Hauptstr. 31',
+    ShipCity: 'Bern',
+    ShipRegion: 'NULL',
+    ShipPostalCode: '3012',
+    ShipCountry: 'Switzerland',
+    products: [
+      {
+        ProductID: 24,
+        ProductName: 'Guaraná Fantástica',
+        UnitPrice: 4.5,
+        Quantity: 15,
+        Discount: 0.15
+      },
+      {
+        ProductID: 55,
+        ProductName: 'Pâté chinois',
+        UnitPrice: 26.4,
+        Quantity: 21,
+        Discount: 0.15
+      },
+      {
+        ProductID: 74,
+        ProductName: 'Longlife Tofu',
+        UnitPrice: 10,
+        Quantity: 21,
+        Discount: 0
+      }
+    ]
+  }
+
+4. List all the orders either served by the employee with the last name "Buchanan" or served by the shipper "Federal Shipping". 
+    query: db.orders.find({ $or: [{"Employee.LastName" : "Buchanan"}, {"Shipper.CompanyName" : "Federal Shipping"}]})
+    
+    results: First and last only to save space
+    {
+    _id: ObjectId("5dc24d63421316888620ca9e"),
+    customer: { CustomerID: 'VINET', CompanyName: 'Vins et alcools Chevalier' },
+    Employee: {
+      EmployeeID: 5,
+      LastName: 'Buchanan',
+      Firstname: 'Steven',
+      Title: 'Sales manager'
+    },
+    OrderDate: ISODate("1996-07-04T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-01T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-16T00:00:00.000Z"),
+    Freight: 32.38,
+    Shipper: {
+      ShipperID: 3,
+      CompanyName: 'Federal Shipping',
+      Phone: '(503) 555-9931'
+    },
+    ShipName: 'Vins et alcools Chevalier',
+    ShipAddress: "59 rue de l'Abbaye",
+    ShipCity: 'Reims',
+    ShipRegion: '',
+    ShipPostalCode: '51100',
+    ShipCountry: 'France',
+    products: [
+      {
+        ProductID: 11,
+        ProductName: 'Queso Cabrales',
+        UnitPrice: 14,
+        Quantity: 12,
+        Discount: 0
+      },
+      {
+        ProductID: 42,
+        ProductName: 'Singaporean Hokkien Fried Mee',
+        UnitPrice: 9.8,
+        Quantity: 10,
+        Discount: 0
+      },
+      {
+        ProductID: 72,
+        ProductName: 'Queso Cabrales',
+        UnitPrice: 34.8,
+        Quantity: 5,
+        Discount: 0
+      }
+    ]
+  },
+  {
+    _id: ObjectId("5dc381bd863cda0ce13b0f09"),
+    customer: { CustomerID: 'HILAA', CompanyName: 'HILARION-Abastos' },
+    Employee: {
+      EmployeeID: 4,
+      LastName: 'Peacock',
+      FirstName: 'Margaret',
+      Title: 'Senior Sales Representative'
+    },
+    OrderDate: ISODate("1996-07-16T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-13T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-22T00:00:00.000Z"),
+    Freight: 81.91,
+    Shipper: {
+      ShipperID: 3,
+      CompanyName: 'Federal Shipping',
+      Phone: '(503) 555-9931'
+    },
+    ShipName: 'HILARION-Abastos',
+    ShipAddress: 'Carrera 22 con Ave. Carlos Soublette #8-35',
+    ShipCity: 'San Cristóbal',
+    ShipRegion: 'Táchira',
+    ShipPostalCode: '5022',
+    ShipCountry: 'Venezuela',
+    products: [
+      {
+        ProductID: 27,
+        ProductName: 'Schoggi Schokolade',
+        UnitPrice: 43.9,
+        Quantity: 25,
+        Discount: 0
+      },
+      {
+        ProductID: 39,
+        ProductName: 'Chartreuse verte',
+        UnitPrice: 18,
+        Quantity: 6,
+        Discount: 0
+      },
+      {
+        ProductID: 77,
+        ProductName: 'Original Frankfurter grüne Soße',
+        UnitPrice: 13,
+        Quantity: 15,
+        Discount: 0
+      }
+    ]
+  }
+
+5. List customer id and company name for orders that were shipped by "Federal Shipping". 
+    query: db.orders.find({"Shipper.CompanyName" : "Federal Shipping"}, {"customer.CustomerID": 1, "customer.CompanyName": 1, "_id": 0})
+
+    results:
+  {
+    customer: { CustomerID: 'VINET', CompanyName: 'Vins et alcools Chevalier' }
+  },
+  {
+    customer: { CustomerID: 'RICSU', CompanyName: 'Richter Supermarkt' }
+  },
+  {
+    customer: { CustomerID: 'HILAA', CompanyName: 'HILARION-Abastos' }
+  }
+
+6. List ObjectID of order,  order-date, required-date, shipping date and shipper name for all the orders that are 
+   placed prior to 1997 
+   (note because this is a date you need to use ISODateLinks to an external site.("1997-01-01T00:00:00.000+00:00") to compare the less than value).
+
+   query: db.orders.find({"OrderDate" : { $lt: ISODate("1997-01-01T00:00:00.000+00:00")} }, {"_id" : 1, "OrderDate": 1, "RequiredDate": 1, "ShippedDate": 1, "Shipper.CompanyName": 1})
+
+    results: First and Last 2 only
+    {
+    _id: ObjectId("5dc24d63421316888620ca9e"),
+    OrderDate: ISODate("1996-07-04T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-01T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-16T00:00:00.000Z"),
+    Shipper: { CompanyName: 'Federal Shipping' }
+  },
+  {
+    _id: ObjectId("5dc38186d8c81e5812a4d702"),
+    OrderDate: ISODate("1996-07-05T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-16T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-10T00:00:00.000Z"),
+    Shipper: { CompanyName: 'Speedy Express' }
+  },
+  
+  {
+    _id: ObjectId("5dc381bd863cda0ce13b0f09"),
+    OrderDate: ISODate("1996-07-16T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-13T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-22T00:00:00.000Z"),
+    Shipper: { CompanyName: 'Federal Shipping' }
+  },
+  {
+    _id: ObjectId("5dc381c4acedb56dc700240e"),
+    OrderDate: ISODate("1996-07-17T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-14T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-23T00:00:00.000Z"),
+    Shipper: { CompanyName: 'Speedy Express' }
+  }
+
+7. List customer id and company name of all the customers who ordered the product with the product name "Louisiana Fiery Hot Pepper Sauce".
+    query: db.orders.find({"products.ProductName": { $all: ["Louisiana Fiery Hot Pepper Sauce"] }}, {"customer.CustomerID" : 1, "customer.CompanyName" : 1, "_id": 0})
+
+    results: 
+  { customer: { CustomerID: 'HANAR', CompanyName: 'Hanari Carnes' } },
+  {
+    customer: { CustomerID: 'VICTE', CompanyName: 'Victuailles en stock' }
+  }
+
+8. List CustomerID and Company Name of customer for all the orders with freight value greater than 50.
+    query: db.orders.find({"Freight": { $gt: 50}}, {"customer.CustomerID" : 1, "customer.CompanyName" : 1, "_id" : 0})
+
+    results:
+    { customer: { CustomerID: 'HANAR', CompanyName: 'Hanari Carnes' } },
+  {
+    customer: { CustomerID: 'SUPRD', CompanyName: 'Suprêmes délices' }
+  },
+  { customer: { CustomerID: 'HANAR', CompanyName: 'Hanari Carnes' } },
+  {
+    customer: { CustomerID: 'RICSU', CompanyName: 'Richter Supermarkt' }
+  },
+  {
+    customer: { CustomerID: 'HILAA', CompanyName: 'HILARION-Abastos' }
+  },
+  { customer: { CustomerID: 'ERNSH', CompanyName: 'Ernst Handel' } }
+
+9. Consider following select query in SQL. select * from Orders
+    inner join [Order Details] on Orders.OrderID = [Order Details].OrderID
+    inner join Products on Products.ProductID = [Order Details].ProductID
+    where ProductName = 'Chang'. Write an equivalent Mongo query for the given database.  
+
+    query: db.orders.find({"products.ProductName" : "Chang"})
+
+    results:
+    {
+    _id: ObjectId("5dc381ae69b483768c8c741c"),
+    customer: { CustomerID: 'RICSU', CompanyName: 'Richter Supermarkt' },
+    Employee: {
+      EmployeeID: 9,
+      LastName: 'Dodsworth',
+      FirstName: 'Anne',
+      Title: 'Sales Representative'
+    },
+    OrderDate: ISODate("1996-07-12T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-09T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-15T00:00:00.000Z"),
+    Freight: 148.33,
+    Shipper: {
+      ShipperID: 3,
+      CompanyName: 'Federal Shipping',
+      Phone: '(503) 555-9931'
+    },
+    ShipName: 'Richter Supermarkt',
+    ShipAddress: 'Starenweg 5',
+    ShipCity: 'Genève',
+    ShipRegion: 'NULL',
+    ShipPostalCode: '1204',
+    ShipCountry: 'Switzerland',
+    products: [
+      {
+        ProductID: 2,
+        ProductName: 'Chang',
+        UnitPrice: 19,
+        Quantity: 20,
+        Discount: 0
+      },
+      {
+        ProductID: 16,
+        ProductName: 'Pavlova',
+        UnitPrice: 17.45,
+        Quantity: 35,
+        Discount: 0
+      },
+      {
+        ProductID: 36,
+        ProductName: 'Inlagd Sill',
+        UnitPrice: 19,
+        Quantity: 25,
+        Discount: 0
+      },
+      {
+        ProductID: 59,
+        ProductName: 'Raclette Courdavault',
+        UnitPrice: 55,
+        Quantity: 30,
+        Discount: 0
+      }
+    ]
+  },
+  {
+    _id: ObjectId("5dc381c4acedb56dc700240e"),
+    customer: { CustomerID: 'ERNSH', CompanyName: 'Ernst Handel' },
+    Employee: {
+      EmployeeID: 1,
+      LastName: 'Davolio',
+      FirstName: 'Nancy',
+      Title: 'Senior Sales Representative'
+    },
+    OrderDate: ISODate("1996-07-17T00:00:00.000Z"),
+    RequiredDate: ISODate("1996-08-14T00:00:00.000Z"),
+    ShippedDate: ISODate("1996-07-23T00:00:00.000Z"),
+    Freight: 140.51,
+    Shipper: {
+      ShipperID: 1,
+      CompanyName: 'Speedy Express',
+      Phone: '(503) 555-9831'
+    },
+    ShipName: 'Ernst Handel',
+    ShipAddress: 'Kirchgasse 6',
+    ShipCity: 'Graz',
+    ShipRegion: 'NULL',
+    ShipPostalCode: '8010',
+    ShipCountry: 'Austria',
+    products: [
+      {
+        ProductID: 2,
+        ProductName: 'Chang',
+        UnitPrice: 19,
+        Quantity: 50,
+        Discount: 0.2
+      },
+      {
+        ProductID: 5,
+        ProductName: "Chef Anton's Gumbo Mix",
+        UnitPrice: 21.35,
+        Quantity: 65,
+        Discount: 0.2
+      },
+      {
+        ProductID: 32,
+        ProductName: 'Mascarpone Fabioli',
+        UnitPrice: 32,
+        Quantity: 6,
+        Discount: 0.2
+      }
+    ]
+  }
+
+
+10: Consider the following select query in SQL. select * from Orders
+    inner join [Order Details] on Orders.OrderID = [Order Details].OrderID
+    inner join Products on Products.ProductID = [Order Details].ProductID
+    inner join Shippers on Shippers.ShipperID = Orders.ShipVia
+    where ProductName = 'Chang' or Shippers.CompanyName = 'Federal Shipping'. 
+    Write an equivalent Mongo query for the given database. Show the Project Names and Shipper Names in the results.
+
+    query: 
+    db.orders.find({ $or: [{"products.ProductName" : "Chang"}, {"Shipper.CompanyName" : "Federal Shipping"}]}, {"_id":0, "products.ProductName":1, "Shipper.CompanyName":1})
+
+    results:
+    {
+    Shipper: { CompanyName: 'Federal Shipping' },
+    products: [
+      { ProductName: 'Queso Cabrales' },
+      { ProductName: 'Singaporean Hokkien Fried Mee' },
+      { ProductName: 'Queso Cabrales' }
+    ]
+  },
+  {
+    Shipper: { CompanyName: 'Federal Shipping' },
+    products: [
+      { ProductName: 'Chang' },
+      { ProductName: 'Pavlova' },
+      { ProductName: 'Inlagd Sill' },
+      { ProductName: 'Raclette Courdavault' }
+    ]
+  },
+  {
+    Shipper: { CompanyName: 'Federal Shipping' },
+    products: [
+      { ProductName: 'Schoggi Schokolade' },
+      { ProductName: 'Chartreuse verte' },
+      { ProductName: 'Original Frankfurter grüne Soße' }
+    ]
+  },
+  {
+    Shipper: { CompanyName: 'Speedy Express' },
+    products: [
+      { ProductName: 'Chang' },
+      { ProductName: "Chef Anton's Gumbo Mix" },
+      { ProductName: 'Mascarpone Fabioli' }
+    ]
+  }

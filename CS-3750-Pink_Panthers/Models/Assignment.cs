@@ -19,7 +19,7 @@ namespace Pink_Panthers_Project.Models
 		public DateTime DueDate { get; set; }
 
         [NotMapped]
-        public string? className;
+		public string? className { get; set; }
 
 
 		[Required(ErrorMessage = "Please provide a number")]

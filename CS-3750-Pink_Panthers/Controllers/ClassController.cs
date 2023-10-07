@@ -3,6 +3,7 @@ using Pink_Panthers_Project.Data;
 using Pink_Panthers_Project.Models;
 using Pink_Panthers_Project.Util;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -14,7 +15,6 @@ namespace Pink_Panthers_Project.Controllers
         {
             _context = context;
         }
-
 
         public IActionResult Index()
         {
@@ -31,28 +31,13 @@ namespace Pink_Panthers_Project.Controllers
 
             if (account!.isTeacher)
             {
-                tCourses = _context.Class.Where(c => c.accountID == account!.ID).ToList();
+                tCourses = getTeacherClasses()!;
             }
             else if (!account!.isTeacher)
             {
-                sCourses = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
-                    .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
-                    {
-                        ID = c.ID,
-                        DepartmentCode = c.DepartmentCode,
-                        CourseNumber = c.CourseNumber,
-                        CourseName = c.CourseName,
-                        Room = c.Room,
-                        StartTime = c.StartTime,
-                        EndTime = c.EndTime,
-                        Days = c.Days,
-                        tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                        color = c.color,
-                        hours = c.hours
-                    }).ToList();
+                sCourses = getStudentClasses()!;
             }
             
-
             var viewModel = new CourseView
             {
                 TeachingCourses = tCourses,
@@ -78,12 +63,13 @@ namespace Pink_Panthers_Project.Controllers
 
 			ViewBag.isTeacher = account!.isTeacher;
 
-			var assignments = _context.Assignments.Where(a => a.ClassID == cls!.ID);
+            UpdateAssignments();
+            var assignments = getAssignments();
 
 			var viewModel = new ClassViewModel
 			{
 				Class = cls!,
-				Assignments = assignments.ToList(),
+				Assignments = assignments!,
 				Account = account!
 			};
 			return View(viewModel);
@@ -128,7 +114,8 @@ namespace Pink_Panthers_Project.Controllers
                 sSub.Grade = newGrade.Grade;
                 _context.StudentSubmissions.Update(sSub);
                 await _context.SaveChangesAsync();
-			    return RedirectToAction("ViewSubmissions", new { assignmentID = sSub.AssignmentID } );
+
+				return RedirectToAction("ViewSubmissions", new { assignmentID = sSub.AssignmentID } );
             }
 
             ModelState.AddModelError("GradeMustBeEntered", "");
@@ -155,7 +142,7 @@ namespace Pink_Panthers_Project.Controllers
             }
 		}
         [HttpPost]
-        public IActionResult CreateAssignment([Bind("clsID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignment)
+        public async Task<IActionResult> CreateAssignment([Bind("clsID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignment)
         {
             var account = getAccount();
 
@@ -169,8 +156,11 @@ namespace Pink_Panthers_Project.Controllers
 			if (ModelState.IsValid)
             {
                 assignment.DueDate = assignment.DueDate.AddHours(23).AddMinutes(59).AddSeconds(59);
-				_context.Add(assignment);
-				_context.SaveChanges();
+				await _context.AddAsync(assignment);
+				await _context.SaveChangesAsync();
+
+                UpdateAssignments();
+
 				return RedirectToAction("Index", new { id = assignment.ClassID});
 			}
             else
@@ -236,6 +226,8 @@ namespace Pink_Panthers_Project.Controllers
                 {
                     await _context.StudentSubmissions.AddAsync(newSubmission!);
                     await _context.SaveChangesAsync();
+                    UpdateSubmittedAssignments();
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -243,6 +235,8 @@ namespace Pink_Panthers_Project.Controllers
 					sub!.Submission = newSubmission.Submission;
                     _context.StudentSubmissions.Update(sub);
                     await _context.SaveChangesAsync();
+                    UpdateSubmittedAssignments();
+                    return RedirectToAction("Index");
                 }
             }
             else if (ModelState.IsValid && file == null)
@@ -268,6 +262,9 @@ namespace Pink_Panthers_Project.Controllers
                         await file.CopyToAsync(fs);
                         sub.Submission = fileName;
                         _context.StudentSubmissions.Add(sub);
+                        await _context.SaveChangesAsync();
+                        UpdateSubmittedAssignments();
+                        return RedirectToAction("Index");
                     }
                     else
                     {
@@ -275,14 +272,14 @@ namespace Pink_Panthers_Project.Controllers
 						await file.CopyToAsync(fs);
 						sub.Submission = fileName;
 						_context.StudentSubmissions.Update(sub);
-					}
-					await _context.SaveChangesAsync();
-
-					return RedirectToAction("Index");
-				}
-			}
-			return BadRequest("File not Found");
-		}
+                        await _context.SaveChangesAsync();
+                        UpdateSubmittedAssignments();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return BadRequest("Invalid File Submitted.");
+        }
 
         [HttpGet]
         public IActionResult ViewSubmissions(int assignmentID)
@@ -325,7 +322,6 @@ namespace Pink_Panthers_Project.Controllers
                 HttpContext.Session.SetSessionValue("CurrentClass", cCls);
             }
             return HttpContext.Session.GetSessionValue<Class>("CurrentClass")!;
-
 		}
 
 		private Account getAccount() //Used to set the current account
@@ -335,7 +331,94 @@ namespace Pink_Panthers_Project.Controllers
 				return UnitTestingData._account!;
 			}
 			return HttpContext.Session.GetSessionValue<Account>("LoggedInAccount")!;
-
 		}
-	}
+
+        private List<Class>? getStudentClasses()
+        {
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses")!;
+
+            return null;
+		}
+        private List<Class>? getTeacherClasses()
+        {
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses")!;
+            return null;
+        }
+        private List<Assignment>? getAssignments()
+        {
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments");
+            return null;
+        }
+
+        private void UpdateTeachingCourses()
+        {
+            var account = getAccount();
+			var tCourses = _context.Class.Where(c => c.accountID == account!.ID).ToList();
+
+            if (!UnitTestingData.isUnitTesting)
+                HttpContext.Session.SetSessionValue("TeachingCourses", tCourses);
+		}
+        private void UpdateRegisteredCourses()
+        {
+            var account = getAccount();
+
+			var sCourses = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
+				   .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+				   {
+					   ID = c.ID,
+					   DepartmentCode = c.DepartmentCode,
+					   CourseNumber = c.CourseNumber,
+					   CourseName = c.CourseName,
+					   Room = c.Room,
+					   StartTime = c.StartTime,
+					   EndTime = c.EndTime,
+					   Days = c.Days,
+					   tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
+					   color = c.color,
+					   hours = c.hours
+				   }).ToList();
+            if (!UnitTestingData.isUnitTesting)
+            {
+                HttpContext.Session.SetSessionValue("RegisteredCourses", sCourses);
+            }
+		}
+        private void UpdateAssignments()
+        {
+            var account = getAccount();
+            var cls = getClass();
+
+            var assignments = _context.registeredClasses.Where(rc => rc.classID == cls!.ID && rc.accountID == account.ID)
+                .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
+                {
+                    Id = c.Id,
+                    ClassID = c.ClassID,
+                    AssignmentName = c.AssignmentName,
+                    DueDate = c.DueDate,
+                    PossiblePoints = c.PossiblePoints,
+                    Description = c.Description,
+                    SubmissionType = c.SubmissionType
+                }).ToList();
+
+            foreach (var a in assignments)
+            {
+                a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+            }
+            if (!UnitTestingData.isUnitTesting)
+            {
+                HttpContext.Session.SetSessionValue("Assignments", assignments);
+            }
+        }
+        private void UpdateSubmittedAssignments()
+        {
+            var account = getAccount();
+
+            var studentSubmissions = _context.StudentSubmissions.Where(ss => ss.AccountID == account.ID).Select(ss => ss.AssignmentID).ToList();
+
+            if (!UnitTestingData.isUnitTesting)
+                HttpContext.Session.SetSessionValue("StudentSubmissions", studentSubmissions);
+        }
+    }
 }

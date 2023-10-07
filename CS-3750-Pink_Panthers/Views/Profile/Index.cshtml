@@ -70,15 +70,18 @@
                         <div class="to-do-header">To-Do List</div>
                         @foreach (var assignment in Model.Assignments!)
                         {
-                            <a class="no-decoration" asp-controller="Class" asp-action="ToDoListClick" asp-route-assignmentID="@assignment.Id">
-                                <div class="clickable to-do-card">
-                                    <div class="">
-                                        <b>@assignment.className</b><br />
-                                        Assignment: @assignment.AssignmentName<br />
-                                        Due: @assignment.DueDate
+                            if (!Model.StudentSubmissions!.Contains(assignment.Id))
+                            {
+                                <a class="no-decoration" asp-controller="Class" asp-action="ToDoListClick" asp-route-assignmentID="@assignment.Id">
+                                    <div class="clickable to-do-card">
+                                        <div class="">
+                                            <b>@assignment.className</b><br />
+                                            Assignment: @assignment.AssignmentName<br />
+                                            Due: @assignment.DueDate
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            }
                         }
                     </div>
                 </div>
