@@ -128,7 +128,7 @@ a.no-decoration:hover {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     padding: 5px 30px 5px 5px;
-    width: 200px;
+    width: 150px;
     cursor: pointer;
     background: white url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right center;
     background-size: 20px;

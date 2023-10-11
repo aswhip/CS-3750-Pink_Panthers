@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Register for Class";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <h1>Class List</h1>
 
-<div>
+<div style="display: flex; justify-content: space-between; max-width: 400px;">
     <select id="departmentCodeFilter" class="custom-select">
-        <option value="">Department Code</option>
+        <option value="">Department</option>
         <option value="ACTG">ACTG</option>
         <option value="AERO">AERO</option>
         <option value="ANTH">ANTH</option>
@@ -137,7 +138,8 @@
         <option value="ZOOL">ZOOL</option>
     </select>
     <input class="keyword" type="text" id="classFilterKeyword" placeholder="Keyword" />
-    <button id="filterButton" onclick="filterClasses()" class="btn btn-primary" style="height:36px;">Filter</button>
+    <button id="filterButton" onclick="filterClasses()" class="btn btn-primary" style="height:36px; margin-left: 10px;">
+        <i class="fas fa-filter"></i></button>
 </div>
 
 <table class="table">
@@ -199,9 +201,7 @@
     }
 }
 
-<script>
-
-    function filterClasses() {
+<script>function filterClasses() {
         var keyword = document.getElementById("classFilterKeyword").value.toUpperCase();
         var departmentCode = document.getElementById("departmentCodeFilter").value.toUpperCase();
 
