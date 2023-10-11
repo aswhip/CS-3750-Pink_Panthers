@@ -210,12 +210,17 @@
 
         for (var i = 1; i < tr.length; i++) {
             var courseName = tr[i].getElementsByTagName("td")[4].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+            var courseNumber = tr[i].getElementsByTagName("td")[3].textContent || tr[i].getElementsByTagName("td")[3].innerText;
             var courseDepartmentCode = tr[i].getElementsByTagName("td")[2].textContent || tr[i].getElementsByTagName("td")[2].innerText;
 
             var showRow = true;
 
             if (keyword && !courseName.toUpperCase().includes(keyword)) {
                 showRow = false;
+            }
+
+            if (keyword && courseNumber.toUpperCase().includes(keyword)) {
+                showRow = true;
             }
 
             if (departmentCode && departmentCode !== courseDepartmentCode) {
