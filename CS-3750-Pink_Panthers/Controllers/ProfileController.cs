@@ -160,7 +160,7 @@ namespace Pink_Panthers_Project.Controllers
             }
 
             return NotFound();
-        }
+        } 
 
         [HttpPost]
         public async Task<IActionResult> Register(int classId)
@@ -210,6 +210,7 @@ namespace Pink_Panthers_Project.Controllers
             // Redirect back to the class list page
             return RedirectToAction("Index");
         }
+
 
         /// <summary>
         /// GET

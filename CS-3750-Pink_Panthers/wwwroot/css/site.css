@@ -65,22 +65,6 @@ body {
     border-top-right-radius: 10px !important;
 }
 
-.card-header-course1 {
-    background-color: #54b4c4; 
-}
-
-.card-header-course2 {
-    background-color: #2f0ba3; 
-}
-
-.card-header-course3 {
-    background-color: #b0339b; 
-}
-
-.card-header-course4 {
-    background-color: #27b34f; 
-}
-
 .card-body {
     font-size: 15pt;
 }
@@ -133,4 +117,42 @@ a.no-decoration:hover {
     text-decoration: none;
     color: inherit;
 }
+
+.custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid #ccc;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 5px 30px 5px 5px;
+    width: 200px;
+    cursor: pointer;
+    background: white url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right center;
+    background-size: 20px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.keyword {
+    border: 1px solid #ccc;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 30px 5px 5px;
+    width: 200px;
+    cursor: pointer;
+    background: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+select {
+    max-height: 100px; /* Adjust this value to your preference */
+    overflow: auto;
+}
+
 
