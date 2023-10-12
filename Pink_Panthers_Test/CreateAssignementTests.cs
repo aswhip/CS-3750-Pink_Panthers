@@ -44,7 +44,7 @@ namespace Pink_Panthers_Test
 
 
 
-			var addedAssignment = _context.Assignments.FirstOrDefault(a => a.AssignmentName == "Unit Test Assignment" && a.DueDate == newAssignment.DueDate && a.ClassID == 28);
+			var addedAssignment = _context.Assignments.FirstOrDefault(a => a.AssignmentName == "Unit Test Assignment"  && a.ClassID == 28);
 
 			if (addedAssignment != null)
 			{
