@@ -464,18 +464,31 @@ namespace Pink_Panthers_Project.Controllers
             return null;
         }
 
-        private void UpdateTeachingCourses()
-        {
+		private void UpdateTeachingCourses()
+		{
             var account = getAccount();
-			var tCourses = _context.Class.Where(c => c.accountID == account!.ID).ToList();
-
-            if (!UnitTestingData.isUnitTesting)
-                HttpContext.Session.SetSessionValue("TeachingCourses", tCourses);
+			if (!UnitTestingData.isUnitTesting)
+			{
+				var teachingCourses = _context.teachingClasses.Where(tc => tc.accountID == account!.ID)
+					.Join(_context.Class, tc => tc.classID, c => c.ID, (tc, c) => new Class
+					{
+						ID = c.ID,
+						CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+						CourseName = c.CourseName,
+						Room = c.Room,
+						StartTime = c.StartTime,
+						EndTime = c.EndTime,
+						Days = c.Days,
+						color = c.color,
+						hours = c.hours
+					})
+							.ToList();
+				HttpContext.Session.SetSessionValue("TeachingCourses", teachingCourses);
+			}
 		}
-        private void UpdateRegisteredCourses()
-        {
+		private void UpdateRegisteredCourses()
+		{
             var account = getAccount();
-
 			var sCourses = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
 				   .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
 				   {
@@ -487,16 +500,25 @@ namespace Pink_Panthers_Project.Controllers
 					   StartTime = c.StartTime,
 					   EndTime = c.EndTime,
 					   Days = c.Days,
-					   tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
 					   color = c.color,
 					   hours = c.hours
 				   }).ToList();
-            if (!UnitTestingData.isUnitTesting)
-            {
-                HttpContext.Session.SetSessionValue("RegisteredCourses", sCourses);
-            }
+
+			foreach (var c in sCourses)
+			{
+				c.tName = _context.teachingClasses.Where(tc => tc.classID == c.ID)
+						.Join(_context.Account, tc => tc.accountID, a => a.ID, (tc, a) => new Account
+						{
+							FirstName = a.FirstName,
+							LastName = a.LastName
+						}).Select(c => c.FirstName + " " + c.LastName).SingleOrDefault()!;
+			}
+			if (!UnitTestingData.isUnitTesting)
+			{
+				HttpContext.Session.SetSessionValue("RegisteredCourses", sCourses);
+			}
 		}
-        private void UpdateAssignments()
+		private void UpdateAssignments()
         {
             var account = getAccount();
 

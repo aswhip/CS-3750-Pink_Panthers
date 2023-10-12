@@ -9,6 +9,6 @@ namespace Pink_Panthers_Project.Models
         public int classID { get; set; }
 
         [NotMapped]
-        public Account Account { get; set; }
+        public Account? Account { get; set; }
     }
 }

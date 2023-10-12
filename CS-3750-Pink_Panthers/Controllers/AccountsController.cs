@@ -117,6 +117,10 @@ namespace Pink_Panthers_Project.Controllers
 						{
 							HttpContext.Session.SetSessionValue("LoggedInAccount", account);
 						}
+                        UpdateRegisteredCourses(account);
+                        UpdateTeachingCourses(account);
+                        UpdateAssignments(account);
+                        UpdateStudentSubmissions(account);
 						return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
                     }
                     else
@@ -189,9 +193,8 @@ namespace Pink_Panthers_Project.Controllers
 		{
 			if (!UnitTestingData.isUnitTesting)
 			{
-				var teachingCourses = _context.Class
-							.Where(c => c.accountID == account!.ID)
-							.Select(c => new Class
+				var teachingCourses = _context.teachingClasses.Where(tc => tc.accountID == account!.ID)
+                    .Join(_context.Class, tc => tc.classID, c => c.ID, (tc, c) => new Class
 							{
 								ID = c.ID,
 								CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
@@ -221,10 +224,19 @@ namespace Pink_Panthers_Project.Controllers
                        StartTime = c.StartTime,
                        EndTime = c.EndTime,
                        Days = c.Days,
-                       tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
                        color = c.color,
                        hours = c.hours
                    }).ToList();
+
+            foreach(var c in sCourses)
+            {
+				c.tName = _context.teachingClasses.Where(tc => tc.classID == c.ID)
+						.Join(_context.Account, tc => tc.accountID, a => a.ID, (tc, a) => new Account
+						{
+							FirstName = a.FirstName,
+							LastName = a.LastName
+						}).Select(c => c.FirstName + " " + c.LastName).SingleOrDefault()!;
+			}
             if (!UnitTestingData.isUnitTesting)
             {
                 HttpContext.Session.SetSessionValue("RegisteredCourses", sCourses);

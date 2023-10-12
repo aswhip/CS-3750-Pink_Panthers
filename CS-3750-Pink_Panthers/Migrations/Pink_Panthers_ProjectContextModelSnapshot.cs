@@ -218,6 +218,25 @@ namespace Pink_Panthers_Project.Migrations
 
                     b.ToTable("StudentSubmissions");
                 });
+
+            modelBuilder.Entity("Pink_Panthers_Project.Models.TeachingClass", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("accountID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("classID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("teachingClasses");
+                });
 #pragma warning restore 612, 618
         }
     }

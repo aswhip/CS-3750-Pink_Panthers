@@ -22,7 +22,7 @@
 
                         <!-- Display courses for teachers -->
 
-                        @foreach (var course in Model.TeachingCourses!)
+                        @foreach (var course in Model.TeachingCourses)
                         {
 
                             <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
@@ -43,7 +43,7 @@
                     else if (Model != null && !Model.Account!.isTeacher)
                     {
                         <!-- Display courses for students -->
-                        @foreach (var course in Model.RegisteredCourses!)
+                        @foreach (var course in Model.RegisteredCourses)
                         {
                             <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
                                 <a class="no-decoration" asp-controller="Class" asp-action="Assignments" asp-route-id="@course.ID">

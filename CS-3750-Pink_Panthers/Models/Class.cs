@@ -6,7 +6,6 @@ namespace Pink_Panthers_Project.Models
     public class Class
     {
         public int ID { get; set; }
-        public int accountID { get; set; }
         public string? Room { get; set; }
         public string? DepartmentCode { get; set; }
         public string? CourseNumber { get; set; }
@@ -32,8 +31,6 @@ namespace Pink_Panthers_Project.Models
         [NotMapped]
         public bool friday { get; set; }
         [NotMapped]
-        public string? tName { get; set; }
-
-        
+        public string? tName { get; set; }        
     }
 }

@@ -67,11 +67,22 @@ namespace Pink_Panthers_Project.Controllers
                     ModelState.AddModelError("NoDaysSelected", "");
                     return View(newClass);
                 }
-                newClass.accountID = account!.ID;
                 string color = RandomHexColor();
                 newClass.color = color;
-                await _context.AddAsync(newClass);
+                await _context.Class.AddAsync(newClass);
+				await _context.SaveChangesAsync();
+
+				newClass.ID = await _context.Class.OrderBy(c => c.ID).Select(c => c.ID).LastAsync();
+                TeachingClass teachingClass = new TeachingClass
+                {
+                    accountID = account.ID,
+                    classID = newClass.ID
+                };
+
+                await _context.teachingClasses.AddAsync(teachingClass);
+
                 await _context.SaveChangesAsync();
+
                 UpdateTeachingCourses();
                 return RedirectToAction("Index");
             }
@@ -154,7 +165,12 @@ namespace Pink_Panthers_Project.Controllers
                 };
                 foreach(var item in viewModel.Classes)
                 {
-                    item.tName = _context.Account.Where(t => t.ID == item.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault();
+                    item.tName = _context.teachingClasses.Where(tc => tc.classID == item.ID)
+                        .Join(_context.Account, tc => tc.accountID, a => a.ID, (tc, a) => new Account
+                        {
+                            FirstName = a.FirstName,
+                            LastName = a.LastName
+                        }).Select(c => c.FirstName + " " + c.LastName).SingleOrDefault()!;
                 }
             return View(viewModel);
             }
@@ -383,56 +399,77 @@ namespace Pink_Panthers_Project.Controllers
             }
             return viewModel;
 		}
+
+		private List<Class>? getTeacherClasses()
+		{
+			if (!UnitTestingData.isUnitTesting)
+				return HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses")!;
+			return null;
+		}
+		private List<Class>? getStudentClasses()
+		{
+			if (!UnitTestingData.isUnitTesting)
+				return HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses")!;
+
+			return null;
+		}
 		private void UpdateTeachingCourses()
 		{
             var account = getAccount();
-
 			if (!UnitTestingData.isUnitTesting)
 			{
-				var teachingCourses = _context.Class
-						.Where(c => c.accountID == account!.ID)
-						.Select(c => new Class
-						{
-							ID = c.ID,
-							CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
-							CourseName = c.CourseName,
-							Room = c.Room,
-							StartTime = c.StartTime,
-							EndTime = c.EndTime,
-							Days = c.Days,
-							color = c.color,
-							hours = c.hours
-						})
-						.ToList();
+				var teachingCourses = _context.teachingClasses.Where(tc => tc.accountID == account!.ID)
+					.Join(_context.Class, tc => tc.classID, c => c.ID, (tc, c) => new Class
+					{
+						ID = c.ID,
+						CourseNumber = $"{c.DepartmentCode} {c.CourseNumber}",
+						CourseName = c.CourseName,
+						Room = c.Room,
+						StartTime = c.StartTime,
+						EndTime = c.EndTime,
+						Days = c.Days,
+						color = c.color,
+						hours = c.hours
+					})
+							.ToList();
 				HttpContext.Session.SetSessionValue("TeachingCourses", teachingCourses);
 			}
 		}
 
-        private void UpdateRegisteredCourses()
-        {
+		private void UpdateRegisteredCourses()
+		{
             var account = getAccount();
 
-            var sCourses = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
-                   .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
-                   {
-                       ID = c.ID,
-                       DepartmentCode = c.DepartmentCode,
-                       CourseNumber = c.CourseNumber,
-                       CourseName = c.CourseName,
-                       Room = c.Room,
-                       StartTime = c.StartTime,
-                       EndTime = c.EndTime,
-                       Days = c.Days,
-                       tName = _context.Account.Where(t => t.ID == c.accountID).Select(n => n.FirstName + " " + n.LastName).SingleOrDefault(),
-                       color = c.color,
-                       hours = c.hours
-                   }).ToList();
-            if (!UnitTestingData.isUnitTesting)
-            {
-                HttpContext.Session.SetSessionValue("RegisteredCourses", sCourses);
-            }
-        }
-        private void UpdateAssignments()
+			var sCourses = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
+				   .Join(_context.Class, rc => rc.classID, c => c.ID, (rc, c) => new Class
+				   {
+					   ID = c.ID,
+					   DepartmentCode = c.DepartmentCode,
+					   CourseNumber = c.CourseNumber,
+					   CourseName = c.CourseName,
+					   Room = c.Room,
+					   StartTime = c.StartTime,
+					   EndTime = c.EndTime,
+					   Days = c.Days,
+					   color = c.color,
+					   hours = c.hours
+				   }).ToList();
+
+			foreach (var c in sCourses)
+			{
+				c.tName = _context.teachingClasses.Where(tc => tc.classID == c.ID)
+						.Join(_context.Account, tc => tc.accountID, a => a.ID, (tc, a) => new Account
+						{
+							FirstName = a.FirstName,
+							LastName = a.LastName
+						}).Select(c => c.FirstName + " " + c.LastName).SingleOrDefault()!;
+			}
+			if (!UnitTestingData.isUnitTesting)
+			{
+				HttpContext.Session.SetSessionValue("RegisteredCourses", sCourses);
+			}
+		}
+		private void UpdateAssignments()
         {
             var account = getAccount();
             var assignments = _context.registeredClasses.Where(rc => rc.accountID == account!.ID)
