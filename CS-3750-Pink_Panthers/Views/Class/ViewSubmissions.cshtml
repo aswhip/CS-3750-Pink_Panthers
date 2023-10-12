@@ -21,14 +21,16 @@
 		{
 			<tr>
 				<td>@Html.Raw(submission.studentAccount!.FirstName + " " + submission.studentAccount!.LastName)</td>
+				<td>
 					@if (submission.currentAssignment!.SubmissionType == "text")
 					{
-						<td>@submission.Submission</td>
+							@submission.Submission
+						}
+						else
+						{
+							<a href="" download="./Submissions/@submission.Submission">@submission.Submission</a>
 					}
-					else
-					{
-						<td><a href="~/Submissions/@Html.Raw(submission.Submission)" download></a></td>
-					}
+				</td>
 				<td>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</td>
 				<td><a class="btn btn-primary" asp-action="GradeAssignment" asp-route-id="@submission.ID">Grade</a></td>
 			</tr>

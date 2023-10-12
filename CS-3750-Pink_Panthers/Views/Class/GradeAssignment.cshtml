@@ -38,7 +38,16 @@
 			<h5>Submission: </h5>
 			<br />
 			<p width="80%" style="border: 2px;">
-				@Model.Submission
+				@{
+					if(Model.currentAssignment.SubmissionType == "text")
+					{
+						@Html.Display(Model.Submission)
+					}
+					else
+					{
+						<a href="" download="./Submissions/@Model.Submission">@Model.Submission</a>
+					}
+				}
 			</p>
 			<input type="submit" class="btn btn-primary" value="Submit Grade" />
 		</form>
