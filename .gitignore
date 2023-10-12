@@ -39,3 +39,6 @@ Pink_Panthers_Test/bin
 *.wsuo
 *.user
 *.suo
+/Pink_Panthers_Test/bin/Debug/net6.0/CoverletSourceRootsMapping
+/Pink_Panthers_Test/obj/Debug/net6.0/Pink_Panthers_Test.assets.cache
+/Pink_Panthers_Test/obj/Debug/net6.0/Pink_Panthers_Test.GeneratedMSBuildEditorConfig.editorconfig
