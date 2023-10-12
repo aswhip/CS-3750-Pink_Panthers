@@ -310,6 +310,106 @@ namespace Pink_Panthers_Project.Controllers
             return View(viewSubmissions);
         }
 
+        [HttpGet]
+        public IActionResult EditClass(int id)
+        {
+            var account = getAccount();
+            var cls = getClass(id);
+            ViewBag.isTeacher = account!.isTeacher;
+
+            string str = cls.Days!;
+            string day = "";
+            foreach(char c in str)
+            {
+                if(c != ' ')
+                    day += c;
+                else if(c.Equals(' '))
+                {
+                    if (day.Equals("M"))
+                    {
+                        cls.monday = true;
+                    }
+                    else if (day.Equals("T"))
+                    {
+                        cls.tuesday = true;
+                    }
+                    else if (day.Equals("W"))
+                    {
+                        cls.wednesday = true;
+                    }
+                    else if (day.Equals("Th"))
+                    {
+                        cls.thursday = true;
+                    }
+                    else if (day.Equals("F"))
+                    {
+                        cls.friday = true;
+                    }
+                    day = "";
+                }
+            }
+            if (account.isTeacher)
+            {
+                return View(cls);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditClass(Class c)
+        {
+            var account = getAccount();
+            ViewBag.isTeacher = account.isTeacher;
+            if (account.isTeacher)
+            {
+                setDays(ref c);
+                _context.Class.Update(c);
+                await _context.SaveChangesAsync();
+
+                UpdateTeachingCourses();
+
+                return RedirectToAction("Index");
+            }
+            return NotFound();
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCourse(int id)
+        {
+            var account = getAccount();
+            Class cls = _context.Class.Where(c => c.ID == id).FirstOrDefault()!;
+            ViewBag.isTeacher = account.isTeacher;
+
+            if (account.isTeacher)
+            {
+                _context.Class.Remove(cls);
+                await _context.SaveChangesAsync();
+
+                UpdateTeachingCourses();
+
+                return RedirectToAction("Index");
+            }
+
+            return NotFound();
+
+        }
+
+        private void setDays(ref Class getDays)
+        {
+            getDays.Days = "";
+            if (getDays.monday)
+                getDays.Days += "M ";
+            if (getDays.tuesday)
+                getDays.Days += "T ";
+            if (getDays.wednesday)
+                getDays.Days += "W ";
+            if (getDays.thursday)
+                getDays.Days += "Th ";
+            if (getDays.friday)
+                getDays.Days += "F ";
+        }
+
         private Class getClass(int? id = null)
         {
             if (UnitTestingData.isUnitTesting)

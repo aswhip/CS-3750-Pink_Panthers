@@ -40,8 +40,8 @@
 								<td>@course.Days</td>
 								<td>@course.StartTime.ToString() - @course.EndTime.ToString()</td>
 								<td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
-								<td><a class="btn btn-light">Edit</a></td>
-								<td><a class="btn btn-warning">Delete</a></td>
+								<td><a class="btn btn-light" asp-action="EditClass" asp-route-id="@course.ID">Edit</a></td>
+								<td><a class="btn btn-warning" asp-action="DeleteCourse" asp-route-id="@course.ID">Delete</a></td>
 							</tr>
 						}
 					</table>
