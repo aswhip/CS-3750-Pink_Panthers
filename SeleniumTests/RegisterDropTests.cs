@@ -15,7 +15,7 @@ namespace SeleniumTests
         public void RegisterForClassTest()
         {
             IWebDriver driver = new EdgeDriver();
-            string url = "https://localhost:7011/Accounts/Login";
+            string url = "https://pinkpanthers3750.azurewebsites.net";
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl(url);
@@ -51,7 +51,7 @@ namespace SeleniumTests
         public void ZDropRegisteredClassTest() //Alphabetical ordering with the Z
         {
             IWebDriver driver = new EdgeDriver();
-            string url = "https://localhost:7011/Accounts/Login";
+            string url = "https://pinkpanthers3750.azurewebsites.net";
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl(url);
