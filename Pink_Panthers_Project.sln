@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pink_Panthers_Project", "CS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pink_Panthers_Test", "Pink_Panthers_Test\Pink_Panthers_Test.csproj", "{6CB62BF3-D549-4CCE-AAA5-33F9D292156F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{001A4437-2C52-4F29-B6F6-F25BD3491309}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6CB62BF3-D549-4CCE-AAA5-33F9D292156F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CB62BF3-D549-4CCE-AAA5-33F9D292156F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CB62BF3-D549-4CCE-AAA5-33F9D292156F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{001A4437-2C52-4F29-B6F6-F25BD3491309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001A4437-2C52-4F29-B6F6-F25BD3491309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001A4437-2C52-4F29-B6F6-F25BD3491309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001A4437-2C52-4F29-B6F6-F25BD3491309}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

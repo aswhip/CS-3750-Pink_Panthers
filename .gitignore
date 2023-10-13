@@ -50,3 +50,14 @@ Pink_Panthers_Test/bin
 /.vs/Pink_Panthers_Project/v17/.futdcache.v2
 /.vs/ProjectEvaluation/pink_panthers_project.metadata.v7.bin
 /.vs/ProjectEvaluation/pink_panthers_project.projects.v7.bin
+
+
+TestResults
+/TestResults
+./TestResults
+../TestResults
+~/TestResults
+
+/SeleniumTests/bin
+./SeleniumTests/bin
+
