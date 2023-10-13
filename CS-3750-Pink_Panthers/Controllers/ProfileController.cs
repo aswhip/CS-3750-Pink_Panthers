@@ -298,7 +298,7 @@ namespace Pink_Panthers_Project.Controllers
                 return NotFound();
             }
 
-
+            UpdateAccount(account.ID);
             return RedirectToAction("Details");
         }
         [HttpGet]
