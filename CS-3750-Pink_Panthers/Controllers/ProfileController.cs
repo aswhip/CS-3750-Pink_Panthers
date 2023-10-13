@@ -267,36 +267,31 @@ namespace Pink_Panthers_Project.Controllers
         /// <param name="account"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Edit(Account account)
+        public async Task<IActionResult> Edit(Account account)
         {
-			var Account = account; //Get account
 
             if(!ModelState.IsValid) //Check if fields are vaild
             {
                 return View(account);
             }
-
-            if (Account != null) //Update account information
+            Account? a = await _context.Account.Where(c => c.ID == account.ID).SingleOrDefaultAsync();
+            if (a != null)
             {
-                Account.FirstName = account.FirstName;
-                Account.LastName = account.LastName;
-                Account.AddressLine1 = account.AddressLine1;
-                Account.AddressLine2 = account.AddressLine2;
-                Account.City = account.City;
-                Account.State = account.State;
-                Account.ZipCode = account.ZipCode;
-                Account.ProfileLink1 = account.ProfileLink1;
-                Account.ProfileLink2 = account.ProfileLink2;
-                Account.ProfileLink3 = account.ProfileLink3;
-
-                //Save to database
-                _context.Entry(Account).State = EntityState.Modified;
-                _context.SaveChanges();
+                a.FirstName = account.FirstName;
+                a.LastName = account.LastName;
+                a.AddressLine1 = account.AddressLine1;
+                a.AddressLine2 = account.AddressLine2;
+                a.City = account.City;
+                a.State = account.State;
+                a.ZipCode = account.ZipCode;
+                a.ProfileLink1 = account.ProfileLink1;
+                a.ProfileLink2 = account.ProfileLink2;
+                a.ProfileLink3 = account.ProfileLink3;
+                _context.Account.Update(a);
+                await _context.SaveChangesAsync();
             }
             else
-            {
                 return NotFound();
-            }
 
             UpdateAccount(account.ID);
             return RedirectToAction("Details");
