@@ -30,13 +30,13 @@ namespace Pink_Panthers_Test
                 StartTime = DateTime.Parse("9:30 AM"),
                 EndTime = DateTime.Parse("11:00 AM")
             };
-            Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //Teacher Account
+            Account? account = _context.Account.Where(c => c.ID == 6).FirstOrDefault(); //Teacher Account
 
             UnitTestingData._account = account;
 
-            int count = _context.Class.Where(c => c.accountID == account!.ID).Count();
+            int count = _context.teachingClasses.Where(c => c.accountID == account!.ID).Count();
             await profileController.addClass(newClass);
-            int newCount = _context.Class.Where(c => c.accountID == account!.ID).Count();
+            int newCount = _context.teachingClasses.Where(c => c.accountID == account!.ID).Count();
 
             Assert.AreEqual(newCount, count + 1, "Add class failed");
 
@@ -66,15 +66,15 @@ namespace Pink_Panthers_Test
                 StartTime = DateTime.Parse("9:30 AM"),
                 EndTime = DateTime.Parse("11:00 AM")
             };
-            Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //Student Account
+            Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //Student Account
 
             UnitTestingData._account = account;
 
-            int count = _context.Class.Where(c => c.accountID == account!.ID).Count();
+            int count = _context.teachingClasses.Where(c => c.accountID == account!.ID).Count();
             Assert.AreEqual(count, 0, "Count should be 0");
 
             await profileController.addClass(newClass);
-            int newCount = _context.Class.Where(c => c.accountID == account!.ID).Count();
+            int newCount = _context.teachingClasses.Where(c => c.accountID == account!.ID).Count();
 
             Assert.AreEqual(newCount, count, "Student added class"); //Student should not be able to add class, so new count and count should be equal
 

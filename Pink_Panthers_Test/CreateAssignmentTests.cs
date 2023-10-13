@@ -10,10 +10,10 @@ using Pink_Panthers_Project.Models;
 namespace Pink_Panthers_Test
 {
 	[TestClass]
-	public class CreateAssignementTests : Tests //Derived from Tests, can access protected member _context
+	public class CreateAssignmentTests : Tests //Derived from Tests, can access protected member _context
 	{
 		[TestMethod]
-		public async Task TeacherCanCreateAssignement()
+		public async Task TeacherCanCreateAssignment()
 		{
 			UnitTestingData.isUnitTesting = true;
 
@@ -21,12 +21,12 @@ namespace Pink_Panthers_Test
 
 			classController classController = new classController(_context);
 
-			Account? account = _context.Account.Where(c => c.ID == 31).FirstOrDefault(); //Teacher Account
+			Account? account = _context.Account.Where(c => c.ID == 6).FirstOrDefault(); //Teacher Account
 			UnitTestingData._account = account;
 
 			Assignment newAssignment = new Assignment
 			{
-				ClassID = 28, //Data Analytics
+				ClassID = 6, //Unit Test Course
 				AssignmentName = "Unit Test Assignment",
 				DueDate = DateTime.Now.AddDays(2),
 				PossiblePoints = 100,
@@ -44,7 +44,7 @@ namespace Pink_Panthers_Test
 
 
 
-			var addedAssignment = _context.Assignments.FirstOrDefault(a => a.AssignmentName == "Unit Test Assignment"  && a.ClassID == 28);
+			var addedAssignment = _context.Assignments.FirstOrDefault(a => a.AssignmentName == "Unit Test Assignment"  && a.ClassID == 6);
 
 			if (addedAssignment != null)
 			{

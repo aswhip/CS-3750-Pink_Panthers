@@ -19,17 +19,17 @@ namespace Pink_Panthers_Test
 			UnitTestingData.isUnitTesting = true;
 
 			ProfileController profileController = new ProfileController(_context);
-            Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
+            Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //ID 5 is test student
 
             if(account != null)
                 UnitTestingData._account = account!;
 
-            await profileController.Register(46); //Class ID 46 is the Test Course
-            var didRegister = _context.registeredClasses.Where(c => c.classID == 46 && c.accountID == account!.ID).FirstOrDefault();
+            await profileController.Register(6); //Class ID 6 is the Test Course
+            var didRegister = _context.registeredClasses.Where(c => c.classID == 6 && c.accountID == account!.ID).FirstOrDefault();
             Assert.IsNotNull(didRegister);
             if(didRegister != null)
             {
-				await profileController.Register(46); //Class ID 46 is the Test Course
+				await profileController.Register(6); //Dropping the course
 			}
 
             await _context.SaveChangesAsync();
@@ -44,17 +44,17 @@ namespace Pink_Panthers_Test
 
 			//Need to temporarily register for a class
 			ProfileController profileController = new ProfileController(_context);
-            Account? account = _context.Account.Where(c => c.ID == 1).FirstOrDefault(); //ID 1 is test student
+            Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //ID 5 is test student
 
             if (account != null)
 				UnitTestingData._account = account!;
 
-			await profileController.Register(46); //Class ID 46 is the Test Course
+			await profileController.Register(6); //Class ID 6 is the Test Course
 
             //Now we need to drop the class, which uses the same method but drops the class if they are already registered
-            await profileController.Register(46); //Drops the class 
+            await profileController.Register(6); //Drops the class 
 
-            var didDrop = _context.registeredClasses.Where(c => c.classID == 46 && c.accountID == account!.ID).FirstOrDefault();
+            var didDrop = _context.registeredClasses.Where(c => c.classID == 6 && c.accountID == account!.ID).FirstOrDefault();
 
             Assert.IsNull(didDrop, "Class Drop Failed");
 
@@ -74,14 +74,14 @@ namespace Pink_Panthers_Test
 			UnitTestingData.isUnitTesting = true;
 
 			ProfileController profileController = new ProfileController(_context);
-            Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //ID 5 is test teacher
+            Account? account = _context.Account.Where(c => c.ID == 6).FirstOrDefault(); //ID 6 is test teacher
 
             if (account != null)
 				UnitTestingData._account = account!;
 
-			await profileController.Register(46); //Class ID 46 is the Test Course
+			await profileController.Register(6); //Class ID 46 is the Test Course
 
-            var didRegister = _context.registeredClasses.Where(c => c.classID == 7 && c.accountID == account!.ID).FirstOrDefault();
+            var didRegister = _context.registeredClasses.Where(c => c.classID == 6 && c.accountID == account!.ID).FirstOrDefault();
 
             Assert.IsNull(didRegister, "Teacher can register for class");
 

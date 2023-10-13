@@ -203,7 +203,7 @@ namespace Pink_Panthers_Project.Controllers
                     int hours = _context.Class.Where(c => c.ID == registeredClass.classID).Select(c => c.hours).SingleOrDefault();
                     account!.AmountToBePaid += (100 * hours);
                     account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
-
+                    _context.Account.Update(account);
                     // Add the registeredClass to your registered classes collection
                     await _context.registeredClasses.AddAsync(registeredClass);
                 }
@@ -216,13 +216,15 @@ namespace Pink_Panthers_Project.Controllers
                     int hours = _context.Class.Where(c => c.ID == registeredClassToRemove!.classID).Select(c => c.hours).SingleOrDefault();
                     account!.AmountToBePaid -= (100 * hours);
                     account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
+					_context.Account.Update(account);
 
-                    _context.registeredClasses.Remove(registeredClassToRemove!);
+					_context.registeredClasses.Remove(registeredClassToRemove!);
 
                 }
                 await _context.SaveChangesAsync();
             }
             UpdateRegisteredCourses();
+            UpdateAccount(account.ID);
             // Redirect back to the class list page
             return RedirectToAction("Index");
         }
@@ -413,6 +415,14 @@ namespace Pink_Panthers_Project.Controllers
 
 			return null;
 		}
+        private void UpdateAccount(int id)
+        {
+            if (!UnitTestingData.isUnitTesting)
+            {
+                var account = _context.Account.Where(a => a.ID == id).FirstOrDefault();
+                HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+            }
+        }
 		private void UpdateTeachingCourses()
 		{
             var account = getAccount();

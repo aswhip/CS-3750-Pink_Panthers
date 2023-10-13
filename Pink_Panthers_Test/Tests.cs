@@ -18,7 +18,7 @@ namespace Pink_Panthers_Test
         {
             DbContextOptions<Pink_Panthers_ProjectContext> options = new DbContextOptions<Pink_Panthers_ProjectContext>();
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder(options);
-            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Data Source=titan.cs.weber.edu,10433;Initial Catalog=3750_PinkPanthers;User ID=3750_PinkPanthers;Password=P1nkpanthers!;TrustServerCertificate=True");
+            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Server=tcp:pinkpanthers.database.windows.net,1433;Initial Catalog=3750_PinkPanthers;Persist Security Info=False;User ID=PinkPanthers;Password=P1nkpanthers!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
             _context = new Pink_Panthers_ProjectContext((DbContextOptions<Pink_Panthers_ProjectContext>)builder.Options);
         }
     }
