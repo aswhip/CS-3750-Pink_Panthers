@@ -109,7 +109,7 @@ namespace Pink_Panthers_Project.Controllers
             var account = getAccount();
 
 			ViewBag.isTeacher = account!.isTeacher;
-            return View();
+            return View(account);
         }
 
         [HttpGet]
