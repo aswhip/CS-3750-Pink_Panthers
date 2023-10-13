@@ -23,12 +23,21 @@ body {
 
 .to-do-header {
     width: 300px;
-    background-color: red;
+    background-color: #eb7171;
+    color: black;
     height: 50px;
     font-size: x-large;
     font-weight: bolder;
     border-top-left-radius: 10px !important;
     border-top-right-radius: 10px !important;
+}
+
+.notification_header {
+    background-color: #8bc4b0 !important;
+}
+
+.notification {
+    border-radius: 0px !important;
 }
 
 .to-do-list {
@@ -46,7 +55,6 @@ body {
     width: 300px;
     background-color: white;
     border-bottom: solid;
-    border-radius: 5px;
 }
 
 .custom-card {
@@ -155,4 +163,8 @@ select {
     overflow: auto;
 }
 
+
+.save-btn, .cancel-btn, .edit-btn, upload-btn {
+    margin-top: 8px;
+}
 

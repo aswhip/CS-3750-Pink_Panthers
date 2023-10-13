@@ -1,9 +1,9 @@
 ﻿@model Pink_Panthers_Project.Models.Account
 
 @{
-    ViewData["Title"] = "FileUpload";
+    ViewData["Title"] = "Change Profile Picture";
 }
-<h2>File Upload</h2>
+<h2>Change Profile Picture</h2>
 <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="FileUpload">
     @if (ViewData.ModelState.ContainsKey("NoImage"))
     {
@@ -11,11 +11,15 @@
         <br />
         <br />
     }
-    <span>Select File:</span>
+    <div>
+        <span>Select File:</span>
+    
+        <input type="file" name="postedFile" />
+    </div>
 
-    <input type="file" name="postedFile" />
-    <br />
-    <input type="submit" value="Upload" />
+    <div>
+        <input class="btn btn-primary upload-btn" type="submit" value="Upload" />
+    </div>
 
     <br />
     <br />
