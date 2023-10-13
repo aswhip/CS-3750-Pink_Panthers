@@ -174,14 +174,14 @@
                         {
                             <form method="post" action="@Url.Action("Register", "Profile")">
                                 <input type="hidden" name="classId" value="@item.ID" />
-                                <button type="submit" class="btn btn-danger">Drop</button>
+                                <button type="submit" class="btn btn-danger" id="@Html.Raw(item.ID + "dropBtn")">Drop</button>
                             </form>
                         }
                         else
                         {
                             <form method="post" action="@Url.Action("Register", "Profile")">
                                 <input type="hidden" name="classId" value="@item.ID" />
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary" id="@Html.Raw(item.ID + "registerBtn")">Register</button>
                             </form>
                         }
                     </td>

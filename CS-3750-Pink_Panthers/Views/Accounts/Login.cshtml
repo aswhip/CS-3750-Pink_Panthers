@@ -36,17 +36,17 @@
             }
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" id="usernameText"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <input asp-for="Password" class="form-control" id="passwordText"/>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="button" value="Create Account" class="btn btn-primary btn-signup" onclick="location.href='@Url.Action("Create", "Accounts")'" />
-                <input type="submit" value="Login" class="btn btn-primary btn-login" />
+                <input type="button" value="Create Account" class="btn btn-primary btn-signup" onclick="location.href='@Url.Action("Create", "Accounts")'" itemscope id="createAccountBtn" />
+                <input type="submit" value="Login" class="btn btn-primary btn-login" itemscope id="loginBtn"/>
             </div>
         </form>
     </div>
