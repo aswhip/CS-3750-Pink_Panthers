@@ -51,7 +51,6 @@ namespace Pink_Panthers_Project.Controllers
         {
             var account = getAccount();
 			var cls = id != null ? getClass(id) : getClass(); //Gets the class based on id if id != null, otherwise just gets the current active class
-            ViewBag.Class = cls;
 
             if (account! == null)
             {
@@ -62,6 +61,7 @@ namespace Pink_Panthers_Project.Controllers
                 return NotFound();
             }
 
+            ViewBag.Class = cls;
 			ViewBag.isTeacher = account!.isTeacher;
 
             UpdateAssignments();
@@ -146,7 +146,7 @@ namespace Pink_Panthers_Project.Controllers
             }
 		}
         [HttpPost]
-        public async Task<IActionResult> CreateAssignment([Bind("clsID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignment)
+        public async Task<IActionResult> CreateAssignment([Bind("ClassID,AssignmentName,DueDate,PossiblePoints,Description,SubmissionType")]Assignment assignment)
         {
             var account = getAccount();
 

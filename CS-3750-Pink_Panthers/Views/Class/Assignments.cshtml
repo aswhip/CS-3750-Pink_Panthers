@@ -19,6 +19,9 @@
 			@if (Model!.Assignments!.Count == 0)
 			{
 				<p>No Assignments yet for this course</p>
+				<div class="col-md-4">
+					<a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+				</div>
 			}
 			else
 			{
@@ -47,9 +50,12 @@
 							</tr>
 						}
 					</table>
+					<div class="col-md-4">
+						<a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+					</div>
 				}
 
-				@if (!Model.Account.isTeacher)
+				@if (!Model!.Account.isTeacher)
 				{
 					<table>
 						<tr>
@@ -80,16 +86,6 @@
 							</tr>
 						}
 					</table>
-				}
-
-
-
-
-				@if (Model.Account.isTeacher)
-				{
-					<div class="col-md-4">
-						<a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
-					</div>
 				}
 			}
 
