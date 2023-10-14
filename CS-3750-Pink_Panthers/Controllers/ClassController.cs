@@ -539,6 +539,7 @@ namespace Pink_Panthers_Project.Controllers
 							Description = c.Description,
 							SubmissionType = c.SubmissionType
 						}).ToList();
+
 				}
 				else
 				{
@@ -552,6 +553,16 @@ namespace Pink_Panthers_Project.Controllers
 				if (!UnitTestingData.isUnitTesting)
 				{
 					HttpContext.Session.SetSessionValue("Assignments", assignments);
+                    if (!account.isTeacher)
+                    {
+                        foreach (var a in assignments)
+                        {
+                            a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
+                            a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
+                        }
+                        var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
+                        HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
+                    }
 				}
 			}
             

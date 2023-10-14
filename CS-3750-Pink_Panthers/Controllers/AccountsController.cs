@@ -259,10 +259,14 @@ namespace Pink_Panthers_Project.Controllers
             foreach(var a in assignments)
             {
                 a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+                a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
+                a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
             }
+            var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
             if (!UnitTestingData.isUnitTesting)
             {
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
+                HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
             }
         }
         private void UpdateStudentSubmissions(Account account)
