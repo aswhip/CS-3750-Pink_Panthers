@@ -30,5 +30,11 @@ namespace Pink_Panthers_Project.Models
 
         [Required]
         public string? SubmissionType { get; set; }
+
+        [NotMapped]
+        public int? grade { get; set; }
+
+        [NotMapped]
+        public bool? submitted { get; set; }
     }
 }

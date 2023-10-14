@@ -88,37 +88,36 @@
                     <b>Notifications</b>
                     <div class="exit_button clickable">x</div>
                 </div>
-                <div class="notification">
-                    <b>CS 3550</b><br />
-                    <b>Assignment 1</b><br />
-                    <b>Graded</b><br />
-                    <b>10/4/2023 10:45 AM</b>
-                </div>
-                <div class="notification">
-                    <b>CS 1400</b><br />
-                    <b>Assignment 2</b><br />
-                    <b>Created</b><br />
-                    <b>10/3/2023 9:45 AM</b>
-                </div>
-                <div class="notification">
-                    <b>CS 1400</b><br />
-                    <b>Quiz 1</b><br />
-                    <b>Graded</b><br />
-                    <b>9/30/2023 3:00 PM</b>
-                </div>
-                <div class="notification">
-                    <b>CS 1400</b><br />
-                    <b>Quiz 1</b><br />
-                    <b>Created</b><br />
-                    <b>9/27/2023 12:00 AM</b>
-                </div>
-                <div class="notification">
-                    <b>CS 3550</b><br />
-                    <b>Assignment 1</b><br />
-                    <b>Created</b><br />
-                    <b>9/25/2023 10:00 AM</b>
-                </div>
-
+                
+                    @if (Model.UpcomingAssignments != null)
+                {
+                    @foreach (var assignment in Model.UpcomingAssignments)
+                    {
+                        <div class="notification">
+                            <b>@assignment.className</b><br />
+                            <b>@assignment.AssignmentName</b><br />
+                            @if (assignment.grade != null)
+                            {
+                                <b>Graded</b><br />
+                            }
+                            else if (assignment.submitted)
+                            {
+                                <b>Not Yet Graded</b><br />
+                            }
+                            else
+                            {
+                                <b>Not Yet Submitted</b><br />
+                            }
+                            <b>@assignment.DueDate.ToString("MM/dd/yyyy h:mm tt")</b>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="notification">
+                        <b>No Notifications</b>
+                    </div>
+                }
             </div>
         </div>
         <script>
