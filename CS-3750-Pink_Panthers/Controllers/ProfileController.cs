@@ -306,6 +306,7 @@ namespace Pink_Panthers_Project.Controllers
 
         }
         [HttpPost]
+        [DisableRequestSizeLimit]
         public IActionResult FileUpload(IFormFile postedFile) 
         {
 			var account = getAccount();
