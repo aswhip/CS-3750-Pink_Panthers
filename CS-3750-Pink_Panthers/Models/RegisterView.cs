@@ -6,6 +6,7 @@
         public List<RegisteredClass>? RegisteredClasses { get; set; }
         public Account? Account { get; set; }
         public string? TeacherName { get; set; }
+        public List<Assignment>? UpcomingAssignments { get; set; }
     }
 
 }

@@ -109,7 +109,7 @@ namespace Pink_Panthers_Project.Controllers
             var account = getAccount();
 
 			ViewBag.isTeacher = account!.isTeacher;
-            return View(account);
+            return View(getCourseView());
         }
 
         [HttpGet]
@@ -162,6 +162,7 @@ namespace Pink_Panthers_Project.Controllers
                 {
                     Classes = _context.Class.ToList(),
                     RegisteredClasses = _context.registeredClasses.ToList(),
+                    UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications"),
                 };
                 foreach(var item in viewModel.Classes)
                 {
@@ -241,7 +242,10 @@ namespace Pink_Panthers_Project.Controllers
 
 			ViewBag.isTeacher = account!.isTeacher;
             if (account != null)
-                return View(account);
+            {
+                var viewModel = getCourseView();
+                return View(viewModel);
+            }
             return NotFound();
         }
 
@@ -302,7 +306,7 @@ namespace Pink_Panthers_Project.Controllers
 			var account = getAccount();
 
 			ViewBag.isTeacher = account!.isTeacher;
-            return View(account);
+            return View(getCourseView());
 
         }
         [HttpPost]

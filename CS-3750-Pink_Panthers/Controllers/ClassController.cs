@@ -42,7 +42,8 @@ namespace Pink_Panthers_Project.Controllers
             {
                 TeachingCourses = tCourses,
                 RegisteredCourses = sCourses,
-                Account = account!
+                Account = account!,
+                UpcomingAssignments = getUpcomingAssignments()
             };
             return View(viewModel);
         }
@@ -74,7 +75,8 @@ namespace Pink_Panthers_Project.Controllers
                 Class = cls!,
                 Assignments = assignments!,
                 Account = account!,
-                StudentSubmissions = submissions
+                StudentSubmissions = submissions,
+                UpcomingAssignments = getUpcomingAssignments()
 			};
 			return View(viewModel);
 		}
@@ -455,6 +457,12 @@ namespace Pink_Panthers_Project.Controllers
         {
             if (!UnitTestingData.isUnitTesting)
                 return HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments");
+            return null;
+        }
+        private List<Assignment>? getUpcomingAssignments()
+        {
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications");
             return null;
         }
         private List<StudentSubmission>? getStudentSubmissions()
