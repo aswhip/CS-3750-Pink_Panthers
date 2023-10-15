@@ -1,4 +1,4 @@
-﻿@model Pink_Panthers_Project.Models.Account
+﻿@model Pink_Panthers_Project.Models.CourseView
 
 @{
     ViewData["Title"] = "Details";
@@ -15,10 +15,10 @@
         <h1>Details</h1>
         
         @{
-            string path = Directory.GetCurrentDirectory() + @"\wwwroot\Images\" + Model.ID!.ToString() + "_" + Model.LastName! + "pfp.jpg";
+            string path = Directory.GetCurrentDirectory() + @"\wwwroot\Images\" + Model.Account.ID!.ToString() + "_" + Model.Account.LastName! + "pfp.jpg";
             if (File.Exists(path))
             {
-                <img src="~/Images/@Html.ValueFor(Model => Model.ID)_@Html.ValueFor(Model => Model.LastName)pfp.jpg" alt="Profile Picture" width="150px" height="150px">
+                <img src="~/Images/@Html.ValueFor(Model => Model.Account.ID)_@Html.ValueFor(Model => Model.Account.LastName)pfp.jpg" alt="Profile Picture" width="150px" height="150px">
             }
             else
             {
@@ -27,70 +27,70 @@
         }
         <div class="form-group">
             <label for="FirstName">First Name</label>
-            <input type="text" id="FirstName" name="Firstname" class="form-control" value="@Model.FirstName" readonly data-editable="false" />
+            <input type="text" id="FirstName" name="Firstname" class="form-control" value="@Model.Account.FirstName" readonly data-editable="false" />
         </div>
 
         <div class="form-group">
             <label for="LastName">Last Name</label>
-            <input type="text" id="LastName" name="Lastname" class="form-control" value="@Model.LastName" readonly data-editable="false" />
+            <input type="text" id="LastName" name="Lastname" class="form-control" value="@Model.Account.LastName" readonly data-editable="false" />
 
         </div>
 
 
         <div class="form-group">
             <label for="Email">Email</label>
-            <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" readonly data-editable="false" />
+            <input type="email" id="Email" name="Email" class="form-control" value="@Model.Account.Email" readonly data-editable="false" />
         </div>
 
         <div class="form-group">
             <label for="BirthDate">Date of Birth</label>
-            <input type="date" id="BirthDate" name="BirthDate" class="form-control" value="@Model.BirthDate.ToString("yyyy-MM-dd")" readonly data-editable="false" />
+            <input type="date" id="BirthDate" name="BirthDate" class="form-control" value="@Model.Account.BirthDate.ToString("yyyy-MM-dd")" readonly data-editable="false" />
         </div>
 
 
         <div class="form-group">
             <label for="AddressLine1">Address Line 1</label>
-            <input type="text" id="AddressLine1" name="AddressLine1" class="form-control" value="@Model.AddressLine1" readonly data-editable="false" />
+            <input type="text" id="AddressLine1" name="AddressLine1" class="form-control" value="@Model.Account.AddressLine1" readonly data-editable="false" />
         </div>
 
         <div class="form-group">
             <label for="AddressLine2">Address Line 2</label>
-            <input type="text" id="AddressLine2" name="AddressLine2" class="form-control" value="@Model.AddressLine2" readonly data-editable="false" />
+            <input type="text" id="AddressLine2" name="AddressLine2" class="form-control" value="@Model.Account.AddressLine2" readonly data-editable="false" />
         </div>
 
         <div class="form-group">
             <label for="City">City</label>
-            <input type="text" id="City" name="City" class="form-control" value="@Model.City" readonly data-editable="false" />
+            <input type="text" id="City" name="City" class="form-control" value="@Model.Account.City" readonly data-editable="false" />
         </div>
 
         <div class="form-group">
             <label for="State">State</label>
-            <input type="text" id="State" name="State" class="form-control" value="@Model.State" readonly data-editable="false" />
+            <input type="text" id="State" name="State" class="form-control" value="@Model.Account.State" readonly data-editable="false" />
         </div>
 
         <div class="form-group">
             <label for="ZipCode">Zip Code</label>
-            <input type="text" id="ZipCode" name="ZipCode" class="form-control" value="@Model.ZipCode" readonly data-editable="false" />
+            <input type="text" id="ZipCode" name="ZipCode" class="form-control" value="@Model.Account.ZipCode" readonly data-editable="false" />
         </div>
 
-        @if (!string.IsNullOrEmpty(Model.ProfileLink1))
+        @if (!string.IsNullOrEmpty(Model.Account.ProfileLink1))
         {
             <div class="form-group">
-                <a href="@Model.ProfileLink1">@Model.ProfileLink1</a>
+                <a href="@Model.Account.ProfileLink1">@Model.Account.ProfileLink1</a>
             </div>
         }
 
-        @if (!string.IsNullOrEmpty(Model.ProfileLink2))
+        @if (!string.IsNullOrEmpty(Model.Account.ProfileLink2))
         {
             <div class="form-group">
-                <a href="@Model.ProfileLink2" >@Model.ProfileLink2</a>
+                <a href="@Model.Account.ProfileLink2">@Model.Account.ProfileLink2</a>
             </div>
         }
 
-        @if (!string.IsNullOrEmpty(Model.ProfileLink3))
+        @if (!string.IsNullOrEmpty(Model.Account.ProfileLink3))
         {
             <div class="form-group">
-                <a href="@Model.ProfileLink3" >@Model.ProfileLink3</a>
+                <a href="@Model.Account.ProfileLink3">@Model.Account.ProfileLink3</a>
             </div>
         }
 
