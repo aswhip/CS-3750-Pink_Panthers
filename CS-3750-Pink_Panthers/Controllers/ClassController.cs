@@ -212,7 +212,8 @@ namespace Pink_Panthers_Project.Controllers
 			}
 		}
 		[HttpPost]
-		public async Task<IActionResult> SubmitAssignment(StudentSubmission? newSubmission, IFormFile? file)
+        [DisableRequestSizeLimit]
+		public async Task<IActionResult> SubmitAssignment(StudentSubmission? newSubmission, [FromForm]IFormFile? file)
 		{
             var account = getAccount();
             var cls = getClass();
