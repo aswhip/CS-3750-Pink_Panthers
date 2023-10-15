@@ -28,8 +28,8 @@
 						}
 						else
 						{
-							<a href="" download="./Submissions/@submission.Submission">@submission.Submission</a>
-					}
+							<a href="~/Submissions/@submission.Submission" download="@submission.Submission">@submission.Submission</a>
+						}
 				</td>
 				<td>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</td>
 				<td><a class="btn btn-primary" asp-action="GradeAssignment" asp-route-id="@submission.ID">Grade</a></td>

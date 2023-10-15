@@ -19,5 +19,7 @@ namespace Pink_Panthers_Project.Models
 		public Assignment? currentAssignment { get; set; }
 		[NotMapped]
 		public Account? studentAccount { get; set; }
+		[NotMapped]
+		public List<Assignment>? UpcomingAssignments { get; set; }
 	}
 }

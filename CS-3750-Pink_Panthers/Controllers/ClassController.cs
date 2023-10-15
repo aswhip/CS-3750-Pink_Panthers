@@ -206,7 +206,8 @@ namespace Pink_Panthers_Project.Controllers
                 var submissionView = new StudentSubmission
                 {
                     AssignmentID = assignmentID,
-                    currentAssignment = _context.Assignments.Find(assignmentID)
+                    currentAssignment = _context.Assignments.Find(assignmentID),
+                    UpcomingAssignments = getUpcomingAssignments()
                 };
 				return View(submissionView);
 			}
