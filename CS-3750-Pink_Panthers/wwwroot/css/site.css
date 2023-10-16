@@ -164,7 +164,7 @@ select {
 }
 
 
-.save-btn, .cancel-btn, .edit-btn, upload-btn {
+.save-btn, .cancel-btn, .edit-btn, .upload-btn {
     margin-top: 8px;
 }
 
