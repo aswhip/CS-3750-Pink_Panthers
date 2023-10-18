@@ -6,5 +6,9 @@
 
 		public string? AssignmentName { get; set;}
 		public List<Assignment>? UpcomingAssignments { get; set;}
+
+		public List<int>? Grades { get; set;}
+
+		public int? MaxGrade { get; set;}
 	}
 }
