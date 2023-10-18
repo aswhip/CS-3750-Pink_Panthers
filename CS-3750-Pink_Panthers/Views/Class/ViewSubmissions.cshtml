@@ -4,6 +4,39 @@
 	ViewData["Title"] = "Course";
 }
 
+<head>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			
+		var gradesArray = @Html.Raw(Json.Serialize(Model!.Grades));
+		var max = @Model.MaxGrade;
+
+		var data = [{
+		type: 'box',
+		x: gradesArray,
+		boxpoints: 'false', 
+		jitter: 0.3,     // Add some jitter for better visualization
+		fillcolor: '#d5a6bd',
+		line: {
+			color: '#a64d79'
+		},
+		hoverinfo: 'x'
+		}];
+
+			var layout = {
+				title: 'Student Performance',
+				xaxis: {
+					title: 'Grades',
+					range: [0, max]
+				}
+			};  
+		
+		Plotly.newPlot('gradeBoxPlot', data, layout);});
+	</script>
+
+
+</head>
 <div class="container">
 	<div class="row mt-5">
 		<h2>@Model.AssignmentName</h2>
@@ -37,4 +70,15 @@
 		}
 		</table>
 	</div>
+
+	
+	@if (Model!.StudentSubmissions!.Count != 0)
+	{
+		<div class="row mt-3">
+			<div id="gradeBoxPlot" />
+		</div>
+	}
+	
+
+	
 </div>

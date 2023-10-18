@@ -304,8 +304,13 @@ namespace Pink_Panthers_Project.Controllers
             var viewSubmissions = new SubmissionsViewModel
             {
                 StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),
-                AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault()
-            };
+                AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault(),
+                Grades = _context.StudentSubmissions
+				.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
+				.Select(c => c.Grade.Value)
+				.ToList(),
+                MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault()
+			};
             foreach(var s in viewSubmissions.StudentSubmissions)
             {
                 s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
