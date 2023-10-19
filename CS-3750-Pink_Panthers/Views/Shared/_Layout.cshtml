@@ -88,35 +88,38 @@
                     <b>Notifications</b>
                     <div class="exit_button clickable">x</div>
                 </div>
-                
-                    @if (Model.UpcomingAssignments != null)
+
+                @if (!ViewBag.isTeacher)
                 {
-                    @foreach (var assignment in Model.UpcomingAssignments)
                     {
-                        <div class="notification">
-                            <b>@assignment.className</b><br />
-                            <b>@assignment.AssignmentName</b><br />
-                            @if (assignment.grade != null)
-                            {
-                                <b>Graded</b><br />
-                            }
-                            else if (assignment.submitted)
-                            {
-                                <b>Not Yet Graded</b><br />
-                            }
-                            else
-                            {
-                                <b>Not Yet Submitted</b><br />
-                            }
-                            <b>@assignment.DueDate.ToString("MM/dd/yyyy h:mm tt")</b>
-                        </div>
+                        @foreach (var assignment in Model.UpcomingAssignments)
+                        {
+                            <div class="notification">
+                                <b>@assignment.className</b><br />
+                                <b>@assignment.AssignmentName</b><br />
+                                @if (assignment.grade != null)
+                                {
+                                    <b>Graded</b><br />
+                                }
+                                else if (assignment.submitted)
+                                {
+                                    <b>Not Yet Graded</b><br />
+                                }
+                                else
+                                {
+                                    <b>Not Yet Submitted</b><br />
+                                }
+                                <b>@assignment.DueDate.ToString("MM/dd/yyyy h:mm tt")</b>
+                            </div>
+                        }
                     }
                 }
-                else
-                {
-                    <div class="notification">
-                        <b>No Notifications</b>
-                    </div>
+                    else
+                    {
+                        <div class="notification">
+                            <b>No Notifications</b>
+                        </div>
+                    }
                 }
             </div>
         </div>
