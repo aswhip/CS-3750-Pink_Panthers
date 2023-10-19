@@ -34,7 +34,6 @@ namespace Pink_Panthers_Test
 
             UnitTestingData._account = account;
 
-
             await profileController.addClass(newClass);
             int count = _context.teachingClasses.Where(c => c.accountID == account!.ID).Count();
             await classController.DeleteCourse(newClass.ID);

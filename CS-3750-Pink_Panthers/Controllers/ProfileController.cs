@@ -36,10 +36,10 @@ namespace Pink_Panthers_Project.Controllers
             }
 
             return NotFound();
-        } 
-        
+        }
 
-        [HttpGet]
+
+	[HttpGet]
         public IActionResult addClass()
         {
 			var account = getAccount();
@@ -109,7 +109,7 @@ namespace Pink_Panthers_Project.Controllers
             var account = getAccount();
 
 			ViewBag.isTeacher = account!.isTeacher;
-            return View(getCourseView());
+            return View();
         }
 
         [HttpGet]

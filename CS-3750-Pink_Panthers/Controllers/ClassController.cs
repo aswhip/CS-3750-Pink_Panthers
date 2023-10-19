@@ -4,6 +4,7 @@ using Pink_Panthers_Project.Models;
 using Pink_Panthers_Project.Util;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using OpenQA.Selenium.Internal;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -188,6 +189,36 @@ namespace Pink_Panthers_Project.Controllers
 
             return RedirectToAction("SubmitAssignment", new { assignmentID = assignmentID });
         }
+
+        [HttpGet]
+        public IActionResult Performance(int assignmentID)
+        {
+			var account = getAccount();
+			var cls = getClass();
+			ViewBag.Class = cls;
+
+			if (account! == null || cls! == null || !account!.isTeacher)
+			{
+				return NotFound();
+			}
+			ViewBag.isTeacher = account!.isTeacher;
+			var viewSubmissions = new SubmissionsViewModel
+			{
+				StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),
+				AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault(),
+				Grades = _context.StudentSubmissions
+				.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
+				.Select(c => c.Grade.Value)
+				.ToList(),
+				MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault()
+			};
+			foreach (var s in viewSubmissions.StudentSubmissions)
+			{
+				s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
+				s.currentAssignment = _context.Assignments.Where(c => c.Id == s.AssignmentID).SingleOrDefault();
+			}
+			return View(viewSubmissions);
+		}
 
         [HttpGet]
         public IActionResult SubmitAssignment(int assignmentID)
