@@ -15,8 +15,8 @@ namespace Pink_Panthers_Test
             UnitTestingData.isUnitTesting = true;
 
             ProfileController profileController = new ProfileController(_context);
-            classController classController = new classController(_context);
-            var submitAssignmentController = new classController(_context);
+            ClassController classController = new ClassController(_context);
+            var submitAssignmentController = new ClassController(_context);
 
 
             Account? account = _context.Account.Where(c => c.ID == 7).FirstOrDefault();

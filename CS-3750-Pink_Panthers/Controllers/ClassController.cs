@@ -7,11 +7,11 @@ using System.Data;
 
 namespace Pink_Panthers_Project.Controllers
 {
-    public class classController : Controller
+    public class ClassController : Controller
     {
         private readonly Pink_Panthers_ProjectContext _context;
 
-		public classController(Pink_Panthers_ProjectContext context)
+		public ClassController(Pink_Panthers_ProjectContext context)
         {
             _context = context;
         }

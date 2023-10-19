@@ -19,7 +19,7 @@ namespace Pink_Panthers_Test
 
 			ProfileController profileController = new ProfileController(_context);
 
-			classController classController = new classController(_context);
+			ClassController classController = new ClassController(_context);
 
 			Account? account = _context.Account.Where(c => c.ID == 6).FirstOrDefault(); //Teacher Account
 			UnitTestingData._account = account;
