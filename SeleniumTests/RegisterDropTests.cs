@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Chrome;
 
 namespace SeleniumTests
 {
@@ -14,8 +15,10 @@ namespace SeleniumTests
         [TestMethod]
         public void RegisterForClassTest()
         {
-            IWebDriver driver = new EdgeDriver();
-            string url = "https://pinkpanthers3750.azurewebsites.net";
+			IWebDriver driver = new EdgeDriver();
+			//IWebDriver driver = new ChromeDriver();
+
+			string url = "https://pinkpanthers3750.azurewebsites.net";
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl(url);
@@ -50,8 +53,10 @@ namespace SeleniumTests
         [TestMethod]
         public void ZDropRegisteredClassTest() //Alphabetical ordering with the Z
         {
-            IWebDriver driver = new EdgeDriver();
-            string url = "https://pinkpanthers3750.azurewebsites.net";
+			IWebDriver driver = new EdgeDriver();
+			//IWebDriver driver = new ChromeDriver();
+
+			string url = "https://pinkpanthers3750.azurewebsites.net";
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl(url);
