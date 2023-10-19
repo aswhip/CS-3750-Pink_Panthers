@@ -74,7 +74,8 @@ namespace Pink_Panthers_Project.Controllers
                             UpdateAssignments(loginAccount);
                             UpdateStudentSubmissions(loginAccount);
                         }
-						HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
+                        loginAccount.UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications");
+                        HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
 					}
 					return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
                 }

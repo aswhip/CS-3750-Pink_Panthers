@@ -258,7 +258,7 @@ namespace Pink_Panthers_Project.Controllers
         {
 			var account = getAccount();
 
-			ViewBag.isTeacher = account!.isTeacher;
+            ViewBag.isTeacher = account!.isTeacher;
             if (account != null)
                 return View(account);
             return NotFound();
@@ -421,6 +421,7 @@ namespace Pink_Panthers_Project.Controllers
             if (!UnitTestingData.isUnitTesting)
             {
                 var account = _context.Account.Where(a => a.ID == id).FirstOrDefault();
+                account.UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications");
                 HttpContext.Session.SetSessionValue("LoggedInAccount", account);
             }
         }

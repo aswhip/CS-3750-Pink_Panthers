@@ -1,5 +1,6 @@
 ﻿using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pink_Panthers_Project.Models
 {
@@ -59,6 +60,9 @@ namespace Pink_Panthers_Project.Models
         public bool isTeacher { get; set; } //True for Teacher Account, false for Student Account+
 
         public double AmountToBePaid { get; set; }
+
+        [NotMapped]
+        public List<Assignment>? UpcomingAssignments { get; set; }
 
         //public List<CourseInfo> teachingCourses { get; set; }
 
