@@ -91,7 +91,7 @@
 
                 @if (!ViewBag.isTeacher)
                 {
-                    {
+                    @if(Model.UpcomingAssignments != null){
                         @foreach (var assignment in Model.UpcomingAssignments)
                         {
                             <div class="notification">
@@ -113,7 +113,6 @@
                             </div>
                         }
                     }
-                }
                     else
                     {
                         <div class="notification">
