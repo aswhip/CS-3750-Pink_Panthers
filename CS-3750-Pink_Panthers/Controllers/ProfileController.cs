@@ -113,27 +113,54 @@ namespace Pink_Panthers_Project.Controllers
         }
 
         [HttpGet]
-        public IActionResult Account()
+        public IActionResult Account([FromQuery] double amountToPay, [FromQuery] string paymentStatus)
         {
-			var account = getAccount();
+            var account = getAccount();
+            ViewBag.isTeacher = account!.isTeacher;
 
-			ViewBag.isTeacher = account!.isTeacher;
-            if (account != null) //An account must be active to view this page
+            if (account == null)
+            {
+                return NotFound(); // or handle this case accordingly
+            }
+
+            if (paymentStatus == "succeeded")
+            {
+                var viewModel = getCourseView();
+                // Update the account
+                account.AmountToBePaid -= amountToPay;
+                if (account.AmountToBePaid < 0)
+                    account.AmountToBePaid = 0;
+
+                // Save changes to the database
+                _context.Account.Update(account);
+                _context.SaveChanges();
+
+                // Update the session with the latest account information
+                HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+
+
+                // Display a success view
+                return RedirectToAction("Account");
+            }
+
+            if (account != null)
             {
                 var viewModel = getCourseView();
                 return View(viewModel);
             }
 
-
             return NotFound();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Account(double amountToPay) //Updates the amount needing to be paid
-        {
-			var account = getAccount();
 
-			ViewBag.isTeacher = account!.isTeacher;
+
+
+        [HttpPost]
+        public async Task<IActionResult> Account([FromQuery] double amountToPay)
+        {
+            var account = getAccount();
+
+            ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
             {
                 var viewModel = getCourseView();
@@ -143,8 +170,12 @@ namespace Pink_Panthers_Project.Controllers
                     account!.AmountToBePaid = 0;
                 _context.Account.Update(account!);
                 await _context.SaveChangesAsync();
+
+                HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+
                 return View(viewModel);
             }
+
             return NotFound();
         }
 
@@ -202,8 +233,13 @@ namespace Pink_Panthers_Project.Controllers
                     };
 
                     int hours = _context.Class.Where(c => c.ID == registeredClass.classID).Select(c => c.hours).SingleOrDefault();
+                    
                     account!.AmountToBePaid += (100 * hours);
                     account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
+                    if (account.AmountToBePaid <= 0)
+                    {
+                        account.AmountToBePaid = 0;
+                    }
                     _context.Account.Update(account);
                     // Add the registeredClass to your registered classes collection
                     await _context.registeredClasses.AddAsync(registeredClass);
@@ -215,9 +251,14 @@ namespace Pink_Panthers_Project.Controllers
                     var registeredClassToRemove = _context.registeredClasses.FirstOrDefault(rc => rc.accountID == accountId && rc.classID == classId);
 
                     int hours = _context.Class.Where(c => c.ID == registeredClassToRemove!.classID).Select(c => c.hours).SingleOrDefault();
+                    
                     account!.AmountToBePaid -= (100 * hours);
                     account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
-					_context.Account.Update(account);
+                    if (account.AmountToBePaid <= 0)
+                    {
+                        account.AmountToBePaid = 0;
+                    }
+                    _context.Account.Update(account);
 
 					_context.registeredClasses.Remove(registeredClassToRemove!);
 
