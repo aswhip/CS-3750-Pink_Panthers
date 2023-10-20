@@ -350,7 +350,7 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
-
+        
         /// <summary>
         /// Getters and Setters for the viewModels and account, based on session
         /// </summary>
@@ -397,6 +397,7 @@ namespace Pink_Panthers_Project.Controllers
                     Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
                     StudentSubmissions = HttpContext.Session.GetSessionValue<List<StudentSubmission>>("StudentSubmissions"),
                     UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications"),
+                    AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
                     Account = account
                 };
             }

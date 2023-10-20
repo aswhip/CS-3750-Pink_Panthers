@@ -8,5 +8,6 @@
         public List<StudentSubmission>? StudentSubmissions { get; set; }
         public Account? Account { get; set; }
         public List<Assignment>? UpcomingAssignments { get; set; }
+        public List<Assignment>? AllAssignments { get; set; }
     }
 }

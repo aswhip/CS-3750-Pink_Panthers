@@ -18,124 +18,159 @@
         @if (Model.Account.isTeacher)
         {
             @foreach (var course in Model.TeachingCourses)
+            {
+
+                var color = course.color;
+                var textColor = "white";
+
+
+                @if (color.Contains(';'))
                 {
+                    var parts = color.Split(';');
+                    color = parts[0].Trim();
 
-                    var color = course.color;
-                    var textColor = "white";
-
-
-                    @if(color.Contains(';'))
-                        {
-                            var parts = color.Split(';');
-                            color = parts[0].Trim();
-
-                            if (parts.Length > 1)
-                            {
-                                if (parts[1].Contains(":"))
-                                {
-                                    var textPart = parts[1].Split(":");
-                                    textColor = textPart[1];
-                                }
-                            }
-                        }
-
-                    var startDate = new DateTime(2023, 8, 15);
-                    startDate.AddHours(course.StartTime.Hour);
-                    startDate.AddMinutes(course.StartTime.Minute);
-                    var endDate = new DateTime(2023, 12, 15);
-                    string days = @course.Days;
-                    while (days.Length != 0)
+                    if (parts.Length > 1)
                     {
-                        if (days.StartsWith("M"))
+                        if (parts[1].Contains(":"))
                         {
-                            if (days.Length == 1)
-                            {
-                                days = "";
-                            }
-                            else
-                                days = days.Substring(2);
-                            startDate = new DateTime(2023, 8, 21);
+                            var textPart = parts[1].Split(":");
+                            textColor = textPart[1];
+                        }
+                    }
+                }
 
-                        }
-                        else if (days.StartsWith("Th"))
+                var startDate = new DateTime(2023, 8, 15);
+                startDate.AddHours(course.StartTime.Hour);
+                startDate.AddMinutes(course.StartTime.Minute);
+                var endDate = new DateTime(2023, 12, 15);
+                string days = @course.Days;
+                while (days.Length != 0)
+                {
+                    if (days.StartsWith("M"))
+                    {
+                        if (days.Length == 1)
                         {
-                            if (days.Length == 2)
-                            {
-                                days = "";
-                            }
-                            else
-                                days = days.Substring(3);
-                            startDate = new DateTime(2023, 8, 17);
+                            days = "";
                         }
-                        else if (days.StartsWith("W"))
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 21);
+
+                    }
+                    else if (days.StartsWith("Th"))
+                    {
+                        if (days.Length == 2)
                         {
-                            if (days.Length == 1)
-                            {
-                                days = "";
-                            }
-                            else
-                                days = days.Substring(2);
-                            startDate = new DateTime(2023, 8, 16);
+                            days = "";
                         }
-                        else if (days.StartsWith("T"))
+                        else
+                            days = days.Substring(3);
+                        startDate = new DateTime(2023, 8, 17);
+                    }
+                    else if (days.StartsWith("W"))
+                    {
+                        if (days.Length == 1)
                         {
-                            if (days.Length == 1)
-                            {
-                                days = "";
-                            }
-                            else
-                                days = days.Substring(2);
-                            startDate = new DateTime(2023, 8, 15);
+                            days = "";
                         }
-                        else if (days.StartsWith("F"))
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 16);
+                    }
+                    else if (days.StartsWith("T"))
+                    {
+                        if (days.Length == 1)
                         {
-                            if (days.Length == 1)
-                            {
-                                days = "";
-                            }
-                            else
-                                days = days.Substring(2);
-                            startDate = new DateTime(2023, 8, 18);
+                            days = "";
                         }
-                        while (startDate <= endDate)
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 15);
+                    }
+                    else if (days.StartsWith("F"))
+                    {
+                        if (days.Length == 1)
                         {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 18);
+                    }
+                    while (startDate <= endDate)
+                    {
                         <text>
 
-                                    {
-                                        title: '@course.StartTime.ToString("hh:mm tt") @course.DepartmentCode @course.CourseNumber',
-                                        start: '@startDate.ToString("yyyy-MM-dd")',
-                                        end: '@startDate.ToString("yyyy-MM-dd")',
-                                        backgroundColor: '@color',
-                                        textColor: '@textColor'
-                                    },
+                                                    {
+                                                        title: '@course.StartTime.ToString("hh:mm tt") @course.DepartmentCode @course.CourseNumber',
+                                                        start: '@startDate.ToString("yyyy-MM-dd")',
+                                                        end: '@startDate.ToString("yyyy-MM-dd")',
+                                                        backgroundColor: '@color',
+                                                        textColor: '@textColor'
+                                                    },
                         </text>
                         startDate = startDate.AddDays(7);
                     }
-                }
-            }
-        }
-        else
-        {
-            @foreach (var course in Model.RegisteredCourses) {
-
+                    }
+                    }
+                    }
+                    else
+                    {
+                    @foreach (var assignment in Model.AllAssignments)
+                    {
+                    var course = Model.RegisteredCourses.FirstOrDefault(course => course.ID == assignment.ClassID);
                     var color = course.color;
                     var textColor = "white";
 
+                    @if (color.Contains(';'))
+                    {
+                    var parts = color.Split(';');
+                    color = parts[0].Trim();
 
-                    @if(color.Contains(';'))
+                    if (parts.Length > 1)
+                    {
+                    if (parts[1].Contains(":"))
+                    {
+                    var textPart = parts[1].Split(":");
+                    textColor = textPart[1];
+                    }
+                    }
+                    }
+
+                    <text>
+                                                {
+                                                    title: '@assignment.className @assignment.AssignmentName',
+                                                    start: '@assignment.DueDate.ToString("yyyy-MM-dd")',
+                                                    end: '@assignment.DueDate.ToString("yyyy-MM-dd")',
+                                                    backgroundColor: '@color',
+                                                    textColor: '@textColor',
+                                                    url: '@Url.Action("SubmitAssignment", "Class", new { assignmentID = assignment.Id, classID = assignment.ClassID })'
+                            },
+                                
+                </text>
+            }
+
+            @foreach (var course in Model.RegisteredCourses)
+            {
+
+                var color = course.color;
+                var textColor = "white";
+
+
+                @if (color.Contains(';'))
+                {
+                    var parts = color.Split(';');
+                    color = parts[0].Trim();
+
+                    if (parts.Length > 1)
+                    {
+                        if (parts[1].Contains(":"))
                         {
-                            var parts = color.Split(';');
-                            color = parts[0].Trim();
-
-                            if (parts.Length > 1)
-                            {
-                                if (parts[1].Contains(":"))
-                                {
-                                    var textPart = parts[1].Split(":");
-                                    textColor = textPart[1];
-                                }
-                            }
+                            var textPart = parts[1].Split(":");
+                            textColor = textPart[1];
                         }
+                    }
+                }
 
 
                 var startDate = new DateTime(2023, 8, 15);
@@ -143,73 +178,73 @@
                 string days = @course.Days;
                 while (days.Length != 0)
                 {
-                if (days.StartsWith("M"))
-                {
-                    if (days.Length == 1)
+                    if (days.StartsWith("M"))
                     {
-                        days = "";
-                    }
-                    else
-                        days = days.Substring(2);
-                    startDate = new DateTime(2023, 8, 21);
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 21);
 
-                }
-                else if (days.StartsWith("Th"))
-                {
-                    if (days.Length == 2)
-                    {
-                        days = "";
                     }
-                    else
-                        days = days.Substring(3);
-                    startDate = new DateTime(2023, 8, 17);
-                }
-                else if (days.StartsWith("W"))
-                {
-                    if (days.Length == 1)
+                    else if (days.StartsWith("Th"))
                     {
-                        days = "";
+                        if (days.Length == 2)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(3);
+                        startDate = new DateTime(2023, 8, 17);
                     }
-                    else
-                        days = days.Substring(2);
-                    startDate = new DateTime(2023, 8, 16);
-                }
-                else if (days.StartsWith("T "))
-                {
-                    if (days.Length == 1)
+                    else if (days.StartsWith("W"))
                     {
-                        days = "";
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 16);
                     }
-                    else
-                        days = days.Substring(2);
-                    startDate = new DateTime(2023, 8, 15);
-                }
-                else if (days.StartsWith("F"))
-                {
-                    if (days.Length == 1)
+                    else if (days.StartsWith("T "))
                     {
-                        days = "";
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 15);
                     }
-                    else
-                        days = days.Substring(2);
-                    startDate = new DateTime(2023, 8, 18);
-                }
-                while (startDate <= endDate)
-                {
-                    <text>
+                    else if (days.StartsWith("F"))
+                    {
+                        if (days.Length == 1)
+                        {
+                            days = "";
+                        }
+                        else
+                            days = days.Substring(2);
+                        startDate = new DateTime(2023, 8, 18);
+                    }
+                    while (startDate <= endDate)
+                    {
+                        <text>
 
-                                {
-                                    title: '@course.StartTime.ToString("hh:mm tt") @course.DepartmentCode @course.CourseNumber',
-                                    start: '@startDate.ToString("yyyy-MM-dd")',
-                                    end: '@startDate.ToString("yyyy-MM-dd")',
-                                    backgroundColor: '@color',
-                                    textColor: '@textColor'
-                                },
-                    </text>
-                    startDate = startDate.AddDays(7);
+                                                {
+                                                    title: '@course.StartTime.ToString("hh:mm tt") @course.DepartmentCode @course.CourseNumber',
+                                                    start: '@startDate.ToString("yyyy-MM-dd")',
+                                                    end: '@startDate.ToString("yyyy-MM-dd")',
+                                                    backgroundColor: '@color',
+                                                    textColor: '@textColor'
+                                                },
+                        </text>
+                        startDate = startDate.AddDays(7);
+                    }
                 }
             }
-        }
         }
                         ]
             });

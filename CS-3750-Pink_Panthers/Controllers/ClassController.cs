@@ -221,6 +221,7 @@ namespace Pink_Panthers_Project.Controllers
 		}
 
         [HttpGet]
+        [Route("Class/SubmitAssignment/{assignmentID}")]
         public IActionResult SubmitAssignment(int assignmentID)
         {
             var account = getAccount();
@@ -243,7 +244,32 @@ namespace Pink_Panthers_Project.Controllers
 				return View(submissionView);
 			}
 		}
-		[HttpPost]
+
+        [HttpGet]
+        [Route("Class/SubmitAssignment/{assignmentID}/{classID}")]
+        public IActionResult SubmitAssignment(int assignmentID, int classID)
+        {
+            var account = getAccount();
+            var cls = getClass(classID);
+
+            ViewBag.isTeacher = account!.isTeacher;
+
+            if (cls! == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var submissionView = new StudentSubmission
+                {
+                    AssignmentID = assignmentID,
+                    currentAssignment = _context.Assignments.Find(assignmentID),
+                    UpcomingAssignments = getUpcomingAssignments()
+                };
+                return View(submissionView);
+            }
+        }
+        [HttpPost]
         [DisableRequestSizeLimit]
 		public async Task<IActionResult> SubmitAssignment(StudentSubmission? newSubmission, [FromForm]IFormFile? file)
 		{

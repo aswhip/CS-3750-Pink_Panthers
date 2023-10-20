@@ -268,6 +268,7 @@ namespace Pink_Panthers_Project.Controllers
             {
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
                 HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
+                HttpContext.Session.SetSessionValue("AllAssignments", assignments);
             }
         }
         private void UpdateStudentSubmissions(Account account)
