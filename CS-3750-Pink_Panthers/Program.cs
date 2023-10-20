@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Pink_Panthers_Project.Data;
+using Stripe;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Pink_Panthers_ProjectContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Azure") ?? throw new InvalidOperationException("Connection string 'Pink_Panthers_ProjectContext' not found."), 
@@ -31,6 +33,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<String>();
 
 app.UseSession();
 
