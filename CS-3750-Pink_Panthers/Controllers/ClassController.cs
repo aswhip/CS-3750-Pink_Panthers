@@ -219,7 +219,7 @@ namespace Pink_Panthers_Project.Controllers
 			}
 			return View(viewSubmissions);
 		}
-
+/*
         [HttpGet]
         [Route("Class/SubmitAssignment/{assignmentID}")]
         public IActionResult SubmitAssignment(int assignmentID)
@@ -244,21 +244,21 @@ namespace Pink_Panthers_Project.Controllers
 				return View(submissionView);
 			}
 		}
-
+        */
         [HttpGet]
-        [Route("Class/SubmitAssignment/{assignmentID}/{classID}")]
-        public IActionResult SubmitAssignment(int assignmentID, int classID)
+        public IActionResult SubmitAssignment(int assignmentID)
         {
             var account = getAccount();
-            var cls = getClass(classID);
-
+            var assignment = _context.Assignments.Find(assignmentID);
+            var cls = getClass(assignment.ClassID);
+           
             ViewBag.isTeacher = account!.isTeacher;
 
             if (cls! == null)
             {
                 return NotFound();
             }
-            else
+            else 
             {
                 var submissionView = new StudentSubmission
                 {
@@ -268,7 +268,7 @@ namespace Pink_Panthers_Project.Controllers
                 };
                 return View(submissionView);
             }
-        }
+        } 
         [HttpPost]
         [DisableRequestSizeLimit]
 		public async Task<IActionResult> SubmitAssignment(StudentSubmission? newSubmission, [FromForm]IFormFile? file)
@@ -345,6 +345,10 @@ namespace Pink_Panthers_Project.Controllers
             }
             return BadRequest("Invalid File Submitted.");
         }
+
+        //new for science
+
+        //new for science
 
         [HttpGet]
         public IActionResult ViewSubmissions(int assignmentID)
