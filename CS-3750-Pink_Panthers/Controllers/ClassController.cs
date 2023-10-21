@@ -17,18 +17,25 @@ namespace Pink_Panthers_Project.Controllers
             _context = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var account = getAccount();
 
-			List<Class> tCourses = new List<Class>();
-            List<Class> sCourses = new List<Class>();
-
-			if (account == null)
+            if (account! == null)
             {
                 return NotFound();
             }
+
+            List<Class> tCourses = new List<Class>();
+            List<Class> sCourses = new List<Class>();
+
             ViewBag.isTeacher = account!.isTeacher;
+
+            UpdateAssignments();
+            var assignments = getAssignments();
+            var submissions = getStudentSubmissions();
+
 
             if (account!.isTeacher)
             {
@@ -38,14 +45,17 @@ namespace Pink_Panthers_Project.Controllers
             {
                 sCourses = getStudentClasses()!;
             }
-            
+
             var viewModel = new CourseView
             {
                 TeachingCourses = tCourses,
                 RegisteredCourses = sCourses,
+                Assignments = assignments,
+                StudentSubmissions = submissions,
                 Account = account!,
                 UpcomingAssignments = getUpcomingAssignments()
             };
+
             return View(viewModel);
         }
 
@@ -575,46 +585,50 @@ namespace Pink_Panthers_Project.Controllers
 
             if (!UnitTestingData.isUnitTesting)
             {
-				var cls = getClass();
-				List<Assignment> assignments = new List<Assignment>();
-				if (!account.isTeacher)
-				{
-					assignments = _context.registeredClasses.Where(rc => rc.classID == cls!.ID && rc.accountID == account.ID)
-						.Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
-						{
-							Id = c.Id,
-							ClassID = c.ClassID,
-							AssignmentName = c.AssignmentName,
-							DueDate = c.DueDate,
-							PossiblePoints = c.PossiblePoints,
-							Description = c.Description,
-							SubmissionType = c.SubmissionType
-						}).ToList();
-
-				}
-				else
-				{
-					assignments = _context.Assignments.Where(c => c.ClassID == cls.ID).ToList();
-				}
-
-				foreach (var a in assignments)
-				{
-					a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
-				}
-				if (!UnitTestingData.isUnitTesting)
-				{
-					HttpContext.Session.SetSessionValue("Assignments", assignments);
+                var cls = getClass();
+                if (account != null && cls != null) // Check for null values
+                {
+                    
+                    List<Assignment> assignments = new List<Assignment>();
                     if (!account.isTeacher)
                     {
-                        foreach (var a in assignments)
-                        {
-                            a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
-                            a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
-                        }
-                        var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
-                        HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
+                        assignments = _context.registeredClasses.Where(rc => rc.classID == cls!.ID && rc.accountID == account.ID)
+                            .Join(_context.Assignments, rc => rc.classID, c => c.ClassID, (rc, c) => new Assignment
+                            {
+                                Id = c.Id,
+                                ClassID = c.ClassID,
+                                AssignmentName = c.AssignmentName,
+                                DueDate = c.DueDate,
+                                PossiblePoints = c.PossiblePoints,
+                                Description = c.Description,
+                                SubmissionType = c.SubmissionType
+                            }).ToList();
+
                     }
-				}
+                    else
+                    {
+                        assignments = _context.Assignments.Where(c => c.ClassID == cls.ID).ToList();
+                    }
+
+                    foreach (var a in assignments)
+                    {
+                        a.className = _context.Class.Where(c => c.ID == a.ClassID).Select(c => c.DepartmentCode + c.CourseNumber + ": " + c.CourseName).SingleOrDefault();
+                    }
+                    if (!UnitTestingData.isUnitTesting)
+                    {
+                        HttpContext.Session.SetSessionValue("Assignments", assignments);
+                        if (!account.isTeacher)
+                        {
+                            foreach (var a in assignments)
+                            {
+                                a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
+                                a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
+                            }
+                            var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
+                            HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
+                        }
+                    }
+                }
 			}
             
         }

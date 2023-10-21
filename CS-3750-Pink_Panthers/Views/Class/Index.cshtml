@@ -1,93 +1,158 @@
-﻿@model Pink_Panthers_Project.Models.CourseView
+﻿@using Pink_Panthers_Project.Util
+
+@model Pink_Panthers_Project.Models.CourseView
 
 @{
-	ViewData["Title"] = "Course";
+    ViewData["Title"] = "Course";
 }
 
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width" />
 </head>
 <body>
-	<div class="container">
-		<div class="row mt-5">
-			<h2>Courses:</h2>
-			@if (Model!.Account!.isTeacher)
-			{
-				if (Model.TeachingCourses!.Count == 0)
-				{
-					<p>You don't have any courses yet</p>
-				}
-				else
-				{
-					<table>
-						<tr>
-							<th>Class</th>
-							<th>Room</th>
-							<th>Days</th>
-							<th>Time</th>
-							<th>Assignments</th>
-							<th>Edit</th>
-							<th>Delete</th>
-						</tr>
-						@foreach (var course in Model?.TeachingCourses!)
-						{
-							<tr>
-								<td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
-								<td>@course.Room</td>
-								<td>@course.Days</td>
-								<td>@course.StartTime.ToString() - @course.EndTime.ToString()</td>
-								<td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
-								<td><a class="btn btn-light" asp-action="EditClass" asp-route-id="@course.ID">Edit</a></td>
-								<td><a class="btn btn-warning" asp-action="DeleteCourse" asp-route-id="@course.ID">Delete</a></td>
-							</tr>
-						}
-					</table>
-				}
-			}
-			else if(!Model.Account!.isTeacher)
-			{
-				if (Model.RegisteredCourses!.Count == 0)
-				{
-					<p>You aren't registered for any classes yet!</p>
-				}
-				else
-				{
-					<table>
-						<tr>
-							<th>Class</th>
-							<th>Room</th>
-							<th>Days</th>
-							<th>Time</th>
-							<th>Assignments</th>
-						</tr>
-						@foreach (var course in Model?.RegisteredCourses!)
-						{
-							<tr>
-								<td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
-								<td>@course.Room</td>
-								<td>@course.Days</td>
-								<td>@course.StartTime.ToString() - @course.EndTime.ToString()</td>
-								<td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
-							</tr>
-						}
-					</table>
-				}
-			}
-			@if (Model.Account.isTeacher)
-			{
-				<div class="col-md-4">
-					<a asp-action="addClass" asp-controller="Profile" class="btn btn-primary">Add Class</a>
-				</div>
-			}
+    <div class="container">
+        <div class="row mt-5">
+            <h2>Courses:</h2>
+            @if (Model!.Account!.isTeacher)
+            {
+                if (Model.TeachingCourses!.Count == 0)
+                {
+                    <p>You don't have any courses yet</p>
+                }
+                else
+                {
+                    <table>
+                        <tr>
+                            <th>Class</th>
+                            <th>Room</th>
+                            <th>Days</th>
+                            <th>Time</th>
+                            <th>Assignments</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        @foreach (var course in Model?.TeachingCourses!)
+                        {
+                            <tr>
+                                <td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
+                                <td>@course.Room</td>
+                                <td>@course.Days</td>
+                                <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
+                                <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
+                                <td><a class="btn btn-light" asp-action="EditClass" asp-route-id="@course.ID">Edit</a></td>
+                                <td><a class="btn btn-warning" asp-action="DeleteCourse" asp-route-id="@course.ID">Delete</a></td>
+                            </tr>
+                        }
+                    </table>
+                }
+            }
+            else if (!Model.Account!.isTeacher)
+            {
+                if (Model.RegisteredCourses!.Count == 0)
+                {
+                    <p>You aren't registered for any classes yet!</p>
+                }
+                else
+                {
+                    <table>
+                        <tr>
+                            <th>Class</th>
+                            <th>Room</th>
+                            <th>Days</th>
+                            <th>Time</th>
+                            <th>Grade</th>
+                            <th>Letter Grade</th>
+                            <th>Assignments</th>
+                        </tr>
+                        @foreach (var course in Model?.RegisteredCourses!)
+                        {
+                            <tr>
+                                <td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
+                                <td>@course.Room</td>
+                                <td>@course.Days</td>
+                                <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
+                                <td>
+                                    @{
+                                        int totalGrades = 0;
+                                        int totalPossiblePoints = 0;
+
+                                        if(Model != null)
+                                        {
+                                            foreach (var assignment in Model.Assignments.Where(a => a.ClassID == course.ID))
+                                            {
+                                                foreach (var submission in Model.StudentSubmissions.Where(s => s.AssignmentID == assignment.Id))
+                                                {
+                                                    // Check if the assignment's due date is in the past
+                                                    bool isPastDue = assignment.DueDate < DateTime.Now;
+
+                                                    if (submission.Grade.HasValue && assignment.submitted == true)
+                                                    {
+                                                        // Assignment has a grade
+                                                        totalGrades += submission.Grade.Value;
+                                                        totalPossiblePoints += assignment.PossiblePoints;
+                                                    }
+                                                    else if (!isPastDue)
+                                                    {
+                                                        // Assignment doesn't have a grade, and due date is not in the past
+                                                        // Skip this assignment in the calculation
+                                                        continue;
+                                                    }
+                                                    else if (isPastDue && assignment.submitted == false)
+                                                    {
+                                                        totalGrades += 0;
+                                                        totalPossiblePoints += assignment.PossiblePoints;
+                                                    }
+                                                }
+
+                                            }
+                                        }
+
+                                        if (totalPossiblePoints > 0)
+                                        {
+                                            <span>@totalGrades / @totalPossiblePoints</span>
+                                        }
+                                        else
+                                        {
+                                            <span>N/A</span>
+                                        }
+                                    }
+
+                                </td>
+                                <td>
+                                    @{
+                                        if (totalPossiblePoints > 0)
+                                        {
+                                            var numericGrade = ((double)totalGrades/totalPossiblePoints) * 100;
+                                            var letterGrade = GradingUtil.GetLetterGrade(numericGrade);
+                                            <span>@letterGrade</span>
+                                        }
+                                        else
+                                        {
+                                            <span>N/A</span>
+                                        }
+                                    }
+                                </td>
+                                <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
+                            </tr>
+                        }
+                    </table>
+                }
+            }
+            @if (Model.Account.isTeacher)
+            {
+                <div class="col-md-4">
+                    <a asp-action="addClass" asp-controller="Profile" class="btn btn-primary">Add Class</a>
+                </div>
+            }
 
 
 
 
 
-		</div>
-	</div>
+        </div>
+    </div>
 </body>
 </html>

@@ -125,7 +125,6 @@ namespace Pink_Panthers_Project.Controllers
 
             if (paymentStatus == "succeeded")
             {
-                var viewModel = getCourseView();
                 // Update the account
                 account.AmountToBePaid -= amountToPay;
                 if (account.AmountToBePaid < 0)
