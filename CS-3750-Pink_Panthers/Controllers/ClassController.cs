@@ -219,32 +219,7 @@ namespace Pink_Panthers_Project.Controllers
 			}
 			return View(viewSubmissions);
 		}
-/*
-        [HttpGet]
-        [Route("Class/SubmitAssignment/{assignmentID}")]
-        public IActionResult SubmitAssignment(int assignmentID)
-        {
-            var account = getAccount();
-            var cls = getClass();
 
-			ViewBag.isTeacher = account!.isTeacher;
-
-			if (cls! == null)
-			{
-				return NotFound();
-			}
-			else
-			{
-                var submissionView = new StudentSubmission
-                {
-                    AssignmentID = assignmentID,
-                    currentAssignment = _context.Assignments.Find(assignmentID),
-                    UpcomingAssignments = getUpcomingAssignments()
-                };
-				return View(submissionView);
-			}
-		}
-        */
         [HttpGet]
         public IActionResult SubmitAssignment(int assignmentID)
         {

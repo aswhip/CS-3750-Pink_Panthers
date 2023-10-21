@@ -121,6 +121,9 @@
                     var course = Model.RegisteredCourses.FirstOrDefault(course => course.ID == assignment.ClassID);
                     var color = course.color;
                     var textColor = "white";
+                    var courseName = assignment.className;
+                    var courseParts = courseName.Split(':');
+                    courseName = courseParts[0];
 
                     @if (color.Contains(';'))
                     {
@@ -139,7 +142,7 @@
 
                     <text>
                                                 {
-                                                    title: '@assignment.className @assignment.AssignmentName',
+                                                    title: '@courseName  @assignment.AssignmentName',
                                                     start: '@assignment.DueDate.ToString("yyyy-MM-dd")',
                                                     end: '@assignment.DueDate.ToString("yyyy-MM-dd")',
                                                     backgroundColor: '@color',
