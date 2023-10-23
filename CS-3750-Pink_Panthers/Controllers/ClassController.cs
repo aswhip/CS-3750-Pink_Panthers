@@ -53,7 +53,8 @@ namespace Pink_Panthers_Project.Controllers
                 Assignments = assignments,
                 StudentSubmissions = submissions,
                 Account = account!,
-                UpcomingAssignments = getUpcomingAssignments()
+                UpcomingAssignments = getUpcomingAssignments(),
+                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments")
             };
 
             return View(viewModel);

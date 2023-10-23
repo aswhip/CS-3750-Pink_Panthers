@@ -81,7 +81,7 @@
 
                                         if(Model != null)
                                         {
-                                            foreach (var assignment in Model.Assignments.Where(a => a.ClassID == course.ID))
+                                            foreach (var assignment in Model.AllAssignments.Where(a => a.ClassID == course.ID))
                                             {
                                                 foreach (var submission in Model.StudentSubmissions.Where(s => s.AssignmentID == assignment.Id))
                                                 {
