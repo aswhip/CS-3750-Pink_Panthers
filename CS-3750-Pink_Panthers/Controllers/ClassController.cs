@@ -435,10 +435,37 @@ namespace Pink_Panthers_Project.Controllers
         {
             var account = getAccount();
             Class cls = _context.Class.Where(c => c.ID == id).FirstOrDefault()!;
+            Assignment assignment = _context.Assignments.Where(c => c.ClassID == cls.ID).FirstOrDefault()!;
+            StudentSubmission studentSubmission = _context.StudentSubmissions.Where(c => c.AssignmentID == assignment.Id).FirstOrDefault()!;
+            
             ViewBag.isTeacher = account.isTeacher;
 
             if (account.isTeacher)
             {
+                while (assignment != null)
+                {
+                    while (studentSubmission != null)
+                    {
+                        _context.StudentSubmissions.Remove(studentSubmission);
+                        await _context.SaveChangesAsync();
+                        studentSubmission = _context.StudentSubmissions.Where(c => c.AssignmentID == assignment.Id).FirstOrDefault()!;
+                    }
+                    _context.Assignments.Remove(assignment);
+                    await _context.SaveChangesAsync();
+                    assignment = _context.Assignments.Where(c => c.ClassID == cls.ID).FirstOrDefault()!;
+                    if (assignment != null)
+                    {
+                        studentSubmission = _context.StudentSubmissions.Where(c => c.AssignmentID == assignment.Id).FirstOrDefault()!;
+                    }
+                }
+                RegisteredClass registeredClass = _context.registeredClasses.Where(c => c.classID == cls.ID).FirstOrDefault()!;
+
+                while (registeredClass != null)
+                {
+                    _context.registeredClasses.Remove(registeredClass);
+                    await _context.SaveChangesAsync();
+                    registeredClass = _context.registeredClasses.Where(c => c.classID == cls.ID).FirstOrDefault()!;
+                }
                 _context.Class.Remove(cls);
                 await _context.SaveChangesAsync();
 
