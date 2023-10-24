@@ -38,39 +38,42 @@
 
 </head>
 <div class="container">
-	<div class="row mt-5">
-		<h2>@Model.AssignmentName</h2>
-		@if (Model!.StudentSubmissions!.Count == 0)
-		{
-			<p>No Submissions yet for this assignment</p>
-		}
-		<table>
-			<tr>
-				<th>Student</th>
-				<th>Submission</th>
-				<th>Grade</th>
-			</tr>
-		@foreach(var submission in Model.StudentSubmissions!)
-		{
-			<tr>
-				<td>@Html.Raw(submission.studentAccount!.FirstName + " " + submission.studentAccount!.LastName)</td>
-				<td>
-					@if (submission.currentAssignment!.SubmissionType == "text")
-					{
-							@submission.Submission
-						}
-						else
-						{
-							<a href="~/Submissions/@submission.Submission" download="@submission.Submission">@submission.Submission</a>
-						}
-				</td>
-				<td>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</td>
-				<td><a class="btn btn-primary" asp-action="GradeAssignment" asp-route-id="@submission.ID">Grade</a></td>
-			</tr>
-		}
-		</table>
-	</div>
-
+	
+		<div class="row mt-5">
+        <h2>@Model.AssignmentName</h2>
+		@if (Model!.Account!.isTeacher)
+        {
+			@if (Model!.StudentSubmissions!.Count == 0)
+			{
+				<p>No Submissions yet for this assignment</p>
+			}
+			<table>
+				<tr>
+					<th>Student</th>
+					<th>Submission</th>
+					<th>Grade</th>
+				</tr>
+				@foreach (var submission in Model.StudentSubmissions!)
+				{
+					<tr>
+						<td>@Html.Raw(submission.studentAccount!.FirstName + " " + submission.studentAccount!.LastName)</td>
+						<td>
+							@if (submission.currentAssignment!.SubmissionType == "text")
+							{
+								@submission.Submission
+							}
+							else
+							{
+								<a href="~/Submissions/@submission.Submission" download="@submission.Submission">@submission.Submission</a>
+							}
+						</td>
+						<td>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</td>
+						<td><a class="btn btn-primary" asp-action="GradeAssignment" asp-route-id="@submission.ID">Grade</a></td>
+					</tr>
+				}
+			</table>
+			}
+		</div>
 	
 	@if (Model!.StudentSubmissions!.Count != 0)
 	{

@@ -2,6 +2,7 @@
 {
 	public class SubmissionsViewModel
 	{
+		public Account? Account { get; set; }
 		public List<StudentSubmission>? StudentSubmissions { get; set;}
 
 		public string? AssignmentName { get; set;}
