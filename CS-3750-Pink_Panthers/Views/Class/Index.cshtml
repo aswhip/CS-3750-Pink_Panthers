@@ -73,20 +73,29 @@
                                 <td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
                                 <td>@course.Room</td>
                                 <td>@course.Days</td>
+
                                 <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
                                 <td>
                                     @{
                                         int totalGrades = 0;
                                         int totalPossiblePoints = 0;
 
-                                        if(Model != null)
+
+
+                                        if (Model != null)
                                         {
                                             foreach (var assignment in Model.AllAssignments.Where(a => a.ClassID == course.ID))
                                             {
+                                                bool hasSubmission = false;
+                                                bool isPastDue = false;
+
+                                                if (assignment.DueDate < DateTime.Now)
+                                                {
+                                                    isPastDue = true;
+                                                }
+
                                                 foreach (var submission in Model.StudentSubmissions.Where(s => s.AssignmentID == assignment.Id))
                                                 {
-                                                    // Check if the assignment's due date is in the past
-                                                    bool isPastDue = assignment.DueDate < DateTime.Now;
 
                                                     if (submission.Grade.HasValue && assignment.submitted == true)
                                                     {
@@ -100,11 +109,15 @@
                                                         // Skip this assignment in the calculation
                                                         continue;
                                                     }
-                                                    else if (isPastDue && assignment.submitted == false)
-                                                    {
-                                                        totalGrades += 0;
-                                                        totalPossiblePoints += assignment.PossiblePoints;
-                                                    }
+
+                                                    hasSubmission = true;
+
+                                                }
+
+                                                if (isPastDue && !hasSubmission)
+                                                {
+                                                    totalGrades += 0;
+                                                    totalPossiblePoints += assignment.PossiblePoints;
                                                 }
 
                                             }
