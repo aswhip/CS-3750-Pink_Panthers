@@ -202,36 +202,6 @@ namespace Pink_Panthers_Project.Controllers
         }
 
         [HttpGet]
-        public IActionResult Performance(int assignmentID)
-        {
-			var account = getAccount();
-			var cls = getClass();
-			ViewBag.Class = cls;
-
-			if (account! == null || cls! == null)
-			{
-				return NotFound();
-			}
-			ViewBag.isTeacher = account!.isTeacher;
-			var viewSubmissions = new SubmissionsViewModel
-			{
-				StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),
-				AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault(),
-				Grades = _context.StudentSubmissions
-				.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
-				.Select(c => c.Grade.Value)
-				.ToList(),
-				MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault()
-			};
-			foreach (var s in viewSubmissions.StudentSubmissions)
-			{
-				s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
-				s.currentAssignment = _context.Assignments.Where(c => c.Id == s.AssignmentID).SingleOrDefault();
-			}
-			return View(viewSubmissions);
-		}
-
-        [HttpGet]
         public IActionResult SubmitAssignment(int assignmentID)
         {
             var account = getAccount();
@@ -343,13 +313,14 @@ namespace Pink_Panthers_Project.Controllers
             var cls = getClass();
             ViewBag.Class = cls;
 
-            if (account! == null || cls! == null || !account!.isTeacher)
+            if (account! == null || cls! == null)
             {
                 return NotFound();
             }
             ViewBag.isTeacher = account!.isTeacher;
             var viewSubmissions = new SubmissionsViewModel
             {
+                Account = account,
                 StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),
                 AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault(),
                 Grades = _context.StudentSubmissions

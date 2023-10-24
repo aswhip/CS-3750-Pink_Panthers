@@ -89,7 +89,7 @@
 								}
 								@if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
 								{
-									<td><a class="btn btn-primary" asp-action="Performance" asp-route-assignmentID="@assignment.Id">Performance</a></td>
+									<td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Performance</a></td>
 								}
 							</tr>
 						}
