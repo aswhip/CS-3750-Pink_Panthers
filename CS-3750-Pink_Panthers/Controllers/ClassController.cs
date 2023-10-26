@@ -5,6 +5,7 @@ using Pink_Panthers_Project.Util;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using OpenQA.Selenium.Internal;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -79,8 +80,109 @@ namespace Pink_Panthers_Project.Controllers
 
             UpdateAssignments();
             var assignments = getAssignments();
+            List<StudentSubmission>? submissions;
 
-            var submissions = getStudentSubmissions();
+			List<StudentClassGrade> classPerformance = new List<StudentClassGrade>();
+            int countE = 0, countDPlus = 0, countD = 0, countDMinus = 0, countCPlus = 0, countC = 0, countCMinus = 0, countBPlus = 0,
+                countB = 0, countBMinus = 0, countA = 0, countAMinus = 0;
+
+			if (account.isTeacher)
+            {
+                submissions = new List<StudentSubmission>();
+                foreach(var a in assignments)
+                {
+                    var teaching = _context.StudentSubmissions.Where(tc => tc.AssignmentID == a.Id).ToList();
+                    foreach(var tc in teaching)
+                    {
+                        tc.PossiblePoints = a.PossiblePoints;
+                    }
+
+                    submissions.AddRange(teaching);
+				}
+				foreach (var s in submissions)
+				{
+					if (!classPerformance.Any(c => c.StudentID == s.AccountID))
+					{
+                        if (s.Grade != null)
+                        {
+                            StudentClassGrade newEntry = new StudentClassGrade()
+                            {
+                                StudentID = s.AccountID,
+                                StudentPointsEarned = s.Grade,
+                                TotalPossiblePoints = 0
+                            };
+                            newEntry.TotalPossiblePoints += s.PossiblePoints;
+                            classPerformance.Add(newEntry);
+                        }
+					}
+					else
+					{
+						StudentClassGrade curStudent = classPerformance.Where(c => c.StudentID == s.AccountID).FirstOrDefault()!;
+                        if (s.Grade != null)
+                        {
+                            curStudent.StudentPointsEarned += s.Grade;
+                            curStudent.TotalPossiblePoints += s.PossiblePoints;
+                        }
+					}
+				}
+
+				foreach (var cp in classPerformance)
+				{
+                    if (cp.TotalPossiblePoints != null)
+                    {
+                        double percent = (double)(cp.StudentPointsEarned / (double)cp.TotalPossiblePoints);
+                        percent *= 100;
+
+                        cp.StudentGrade = getGradeLetter(percent);
+                        switch (cp.StudentGrade)
+                        {
+                            case "A":
+                                ++countA;
+                                break;
+                            case "A-":
+                                ++countAMinus;
+                                break;
+                            case "B+":
+                                ++countBPlus;
+                                break;
+                            case "B":
+                                ++countB;
+                                break;
+                            case "B-":
+                                ++countB;
+                                break;
+                            case "C+":
+                                ++countCPlus;
+                                break;
+                            case "C":
+                                ++countC;
+                                break;
+                            case "C-":
+                                ++countCMinus;
+                                break;
+                            case "D+":
+                                ++countDPlus;
+                                break;
+                            case "D":
+                                ++countD;
+                                break;
+                            case "D-":
+                                ++countDMinus;
+                                break;
+                            case "E":
+                                ++countE;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+				}
+			}
+            else
+            {
+                submissions = getStudentSubmissions();
+            }
+
 
             var viewModel = new ClassViewModel
             {
@@ -88,7 +190,20 @@ namespace Pink_Panthers_Project.Controllers
                 Assignments = assignments!,
                 Account = account!,
                 StudentSubmissions = submissions,
-                UpcomingAssignments = getUpcomingAssignments()
+                UpcomingAssignments = getUpcomingAssignments(),
+                StudentClassGrades = classPerformance,
+                countE = countE,
+                countDPlus = countDPlus,
+                countD = countD,
+                countDMinus = countDMinus,
+                countCPlus = countCPlus,
+                countC = countC,
+                countCMinus = countCMinus,
+                countBPlus = countBPlus,
+                countB = countB,
+                countBMinus = countBMinus,
+                countA = countA,
+                countAMinus = countAMinus
 			};
 			return View(viewModel);
 		}
@@ -448,6 +563,58 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
 
         }
+
+        private string getGradeLetter(double percent)
+        {
+			if (percent >= 94.00)
+			{
+				return "A";
+			}
+			else if (percent >= 90.00)
+			{
+				return "A-";
+			}
+			else if (percent >= 87.00)
+			{
+				return "B+";
+			}
+			else if (percent >= 84.00)
+			{
+				return "B";
+			}
+			else if (percent >= 80.00)
+			{
+				return "B-";
+			}
+			else if (percent >= 77.00)
+			{
+				return "C+";
+			}
+			else if (percent >= 74.00)
+			{
+				return "C";
+			}
+			else if (percent >= 70.00)
+			{
+				return "C-";
+			}
+			else if (percent >= 67.00)
+			{
+				return "D+";
+			}
+			else if (percent >= 64.00)
+			{
+				return "D";
+			}
+			else if (percent >= 60.00)
+			{
+				return "D-";
+			}
+			else
+			{
+				return "E";
+			}
+		}
 
         private void setDays(ref Class getDays)
         {
