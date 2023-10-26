@@ -1,7 +1,9 @@
-﻿@model Pink_Panthers_Project.Models.ClassViewModel
+﻿@using Pink_Panthers_Project.Util
+
+@model Pink_Panthers_Project.Models.ClassViewModel
 
 @{
-	ViewData["Title"] = "Course";
+    ViewData["Title"] = "Course";
 }
 
 
@@ -9,8 +11,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-	<script type="text/javascript">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function () {
 
 			var xArray = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'E'];
@@ -18,7 +20,7 @@
 			var data = [{
 				type: 'bar',
 				x: xArray,
-				y: [@Model.countA, @Model.countAMinus, @Model.countBPlus, @Model.countB, @Model.countBMinus, @Model.countCPlus, 
+				y: [@Model.countA, @Model.countAMinus, @Model.countBPlus, @Model.countB, @Model.countBMinus, @Model.countCPlus,
 					@Model.countC, @Model.countCMinus, @Model.countDPlus, @Model.countD, @Model.countDMinus, @Model.countE],
 				marker: {
 					color: ['rgba(0,255,0,1)','rgba(0,255,0,1)','rgba(0,200,55,1)','rgba(0,100,155,1)','rgba(0,0,255,1)',
@@ -42,101 +44,172 @@
 
 			Plotly.newPlot('classPerformance', data, layout);
 		});
-	</script>
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="row mt-5">
-            <h1>@Model!.Class!.CourseName</h1>
-            
+            <div style="display: flex; justify-content: flex-end;">
+                @{
+                    int totalGrades = 0;
+                    int totalPossiblePoints = 0;
+
+                    if (Model != null)
+                    {
+                        foreach (var assignment in Model.AllAssignments.Where(a => a.ClassID == Model.Class.ID))
+                        {
+                            bool hasSubmission = false;
+                            bool isPastDue = false;
+
+                            if (assignment.DueDate < DateTime.Now)
+                            {
+                                isPastDue = true;
+                            }
+
+                            foreach (var submission in Model.StudentSubmissions.Where(s => s.AssignmentID == assignment.Id))
+                            {
+                                if (submission.Grade.HasValue && assignment.submitted == true)
+                                {
+                                    // Assignment has a grade
+                                    totalGrades += submission.Grade.Value;
+                                    totalPossiblePoints += assignment.PossiblePoints;
+                                }
+                                else if (!isPastDue)
+                                {
+                                    // Assignment doesn't have a grade, and due date is not in the past
+                                    // Skip this assignment in the calculation
+                                    continue;
+                                }
+
+                                hasSubmission = true;
+                            }
+
+                            if (isPastDue && !hasSubmission)
+                            {
+                                totalGrades += 0;
+                                totalPossiblePoints += assignment.PossiblePoints;
+                            }
+                        }
+                    }
+
+                    if (totalPossiblePoints > 0)
+                    {
+                        <h5>@totalGrades / @totalPossiblePoints</h5>
+                    }
+                    else
+                    {
+                        <h5>N/A</h5>
+                    }
+                }
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <h1>@Model!.Class!.CourseName</h1>
+                <div style="display: flex; align-items: center;">
+                    @{
+                        if (totalPossiblePoints > 0)
+                        {
+                            var numericGrade = ((double)totalGrades / totalPossiblePoints) * 100;
+                            var Grade = numericGrade.ToString("0.00");
+                            var letterGrade = GradingUtil.GetLetterGrade(numericGrade);
+                            <h2 style="margin-left: 15px;">@Grade% - @letterGrade</h2>
+                        }
+                        else
+                        {
+                            <h2 style="margin-left: 15px;">N/A</h2>
+                        }
+                    }
+                </div>
+            </div>
+
+
             <h2>Assignments:</h2>
-			@if (Model!.Assignments!.Count == 0)
-			{
-				<p>No Assignments yet for this course</p>
-				if (Model.Account!.isTeacher)
-				{
-					<div class="col-md-4">
-						<a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
-					</div>
-				}
-			}
-			else
-			{
-				@if (Model.Account!.isTeacher)
-				{
-					<table>
-						<tr>
-							<th>Name</th>
-							<th>Points</th>
-							<th>Due Date</th>
-							<th>Submission Type</th>
-							<th>Submissions</th>
-							<th>Edit</th>
-							<th>Delete</th>
-						</tr>
-						@foreach (var assignment in Model?.Assignments!)
-						{
-							<tr>
-								<td>@assignment.AssignmentName</td>
-								<td>@assignment.PossiblePoints</td>
-								<td>@assignment.DueDate.ToString()</td>
-								<td>@assignment.SubmissionType</td>
-								<td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Submissions</a></td>
-								<td><a class="btn btn-light">Edit</a></td>
-								<td><a class="btn btn-warning">Delete</a></td>
-							</tr>
-						}
-					</table>
-					<div class="col-md-4">
-						<a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
-					</div>
+            @if (Model!.Assignments!.Count == 0)
+            {
+                <p>No Assignments yet for this course</p>
+                if (Model.Account!.isTeacher)
+                {
+                    <div class="col-md-4">
+                        <a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+                    </div>
+                }
+            }
+            else
+            {
+                @if (Model.Account!.isTeacher)
+                {
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Due Date</th>
+                            <th>Submission Type</th>
+                            <th>Submissions</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        @foreach (var assignment in Model?.Assignments!)
+                        {
+                            <tr>
+                                <td>@assignment.AssignmentName</td>
+                                <td>@assignment.PossiblePoints</td>
+                                <td>@assignment.DueDate.ToString()</td>
+                                <td>@assignment.SubmissionType</td>
+                                <td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Submissions</a></td>
+                                <td><a class="btn btn-light">Edit</a></td>
+                                <td><a class="btn btn-warning">Delete</a></td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="col-md-4">
+                        <a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+                    </div>
 
-					<div class="row mt-3">
-						<div id="classPerformance" />
-					</div>
-				}
+                    <div class="row mt-3">
+                        <div id="classPerformance" />
+                    </div>
+                }
 
-				@if (!Model!.Account.isTeacher)
-				{
-					<table>
-						<tr>
-							<th>Name</th>
-							<th>Points</th>
-							<th>Due Date</th>
-							<th>Submission Type</th>
-							<th>Grade</th>
-							<th>Submissions</th>
-							<th>Performance</th>
-						</tr>
-						@foreach (var assignment in Model?.Assignments!)
-						{
-							<tr>
-								<td>@assignment.AssignmentName</td>
-								<td>@assignment.PossiblePoints</td>
-								<td>@assignment.DueDate.ToString()</td>
-								<td>@assignment.SubmissionType</td>
-								<td>@Model.StudentSubmissions!.Where(c => c.AssignmentID == assignment.Id).Select(c => c.Grade).SingleOrDefault() / @assignment.PossiblePoints</td>
-								@if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
-								{
-									<td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Re-Submit Assignment</a></td>
-								}
-								else
-								{
-									<td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Submit Assignment</a></td>
+                @if (!Model!.Account.isTeacher)
+                {
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Points</th>
+                            <th>Due Date</th>
+                            <th>Submission Type</th>
+                            <th>Grade</th>
+                            <th>Submissions</th>
+                            <th>Performance</th>
+                        </tr>
+                        @foreach (var assignment in Model?.Assignments!)
+                        {
+                            <tr>
+                                <td>@assignment.AssignmentName</td>
+                                <td>@assignment.PossiblePoints</td>
+                                <td>@assignment.DueDate.ToString()</td>
+                                <td>@assignment.SubmissionType</td>
+                                <td>@Model.StudentSubmissions!.Where(c => c.AssignmentID == assignment.Id).Select(c => c.Grade).SingleOrDefault() / @assignment.PossiblePoints</td>
+                                @if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
+                                {
+                                    <td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Re-Submit Assignment</a></td>
+                                }
+                                else
+                                {
+                                    <td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Submit Assignment</a></td>
 
-								}
-								@if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
-								{
-									<td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Performance</a></td>
-								}
-							</tr>
-						}
-					</table>
-				}
-			}
+                                }
+                                @if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
+                                {
+                                    <td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Performance</a></td>
+                                }
+                            </tr>
+                        }
+                    </table>
+                }
+            }
 
-			
-			
+
+
 
 
         </div>

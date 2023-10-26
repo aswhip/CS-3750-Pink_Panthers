@@ -63,8 +63,6 @@
                             <th>Room</th>
                             <th>Days</th>
                             <th>Time</th>
-                            <th>Grade</th>
-                            <th>Letter Grade</th>
                             <th>Assignments</th>
                         </tr>
                         @foreach (var course in Model?.RegisteredCourses!)
@@ -73,81 +71,7 @@
                                 <td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
                                 <td>@course.Room</td>
                                 <td>@course.Days</td>
-
                                 <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
-                                <td>
-                                    @{
-                                        int totalGrades = 0;
-                                        int totalPossiblePoints = 0;
-
-
-
-                                        if (Model != null)
-                                        {
-                                            foreach (var assignment in Model.AllAssignments.Where(a => a.ClassID == course.ID))
-                                            {
-                                                bool hasSubmission = false;
-                                                bool isPastDue = false;
-
-                                                if (assignment.DueDate < DateTime.Now)
-                                                {
-                                                    isPastDue = true;
-                                                }
-
-                                                foreach (var submission in Model.StudentSubmissions.Where(s => s.AssignmentID == assignment.Id))
-                                                {
-
-                                                    if (submission.Grade.HasValue && assignment.submitted == true)
-                                                    {
-                                                        // Assignment has a grade
-                                                        totalGrades += submission.Grade.Value;
-                                                        totalPossiblePoints += assignment.PossiblePoints;
-                                                    }
-                                                    else if (!isPastDue)
-                                                    {
-                                                        // Assignment doesn't have a grade, and due date is not in the past
-                                                        // Skip this assignment in the calculation
-                                                        continue;
-                                                    }
-
-                                                    hasSubmission = true;
-
-                                                }
-
-                                                if (isPastDue && !hasSubmission)
-                                                {
-                                                    totalGrades += 0;
-                                                    totalPossiblePoints += assignment.PossiblePoints;
-                                                }
-
-                                            }
-                                        }
-
-                                        if (totalPossiblePoints > 0)
-                                        {
-                                            <span>@totalGrades / @totalPossiblePoints</span>
-                                        }
-                                        else
-                                        {
-                                            <span>N/A</span>
-                                        }
-                                    }
-
-                                </td>
-                                <td>
-                                    @{
-                                        if (totalPossiblePoints > 0)
-                                        {
-                                            var numericGrade = ((double)totalGrades/totalPossiblePoints) * 100;
-                                            var letterGrade = GradingUtil.GetLetterGrade(numericGrade);
-                                            <span>@letterGrade</span>
-                                        }
-                                        else
-                                        {
-                                            <span>N/A</span>
-                                        }
-                                    }
-                                </td>
                                 <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
                             </tr>
                         }

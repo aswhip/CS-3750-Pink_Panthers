@@ -55,7 +55,7 @@ namespace Pink_Panthers_Project.Controllers
                 StudentSubmissions = submissions,
                 Account = account!,
                 UpcomingAssignments = getUpcomingAssignments(),
-                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments")
+                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
             };
 
             return View(viewModel);
@@ -77,6 +77,13 @@ namespace Pink_Panthers_Project.Controllers
 
             ViewBag.Class = cls;
 			ViewBag.isTeacher = account!.isTeacher;
+
+            List<Class> sCourses = new List<Class>();
+
+            if (!account!.isTeacher)
+            {
+                sCourses = getStudentClasses()!;
+            }
 
             UpdateAssignments();
             var assignments = getAssignments();
@@ -203,8 +210,10 @@ namespace Pink_Panthers_Project.Controllers
                 countB = countB,
                 countBMinus = countBMinus,
                 countA = countA,
-                countAMinus = countAMinus
-			};
+                countAMinus = countAMinus,
+                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
+                RegisteredCourses = sCourses
+            };
 			return View(viewModel);
 		}
 

@@ -10,8 +10,10 @@
 
         public List<StudentSubmission>? StudentSubmissions { get; set; } 
         public List<Assignment>? UpcomingAssignments { get; set; }
+        public List<Assignment>? AllAssignments { get; set; }
+        public List<Class>? RegisteredCourses { get; set; }
 
-		public List<StudentClassGrade>? StudentClassGrades { get; set; }
+        public List<StudentClassGrade>? StudentClassGrades { get; set; }
 
         public int countE {  get; set; }
         public int countDPlus { get; set; }
