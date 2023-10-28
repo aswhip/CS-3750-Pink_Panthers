@@ -54,7 +54,7 @@
                     int totalGrades = 0;
                     int totalPossiblePoints = 0;
 
-                    if (Model != null)
+                    if (Model != null && !Model.Account.isTeacher)
                     {
                         foreach (var assignment in Model.AllAssignments.Where(a => a.ClassID == Model.Class.ID))
                         {
