@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using OpenQA.Selenium.Internal;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using OpenQA.Selenium;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -399,7 +400,14 @@ namespace Pink_Panthers_Project.Controllers
 				sub = newSubmission!;
 				sub.AccountID = account!.ID;
 				string fileName = account!.ID + "_" + newSubmission!.AssignmentID + "_" + file.FileName ;
-				string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Submissions", fileName);
+                string path;
+                if (UnitTestingData.isUnitTesting) {
+                    string relativePathForTests = @"..\..\..\..\CS-3750-Pink_Panthers\wwwroot\Submissions";
+                    path = Path.Combine(Directory.GetCurrentDirectory(), relativePathForTests, fileName);
+
+                }
+                else
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Submissions", fileName);
                 using(FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Write))
                 {
                     if (await _context.StudentSubmissions.Where(c => c.AccountID == account!.ID && c.AssignmentID == newSubmission!.AssignmentID).SingleOrDefaultAsync() == null)
@@ -425,10 +433,6 @@ namespace Pink_Panthers_Project.Controllers
             }
             return BadRequest("Invalid File Submitted.");
         }
-
-        //new for science
-
-        //new for science
 
         [HttpGet]
         public IActionResult ViewSubmissions(int assignmentID)

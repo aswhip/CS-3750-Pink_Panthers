@@ -24,10 +24,10 @@ namespace SeleniumTests
             driver.Navigate().GoToUrl(url);
 
             IWebElement username = driver.FindElement(By.Id("usernameText"));
-            username.SendKeys("ubersecret@gmail.com");
+            username.SendKeys("testteacher@gmail.com");
 
             IWebElement password = driver.FindElement(By.Id("passwordText"));
-            password.SendKeys("supersecret");
+            password.SendKeys("test1");
 
             IWebElement loginBtn = driver.FindElement(By.Id("loginBtn"));
 
@@ -43,7 +43,7 @@ namespace SeleniumTests
             IWebElement createClassLink = driver.FindElement(By.Id("CreateClass"));
             createClassLink.Click();
 
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(2000);
 
             IWebElement room = driver.FindElement(By.Id("Room"));
             room.SendKeys("NB 234");
@@ -72,7 +72,12 @@ namespace SeleniumTests
             IWebElement hours = driver.FindElement(By.Id("hours"));
             hours.SendKeys("4");
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(4000);
+
+            IWebElement submit = driver.FindElement(By.Id("submit"));
+            submit.Click();
+
+            System.Threading.Thread.Sleep(2000);
 
             classLink = driver.FindElement(By.Id("ClassLink"));
             classLink.Click();
