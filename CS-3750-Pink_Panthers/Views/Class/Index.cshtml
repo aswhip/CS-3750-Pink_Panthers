@@ -24,6 +24,7 @@
                 }
                 else
                 {
+                    int courses = 0;
                     <table>
                         <tr>
                             <th>Class</th>
@@ -36,6 +37,7 @@
                         </tr>
                         @foreach (var course in Model?.TeachingCourses!)
                         {
+                            courses++;
                             <tr>
                                 <td>@Html.Raw(course.DepartmentCode + course.CourseNumber + ": " + course.CourseName)</td>
                                 <td>@course.Room</td>
@@ -43,7 +45,7 @@
                                 <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
                                 <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
                                 <td><a class="btn btn-light" asp-action="EditClass" asp-route-id="@course.ID">Edit</a></td>
-                                <td><a class="btn btn-warning" asp-action="DeleteCourse" asp-route-id="@course.ID">Delete</a></td>
+                                <td><a class="btn btn-warning" asp-action="DeleteCourse" id="Delete_@courses" asp-route-id="@course.ID">Delete</a></td>
                             </tr>
                         }
                     </table>
@@ -81,7 +83,7 @@
             @if (Model.Account.isTeacher)
             {
                 <div class="col-md-4">
-                    <a asp-action="addClass" asp-controller="Profile" class="btn btn-primary">Add Class</a>
+                    <a asp-action="addClass" asp-controller="Profile" id="CreateClass" class="btn btn-primary">Add Class</a>
                 </div>
             }
 

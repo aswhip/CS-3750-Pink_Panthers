@@ -43,7 +43,7 @@
                         else if (ViewBag.isTeacher)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Class" asp-action="Index">Classes</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Class" asp-action="Index" id="ClassLink">Classes</a>
                             </li>
                             @if(ViewBag.Class != null)
                             {

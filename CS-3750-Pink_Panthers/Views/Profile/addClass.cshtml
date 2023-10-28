@@ -16,12 +16,12 @@
             }
             <div class="form-group">
                 <label asp-for="Room" class="control-label"></label>
-                <input asp-for="Room" class="form-control" />
+                <input asp-for="Room" id="Room" class="form-control" />
                 <span asp-validation-for="Room" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DepartmentCode" class="control-label">Department Code</label>
-                <select asp-for="DepartmentCode" class="form-control">
+                <select asp-for="DepartmentCode" id="DepartmentCode" class="form-control">
                     <option value="ACTG">ACTG</option>
                     <option value="AERO">AERO</option>
                     <option value="ANTH">ANTH</option>
@@ -153,12 +153,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="CourseNumber" class="control-label">Course Number</label>
-                <input asp-for="CourseNumber" class="form-control" />
+                <input asp-for="CourseNumber" id="CourseNumber" class="form-control" />
                 <span asp-validation-for="CourseNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CourseName" class="control-label">Course Name</label>
-                <input asp-for="CourseName" class="form-control" />
+                <input asp-for="CourseName" id="CourseName" class="form-control" />
                 <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -170,22 +170,22 @@
                 <br />
                 <div>
                     <pre>
-   @Html.CheckBoxFor(m => m.monday)         @Html.CheckBoxFor(m => m.tuesday)          @Html.CheckBoxFor(m => m.wednesday)          @Html.CheckBoxFor(m => m.thursday)        @Html.CheckBoxFor(m => m.friday)</pre>
+                        @Html.CheckBoxFor(m => m.monday, new { id = "MondayCheckbox" })         @Html.CheckBoxFor(m => m.tuesday, new { id = "TuesdayCheckbox" })          @Html.CheckBoxFor(m => m.wednesday, new { id = "WednesdayCheckbox" })          @Html.CheckBoxFor(m => m.thursday, new { id = "ThursdayCheckbox" })        @Html.CheckBoxFor(m => m.friday, new { id = "FridayCheckbox" })</pre>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label">Start Time</label>
-                <input asp-for="StartTime" class="form-control" />
+                <input asp-for="StartTime" id="StartTime" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndTime" class="control-label">End Time</label>
-                <input asp-for="EndTime" class="form-control" />
+                <input asp-for="EndTime" id="EndTime" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="hours" class="control-label">Credit Hours</label>
-                <select asp-for="hours" class="form-control">
+                <select asp-for="hours" id="hours" class="form-control">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -196,7 +196,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add Class" class="btn btn-primary" />
+                <input type="submit" value="Add Class" id="submit" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -531,7 +531,11 @@ namespace Pink_Panthers_Project.Controllers
             var account = getAccount();
             Class cls = _context.Class.Where(c => c.ID == id).FirstOrDefault()!;
             Assignment assignment = _context.Assignments.Where(c => c.ClassID == cls.ID).FirstOrDefault()!;
-            StudentSubmission studentSubmission = _context.StudentSubmissions.Where(c => c.AssignmentID == assignment.Id).FirstOrDefault()!;
+            StudentSubmission studentSubmission = null;
+            if (assignment != null)
+            {
+                studentSubmission = _context.StudentSubmissions.Where(c => c.AssignmentID == assignment.Id).FirstOrDefault()!;
+            }
             
             ViewBag.isTeacher = account.isTeacher;
 
