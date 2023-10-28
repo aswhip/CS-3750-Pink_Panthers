@@ -51,8 +51,10 @@
         <div class="row mt-5">
             <div style="display: flex; justify-content: flex-end;">
                 @{
+
                     int totalGrades = 0;
                     int totalPossiblePoints = 0;
+                    bool teacher = Model.Account.isTeacher;
 
                     if (Model != null && !Model.Account.isTeacher)
                     {
@@ -92,7 +94,8 @@
                         }
                     }
 
-                    if (totalPossiblePoints > 0)
+                    if (teacher) ;
+                    else if (totalPossiblePoints > 0)
                     {
                         <h5>@totalGrades / @totalPossiblePoints</h5>
                     }
@@ -100,13 +103,15 @@
                     {
                         <h5>N/A</h5>
                     }
+                    
                 }
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <h1>@Model!.Class!.CourseName</h1>
                 <div style="display: flex; align-items: center;">
                     @{
-                        if (totalPossiblePoints > 0)
+                        if (teacher) ;
+                        else if (totalPossiblePoints > 0)
                         {
                             var numericGrade = ((double)totalGrades / totalPossiblePoints) * 100;
                             var Grade = numericGrade.ToString("0.00");
@@ -120,7 +125,7 @@
                     }
                 </div>
             </div>
-
+            
 
             <h2>Assignments:</h2>
             @if (Model!.Assignments!.Count == 0)
