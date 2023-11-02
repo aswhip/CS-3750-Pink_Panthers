@@ -59,7 +59,7 @@ namespace Pink_Panthers_Project.Controllers
             var account = GetAccount();
             var unitAmountCents = (long)(hiddenAmountToPay * 100);
 
-            var successUrl = $"{Request.Scheme}://{Request.Host}/Profile/Account?amountToPay={hiddenAmountToPay}&paymentStatus=succeeded";
+            var successUrl = $"{Request.Scheme}://{Request.Host}/Profile/Receipt?amountToPay={hiddenAmountToPay}&paymentStatus=succeeded";
             var cancelUrl = $"{Request.Scheme}://{Request.Host}/Profile/Account?amountToPay={hiddenAmountToPay}&paymentStatus=canceled";
 
             var options = new SessionCreateOptions
@@ -88,6 +88,7 @@ namespace Pink_Panthers_Project.Controllers
             var service = new SessionService();
             Session session = service.Create(options);
 
+            HttpContext.Session.SetSessionValue<decimal>("amountToPay", hiddenAmountToPay);
             return Redirect(session.Url);
         }
 

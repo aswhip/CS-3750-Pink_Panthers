@@ -1,0 +1,36 @@
+﻿@model Pink_Panthers_Project.Models.ViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+<div style="text-align: center;">
+    <h1>Receipt</h1>
+    <div>
+        <h5>
+            Paid: Tuition
+        </h5>
+        <h5>
+            Amount: $@Model.AmountToPay.ToString("0.00")
+        </h5>
+        <h5>
+            Transaction ID: pi_@GenerateRandomString(24)
+        </h5>
+
+        <a asp-action="Account" class="btn btn-primary">Back to Account</a>
+    </div>
+</div>
+
+    @functions {
+        // Define a function to generate a random alphanumeric string
+        public string GenerateRandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+            var random = new Random();
+            var result = new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            return result;
+        }
+    }
+

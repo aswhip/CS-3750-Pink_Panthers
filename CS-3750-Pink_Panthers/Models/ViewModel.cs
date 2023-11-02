@@ -60,5 +60,12 @@
 		*/
 
 		public List<Class>? TeachingCourses { get; set; }
-	}
+
+        /*
+		 * Receipt Stuff
+		 * ------------------------------------------------------------------
+		*/
+
+        public decimal AmountToPay { get; set; }
+    }
 }

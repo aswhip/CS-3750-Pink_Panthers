@@ -20,6 +20,9 @@ namespace Pink_Panthers_Project.Controllers
     public class ProfileController : Controller
     {
 		private readonly Pink_Panthers_ProjectContext _context;
+
+        public double AmountToPay { get; private set; }
+
         public ProfileController(Pink_Panthers_ProjectContext context)
         {
             _context = context;
@@ -152,9 +155,6 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> Account([FromQuery] double amountToPay)
         {
@@ -178,6 +178,65 @@ namespace Pink_Panthers_Project.Controllers
 
             return NotFound();
         }
+
+        [HttpGet]
+        public IActionResult Receipt([FromQuery] double amountToPay, [FromQuery] string paymentStatus)
+        {
+            var account = getAccount();
+            ViewBag.isTeacher = account!.isTeacher;
+
+            if (account == null)
+            {
+                return NotFound(); // or handle this case accordingly
+            }
+
+            if (paymentStatus == "succeeded")
+            {
+                // Update the account
+                account.AmountToBePaid -= amountToPay;
+                if (account.AmountToBePaid < 0)
+                    account.AmountToBePaid = 0;
+
+                // Save changes to the database
+                _context.Account.Update(account);
+                _context.SaveChanges();
+
+                // Update the session with the latest account information
+                HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+
+                AmountToPay = amountToPay;
+                // Display a success view
+                return RedirectToAction("ReceiptView");
+            }
+
+            if (account != null)
+            {
+                var viewModel = getViewModel();
+                return View(viewModel);
+            }
+
+            return NotFound();
+        }
+
+        public IActionResult ReceiptView()
+        {
+            var account = getAccount();
+
+            ViewBag.isTeacher = account!.isTeacher;
+            if (account != null) //An account must be active to view this page
+            {
+                var pay = HttpContext.Session.GetSessionValue<decimal>("amountToPay");
+
+                HttpContext.Session.SetSessionValue("LoggedInAccount", account);
+
+                ViewModel viewModel = addAmountViewModel(pay);
+                return View(viewModel);
+            }
+
+            return NotFound();
+        }
+
+        
 
         [HttpGet]
         public IActionResult Register()
@@ -449,6 +508,33 @@ namespace Pink_Panthers_Project.Controllers
             }
             return viewModel;
 		}
+
+        private ViewModel addAmountViewModel(decimal amountToPay)
+        {
+            ViewModel viewModel;
+            if (UnitTestingData.isUnitTesting)
+            {
+                viewModel = new ViewModel
+                {
+                    Account = getAccount()
+                };
+            }
+            else
+            {
+                viewModel = new ViewModel
+                {
+                    TeachingCourses = getTeacherClasses(),
+                    RegisteredCourses = getStudentClasses(),
+                    Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
+                    StudentSubmissions = HttpContext.Session.GetSessionValue<List<StudentSubmission>>("StudentSubmissions"),
+                    AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
+                    Account = getAccount(),
+                    Notifications = getNotifications(),
+                    AmountToPay = amountToPay
+                };
+            }
+            return viewModel;
+        }
 
 		private List<Class>? getTeacherClasses()
 		{
