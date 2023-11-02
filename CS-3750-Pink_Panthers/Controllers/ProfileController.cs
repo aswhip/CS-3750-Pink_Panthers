@@ -12,6 +12,8 @@ using System.Runtime.CompilerServices;
 using System.Collections.Immutable;
 using System.Collections.Generic;
 using Pink_Panthers_Project.Util;
+using OpenQA.Selenium.DevTools.V115.Page;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -386,6 +388,14 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
         }
 
+        public IActionResult ClearNotification(int notificationID, string returnUrl)
+        {
+            _context.Notifications.Where(n => n.Id == notificationID).ExecuteUpdate(n => n.SetProperty(c => c.IsCleared, true));
+            UpdateNotifications(getAccount());
+
+            return RedirectPermanent(returnUrl);
+        }
+
         
         /// <summary>
         /// Getters and Setters for the viewModels and account, based on session
@@ -547,6 +557,20 @@ namespace Pink_Panthers_Project.Controllers
             {
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
             }
+        }
+
+        private void UpdateNotifications(Account account)
+        {
+            var notifications = _context.Notifications.Where(n => n.StudentId == account.ID && n.IsCleared == false).ToList();
+            foreach (var notification in notifications)
+            {
+                var assignment = _context.Assignments.Where(a => a.Id == notification.AssignmentId).FirstOrDefault();
+                notification.AssignmentName = assignment.AssignmentName;
+                notification.DueDate = assignment.DueDate;
+                notification.ClassName = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode.ToString() + c.CourseNumber.ToString() + ": " + c.CourseName).SingleOrDefault();
+            }
+            if (!UnitTestingData.isUnitTesting)
+                HttpContext.Session.SetSessionValue("Notifications", notifications);
         }
 
 

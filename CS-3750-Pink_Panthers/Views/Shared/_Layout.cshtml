@@ -101,8 +101,18 @@
                         @foreach (var notification in Model.Notifications)
                         {
                             <div class="notification">
-                                <b>@notification.ClassName</b><br />
-                                <b>@notification.AssignmentName</b><br />
+                                <b>@notification.ClassName</b>
+                                <form asp-action="ClearNotification" asp-controller="Profile">
+                                    @{
+                                        Uri returnUrl = new Uri(String.Format("{0}://{1}{2}{3}", Context.Request.Scheme, Context.Request.Host, Context.Request.Path, Context.Request.QueryString));
+                                    }
+                                    <div class="clear-notif">
+                                        <input type="submit" class="btn" value="x"/>
+                                        <input type="hidden" name="notificationID" value="@notification.Id" />
+                                        <input type="hidden" name="returnUrl" value="@returnUrl" />
+                                    </div>
+                                    </form>
+                                <br /><b>@notification.AssignmentName</b><br />
                                 <b>@notification.NotificationString</b><br />
                                 <b>Due: @notification.DueDate.ToString("MM/dd/yyyy h:mm tt")</b>
                             </div>

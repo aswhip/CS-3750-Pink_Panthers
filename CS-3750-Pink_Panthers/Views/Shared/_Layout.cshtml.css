@@ -88,3 +88,16 @@ button.accept-policy {
     float: right;
     padding-right: 10px;
 }
+
+.clear-notif {
+    float: right;
+    padding-right: 5px;
+    border: none;
+    color: black;
+    outline-color: none;
+}
+
+    .clear-notif a {
+        all: unset;
+        
+    }
