@@ -20,5 +20,6 @@ namespace Pink_Panthers_Project.Data
         public DbSet<Pink_Panthers_Project.Models.TeachingClass> teachingClasses { get; set; } = default!;
         public DbSet<Pink_Panthers_Project.Models.Assignment> Assignments { get; set; } = default!;
         public DbSet<Pink_Panthers_Project.Models.StudentSubmission> StudentSubmissions { get; set;} = default!;
+        public DbSet<Pink_Panthers_Project.Models.Notification> Notifications { get; set; } = default!;
     }
 }

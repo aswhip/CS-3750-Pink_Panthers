@@ -161,9 +161,6 @@ namespace Pink_Panthers_Project.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("accountID")
-                        .HasColumnType("int");
-
                     b.Property<string>("color")
                         .HasColumnType("nvarchar(max)");
 
@@ -173,6 +170,31 @@ namespace Pink_Panthers_Project.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Class");
+                });
+
+            modelBuilder.Entity("Pink_Panthers_Project.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AssignmentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCleared")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NotificationString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Pink_Panthers_Project.Models.RegisteredClass", b =>

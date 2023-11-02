@@ -61,8 +61,6 @@ namespace Pink_Panthers_Project.Models
 
         public double AmountToBePaid { get; set; }
 
-        [NotMapped]
-        public List<Assignment>? UpcomingAssignments { get; set; }
 
         //public List<CourseInfo> teachingCourses { get; set; }
 

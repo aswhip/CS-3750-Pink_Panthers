@@ -73,6 +73,12 @@
                                     </svg>
                                 </button>
                             </li>
+                            <li class="notification-count">
+                                @if(Model.Notifications.Count > 0)
+                                {
+                                    <b>@Model.Notifications.Count</b>
+                                }
+                            </li>
                         </ul>
                     }
                     
@@ -91,25 +97,14 @@
 
                 @if (!ViewBag.isTeacher)
                 {
-                    @if(Model.UpcomingAssignments != null){
-                        @foreach (var assignment in Model.UpcomingAssignments)
+                    @if(Model.Notifications.Count != 0){
+                        @foreach (var notification in Model.Notifications)
                         {
                             <div class="notification">
-                                <b>@assignment.className</b><br />
-                                <b>@assignment.AssignmentName</b><br />
-                                @if (assignment.grade != null)
-                                {
-                                    <b>Graded</b><br />
-                                }
-                                else if (assignment.submitted)
-                                {
-                                    <b>Not Yet Graded</b><br />
-                                }
-                                else
-                                {
-                                    <b>Not Yet Submitted</b><br />
-                                }
-                                <b>@assignment.DueDate.ToString("MM/dd/yyyy h:mm tt")</b>
+                                <b>@notification.ClassName</b><br />
+                                <b>@notification.AssignmentName</b><br />
+                                <b>@notification.NotificationString</b><br />
+                                <b>Due: @notification.DueDate.ToString("MM/dd/yyyy h:mm tt")</b>
                             </div>
                         }
                     }

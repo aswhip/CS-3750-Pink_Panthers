@@ -48,16 +48,7 @@ namespace Pink_Panthers_Project.Controllers
                 sCourses = getStudentClasses()!;
             }
 
-            var viewModel = new CourseView
-            {
-                TeachingCourses = tCourses,
-                RegisteredCourses = sCourses,
-                Assignments = assignments,
-                StudentSubmissions = submissions,
-                Account = account!,
-                UpcomingAssignments = getUpcomingAssignments(),
-                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
-            };
+            var viewModel = getViewModel();
 
             return View(viewModel);
         }
@@ -192,29 +183,20 @@ namespace Pink_Panthers_Project.Controllers
             }
 
 
-            var viewModel = new ClassViewModel
-            {
-                Class = cls!,
-                Assignments = assignments!,
-                Account = account!,
-                StudentSubmissions = submissions,
-                UpcomingAssignments = getUpcomingAssignments(),
-                StudentClassGrades = classPerformance,
-                countE = countE,
-                countDPlus = countDPlus,
-                countD = countD,
-                countDMinus = countDMinus,
-                countCPlus = countCPlus,
-                countC = countC,
-                countCMinus = countCMinus,
-                countBPlus = countBPlus,
-                countB = countB,
-                countBMinus = countBMinus,
-                countA = countA,
-                countAMinus = countAMinus,
-                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
-                RegisteredCourses = sCourses
-            };
+            var viewModel = getViewModel();
+            viewModel.countE = countE;
+            viewModel.countDPlus = countDPlus;
+            viewModel.countD = countD;
+            viewModel.countDMinus = countDMinus;
+            viewModel.countCPlus = countCPlus;
+            viewModel.countC = countC;
+            viewModel.countCMinus = countCMinus;
+            viewModel.countBPlus = countBPlus;
+            viewModel.countB = countB;
+            viewModel.countBMinus = countBMinus;
+            viewModel.countA = countA;
+            viewModel.countAMinus = countAMinus;
+            viewModel.StudentClassGrades = classPerformance;
 			return View(viewModel);
 		}
 
@@ -254,6 +236,27 @@ namespace Pink_Panthers_Project.Controllers
 			sSub = _context.StudentSubmissions.Find(newGrade.ID)!;
 			if(newGrade.Grade != null)
             {
+                Notification? notification = await _context.Notifications.Where(n => n.StudentId == sSub.AccountID
+											        && n.AssignmentId == sSub.AssignmentID).SingleOrDefaultAsync();
+                if (notification != null)
+                {
+                    notification.NotificationString = "Graded";
+                    notification.IsCleared = false;
+
+                    _context.Notifications.Update(notification);
+                }
+                else
+                {
+                    notification = new Notification();
+
+                    notification.StudentId = sSub.AccountID;
+                    notification.AssignmentId = sSub.AssignmentID;
+                    notification.NotificationString = "Graded";
+                    notification.IsCleared = false;
+
+                    await _context.Notifications.AddAsync(notification);
+                }
+
                 sSub.Grade = newGrade.Grade;
                 _context.StudentSubmissions.Update(sSub);
                 await _context.SaveChangesAsync();
@@ -298,8 +301,21 @@ namespace Pink_Panthers_Project.Controllers
 
 			if (ModelState.IsValid)
             {
-                assignment.DueDate = assignment.DueDate.AddHours(23).AddMinutes(59).AddSeconds(59);
+				assignment.DueDate = assignment.DueDate.AddHours(23).AddMinutes(59).AddSeconds(59);
 				await _context.AddAsync(assignment);
+				await _context.SaveChangesAsync();
+
+                var studentsInClass = await _context.registeredClasses.Where(rc => rc.classID == assignment.ClassID).ToListAsync();
+                foreach(var student in studentsInClass)
+                {
+                    Notification notification = new Notification();
+                    notification.StudentId = student.accountID;
+                    notification.AssignmentId = assignment.Id;
+                    notification.NotificationString = "Created";
+                    notification.IsCleared = false;
+
+                    await _context.AddAsync(notification);
+                }
 				await _context.SaveChangesAsync();
 
                 UpdateAssignments();
@@ -345,7 +361,7 @@ namespace Pink_Panthers_Project.Controllers
                 {
                     AssignmentID = assignmentID,
                     currentAssignment = _context.Assignments.Find(assignmentID),
-                    UpcomingAssignments = getUpcomingAssignments()
+                    Notifications = getNotifications()
                 };
                 return View(submissionView);
             }
@@ -390,7 +406,8 @@ namespace Pink_Panthers_Project.Controllers
                 var submissionView = new StudentSubmission
                 {
                     AssignmentID = newSubmission!.AssignmentID,
-                    currentAssignment = _context.Assignments.Find(newSubmission.AssignmentID)
+                    currentAssignment = _context.Assignments.Find(newSubmission.AssignmentID),
+                    Notifications = getNotifications()
                 };
                 ModelState.AddModelError("NoFile", String.Empty);
                 return View(submissionView);
@@ -446,18 +463,15 @@ namespace Pink_Panthers_Project.Controllers
                 return NotFound();
             }
             ViewBag.isTeacher = account!.isTeacher;
-            var viewSubmissions = new SubmissionsViewModel
-            {
-                Account = account,
-                StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList(),
-                AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault(),
-                Grades = _context.StudentSubmissions
-				.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
-				.Select(c => c.Grade.Value)
-				.ToList(),
-                MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault()
-			};
-            foreach(var s in viewSubmissions.StudentSubmissions)
+            var viewSubmissions = getViewModel();
+            viewSubmissions.StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList();
+            viewSubmissions.AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault();
+            viewSubmissions.Grades = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
+                .Select(c => c.Grade.Value)
+                .ToList();
+            viewSubmissions.MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault();
+
+			foreach (var s in viewSubmissions.StudentSubmissions)
             {
                 s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
                 s.currentAssignment = _context.Assignments.Where(c => c.Id == s.AssignmentID).SingleOrDefault();
@@ -695,17 +709,32 @@ namespace Pink_Panthers_Project.Controllers
                 return HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments");
             return null;
         }
-        private List<Assignment>? getUpcomingAssignments()
-        {
-            if (!UnitTestingData.isUnitTesting)
-                return HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications");
-            return null;
-        }
         private List<StudentSubmission>? getStudentSubmissions()
         {
             if (!UnitTestingData.isUnitTesting)
                 return HttpContext.Session.GetSessionValue<List<StudentSubmission>>("StudentSubmissions")!;
             return null;
+        }
+		private List<Notification>? getNotifications()
+		{
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<Notification>>("Notifications");
+            return null;
+		}
+        private ViewModel getViewModel()
+        {
+            var viewModel = new ViewModel
+            {
+                TeachingCourses = getTeacherClasses(),
+                RegisteredCourses = getStudentClasses(),
+                Assignments = getAssignments(),
+                StudentSubmissions = getStudentSubmissions(),
+                Account = getAccount()!,
+                AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
+                Notifications = getNotifications(),
+                Class = getClass()
+            };
+            return viewModel;
         }
 
 		private void UpdateTeachingCourses()
@@ -807,8 +836,6 @@ namespace Pink_Panthers_Project.Controllers
                                 a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
                                 a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
                             }
-                            var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
-                            HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
                         }
                     }
                 }

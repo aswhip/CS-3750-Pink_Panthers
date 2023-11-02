@@ -79,6 +79,11 @@ button.accept-policy {
     height: 40px;
 }
 
+.notification-count{
+    color: red;
+    font-size: 12px;
+}
+
 .exit_button {
     float: right;
     padding-right: 10px;

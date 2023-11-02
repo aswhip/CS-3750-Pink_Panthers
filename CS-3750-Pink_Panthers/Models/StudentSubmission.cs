@@ -20,8 +20,8 @@ namespace Pink_Panthers_Project.Models
 		[NotMapped]
 		public Account? studentAccount { get; set; }
 		[NotMapped]
-		public List<Assignment>? UpcomingAssignments { get; set; }
-		[NotMapped]
 		public int PossiblePoints {  get; set; }
+		[NotMapped]
+		public List<Notification>? Notifications { get; set; }
 	}
 }

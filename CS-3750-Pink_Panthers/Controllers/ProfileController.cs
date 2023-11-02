@@ -9,7 +9,6 @@ using System.Web;
 using System;
 using System.Configuration;
 using System.Runtime.CompilerServices;
-using Pink_Panthers_Project.Migrations;
 using System.Collections.Immutable;
 using System.Collections.Generic;
 using Pink_Panthers_Project.Util;
@@ -31,7 +30,7 @@ namespace Pink_Panthers_Project.Controllers
             ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
             {
-                var viewModel = getCourseView();
+                var viewModel = getViewModel();
                 return View(viewModel);
             }
 
@@ -109,7 +108,7 @@ namespace Pink_Panthers_Project.Controllers
             var account = getAccount();
 
 			ViewBag.isTeacher = account!.isTeacher;
-            return View();
+            return View(getViewModel());
         }
 
         [HttpGet]
@@ -144,7 +143,7 @@ namespace Pink_Panthers_Project.Controllers
 
             if (account != null)
             {
-                var viewModel = getCourseView();
+                var viewModel = getViewModel();
                 return View(viewModel);
             }
 
@@ -162,7 +161,7 @@ namespace Pink_Panthers_Project.Controllers
             ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
             {
-                var viewModel = getCourseView();
+                var viewModel = getViewModel();
                 account!.AmountToBePaid -= amountToPay;
                 account!.AmountToBePaid = Math.Round(account!.AmountToBePaid, 2);
                 if (account!.AmountToBePaid < 0)
@@ -188,12 +187,9 @@ namespace Pink_Panthers_Project.Controllers
 
             if (!account!.isTeacher && ModelState.IsValid)
             {
-                var viewModel = new RegisterView
-                {
-                    Classes = _context.Class.ToList(),
-                    RegisteredClasses = _context.registeredClasses.ToList(),
-                    UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications"),
-                };
+                var viewModel = getViewModel();
+                viewModel.Classes = _context.Class.ToList();
+                viewModel.RegisteredClasses = _context.registeredClasses.ToList();
                 foreach(var item in viewModel.Classes)
                 {
                     item.tName = _context.teachingClasses.Where(tc => tc.classID == item.ID)
@@ -283,7 +279,7 @@ namespace Pink_Panthers_Project.Controllers
 			ViewBag.isTeacher = account!.isTeacher;
             if (account != null)
             {
-                var viewModel = getCourseView();
+                var viewModel = getViewModel();
                 return View(viewModel);
             }
             return NotFound();
@@ -346,7 +342,7 @@ namespace Pink_Panthers_Project.Controllers
 			var account = getAccount();
 
 			ViewBag.isTeacher = account!.isTeacher;
-            return View(getCourseView());
+            return View(getViewModel());
 
         }
         [HttpPost]
@@ -384,7 +380,7 @@ namespace Pink_Panthers_Project.Controllers
 			ViewBag.isTeacher = account!.isTeacher;
             if (account != null) //An account must be active to view this page
             {
-                var viewModel = getCourseView();
+                var viewModel = getViewModel();
                 return View(viewModel);
             }
             return NotFound();
@@ -417,28 +413,27 @@ namespace Pink_Panthers_Project.Controllers
 			}
 		}
 
-        private CourseView getCourseView()
+        private ViewModel getViewModel()
         {
-            var account = getAccount();
-            CourseView viewModel;
+            ViewModel viewModel;
             if (UnitTestingData.isUnitTesting)
             {
-                viewModel = new CourseView
+                viewModel = new ViewModel
                 {
-                    Account = account
+                    Account = getAccount()
                 };
             }
             else
             {
-                viewModel = new CourseView
+                viewModel = new ViewModel
                 {
-                    TeachingCourses = HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses"),
-                    RegisteredCourses = HttpContext.Session.GetSessionValue<List<Class>>("RegisteredCourses"),
+                    TeachingCourses = getTeacherClasses(),
+                    RegisteredCourses = getStudentClasses(),
                     Assignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Assignments"),
                     StudentSubmissions = HttpContext.Session.GetSessionValue<List<StudentSubmission>>("StudentSubmissions"),
-                    UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications"),
                     AllAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("AllAssignments"),
-                    Account = account
+                    Account = getAccount(),
+                    Notifications = getNotifications()
                 };
             }
             return viewModel;
@@ -450,6 +445,12 @@ namespace Pink_Panthers_Project.Controllers
 				return HttpContext.Session.GetSessionValue<List<Class>>("TeachingCourses")!;
 			return null;
 		}
+        private List<Notification>? getNotifications()
+        {
+            if (!UnitTestingData.isUnitTesting)
+                return HttpContext.Session.GetSessionValue<List<Notification>>("Notifications");
+            return null;
+        }
 		private List<Class>? getStudentClasses()
 		{
 			if (!UnitTestingData.isUnitTesting)
@@ -462,7 +463,6 @@ namespace Pink_Panthers_Project.Controllers
             if (!UnitTestingData.isUnitTesting)
             {
                 var account = _context.Account.Where(a => a.ID == id).FirstOrDefault();
-                account.UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications");
                 HttpContext.Session.SetSessionValue("LoggedInAccount", account);
             }
         }
@@ -543,11 +543,9 @@ namespace Pink_Panthers_Project.Controllers
                 a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
                 a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
             }
-            var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
             if (!UnitTestingData.isUnitTesting)
             {
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
-                HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
             }
         }
 

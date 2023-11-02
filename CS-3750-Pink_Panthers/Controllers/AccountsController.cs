@@ -73,8 +73,8 @@ namespace Pink_Panthers_Project.Controllers
                             UpdateRegisteredCourses(loginAccount);
                             UpdateAssignments(loginAccount);
                             UpdateStudentSubmissions(loginAccount);
-                        }
-                        loginAccount.UpcomingAssignments = HttpContext.Session.GetSessionValue<List<Assignment>>("Notifications");
+							UpdateNotifications(loginAccount);
+						}
                         HttpContext.Session.SetSessionValue("LoggedInAccount", loginAccount);
 					}
 					return RedirectToAction(nameof(ProfileController.Index), "Profile"); //If email and password match, take us to the logged in page
@@ -122,6 +122,7 @@ namespace Pink_Panthers_Project.Controllers
                         UpdateTeachingCourses(account);
                         UpdateAssignments(account);
                         UpdateStudentSubmissions(account);
+                        UpdateNotifications(account);
 						return RedirectToAction(nameof(ProfileController.Index), "Profile"); //Redirect to the Logged-in page. Name can be changed if need be
                     }
                     else
@@ -263,11 +264,9 @@ namespace Pink_Panthers_Project.Controllers
                 a.grade = _context.StudentSubmissions.Where(c => c.AssignmentID == a.Id).Select(c => c.Grade).FirstOrDefault();
                 a.submitted = _context.StudentSubmissions.Any(ss => ss.AssignmentID == a.Id && ss.AccountID == account.ID);
             }
-            var upcomingAssignments = assignments.Where(a => a.DueDate >= DateTime.Now && a.DueDate <= DateTime.Now.AddDays(14)).ToList();
             if (!UnitTestingData.isUnitTesting)
             {
                 HttpContext.Session.SetSessionValue("Assignments", assignments);
-                HttpContext.Session.SetSessionValue("Notifications", upcomingAssignments);
                 HttpContext.Session.SetSessionValue("AllAssignments", assignments);
             }
         }
@@ -277,6 +276,19 @@ namespace Pink_Panthers_Project.Controllers
 
             if (!UnitTestingData.isUnitTesting)
                 HttpContext.Session.SetSessionValue("StudentSubmissions", studentSubmissions);
+        }
+        private void UpdateNotifications(Account account)
+        {
+            var notifications = _context.Notifications.Where(n => n.StudentId == account.ID && n.IsCleared == false).ToList();
+            foreach (var notification in notifications)
+            {
+                var assignment = _context.Assignments.Where(a => a.Id == notification.AssignmentId).FirstOrDefault();
+                notification.AssignmentName = assignment.AssignmentName;
+                notification.DueDate = assignment.DueDate;
+                notification.ClassName = _context.Class.Where(c => c.ID == assignment.ClassID).Select(c => c.DepartmentCode.ToString() + c.CourseNumber.ToString() + ": " + c.CourseName).SingleOrDefault();
+            }
+            if (!UnitTestingData.isUnitTesting)
+                HttpContext.Session.SetSessionValue("Notifications", notifications);
         }
 	}
 }
