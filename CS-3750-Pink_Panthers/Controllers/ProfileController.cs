@@ -295,6 +295,7 @@ namespace Pink_Panthers_Project.Controllers
         public IActionResult Edit()
         {
 			var account = getAccount();
+            account.Notifications = getNotifications();
 
             ViewBag.isTeacher = account!.isTeacher;
             if (account != null)
