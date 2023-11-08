@@ -43,7 +43,7 @@
                                 <td>@course.Room</td>
                                 <td>@course.Days</td>
                                 <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
-                                <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
+                                <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID" id="@Html.Raw(course.ID + "assignmentBtn")">View Assignments</a></td>
                                 <td><a class="btn btn-light" asp-action="EditClass" asp-route-id="@course.ID">Edit</a></td>
                                 <td><a class="btn btn-warning" asp-action="DeleteCourse" id="Delete_@courses" asp-route-id="@course.ID">Delete</a></td>
                             </tr>

@@ -200,7 +200,7 @@
                                 }
                                 else
                                 {
-                                    <td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id">Submit Assignment</a></td>
+                                    <td><a class="btn btn-primary" asp-action="SubmitAssignment" asp-route-assignmentID="@assignment.Id" id="@Html.Raw(assignment.Id + "submitAssignmentBtn")">Submit Assignment</a></td>
 
                                 }
                                 @if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
