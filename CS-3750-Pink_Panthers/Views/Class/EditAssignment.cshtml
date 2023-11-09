@@ -1,0 +1,49 @@
+﻿@model Pink_Panthers_Project.Models.Assignment
+
+@{
+    ViewData["Title"] = "Edit Assignment";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h1>Edit Assignment</h1>
+
+        <form asp-action="EditAssignment" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            
+			<div class="form-group">
+				<label asp-for="AssignmentName" class="control-label">Assignment Name</label>
+				<input asp-for="AssignmentName" class="form-control"/>
+				<span asp-validation-for="AssignmentName" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="Description" class="control-label">Description</label>
+				<input asp-for="Description" class="form-control" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="PossiblePoints" class="control-label">Possible Points</label>
+				<input asp-for="PossiblePoints" class="form-control" />
+				<span asp-validation-for="PossiblePoints" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="DueDate" class="control-label">Due Date</label>
+				<input asp-for="DueDate" class="form-control" type="date"/>
+				<span asp-validation-for="DueDate" class="text-danger"></span>
+			</div>
+
+			<input type="hidden" name="Id" value="@Model.Id" />
+			
+			<input type="hidden" name="SubmissionType" value="@Model.SubmissionType" />
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>

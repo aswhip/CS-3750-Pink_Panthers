@@ -638,6 +638,78 @@ namespace Pink_Panthers_Project.Controllers
         }
 
         [HttpGet]
+        public IActionResult EditAssignment(int AssignmentID)
+        {
+            var account = getAccount();
+			ViewBag.isTeacher = account!.isTeacher;
+
+			if (account.isTeacher)
+            {
+				var assignment = _context.Assignments.Find(AssignmentID);
+                
+				return View(assignment);
+			}
+			return NotFound();
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> EditAssignment(Assignment assignment)
+		{
+			var account = getAccount();
+			ViewBag.isTeacher = account.isTeacher;
+			if (!account.isTeacher)
+			{
+				return NotFound();
+			}
+
+
+			if (!ModelState.IsValid)
+			{
+				return View(assignment);
+			}
+
+			var existingAssignment = await _context.Assignments
+				.AsNoTracking() // avoid tracking issues
+				.SingleOrDefaultAsync(a => a.Id == assignment.Id);
+
+			if (existingAssignment == null)
+			{
+				return NotFound();
+			}
+            
+            if (existingAssignment.PossiblePoints != assignment.PossiblePoints)
+            {
+				RescaleExisitingSubmissionGrades(assignment.Id, existingAssignment.PossiblePoints, assignment.PossiblePoints);
+			}
+
+			existingAssignment.AssignmentName = assignment.AssignmentName;
+			existingAssignment.Description = assignment.Description;
+			existingAssignment.PossiblePoints = assignment.PossiblePoints;
+			existingAssignment.DueDate = assignment.DueDate.AddHours(23).AddMinutes(59).AddSeconds(59);
+			existingAssignment.SubmissionType = assignment.SubmissionType;
+
+			_context.Assignments.Update(existingAssignment);
+			await _context.SaveChangesAsync();
+			UpdateAssignments();
+
+			return RedirectToAction("Assignments", new { id = existingAssignment.ClassID });
+		}
+
+        private void RescaleExisitingSubmissionGrades(int assignmentId, int oldPoints, int newPoints)
+        {
+            var submissions = _context.StudentSubmissions.Where(s => s.AssignmentID == assignmentId).ToList();
+            double factor = (double)newPoints / (double)oldPoints;
+            foreach (var s in submissions)
+            {
+				if (s.Grade != null)
+                {
+					s.Grade = (int)Math.Round((double)s.Grade * factor);
+				}
+			}
+            _context.StudentSubmissions.UpdateRange(submissions);
+        }
+
+		[HttpGet]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             var account = getAccount();
@@ -688,6 +760,39 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAssignment(int assignmentId)
+        {
+            var account = getAccount();
+            if (account == null || !account.isTeacher)
+            {
+                return NotFound();
+            }
+
+            var assignment = await _context.Assignments.FindAsync(assignmentId);
+            if (assignment == null)
+            {
+                return NotFound();
+            }
+
+            //First delete submissions
+            var submissions = await _context.StudentSubmissions.Where(s => s.AssignmentID == assignmentId).ToListAsync();
+            if (submissions.Any())
+            {
+                _context.StudentSubmissions.RemoveRange(submissions);
+                await _context.SaveChangesAsync();
+            }
+
+            _context.Assignments.Remove(assignment);
+            await _context.SaveChangesAsync();
+
+            UpdateAssignments();
+
+            return RedirectToAction("Assignments", new { id = assignment.ClassID });
+        }
+
+
 
         private string getGradeLetter(double percent)
         {
