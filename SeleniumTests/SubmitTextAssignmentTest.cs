@@ -19,7 +19,6 @@ namespace SeleniumTests
             IWebDriver driver = new ChromeDriver();
 
             string url = "https://pinkpanthers3750.azurewebsites.net";
-            url = "https://localhost:7011/";
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl(url);
