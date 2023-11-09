@@ -45,6 +45,39 @@
 			Plotly.newPlot('classPerformance', data, layout);
 		});
     </script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var xArray = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'E'];
+
+            var data = [{
+                type: 'bar',
+                x: xArray,
+                y: [@Model.countA, @Model.countAMinus, @Model.countBPlus, @Model.countB, @Model.countBMinus, @Model.countCPlus,
+        @Model.countC, @Model.countCMinus, @Model.countDPlus, @Model.countD, @Model.countDMinus, @Model.countE],
+                marker: {
+                    color: ['rgba(0,255,0,1)', 'rgba(0,255,0,1)', 'rgba(0,200,55,1)', 'rgba(0,100,155,1)', 'rgba(0,0,255,1)',
+                        'rgba(50,0,205,1)', 'rgba(100,0,155,1)', 'rgba(150,0,150,1)', 'rgba(255,0,0,1)', 'rgba(255,0,0,1)',
+                        'rgba(255,0,0,1)', 'rgba(255,0,0,1)'],
+                    style: ['','','','','','','stroke-color: rgba(0,0,0,0.5)','','','','','']
+                },
+                boxpoints: 'false',
+                line: {
+                    color: '#a64d79'
+                },
+                hoverinfo: 'x'
+            }];
+            var layout = {
+                title: 'Class Performance',
+                yaxis: {
+                    zeroline: false,
+                    range: [0, 20]
+                }
+            };
+
+            Plotly.newPlot('classPerformanceStudent', data, layout);
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -205,17 +238,16 @@
                                 }
                                 @if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
                                 {
-                                    <td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Performance</a></td>
+                                    <td><a class="btn btn-primary" asp-action="Performance" asp-route-assignmentID="@assignment.Id">Performance</a></td>
                                 }
                             </tr>
                         }
                     </table>
+                    <div class="row mt-3">
+                       <div id="classPerformanceStudent" />
+                    </div>
                 }
             }
-
-
-
-
 
         </div>
     </div>

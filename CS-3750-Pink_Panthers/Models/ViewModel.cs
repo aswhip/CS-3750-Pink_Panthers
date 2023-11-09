@@ -23,6 +23,7 @@
 		public string? AssignmentName { get; set; }
 
 		public List<int>? Grades { get; set; }
+		public List<String>? LetterGrades { get; set; }
 
 		public int? MaxGrade { get; set; }
 

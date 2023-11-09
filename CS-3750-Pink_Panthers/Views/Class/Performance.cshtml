@@ -4,77 +4,53 @@
 	ViewData["Title"] = "Course";
 }
 
+
 <head>
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function () {
 
-			var gradesArray = @Html.Raw(Json.Serialize(Model!.Grades));
+			var gradesArray = @Html.Raw(Json.Serialize(Model!.StudentSubmissions));
 			var max = @Model.MaxGrade;
+			console.log(gradesArray);
+			var xArray = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'E'];
 
 			var data = [{
-				type: 'box',
-				x: gradesArray,
+				type: 'bar',
+				x: xArray,
+				y: gradesArray,
+				marker: {
+					color: ['rgba(0,255,0,1)', 'rgba(0,255,0,1)', 'rgba(0,200,55,1)', 'rgba(0,100,155,1)', 'rgba(0,0,255,1)',
+						'rgba(50,0,205,1)', 'rgba(100,0,155,1)', 'rgba(150,0,150,1)', 'rgba(255,0,0,1)', 'rgba(255,0,0,1)',
+						'rgba(255,0,0,1)', 'rgba(255,0,0,1)']
+				},
 				boxpoints: 'false',
-				jitter: 0.3,     // Add some jitter for better visualization
-				fillcolor: '#d5a6bd',
 				line: {
 					color: '#a64d79'
 				},
 				hoverinfo: 'x'
 			}];
-
 			var layout = {
-				title: 'Student Performance',
-				xaxis: {
-					title: 'Grades',
-					range: [0, max]
+				title: 'Class Performance',
+				yaxis: {
+					zeroline: false,
+					range: [0, 20]
 				}
 			};
 
-			Plotly.newPlot('gradeBoxPlot', data, layout);
+			Plotly.newPlot('performance', data, layout);
 		});
 	</script>
 
 
 </head>
 <div class="container">
-	<div class="row mt-5">
-		<h2>@Model.AssignmentName</h2>
-		@if (Model!.StudentSubmissions!.Count == 0)
-		{
-			<p>No Submissions yet for this assignment</p>
-		}
-		<table>
-			<tr>
-				<th>Student</th>
-				<th>Submission</th>
-				<th>Grade</th>
-			</tr>
-			@foreach (var submission in Model.StudentSubmissions!)
-			{
-				<tr>
-					<td>@Html.Raw(submission.studentAccount!.FirstName + " " + submission.studentAccount!.LastName)</td>
-					<td>
-						@if (submission.currentAssignment!.SubmissionType == "text")
-						{
-							@submission.Submission
-						}
-						else
-						{
-							<a href="~/Submissions/@submission.Submission" download="@submission.Submission">@submission.Submission</a>
-						}
-					</td>
-					<td>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</td>
-					<td><a class="btn btn-primary" asp-action="GradeAssignment" asp-route-id="@submission.ID">Grade</a></td>
-				</tr>
-			}
-		</table>
-	</div>
+
+	<h2>@Model.AssignmentName</h2>
 	@if (Model!.StudentSubmissions!.Count != 0)
 	{
 		<div class="row mt-3">
-			<div id="gradeBoxPlot" />
+			<div id="performance" />
 		</div>
 	}
 </div>
