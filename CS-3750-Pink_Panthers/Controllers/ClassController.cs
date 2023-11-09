@@ -8,6 +8,7 @@ using OpenQA.Selenium.Internal;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using OpenQA.Selenium;
 using System.Diagnostics.Metrics;
+using Microsoft.Build.Logging;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -57,7 +58,8 @@ namespace Pink_Panthers_Project.Controllers
         public IActionResult Assignments(int? id)
         {
             var account = getAccount();
-			var cls = id != null ? getClass(id) : getClass(); //Gets the class based on id if id != null, otherwise just gets the current active class
+            List<RGB>? colors = new List<RGB>();
+            var cls = id != null ? getClass(id) : getClass(); //Gets the class based on id if id != null, otherwise just gets the current active class
 
             if (account! == null)
             {
@@ -269,6 +271,25 @@ namespace Pink_Panthers_Project.Controllers
                         }
                     }
                 }
+                for (int i = 0; i < 12; ++i)
+                {
+                    colors.Add(new RGB(0, 0, 255, 1));
+                }
+                string currentStudentGrade = classPerformance.Where(c => c.StudentID == account.ID).Select(c => c.StudentGrade).SingleOrDefault();
+                int index = 0;
+                if (currentStudentGrade.Equals("A")) index = 0;
+                else if (currentStudentGrade.Equals("A-")) index = 1;
+                else if (currentStudentGrade.Equals("B+")) index = 2;
+                else if (currentStudentGrade.Equals("B")) index = 3;
+                else if (currentStudentGrade.Equals("B-")) index = 4;
+                else if (currentStudentGrade.Equals("C+")) index = 5;
+                else if (currentStudentGrade.Equals("C")) index = 6;
+                else if (currentStudentGrade.Equals("C-")) index = 7;
+                else if (currentStudentGrade.Equals("D+")) index = 8;
+                else if (currentStudentGrade.Equals("D")) index = 9;
+                else if (currentStudentGrade.Equals("D-")) index = 10;
+                else if (currentStudentGrade.Equals("E")) index = 11;
+                colors[index] = new RGB(0, 255, 0, 1);
             }
             else
             {
@@ -290,6 +311,7 @@ namespace Pink_Panthers_Project.Controllers
             viewModel.countA = countA;
             viewModel.countAMinus = countAMinus;
             viewModel.StudentClassGrades = classPerformance;
+            viewModel.GraphColor = colors;
 			return View(viewModel);
 		}
 		[HttpGet]
