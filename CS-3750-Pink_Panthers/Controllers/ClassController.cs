@@ -177,6 +177,98 @@ namespace Pink_Panthers_Project.Controllers
                     }
 				}
 			}
+            if (!account.isTeacher)
+            {
+                submissions = new List<StudentSubmission>();
+                foreach (var a in assignments)
+                {
+                    var teaching = _context.StudentSubmissions.Where(tc => tc.AssignmentID == a.Id).ToList();
+                    foreach (var tc in teaching)
+                    {
+                        tc.PossiblePoints = a.PossiblePoints;
+                    }
+
+                    submissions.AddRange(teaching);
+                }
+                foreach (var s in submissions)
+                {
+                    if (!classPerformance.Any(c => c.StudentID == s.AccountID))
+                    {
+                        if (s.Grade != null)
+                        {
+                            StudentClassGrade newEntry = new StudentClassGrade()
+                            {
+                                StudentID = s.AccountID,
+                                StudentPointsEarned = s.Grade,
+                                TotalPossiblePoints = 0
+                            };
+                            newEntry.TotalPossiblePoints += s.PossiblePoints;
+                            classPerformance.Add(newEntry);
+                        }
+                    }
+                    else
+                    {
+                        StudentClassGrade curStudent = classPerformance.Where(c => c.StudentID == s.AccountID).FirstOrDefault()!;
+                        if (s.Grade != null)
+                        {
+                            curStudent.StudentPointsEarned += s.Grade;
+                            curStudent.TotalPossiblePoints += s.PossiblePoints;
+                        }
+                    }
+                }
+
+                foreach (var cp in classPerformance)
+                {
+                    if (cp.TotalPossiblePoints != null)
+                    {
+                        double percent = (double)(cp.StudentPointsEarned / (double)cp.TotalPossiblePoints);
+                        percent *= 100;
+
+                        cp.StudentGrade = getGradeLetter(percent);
+                        switch (cp.StudentGrade)
+                        {
+                            case "A":
+                                ++countA;
+                                break;
+                            case "A-":
+                                ++countAMinus;
+                                break;
+                            case "B+":
+                                ++countBPlus;
+                                break;
+                            case "B":
+                                ++countB;
+                                break;
+                            case "B-":
+                                ++countB;
+                                break;
+                            case "C+":
+                                ++countCPlus;
+                                break;
+                            case "C":
+                                ++countC;
+                                break;
+                            case "C-":
+                                ++countCMinus;
+                                break;
+                            case "D+":
+                                ++countDPlus;
+                                break;
+                            case "D":
+                                ++countD;
+                                break;
+                            case "D-":
+                                ++countDMinus;
+                                break;
+                            case "E":
+                                ++countE;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
             else
             {
                 submissions = getStudentSubmissions();
@@ -458,7 +550,7 @@ namespace Pink_Panthers_Project.Controllers
             var cls = getClass();
             ViewBag.Class = cls;
 
-            if (account! == null || cls! == null)
+            if (account! == null || cls! == null || !account!.isTeacher)
             {
                 return NotFound();
             }
@@ -479,7 +571,9 @@ namespace Pink_Panthers_Project.Controllers
             return View(viewSubmissions);
         }
 
-        [HttpGet]
+ 
+
+		[HttpGet]
         public IActionResult EditClass(int id)
         {
             var account = getAccount();
@@ -751,7 +845,86 @@ namespace Pink_Panthers_Project.Controllers
 				return "E";
 			}
 		}
+		private string getGradeLetter(int percent)
+		{
+			if (percent >= 94.00)
+			{
+				return "A";
+			}
+			else if (percent >= 90.00)
+			{
+				return "A-";
+			}
+			else if (percent >= 87.00)
+			{
+				return "B+";
+			}
+			else if (percent >= 84.00)
+			{
+				return "B";
+			}
+			else if (percent >= 80.00)
+			{
+				return "B-";
+			}
+			else if (percent >= 77.00)
+			{
+				return "C+";
+			}
+			else if (percent >= 74.00)
+			{
+				return "C";
+			}
+			else if (percent >= 70.00)
+			{
+				return "C-";
+			}
+			else if (percent >= 67.00)
+			{
+				return "D+";
+			}
+			else if (percent >= 64.00)
+			{
+				return "D";
+			}
+			else if (percent >= 60.00)
+			{
+				return "D-";
+			}
+			else
+			{
+				return "E";
+			}
+		}
 
+		[HttpGet]
+		public IActionResult Performance(int assignmentID)
+		{
+			var account = getAccount();
+			var cls = getClass();
+			ViewBag.Class = cls;
+
+			if (account! == null || cls! == null)
+			{
+				return NotFound();
+			}
+			ViewBag.isTeacher = account!.isTeacher;
+			var performance = getViewModel();
+			performance.StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList();
+			performance.AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault();
+            performance.Grades = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
+				.Select(c => c.Grade.Value)
+				.ToList();
+			performance.MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault();
+
+
+			foreach (var s in performance.StudentSubmissions)
+			{
+				s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
+				s.currentAssignment = _context.Assignments.Where(c => c.Id == s.AssignmentID).SingleOrDefault();
+			}
+			return View(performance);
+		}
         private void setDays(ref Class getDays)
         {
             getDays.Days = "";
