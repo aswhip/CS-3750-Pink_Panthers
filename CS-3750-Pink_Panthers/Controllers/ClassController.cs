@@ -585,7 +585,7 @@ namespace Pink_Panthers_Project.Controllers
             
             if (existingAssignment.PossiblePoints != assignment.PossiblePoints)
             {
-				RescaleExisitingSubmissionGradees(assignment.Id, existingAssignment.PossiblePoints, assignment.PossiblePoints);
+				RescaleExisitingSubmissionGrades(assignment.Id, existingAssignment.PossiblePoints, assignment.PossiblePoints);
 			}
 
 			existingAssignment.AssignmentName = assignment.AssignmentName;
@@ -601,7 +601,7 @@ namespace Pink_Panthers_Project.Controllers
 			return RedirectToAction("Assignments", new { id = existingAssignment.ClassID });
 		}
 
-        private void RescaleExisitingSubmissionGradees(int assignmentId, int oldPoints, int newPoints)
+        private void RescaleExisitingSubmissionGrades(int assignmentId, int oldPoints, int newPoints)
         {
             var submissions = _context.StudentSubmissions.Where(s => s.AssignmentID == assignmentId).ToList();
             double factor = (double)newPoints / (double)oldPoints;
@@ -666,6 +666,39 @@ namespace Pink_Panthers_Project.Controllers
             return NotFound();
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAssignment(int assignmentId)
+        {
+            var account = getAccount();
+            if (account == null || !account.isTeacher)
+            {
+                return NotFound();
+            }
+
+            var assignment = await _context.Assignments.FindAsync(assignmentId);
+            if (assignment == null)
+            {
+                return NotFound();
+            }
+
+            //First delete submissions
+            var submissions = await _context.StudentSubmissions.Where(s => s.AssignmentID == assignmentId).ToListAsync();
+            if (submissions.Any())
+            {
+                _context.StudentSubmissions.RemoveRange(submissions);
+                await _context.SaveChangesAsync();
+            }
+
+            _context.Assignments.Remove(assignment);
+            await _context.SaveChangesAsync();
+
+            UpdateAssignments();
+
+            return RedirectToAction("Assignments", new { id = assignment.ClassID });
+        }
+
+
 
         private string getGradeLetter(double percent)
         {
