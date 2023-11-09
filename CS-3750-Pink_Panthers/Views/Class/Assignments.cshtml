@@ -160,7 +160,7 @@
                                 <td>@assignment.DueDate.ToString()</td>
                                 <td>@assignment.SubmissionType</td>
                                 <td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Submissions</a></td>
-                                <td><a class="btn btn-light">Edit</a></td>
+                                <td><a class="btn btn-light" asp-action="EditAssignment" asp-route-AssignmentID="@assignment.Id">Edit</a></td>
                                 <td><a class="btn btn-warning">Delete</a></td>
                             </tr>
                         }
