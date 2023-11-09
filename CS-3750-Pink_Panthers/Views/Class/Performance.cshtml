@@ -12,12 +12,14 @@
 
 			var gradesArray = @Html.Raw(Json.Serialize(Model!.StudentSubmissions));
 			var max = @Model.MaxGrade;
-			console.log(gradesArray);
-			var xArray = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'E'];
+			var scoresArray = [];
+			for (let i = 0; i <= max; i++){
+			scoresArray[i] = i;
+			}
 
 			var data = [{
 				type: 'bar',
-				x: xArray,
+				x: scoresArray,
 				y: gradesArray,
 				marker: {
 					color: ['rgba(0,255,0,1)', 'rgba(0,255,0,1)', 'rgba(0,200,55,1)', 'rgba(0,100,155,1)', 'rgba(0,0,255,1)',

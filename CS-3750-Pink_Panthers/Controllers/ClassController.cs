@@ -7,6 +7,7 @@ using System.Data;
 using OpenQA.Selenium.Internal;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using OpenQA.Selenium;
+using System.Diagnostics.Metrics;
 
 namespace Pink_Panthers_Project.Controllers
 {
@@ -291,7 +292,34 @@ namespace Pink_Panthers_Project.Controllers
             viewModel.StudentClassGrades = classPerformance;
 			return View(viewModel);
 		}
+		[HttpGet]
+		public IActionResult Performance(int assignmentID)
+		{
+			var account = getAccount();
+			var cls = getClass();
+			ViewBag.Class = cls;
 
+			if (account! == null || cls! == null)
+			{
+				return NotFound();
+			}
+			ViewBag.isTeacher = account!.isTeacher;
+			var performance = getViewModel();
+			performance.StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList();
+			performance.AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault();
+            performance.Grades = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
+				.Select(c => c.Grade.Value)
+				.ToList();
+			performance.MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault();
+
+
+			foreach (var s in performance.StudentSubmissions)
+			{
+				s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
+				s.currentAssignment = _context.Assignments.Where(c => c.Id == s.AssignmentID).SingleOrDefault();
+			}
+			return View(performance);
+		}
         [HttpGet]
         public IActionResult GradeAssignment(int? id)
         {
@@ -845,86 +873,7 @@ namespace Pink_Panthers_Project.Controllers
 				return "E";
 			}
 		}
-		private string getGradeLetter(int percent)
-		{
-			if (percent >= 94.00)
-			{
-				return "A";
-			}
-			else if (percent >= 90.00)
-			{
-				return "A-";
-			}
-			else if (percent >= 87.00)
-			{
-				return "B+";
-			}
-			else if (percent >= 84.00)
-			{
-				return "B";
-			}
-			else if (percent >= 80.00)
-			{
-				return "B-";
-			}
-			else if (percent >= 77.00)
-			{
-				return "C+";
-			}
-			else if (percent >= 74.00)
-			{
-				return "C";
-			}
-			else if (percent >= 70.00)
-			{
-				return "C-";
-			}
-			else if (percent >= 67.00)
-			{
-				return "D+";
-			}
-			else if (percent >= 64.00)
-			{
-				return "D";
-			}
-			else if (percent >= 60.00)
-			{
-				return "D-";
-			}
-			else
-			{
-				return "E";
-			}
-		}
 
-		[HttpGet]
-		public IActionResult Performance(int assignmentID)
-		{
-			var account = getAccount();
-			var cls = getClass();
-			ViewBag.Class = cls;
-
-			if (account! == null || cls! == null)
-			{
-				return NotFound();
-			}
-			ViewBag.isTeacher = account!.isTeacher;
-			var performance = getViewModel();
-			performance.StudentSubmissions = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID).ToList();
-			performance.AssignmentName = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.AssignmentName).SingleOrDefault();
-            performance.Grades = _context.StudentSubmissions.Where(c => c.AssignmentID == assignmentID && c.Grade.HasValue)
-				.Select(c => c.Grade.Value)
-				.ToList();
-			performance.MaxGrade = _context.Assignments.Where(c => c.Id == assignmentID).Select(c => c.PossiblePoints).SingleOrDefault();
-
-
-			foreach (var s in performance.StudentSubmissions)
-			{
-				s.studentAccount = _context.Account.Where(c => c.ID == s.AccountID).SingleOrDefault();
-				s.currentAssignment = _context.Assignments.Where(c => c.Id == s.AssignmentID).SingleOrDefault();
-			}
-			return View(performance);
-		}
         private void setDays(ref Class getDays)
         {
             getDays.Days = "";
