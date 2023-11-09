@@ -39,6 +39,7 @@ namespace SeleniumTests
             System.Threading.Thread.Sleep(2000);
 
             IWebElement editButton = driver.FindElement(By.Id("editButton"));
+            editButton.Click();
 
             System.Threading.Thread.Sleep(1000);
 
@@ -51,7 +52,7 @@ namespace SeleniumTests
             System.Threading.Thread.Sleep(2000);
 
             
-            city = driver.FindElement(By.Id("cityText"));
+            city = driver.FindElement(By.Id("City"));
             Assert.AreEqual("Bornem", city.GetAttribute("value"));
 
             System.Threading.Thread.Sleep(2000);
