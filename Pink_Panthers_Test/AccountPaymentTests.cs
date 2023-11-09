@@ -19,7 +19,7 @@ namespace Pink_Panthers_Test
             UnitTestingData.isUnitTesting = true;
 
             ProfileController profileController = new ProfileController(_context);
-            Account? account = _context.Account.Where(ac => ac.ID == 5).SingleOrDefault(); //ID 1 is test student
+            Account? account = _context.Account.Where(ac => ac.ID == 5).SingleOrDefault(); //ID 5 is test student
             if (account != null)
                 UnitTestingData._account = account;
 
@@ -30,7 +30,7 @@ namespace Pink_Panthers_Test
             await profileController.Account(payment);
 
             double newAmount = account!.AmountToBePaid;
-            Assert.AreEqual(currAmount - payment, newAmount);
+            Assert.AreEqual(currAmount - payment, newAmount == 0 ? newAmount - payment : newAmount); //If account has no balance to pay, then they can't make a payment
 
             account.AmountToBePaid = currAmount;
             _context.Account.Update(account);

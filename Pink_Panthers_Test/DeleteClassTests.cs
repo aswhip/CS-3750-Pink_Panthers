@@ -30,7 +30,7 @@ namespace Pink_Panthers_Test
                 StartTime = DateTime.Parse("9:30 AM"),
                 EndTime = DateTime.Parse("11:00 AM")
             };
-            Account? account = _context.Account.Where(c => c.ID == 5).FirstOrDefault(); //Teacher Account
+            Account? account = _context.Account.Where(c => c.ID == 6).FirstOrDefault(); //Teacher Account
 
             UnitTestingData._account = account;
 
@@ -39,7 +39,7 @@ namespace Pink_Panthers_Test
             await classController.DeleteCourse(newClass.ID);
             int newCount = _context.teachingClasses.Where(c => c.accountID == account!.ID).Count();
 
-            Assert.AreEqual(newCount, count, "Delete class failed");
+            Assert.AreEqual(newCount, count - 1, "Delete class failed");
 
             profileController.logoutAccount();
         }

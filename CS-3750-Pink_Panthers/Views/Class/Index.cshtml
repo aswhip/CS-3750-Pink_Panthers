@@ -74,7 +74,7 @@
                                 <td>@course.Room</td>
                                 <td>@course.Days</td>
                                 <td>@course.StartTime.ToString("hh:mm tt") - @course.EndTime.ToString("hh:mm tt")</td>
-                                <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID">View Assignments</a></td>
+                                <td><a class="btn btn-primary" asp-action="Assignments" asp-route-id="@course.ID" id="@Html.Raw(course.ID + "assignmentBtn")">View Assignments</a></td>
                             </tr>
                         }
                     </table>

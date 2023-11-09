@@ -15,8 +15,8 @@ namespace SeleniumTests
         [TestMethod]
         public void RegisterForClassTest()
         {
-			IWebDriver driver = new EdgeDriver();
-			//IWebDriver driver = new ChromeDriver();
+			//IWebDriver driver = new EdgeDriver();
+			IWebDriver driver = new ChromeDriver();
 
 			string url = "https://pinkpanthers3750.azurewebsites.net";
             driver.Manage().Window.Maximize();
