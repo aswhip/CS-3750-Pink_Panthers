@@ -55,7 +55,7 @@
 
             <div class="form-group">
 				<label asp-for="City" class="control-label"></label>
-				<input asp-for="City" class="form-control" value="@Model.City" />
+				<input asp-for="City" class="form-control" value="@Model.City" id="cityText" />
 				<span asp-validation-for="City" class="text-danger"></span>
             </div>
 
@@ -94,7 +94,7 @@
 
             
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary save-btn" />
+                <input type="submit" value="Save" class="btn btn-primary save-btn" id="saveButton"/>
             </div>
         </form>
 
