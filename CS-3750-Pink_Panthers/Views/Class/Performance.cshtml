@@ -22,9 +22,7 @@
 				x: scoresArray,
 				y: gradesArray,
 				marker: {
-					color: ['rgba(0,255,0,1)', 'rgba(0,255,0,1)', 'rgba(0,200,55,1)', 'rgba(0,100,155,1)', 'rgba(0,0,255,1)',
-						'rgba(50,0,205,1)', 'rgba(100,0,155,1)', 'rgba(150,0,150,1)', 'rgba(255,0,0,1)', 'rgba(255,0,0,1)',
-						'rgba(255,0,0,1)', 'rgba(255,0,0,1)']
+					color: 'rgba(0,255,0,1)'
 				},
 				boxpoints: 'false',
 				line: {
@@ -34,6 +32,9 @@
 			}];
 			var layout = {
 				title: 'Class Performance',
+				xaxis: {
+					range: [0, max]
+				},
 				yaxis: {
 					zeroline: false,
 					range: [0, 20]

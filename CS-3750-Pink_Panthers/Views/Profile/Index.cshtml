@@ -28,7 +28,7 @@
                             <div class="col-md-1" style="margin-right: 240px; margin-bottom: 15px">
                                 <a class="no-decoration" asp-controller="Class" asp-action="Assignments" asp-route-id="@course.ID">
                                     <div class="card custom-card">
-                                        <div class="card-header" style="background-color: @course.color;">@course.DepartmentCode @course.CourseNumber</div>
+                                        <div class="card-header" id="@course.CourseNumber" style ="background-color: @course.color;">@course.DepartmentCode @course.CourseNumber</div>
                                         <div class="card-body">
                                             @course.CourseName<br />
                                             @course.Room<br />

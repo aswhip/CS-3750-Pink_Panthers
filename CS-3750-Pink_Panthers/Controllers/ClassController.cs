@@ -600,7 +600,7 @@ namespace Pink_Panthers_Project.Controllers
             var cls = getClass();
             ViewBag.Class = cls;
 
-            if (account! == null || cls! == null || !account!.isTeacher)
+            if (account! == null || cls! == null)
             {
                 return NotFound();
             }

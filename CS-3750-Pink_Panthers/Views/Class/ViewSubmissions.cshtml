@@ -40,9 +40,10 @@
 <div class="container">
 	
 		<div class="row mt-5">
-        <h2>@Model.AssignmentName</h2>
+        
 		@if (Model!.Account!.isTeacher)
         {
+			<h2>@Model.AssignmentName</h2>
 			@if (Model!.StudentSubmissions!.Count == 0)
 			{
 				<p>No Submissions yet for this assignment</p>
@@ -77,6 +78,14 @@
 	
 	@if (Model!.StudentSubmissions!.Count != 0)
 	{
+		<h2>@Model.AssignmentName</h2>
+		@foreach (var submission in Model.StudentSubmissions!)
+		{
+			@if(Model.Account.ID == submission.AccountID)
+			{
+				<p>@submission.Grade.ToString()/@submission.currentAssignment!.PossiblePoints</p>
+			}
+		}
 		<div class="row mt-3">
 			<div id="gradeBoxPlot" />
 		</div>

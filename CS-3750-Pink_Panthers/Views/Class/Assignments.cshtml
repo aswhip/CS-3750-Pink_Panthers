@@ -167,7 +167,7 @@
                 if (Model.Account!.isTeacher)
                 {
                     <div class="col-md-4">
-                        <a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+                        <a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary" id="CreateAssignment">Create Assignment</a>
                     </div>
                 }
             }
@@ -194,12 +194,12 @@
                                 <td>@assignment.SubmissionType</td>
                                 <td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Submissions</a></td>
                                 <td><a class="btn btn-light" asp-action="EditAssignment" asp-route-AssignmentID="@assignment.Id">Edit</a></td>
-                                <td><a class="btn btn-warning" asp-action="DeleteAssignment" asp-route-AssignmentID="@assignment.Id">Delete</a></td>
+                                <td><a class="btn btn-warning" asp-action="DeleteAssignment" asp-route-AssignmentID="@assignment.Id" id="@Html.Raw(assignment.AssignmentName + "deleteBtn")">Delete</a></td>
                             </tr>
                         }
                     </table>
                     <div class="col-md-4">
-                        <a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary">Create Assignment</a>
+                        <a asp-action="CreateAssignment" asp-route-id="@Model?.Class?.ID" class="btn btn-primary" id="CreateAssignment">Create Assignment</a>
                     </div>
 
                     <div class="row mt-3">
@@ -238,7 +238,7 @@
                                 }
                                 @if (Model.StudentSubmissions!.Exists(c => c.AssignmentID == assignment.Id))
                                 {
-                                    <td><a class="btn btn-primary" asp-action="Performance" asp-route-assignmentID="@assignment.Id">Performance</a></td>
+                                    <td><a class="btn btn-primary" asp-action="ViewSubmissions" asp-route-assignmentID="@assignment.Id">Performance</a></td>
                                 }
                             </tr>
                         }
